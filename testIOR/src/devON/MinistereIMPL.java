@@ -44,9 +44,12 @@ public class MinistereIMPL extends MinistèrePOA {
 	@Override
 	public void depotDesFormationsRectorat(Formation[] ListeFormation) {
 		// TODO Auto-generated method stub
-		// on rajoute dans larrayliste les nouvelle formation
-		// il faut partir de la fin du tableau pour ne pas écrasser les formations deja existante
-		//jai fais vite fait donc à vérifier
+		//A chaque fois que l'on rajoute des formations
+		//on crée un new tableau on copi les anciennes et les nouvelle données
+		//et on remplace le tableau courant
+		//pas tres jojo..faudrai modifier IDL pour pa utilisé de Formation[]
+		//sa correspond a la liste de formation que l'on a créé
+		//elle n'est pas pratique dutt..
 
 		int NombreDeFormationARajouter=ListeFormation.length;
 		int NombreDeFormationDejaExistante=this.ListeFormation.length;
