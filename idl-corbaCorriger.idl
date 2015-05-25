@@ -1,0 +1,261 @@
+
+module PostLicence {
+	
+	//------------------Structure et Enumeration------------------
+	exception DonneesInvalides {
+		string message; 
+	};
+	exception UtilisationInterdite {
+		string message; 
+	};
+	struct Formation {
+		string nomUniv;
+		string NomFormation;
+		string TypeFormation;
+		string nomRectorat; //Afin de pouvoir orienter les voeux vers le bon rectorat quand les voeux sont transféré
+	};
+	struct Etudiant {
+		string nomEtudiant;
+		string prenomEtudiant;
+		string ineEtudiant;
+		string nomUniv;
+		string adresse;
+		Formation formation;
+	};
+	
+	struct Resultat {
+		short semestre;
+		float moyenne;
+		short codeObtention;
+		short classement;
+	};
+	
+	typedef sequence<Resultat> ListeNotes;
+	
+	struct dossierEtudiant {
+		Etudiant etu;
+		ListeNotes listnotes;
+	};
+	
+	
+	typedef sequence<Formation> seqFormations;
+	
+ 	
+	enum etatvoeux {soumis, nonValide, valide, accepter, refuser, listeDattente};
+	
+	//Enumération utilisée par la méthode repondreAuxPropositions de l'interface GestionDesVoeux
+	enum decision {OUIdefinitif,OUImais, NONdefinitif, NONmais};
+	
+	struct Voeu {
+		Formation formationVoeu;
+		etatvoeux etatVoeu;
+		decision dcsEtudiant;
+		short numeroVoeu;
+	};
+	
+	typedef sequence<Voeu> seqVoeux;
+
+	
+	
+	
+	
+	
+	//------------------INTERFACE------------------
+	
+	//L'IEtudiant est l'interface que l'étudiant possèdera pour communiquer avec les autres serveurs
+	interface IEtudiant {
+		//--Appelé par GestionDesVoeux et GestionDesProfils
+		oneway void  notifier(in string message); //(1)
+
+		//Lorsqu'un rectorat aura transmis les réponses des voeux des étudiants, la GDV appelera cette méthode pour 
+		//mettre a jour les voeux de l'étudiant dans sont InterfaceEtudiant
+		//--Appelé par GestionDesVoeux
+		void majEtatVoeux(in seqVoeux listeVoeux); //(2)
+		
+	 };
+
+	 	//La GDV fonctionne de paire avec la GestionDesProfils même explication que pour la GDP
+	//On retrouve dans cette interface toutes la gestion des voeux des étudiants
+	interface GestionDesVoeux {
+		//ajoute dans sa table les interfaces étudiants qui se sont authentifiées afin de pouvoir les notifiers
+		//--Appelé par IEtudiant
+		readonly attribute short numeroGDV;
+		void inscriptionIE(in string ine, in IEtudiant iorEtudiant) raises(DonneesInvalides); //(7)
+		
+		//Renvoie la liste des formations recherché à l'aide d'un mot clé. Renvoie la totalité si aucun motscles n'est transmis
+		//--Appelé par IEtudiant
+		seqFormations rechercherFormation(in string motscles); //(8)
+        
+		//Renvoie la liste des voeux déjà formulé par un étudiant
+		//--Appelé par IEtudiant
+		seqVoeux chargerVoeux(in string ine) raises(DonneesInvalides); //(9)
+		
+		//Permet a un étudiant de formuler un voeu
+        //--Appelé par IEtudiant
+		void faireUnVoeu(in string ine, in Voeu monVoeux, in short ordre) raises(DonneesInvalides, UtilisationInterdite); //(10)
+
+		//Permet a un étudiant de répondre à la candidature ou il a été pris lors de la première vague
+        //--Appelé par IEtudiant
+		void repondreAuxPropositions(in string ine, in decision choixEtu) raises(DonneesInvalides, UtilisationInterdite); //(11)
+		
+		//Permet a un étudiant de modifier l'ordre de ce voeu
+        //--Appelé par IEtudiant
+		void modifierVoeu (in string ine, in short numeroVoeu, in short ordre) raises(DonneesInvalides, UtilisationInterdite); //(12)
+		
+		//Permet a un étudiant de supprimer un voeu formulé
+        //--Appelé par IEtudiant
+		void supprimerVoeux (in string ine, in short numeroVoeu) raises(DonneesInvalides, UtilisationInterdite); //(13)
+
+		//Dès que toutes les réponses au candidature des étudiants ont été faites. 
+		//Le Rectorat appel cette méthode pour donné le résultat du meilleurs voeu pour chaque interface étudiante
+		//--Appelé par Rectorat
+		/**modif**/
+		void transmettreDecisionCandidatureRectorat (in string ine, in Voeu Reponse) raises(DonneesInvalides); //(14)
+	};
+	 
+	 
+	//La GDP travaille de paire avec la GestionDesVoeux, les 2 interfaces sont sépararées par anticipation d'une éventuelle separation de serveur physique
+	//Dans notre énoncé les 2 interfaces seront chacune un service sur une même machine.
+	//On retrouve dans cette interface, les informations relative a l'étudiant et sont parcours. Tel que identité, université / formation
+	interface GestionDesProfils {
+		//!!!!! Pas d'inscription ni d'authentification. Les etudiants seront inscris en dur dans le code de la GDP
+        readonly attribute short numeroGDP;
+		//Lors d'une connexion : 
+		//la gestion des profils entre dans sa table le couple [IOR, INE] d'un étudiant pour le recontacter, 
+		//mais également elle transmet ce couple à la gestion des voeux en appellant la méthode inscriptionIE. Elle transmet également
+		//à l'interface etudiant le bon ior de la gestion des voeux.
+		//--Appelé par IEtudiant
+		GestionDesVoeux connexion(in IEtudiant iorEtudiant, in string ine, in string mdp) raises(DonneesInvalides); //(3)
+
+		//Cette méthode renvoie le profil d'un étudiant selon sont ine
+		//--Appelé par IEtudiant
+		Etudiant consulterProfil(in string ine) raises(DonneesInvalides); //(4)
+		
+		//Cette méthode permet de modifier les informations sur l'étudiant(jvoi pas bcoup d'intéret..)
+		//--Appelé par IEtudiant
+		void modifierProfil(in string ine, in string adr) raises(DonneesInvalides); //(5)
+		
+		//Permet a un serveur de GDV de s'inscrire et d'être contacté par un étudiant venant de ce connecter
+		//--Appelé par GestionDesVoeux
+		void inscriptionGestionDesVoeux(in GestionDesVoeux GDesVx); //(6)
+	};
+
+
+interface Universite {
+		//Si l'université possède cet étudiant
+		//--Appelé par Rectorat
+		
+		readonly attribute string nomUniversite;
+		readonly attribute string villeUniversite;
+		readonly attribute string academieUniversite;
+		
+		void envoyerCandidature(in string ine, in Voeu voeu) raises(DonneesInvalides); //(25)
+		
+		//Si l'université ne connait pas cet étudiant
+		//--Appelé par Rectorat
+		void envoyerCandidatureD(in dossierEtudiant dossierEtu, in string ine, in Voeu voeu) raises(DonneesInvalides); //(26)
+		
+		//Si un rectorat a besoin de transmettre le dossier a une univ qui n'a pas cette etudiant
+		//Il fais appel a cette méthode en retrouvant l'univ d'origine de l'étudiant
+		//--Appelé par Rectorat
+		dossierEtudiant madDossier(in string ine); //(27)
+		
+		//Le Rectorat transmet la décision de l'étudiant, la décision se trouve dans le voeu
+		//--Appelé par Rectorat
+		void repondrePropositionvoeux(in string ine,in Voeu voeu) raises(DonneesInvalides); //(32)
+		
+	     /**modif**/
+		void deliberationJury();
+	};
+	
+	//Un Rectorat possède un ensemble d'universite
+	interface Rectorat{
+		readonly attribute string nomRectorat;
+		
+		//Permet de transférer un dossier etudiant à un autre rectorat si l'étudiant a fais un voeux en dehors de son academie
+		//Demande d'avoir appelé préhalablement la méthode du ministère permettant de connaitre l'ior d'un rectorat selon un nom donné
+		//--Appelé par Rectorat
+		void transfertDossier(in dossierEtudiant dossierEtu, in Voeu voeu); //(20)
+
+		//Le Rectorat transmet la liste des voeux d'un étudiant
+		//--Appelé par GestionDesVoeux
+		/**modif in Etudiant etu**/
+		void envoyerListeVoeuxGDV(in seqVoeux lv, in Etudiant etu) raises(DonneesInvalides); //(21)
+
+		//Un rectorat relai la réponse d'une université a un autre rectorat qui lui avait transmis cette demande
+		//--Appelé par Rectorat
+		void envoyerDecisionCandidatureRectorat(in string ine, in Voeu voeu) raises(DonneesInvalides); //(22)
+
+		//Une université renvoie la réponse de sa candidature a son rectorat
+		//--Appelé par Universite
+		void envoyerDecisionCandidatureUniv(in Etudiant etu, in Voeu voeu) raises(DonneesInvalides); //(23)
+
+		//Inscription d'une université à un rectorat
+		//--Appelé par Universite
+		void inscriptionUniv(in Universite iorLUniversite); //(24)
+		
+		/**modif**/
+		void inscriptionGDV(in GestionDesVoeux Gdv); 
+		
+		//La GDV transmet la décision de l'étudiant, la décision se trouve dans le voeu
+		//--Appelé par GDV
+		void repondrePropositionVoeux(in string ine,in Voeu voeu) raises(DonneesInvalides); //(31)
+		
+        //**modif**//
+		void deliberationJury();
+	};
+
+
+	//Le ministère regroupe l'ensemble des Rectorat
+	interface Ministère{
+		//Demander par la GDV, fais une fois au lancement des serveurs. Recherche interne a la GDV ensuites
+		//--Appelé par la GestionDesVoeux
+		seqFormations madDesFormationsFrance(); //(15)
+		
+		//Permet de donner au minister la liste des formations dispensé par les universités du rectorat appelé
+		//--Appelé par Rectorat
+		/**Modif*/
+		void depotDesFormationsRectorat(in seqFormations ListeFormation); //(19)
+		
+		//permet au ministère d'avoir la liste des rectorat
+		//--Appelé par Rectorat
+		void inscriptionRectorat (in string nomRectorat, in Rectorat iorRectorat) raises(DonneesInvalides); //(16)
+		
+		//Méthode utilisé afin de transmettre un dossier d'un rectorat à un autre. Pour cela on souhaite récupérer l'ior du rectorat conserné
+		//--Appelé par Rectorat
+		Rectorat recupererRectorat(in string nomRectorat) raises(DonneesInvalides); //(17)
+		
+		//Cette méthode permet a une université de trouver le rectorat auquel elle est rattaché
+		//--Appelé par Universite
+		Rectorat rectoratRattacherUniv(in string nomAcademie) raises(DonneesInvalides); //(18)
+		
+		/**modif**/
+		void deliberationJury();
+	};
+
+	//Une Université possède un ensemble de Formation
+	
+
+
+	//Un LoadBalancer est définit par academie et possède plusieurs (au moins 2 pour notre projet) serveur de GestionDesProfils et GestionDesVoeux.
+	//Chaque serveur fonctionnant par couple et gérant une plage d'ine. 
+	//Exemple : GestionDesProfils1 fonctionne avec GestionDesVoeux1 gère les ine de X00001 a X10000
+	//GestionDesProfils2 fonctionne avec GestionDesVoeux2 gère les ine de X10001 a X20000
+	//etc
+	interface LoadBalancerEtudiant {
+		//Quand un étudiant lance son client IEtudiant celui demande au LoadBalancer l'ior du serveur de profil a contacter 
+		//en fonction de son numéro ine transmis
+		//--Appelé par IEtudiant
+		GestionDesProfils getProfil(in string ine) raises(DonneesInvalides); //(28)
+		
+		//Quand un serveur GDV est lancé il connait son academie de rattachement ainsi que son numero et demande au LoadBalancer de lui fournir
+		//le serveur de GestionDesProfils correspondant au numero transmis et donc à sont propre numéro
+		//--Appelé par GDV
+		GestionDesProfils getServProfil(in short num) raises(DonneesInvalides); //(29)
+
+		//Un serveur de GestionDesProfils
+		//--Appelé par GestionDesProfils s'inscrit avec un numero qui permettra a la GestionDesVoeux de le retrouver
+		void inscriptionGDP(in GestionDesProfils iorGestionDesProfils, in short numero) raises(DonneesInvalides); //(30)
+	};
+};
+
