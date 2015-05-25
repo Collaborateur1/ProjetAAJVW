@@ -16,18 +16,20 @@ public class MinistereIMPL extends MinistèrePOA {
 
 
 	/*************************Constructeur***********************************/
-	public MinistereIMPL(Hashtable<String, Rectorat> listeRectorat,
+	public MinistereIMPL(org.omg.CORBA.ORB orb,Hashtable<String, Rectorat> listeRectorat,
 			Formation[] listeFormation) {
 		super();
 		ListeRectorat = listeRectorat;
 		ListeFormation = listeFormation;
 	}
 
-	public MinistereIMPL() {
+	public MinistereIMPL(org.omg.CORBA.ORB orb) {
 		super();
-		Hashtable<String,Rectorat>ListeRectorat = new Hashtable<String,Rectorat>();
+		ListeRectorat = new Hashtable<String,Rectorat>();
 		//La liste des formation
 		ListeFormation=new Formation[0];
+		NamingServiceTool.putReferenceIntoNS(orb,"Ministere", this);
+		
 	}
 
 
@@ -86,6 +88,7 @@ this.ListeFormation=tempformation;
 	public void inscriptionRectorat(String nomRectorat, Rectorat iorRectorat)throws DonneesInvalides {
 		// TODO Auto-generated method stub
 		//On rajoute le rectorat dans le ministère
+		
 		ListeRectorat.put(nomRectorat, iorRectorat);
 
 
@@ -127,17 +130,21 @@ this.ListeFormation=tempformation;
 		}
 
 	}
-
+	/**********************Fonction rajouter*********************/
+	public void test()
+	{
+		
+	
+		//un test pour voir si les rectorats vienne bien ce rajouter
+			if(!ListeRectorat.isEmpty())
+			System.out.println("sa ka maché2: ");
+		
+	}
 
 	/**********************Le Main pour enregistrer dans le NS*************************/
 
 	public static void main(String[] args) {
-		MinistereIMPL ministere	= new MinistereIMPL();
-		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(new String[0],null);
-		//le NamingServiceTool fait le boulot d'enregistrer l'objet ministere dans le NS
-		// parametre 1=orb parametre 2= nom dans le NS 3= L'objet
-		NamingServiceTool.putReferenceIntoNS(orb,"Ministere", ministere);
-		orb.run();
+		
 	}
 
 
