@@ -137,7 +137,7 @@ this.ListeFormation=tempformation;
 	
 		//un test pour voir si les rectorats vienne bien ce rajouter
 			if(!ListeRectorat.isEmpty())
-			System.out.println("sa ka maché2: ");
+			System.out.println("sa ka maché3: ");
 		
 	}
 
