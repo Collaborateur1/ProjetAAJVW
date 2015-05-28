@@ -9,6 +9,7 @@ public class LBEEtudiantIMPL extends LoadBalancerEtudiantPOA {
 	@Override
 	public GestionDesProfils getProfil(String ine) throws DonneesInvalides {
 		// TODO Auto-generated method stub
+		//commentaire Alex
 		return null;
 	}
 
