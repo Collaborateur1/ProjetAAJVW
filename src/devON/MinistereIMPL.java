@@ -15,7 +15,7 @@ public class MinistereIMPL extends MinistèrePOA {
 	Formation[] ListeFormation;
 
 
-	/*************************Constructeur***********************************/
+	/**************************Constructeur***********************************/
 	public MinistereIMPL(org.omg.CORBA.ORB orb,Hashtable<String, Rectorat> listeRectorat,
 			Formation[] listeFormation) {
 		super();
