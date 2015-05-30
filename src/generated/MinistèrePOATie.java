@@ -1,0 +1,116 @@
+package generated;
+
+/**
+ * Interface definition : Ministère
+ * 
+ * @author OpenORB Compiler
+ */
+public class MinistèrePOATie extends MinistèrePOA
+{
+
+    //
+    // Private reference to implementation object
+    //
+    private MinistèreOperations _tie;
+
+    //
+    // Private reference to POA
+    //
+    private org.omg.PortableServer.POA _poa;
+
+    /**
+     * Constructor
+     */
+    public MinistèrePOATie(MinistèreOperations tieObject)
+    {
+        _tie = tieObject;
+    }
+
+    /**
+     * Constructor
+     */
+    public MinistèrePOATie(MinistèreOperations tieObject, org.omg.PortableServer.POA poa)
+    {
+        _tie = tieObject;
+        _poa = poa;
+    }
+
+    /**
+     * Get the delegate
+     */
+    public MinistèreOperations _delegate()
+    {
+        return _tie;
+    }
+
+    /**
+     * Set the delegate
+     */
+    public void _delegate(MinistèreOperations delegate_)
+    {
+        _tie = delegate_;
+    }
+
+    /**
+     * _default_POA method
+     */
+    public org.omg.PortableServer.POA _default_POA()
+    {
+        if (_poa != null)
+            return _poa;
+        else
+            return super._default_POA();
+    }
+
+    /**
+     * Operation madDesFormationsFrance
+     */
+    public generated.Formation[] madDesFormationsFrance()
+    {
+        return _tie.madDesFormationsFrance();
+    }
+
+    /**
+     * Operation depotDesFormationsRectorat
+     */
+    public void depotDesFormationsRectorat(generated.Formation[] ListeFormation)
+    {
+        _tie.depotDesFormationsRectorat( ListeFormation);
+    }
+
+    /**
+     * Operation inscriptionRectorat
+     */
+    public void inscriptionRectorat(String nomRectorat, generated.Rectorat iorRectorat)
+        throws generated.DonneesInvalides
+    {
+        _tie.inscriptionRectorat( nomRectorat,  iorRectorat);
+    }
+
+    /**
+     * Operation recupererRectorat
+     */
+    public generated.Rectorat recupererRectorat(String nomRectorat)
+        throws generated.DonneesInvalides
+    {
+        return _tie.recupererRectorat( nomRectorat);
+    }
+
+    /**
+     * Operation rectoratRattacherUniv
+     */
+    public generated.Rectorat rectoratRattacherUniv(String nomAcademie)
+        throws generated.DonneesInvalides
+    {
+        return _tie.rectoratRattacherUniv( nomAcademie);
+    }
+
+    /**
+     * Operation deliberationJury
+     */
+    public void deliberationJury()
+    {
+        _tie.deliberationJury();
+    }
+
+}
