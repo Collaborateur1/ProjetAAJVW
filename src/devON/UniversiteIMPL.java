@@ -76,6 +76,12 @@ public UniversiteIMPL() {
 	public void envoyerCandidature(String ine, Voeu voeu)
 			throws DonneesInvalides {
 		// TODO Auto-generated method stub
+		/*
+		 * Cas des candidatures pour les élèves de l'établissement
+		 * on regarde si il on deja postuler dans cette universitée==> ListeVoeux.containsKey(ine)
+		 * si oui on rajoute dans la hashtable qui contien la liste des voeux par ine
+		 * sinon on rajoute un nouvelle ine dans la hashtable avec un couple <nomformation,voeu>
+		 */
 		if (ListeVoeux.containsKey(ine))
 		{
 			ListeVoeux.get(ine).put(voeu.formationVoeu.NomFormation, voeu);
@@ -90,7 +96,7 @@ public UniversiteIMPL() {
 	
 			
 		}
-		
+		//un hashtable avec la liste des candidature par formation
 		ListeCandidatureParFormation.get(voeu.formationVoeu.NomFormation).add(voeu);//ta un truck a faire pour que sa marche(initialisé arrayliste)
 		
 	}

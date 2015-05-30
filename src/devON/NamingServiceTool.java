@@ -15,13 +15,19 @@ public class NamingServiceTool {
 	/**
 	 * @param args
 	 */
+	
+	
+	
+
+	
+	
 	public static org.omg.CORBA.Object getReferenceIntoNS(String nameIntoNS) {
 		//1
 		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(new String[0],null);
 		// 2
-		org.omg.CosNaming.NamingContext nameRoot;
+		
 		try {
-			nameRoot = org.omg.CosNaming.NamingContextHelper.narrow(orb.resolve_initial_references("NameService"));
+			org.omg.CosNaming.NamingContext nameRoot = org.omg.CosNaming.NamingContextHelper.narrow(orb.resolve_initial_references("NameService"));
 			// Recherche de l'objet
 			org.omg.CosNaming.NameComponent[] Obj = new org.omg.CosNaming.NameComponent[1];
 			Obj[0] = new org.omg.CosNaming.NameComponent(nameIntoNS,"");
@@ -92,7 +98,7 @@ public class NamingServiceTool {
 	}
 
 
-	public static Object activeObject (org.omg.CORBA.ORB orb, Servant objectToActive) {
+	public static Object activeObject (org.omg.CORBA.ORB orb ,Servant objectToActive) {
 		try {
 
 			// 2
@@ -130,6 +136,8 @@ public class NamingServiceTool {
 		return null;
 
 	}
+
+
 
 
 }

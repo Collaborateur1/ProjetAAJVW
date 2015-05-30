@@ -4,13 +4,19 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+import org.omg.CORBA.ORBPackage.InvalidName;
+import org.omg.PortableServer.POAPackage.ServantNotActive;
+import org.omg.PortableServer.POAPackage.WrongPolicy;
+
 import PostLicence.DonneesInvalides;
 import PostLicence.Etudiant;
 import PostLicence.GestionDesVoeux;
 import PostLicence.Ministère;
 import PostLicence.MinistèreHelper;
 import PostLicence.Rectorat;
+import PostLicence.RectoratHelper;
 import PostLicence.RectoratPOA;
+import PostLicence.RectoratPOATie;
 import PostLicence.Universite;
 import PostLicence.Voeu;
 import PostLicence.dossierEtudiant;
@@ -24,23 +30,30 @@ public class RectoratIMPL extends RectoratPOA {
 	Ministère MonMinistere;
     
 
-	/*************************Constructeur***********************************/
-	public RectoratIMPL(Hashtable<String, Universite> listeListUniversite) {
+	/*************************Constructeur
+	 * @throws DonneesInvalides ***********************************/
+	public RectoratIMPL(Hashtable<String, Universite> listeListUniversite,String nomrectorat) throws DonneesInvalides {
 		super();
 		ListeListUniversite = listeListUniversite;
 		MonMinistere= MinistèreHelper.narrow(
 				NamingServiceTool.getReferenceIntoNS("Ministere"));
 		System.out.println("Reférérence ministere recuperee" );
-
+        this.nomRectorat=nomrectorat;
+        MonMinistere.inscriptionRectorat(this.nomRectorat, this._this());
 
 	}
 
-	public RectoratIMPL() {
+	public RectoratIMPL(org.omg.CORBA.ORB orb) throws DonneesInvalides, ServantNotActive, WrongPolicy, InvalidName {
 		super();
 		ListeListUniversite = new Hashtable<String,Universite>();
 		MonMinistere= MinistèreHelper.narrow(
 				NamingServiceTool.getReferenceIntoNS("Ministere"));
 		System.out.println("Reférérence ministere recuperee" );
+		 this.nomRectorat="inconnu";
+		 
+		System.out.println("test pour voir si sa arrive la" );
+		
+		System.out.println("tout est ok" );
 	}
 
 
@@ -254,9 +267,10 @@ Enumeration ListeUniv=this.ListeListUniversite.elements();
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws DonneesInvalides, ServantNotActive, WrongPolicy, InvalidName {
 
-    RectoratIMPL recto = new RectoratIMPL();
+  
+    
 	}
 
 

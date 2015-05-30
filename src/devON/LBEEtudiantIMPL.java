@@ -26,11 +26,8 @@ public class LBEEtudiantIMPL extends LoadBalancerEtudiantPOA {
 	}
 
 	public static void main(String[] args) {
-		LBEEtudiantIMPL lbeEtudiant	= new LBEEtudiantIMPL();
-		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(new String[0],null);
-		//le NamingServiceTool fait le boulot d'enregistrer l'objet lbeEtudiant dans le NS
-		// parametre 1=orb parametre 2= nom dans le NS 3= L'objet
-		NamingServiceTool.putReferenceIntoNS(orb,"LBEEtudiant", lbeEtudiant);
-		orb.run();
+	
+	
+		
 	}
 }
