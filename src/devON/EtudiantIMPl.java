@@ -6,7 +6,15 @@ import PostLicence.IEtudiantPOA;
 import PostLicence.Voeu;
 
 public class EtudiantIMPl extends IEtudiantPOA{
+	
+	/**********Constructeur************/
+	
+	public EtudiantIMPl(Client cl)
+	{
+		
+	}
 
+	/********fonction généré******/
 	@Override
 	public void notifier(String message) {
 		// TODO Auto-generated method stub
@@ -24,7 +32,7 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	}
 
 	
-	
+	/*************Fonction rajouter****************/
 	/*
 	public ArrayList ConsulterProfilGDP(String INE)
 	{
