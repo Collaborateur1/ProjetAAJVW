@@ -6,6 +6,8 @@ package devON;
 
 
 
+import generated.Voeu;
+
 import java.awt.Color;
 import java.awt.Component;
 
@@ -13,8 +15,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
-
-import PostLicence.Voeu;
 
 
 /*

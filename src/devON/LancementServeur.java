@@ -1,12 +1,12 @@
 package devON;
 
+import generated.DonneesInvalides;
+import generated.Rectorat;
+import generated.RectoratHelper;
+
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
-
-import PostLicence.DonneesInvalides;
-import PostLicence.Rectorat;
-import PostLicence.RectoratHelper;
 
 public class LancementServeur {
 

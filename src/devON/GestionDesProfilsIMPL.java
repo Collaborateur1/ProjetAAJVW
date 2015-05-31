@@ -1,10 +1,10 @@
 package devON;
 
-import PostLicence.DonneesInvalides;
-import PostLicence.Etudiant;
-import PostLicence.GestionDesProfilsPOA;
-import PostLicence.GestionDesVoeux;
-import PostLicence.IEtudiant;
+import generated.DonneesInvalides;
+import generated.Etudiant;
+import generated.GestionDesProfilsPOA;
+import generated.GestionDesVoeux;
+import generated.IEtudiant;
 
 public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 
