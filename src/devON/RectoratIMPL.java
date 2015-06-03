@@ -1,13 +1,5 @@
 package devON;
 
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Hashtable;
-
-import org.omg.CORBA.ORBPackage.InvalidName;
-import org.omg.PortableServer.POAPackage.ServantNotActive;
-import org.omg.PortableServer.POAPackage.WrongPolicy;
-
 import generated.DonneesInvalides;
 import generated.Etudiant;
 import generated.GestionDesVoeux;
@@ -20,6 +12,17 @@ import generated.RectoratPOATie;
 import generated.Universite;
 import generated.Voeu;
 import generated.dossierEtudiant;
+
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
+
+import org.omg.CORBA.ORBPackage.InvalidName;
+import org.omg.PortableServer.POAPackage.ServantNotActive;
+import org.omg.PortableServer.POAPackage.WrongPolicy;
+
+
+
 
 public class RectoratIMPL extends RectoratPOA {
 
@@ -51,9 +54,7 @@ public class RectoratIMPL extends RectoratPOA {
 		System.out.println("Reférérence ministere recuperee" );
 		 this.nomRectorat="inconnu";
 		 
-		System.out.println("test pour voir si sa arrive la" );
-		
-		System.out.println("tout est ok" );
+	
 	}
 
 

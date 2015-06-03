@@ -23,8 +23,20 @@ bouton a cocher "info" jCheckBox2
 bouton a cocher "droit" jCheckBox3
 bouton a cocher "gestion" jCheckBox4
 bouton a cocher "psyco" jCheckBox15
+Le champs pour rentrer les recherche jTextfield1
+la liste qui affiche les recherches  jList1
+la liste qui affiche les voeux choisie  jList2
+
+champ Nom :jLabel3
+ prenom : jLabel6
+ adresse : jLabel7
+ mail  : jLabel5
+
 
 */
+
+import generated.Etudiant;
+import generated.Voeu;
 
 import java.awt.Color;
 import java.io.BufferedReader;
@@ -38,7 +50,6 @@ import java.util.logging.Logger;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-
 import javax.swing.JFrame;
 /**
  *
@@ -74,17 +85,15 @@ public class Client extends javax.swing.JFrame {
     }
     
     
-    public Client(String INE, String MDP) {
+    public Client(EtudiantIMPl etu) {
         initComponents();
        
-        etudiant=new EtudiantIMPl(this);
+        etudiant=etu;
         Initialisation_Element_Interface();
-   
-
-       
-        
+    
        
     }
+    
     public Client() {
         initComponents();
        
@@ -576,9 +585,26 @@ public class Client extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
  
-   public void configuration_de_connexion()
+   public void configuration_de_connexion(Etudiant etudiant,Voeu[] vx)
    {
-            
+	   
+       
+	   if(vx!=null)
+	   {
+	   ArrayList array=new ArrayList(); 
+	   
+	   for(int i=0;i<vx.length;i++)
+	   {
+		   array.add(vx[i]);
+	   }
+	   jList2.setListData(array.toArray());
+	   
+	   }
+	   
+	   jLabel3.setText(etudiant.nomEtudiant);
+	   jLabel6.setText(etudiant.prenomEtudiant);
+	   jLabel7.setText(etudiant.adresse);
+	   jLabel5.setText(etudiant.nomEtudiant+"univ.fr");
        
    }
     

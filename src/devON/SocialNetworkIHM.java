@@ -1,6 +1,12 @@
 package devON;
 
 
+import generated.DonneesInvalides;
+import generated.IEtudiant;
+import generated.LoadBalancerEtudiant;
+import generated.Rectorat;
+import generated.RectoratHelper;
+
 import java.awt.Color;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -9,7 +15,11 @@ import java.rmi.registry.LocateRegistry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import generated.IEtudiant;
+
+import org.omg.CORBA.ORBPackage.InvalidName;
+import org.omg.PortableServer.POAPackage.ServantNotActive;
+import org.omg.PortableServer.POAPackage.WrongPolicy;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -30,6 +40,8 @@ champ pour afficher mots de passe incorrete: jLabel4
  */
 public class SocialNetworkIHM extends javax.swing.JFrame {
 EtudiantIMPl ietudiant;
+Client cl;
+
 
     /**
      * Creates new form SocialNetworkIHM
@@ -46,14 +58,16 @@ jLabel4.setVisible(false);
         
     }
      
-    public SocialNetworkIHM(EtudiantIMPl ietudiant ) throws RemoteException {
+    public SocialNetworkIHM(EtudiantIMPl ietudiant, Client cl ) throws RemoteException {
         
         initComponents();
+        this.cl=cl;
        this.ietudiant=ietudiant;
        this.getContentPane().setBackground(Color.WHITE);
         
         jPanel1.setOpaque(false);
 jLabel4.setVisible(false);
+
         
     }
 
@@ -102,7 +116,18 @@ jLabel4.setVisible(false);
         jButton1.setText("Connexion");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                try {
+					jButton1ActionPerformed(evt);
+				} catch (DonneesInvalides e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ServantNotActive e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (WrongPolicy e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
@@ -210,17 +235,26 @@ jLabel4.setVisible(false);
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws DonneesInvalides, ServantNotActive, WrongPolicy {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //Bouton connexion
+    	
+        
+		
+		Client postbac;
+		
+    	
         jLabel4.setVisible(false);
-        if (ietudiant.ConnexionGDP(jTextField1.getText().toLowerCase(), jPasswordField1.getText())==null)
+        
+        if (!ietudiant.ConnexionGDP(jTextField1.getText().toLowerCase(), jPasswordField1.getText()))
         {
             jLabel4.setText("Echec d'identification.");
             jLabel4.setVisible(true);
             
         }else
         {
+        	
+            cl.setVisible(true);
             
         }
         
@@ -236,8 +270,12 @@ jLabel4.setVisible(false);
 
     /**
      * @param args the command line arguments
+     * @throws InvalidName 
+     * @throws WrongPolicy 
+     * @throws ServantNotActive 
+     * @throws DonneesInvalides 
      */
-    public static void main(String args[]) throws RemoteException {
+    public static void main(String args[]) throws RemoteException, DonneesInvalides, ServantNotActive, WrongPolicy, InvalidName {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -273,6 +311,9 @@ jLabel4.setVisible(false);
                 }
             }
         });
+        
+          
+        
     }
     
 
