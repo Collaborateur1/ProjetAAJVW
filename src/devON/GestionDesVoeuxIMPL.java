@@ -1,12 +1,12 @@
 package devON;
 
-import PostLicence.DonneesInvalides;
-import PostLicence.Formation;
-import PostLicence.GestionDesVoeuxPOA;
-import PostLicence.IEtudiant;
-import PostLicence.UtilisationInterdite;
-import PostLicence.Voeu;
-import PostLicence.decision;
+import generated.DonneesInvalides;
+import generated.Formation;
+import generated.GestionDesVoeuxPOA;
+import generated.IEtudiant;
+import generated.UtilisationInterdite;
+import generated.Voeu;
+import generated.decision;
 
 public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 

@@ -1,8 +1,8 @@
 package devON;
 
-import PostLicence.DonneesInvalides;
-import PostLicence.GestionDesProfils;
-import PostLicence.LoadBalancerEtudiantPOA;
+import generated.DonneesInvalides;
+import generated.GestionDesProfils;
+import generated.LoadBalancerEtudiantPOA;
 
 public class LBEEtudiantIMPL extends LoadBalancerEtudiantPOA {
 

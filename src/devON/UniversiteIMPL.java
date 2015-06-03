@@ -3,10 +3,10 @@ package devON;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import PostLicence.DonneesInvalides;
-import PostLicence.UniversitePOA;
-import PostLicence.Voeu;
-import PostLicence.dossierEtudiant;
+import generated.DonneesInvalides;
+import generated.UniversitePOA;
+import generated.Voeu;
+import generated.dossierEtudiant;
 
 public class UniversiteIMPL extends UniversitePOA {
 String NomUniv;

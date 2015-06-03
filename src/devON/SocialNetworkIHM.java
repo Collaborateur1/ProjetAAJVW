@@ -9,7 +9,7 @@ import java.rmi.registry.LocateRegistry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import PostLicence.IEtudiant;
+import generated.IEtudiant;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
