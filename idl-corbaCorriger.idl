@@ -70,7 +70,7 @@ module PostLicence {
 		//Lorsqu'un rectorat aura transmis les réponses des voeux des étudiants, la GDV appelera cette méthode pour 
 		//mettre a jour les voeux de l'étudiant dans sont InterfaceEtudiant
 		//--Appelé par GestionDesVoeux
-		void majEtatVoeux(in seqVoeux listeVoeux); //(2)
+		void majEtatVoeux(in Voeu UnVoeu); //(2)
 		
 	 };
 
