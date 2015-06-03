@@ -12,6 +12,10 @@ import generated.Voeu;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
+
+import generated.Etudiant;
 
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
@@ -23,34 +27,38 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	SocialNetworkIHM interfaceConnexion;
 	org.omg.PortableServer.POA rootPOA;
 	GestionDesVoeux gdv;
+	LoadBalancerEtudiant loadbalancer;
+	Hashtable <String,Voeu> ListeVoeuxEtu;
+
 	
 	/**********Constructeur
-	 * @throws RemoteException ************/
-	
+	 * @throws RemoteException ************/	
 	public EtudiantIMPl() throws RemoteException
 	{
 		this.cl=cl;
 		cl=new Client(this);
 		interfaceConnexion=new SocialNetworkIHM(this,cl);
+		loadbalancer= LoadBalancerEtudiantHelper.narrow(NamingServiceTool.getReferenceIntoNS("LBL"));
 		
 	}
-
+	
 	/********fonction généré******/
 	@Override
 	public void notifier(String message) {
 		// TODO Auto-generated method stub
+		System.out.println (message);
 		
+	}
+	@Override
+	public void majEtatVoeux(Voeu UnVoeu) {
+		// TODO Auto-generated method stub
+		ListeVoeuxEtu.get(UnVoeu.numeroVoeu).etatVoeu = UnVoeu.etatVoeu;
+		
+							
 	}
 
-	@Override
-	public void majEtatVoeux(Voeu[] listeVoeux) {
-		// TODO Auto-generated method stub
-		
-	}
 	
-	
-	
-	/*************Fonction rajouter****************/
+		/*************Fonction rajouter****************/
 	
 	public boolean ConnexionGDP(String INE, String mdp) throws DonneesInvalides, ServantNotActive, WrongPolicy
 	{
@@ -74,7 +82,7 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	
 	public boolean setGestionDesProfils(String ine) throws DonneesInvalides
 	{
-		LoadBalancerEtudiant loadBalanceEtu= LoadBalancerEtudiantHelper.narrow( NamingServiceTool.getReferenceIntoNS("LoadBalance"));
+		LoadBalancerEtudiant loadBalanceEtu= LoadBalancerEtudiantHelper.narrow( NamingServiceTool.getReferenceIntoNS("LBL"));
 		gdp=loadBalanceEtu.getProfil(ine);
 		return true;
 	}
@@ -100,6 +108,10 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		return gdv;
 	}
 	
+	public LoadBalancerEtudiant getLoadBalancer()
+	{
+		return loadbalancer;
+	}
 	/*
 	public ArrayList ConsulterProfilGDP(String INE)
 	{
@@ -125,4 +137,6 @@ public static void main(String[] args) throws RemoteException, InvalidName {
 	
 	
 }
+
+
 }

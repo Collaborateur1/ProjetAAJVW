@@ -3,6 +3,7 @@ package devON;
 
 import generated.DonneesInvalides;
 import generated.IEtudiant;
+import generated.LoadBalancerEtudiant;
 import generated.Rectorat;
 import generated.RectoratHelper;
 
@@ -14,9 +15,11 @@ import java.rmi.registry.LocateRegistry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -64,6 +67,7 @@ jLabel4.setVisible(false);
         
         jPanel1.setOpaque(false);
 jLabel4.setVisible(false);
+
         
     }
 

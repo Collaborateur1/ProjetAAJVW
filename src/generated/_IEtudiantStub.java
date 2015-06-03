@@ -73,7 +73,7 @@ public class _IEtudiantStub extends org.omg.CORBA.portable.ObjectImpl
     /**
      * Operation majEtatVoeux
      */
-    public void majEtatVoeux(generated.Voeu[] listeVoeux)
+    public void majEtatVoeux(generated.Voeu UnVoeu)
     {
         while(true)
         {
@@ -83,7 +83,7 @@ public class _IEtudiantStub extends org.omg.CORBA.portable.ObjectImpl
                 try
                 {
                     org.omg.CORBA.portable.OutputStream _output = this._request("majEtatVoeux",true);
-                    generated.seqVoeuxHelper.write(_output,listeVoeux);
+                    generated.VoeuHelper.write(_output,UnVoeu);
                     _input = this._invoke(_output);
                     return;
                 }
@@ -109,7 +109,7 @@ public class _IEtudiantStub extends org.omg.CORBA.portable.ObjectImpl
                 generated.IEtudiantOperations _self = (generated.IEtudiantOperations) _so.servant;
                 try
                 {
-                    _self.majEtatVoeux( listeVoeux);
+                    _self.majEtatVoeux( UnVoeu);
                     return;
                 }
                 finally

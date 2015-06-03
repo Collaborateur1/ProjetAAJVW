@@ -21,6 +21,9 @@ import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
+
+
+
 public class RectoratIMPL extends RectoratPOA {
 
 	Hashtable<String,Universite>ListeListUniversite;

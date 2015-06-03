@@ -60,7 +60,7 @@ public abstract class IEtudiantPOA extends org.omg.PortableServer.Servant
             final org.omg.CORBA.portable.InputStream _is,
             final org.omg.CORBA.portable.ResponseHandler handler) {
         org.omg.CORBA.portable.OutputStream _output;
-        generated.Voeu[] arg0_in = generated.seqVoeuxHelper.read(_is);
+        generated.Voeu arg0_in = generated.VoeuHelper.read(_is);
 
         majEtatVoeux(arg0_in);
 
