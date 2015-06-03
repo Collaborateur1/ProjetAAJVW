@@ -23,6 +23,7 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	SocialNetworkIHM interfaceConnexion;
 	org.omg.PortableServer.POA rootPOA;
 	GestionDesVoeux gdv;
+	LoadBalancerEtudiant loadbalancer;
 	
 	/**********Constructeur
 	 * @throws RemoteException ************/
@@ -32,6 +33,7 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		this.cl=cl;
 		cl=new Client(this);
 		interfaceConnexion=new SocialNetworkIHM(this,cl);
+		loadbalancer= LoadBalancerEtudiantHelper.narrow(NamingServiceTool.getReferenceIntoNS("LBL"));
 		
 	}
 
@@ -74,7 +76,7 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	
 	public boolean setGestionDesProfils(String ine) throws DonneesInvalides
 	{
-		LoadBalancerEtudiant loadBalanceEtu= LoadBalancerEtudiantHelper.narrow( NamingServiceTool.getReferenceIntoNS("LoadBalance"));
+		LoadBalancerEtudiant loadBalanceEtu= LoadBalancerEtudiantHelper.narrow( NamingServiceTool.getReferenceIntoNS("LBL"));
 		gdp=loadBalanceEtu.getProfil(ine);
 		return true;
 	}
@@ -100,6 +102,10 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		return gdv;
 	}
 	
+	public LoadBalancerEtudiant getLoadBalancer()
+	{
+		return loadbalancer;
+	}
 	/*
 	public ArrayList ConsulterProfilGDP(String INE)
 	{

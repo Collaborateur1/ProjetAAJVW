@@ -3,6 +3,7 @@ package devON;
 
 import generated.DonneesInvalides;
 import generated.IEtudiant;
+import generated.LoadBalancerEtudiant;
 import generated.Rectorat;
 import generated.RectoratHelper;
 
@@ -64,6 +65,7 @@ jLabel4.setVisible(false);
         
         jPanel1.setOpaque(false);
 jLabel4.setVisible(false);
+
         
     }
 
