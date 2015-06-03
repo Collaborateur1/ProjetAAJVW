@@ -1,12 +1,15 @@
 package devON;
 
 import generated.DonneesInvalides;
+import generated.Etudiant;
 import generated.UniversitePOA;
 import generated.Voeu;
 import generated.dossierEtudiant;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+
+import javax.lang.model.util.Elements;
 
 public class UniversiteIMPL extends UniversitePOA {
 String NomUniv;
@@ -23,7 +26,7 @@ Hashtable<String,Hashtable<String,Voeu>> ListeVoeux;
 
 Hashtable<String,Hashtable<String,Double>> ListeAdmiParForamtion;
 
-Hashtable<String, ArrayList<Voeu>> ListeCandidatureParFormation;
+Hashtable<String, ArrayList<String>> ListeCandidatureParFormation;
 
 
 
@@ -36,7 +39,7 @@ public UniversiteIMPL(String nomUniv, String ville, String academie, Hashtable<S
 	
 	DossierEtudiant=dossierEtudiant;
 	ListeVoeux=new Hashtable<String,Hashtable<String,Voeu>>();
-	ListeCandidatureParFormation=new Hashtable<String,ArrayList<Voeu>>();
+	ListeCandidatureParFormation=new Hashtable<String,ArrayList<String>>();
 	DossierCandidatureEtudiant=new Hashtable<String,dossierEtudiant>();
 }
 
@@ -46,7 +49,7 @@ public UniversiteIMPL() {
 	DossierEtudiant=new Hashtable<String,dossierEtudiant>();
 	ListeVoeux=new Hashtable<String,Hashtable<String,Voeu>>();
 	
-	ListeCandidatureParFormation=new Hashtable<String,ArrayList<Voeu>>();
+	ListeCandidatureParFormation=new Hashtable<String,ArrayList<String>>();
 	DossierCandidatureEtudiant=new Hashtable<String,dossierEtudiant>();
 }
 
@@ -97,7 +100,7 @@ public UniversiteIMPL() {
 			
 		}
 		//un hashtable avec la liste des candidature par formation
-		ListeCandidatureParFormation.get(voeu.formationVoeu.NomFormation).add(voeu);//ta un truck a faire pour que sa marche(initialisé arrayliste)
+		ListeCandidatureParFormation.get(voeu.formationVoeu.NomFormation).add(ine);//ta un truck a faire pour que sa marche(initialisé arrayliste)
 		
 	}
 
@@ -125,7 +128,7 @@ public UniversiteIMPL() {
 			
 		}
 		
-		ListeCandidatureParFormation.get(voeu.formationVoeu.NomFormation).add(voeu);//ta un truck a faire pour que sa marche(initialisé arrayliste)
+		ListeCandidatureParFormation.get(voeu.formationVoeu.NomFormation).add(ine);//ta un truck a faire pour que sa marche(initialisé arrayliste)
 		
 		
 		//seule truck en plus que la fonction d'en haut..stoquer le dossier de létudiant
@@ -148,6 +151,7 @@ public UniversiteIMPL() {
 	@Override
 	public void deliberationJury() {
 		// TODO Auto-generated method stub
+		
 		
 	}
 
