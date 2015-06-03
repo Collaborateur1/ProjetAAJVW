@@ -1,13 +1,17 @@
 package devON;
+import java.util.Hashtable;
+
 import generated.*;
 
 public class LoadBalancerEtudiantIMPL extends LoadBalancerEtudiantPOA{
+	
+	static Hashtable<String,GestionDesProfilsIMPL>listeDesServGestProfil;
 
 	public LoadBalancerEtudiantIMPL(org.omg.CORBA.ORB orb) {
 		
 		super();
 		// TODO Auto-generated constructor stub
-		NamingServiceTool.putReferenceIntoNS(orb,"Ministere", this);
+		NamingServiceTool.putReferenceIntoNS(orb,"LoadBalancerEtudiant", this);
 	}
 
 	@Override
