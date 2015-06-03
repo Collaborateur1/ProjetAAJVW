@@ -92,7 +92,9 @@ loadBalancer.inscriptionGDP(gdp, nGdp);
 	@Override
 	public void modifierProfil(String ine, String adr) throws DonneesInvalides {
 		// TODO Auto-generated method stub
-		
+		if(etudiantinscrit.contains(ine)){
+			etudiantinscrit.get(ine).adresse = adr;
+		}
 	}
 
 	@Override
