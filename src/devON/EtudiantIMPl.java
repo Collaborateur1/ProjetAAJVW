@@ -29,6 +29,7 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	GestionDesVoeux gdv;
 	LoadBalancerEtudiant loadbalancer;
 	Hashtable <String,Voeu> ListeVoeuxEtu;
+
 	
 	/**********Constructeur
 	 * @throws RemoteException ************/	
@@ -48,20 +49,15 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		System.out.println (message);
 		
 	}
-
 	@Override
-	public void majEtatVoeux(Voeu[] listeVoeux) {
+	public void majEtatVoeux(Voeu UnVoeu) {
 		// TODO Auto-generated method stub
-		Enumeration ListeVoeuxEtu =  ListeVoeuxEtu.elements() ;
-		for(int i = 0; i<=listeVoeux.length; i++){
-			if (ListeVoeux.hasMoreElements()){
-				if(ListeVoeuxEtu.nextElement().numeroVoeu == LesVoeux[j].numeroVoeu)
-					LesVoeux[i].etatVoeu = listeVoeux[i].etatVoeu;
-			}
-				
-			}
-		}	
-				
+		ListeVoeuxEtu.get(UnVoeu.numeroVoeu).etatVoeu = UnVoeu.etatVoeu;
+		
+							
+	}
+
+	
 		/*************Fonction rajouter****************/
 	
 	public boolean ConnexionGDP(String INE, String mdp) throws DonneesInvalides, ServantNotActive, WrongPolicy
@@ -141,4 +137,6 @@ public static void main(String[] args) throws RemoteException, InvalidName {
 	
 	
 }
+
+
 }
