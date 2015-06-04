@@ -96,7 +96,9 @@ loadBalancer.inscriptionGDP(GestionDesProfilsHelper.narrow(rootPOA.servant_to_re
 	@Override
 	public void modifierProfil(String ine, String adr) throws DonneesInvalides {
 		// TODO Auto-generated method stub
-		
+		if(etudiantinscrit.contains(ine)){
+			etudiantinscrit.get(ine).adresse = adr;
+		}
 	}
 
 	@Override
