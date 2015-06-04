@@ -31,7 +31,7 @@ Hashtable<String,Hashtable<String,Double>> ListeAdmiParForamtion;
 
 // formation, liste INE
 Hashtable<String, ArrayList<String>> ListeCandidatureParFormation;
-Hashtable <String, Resultat[]> ListeResultEtu;
+Hashtable <String, Resultat[] > ListeResultEtu;
 
 
 
@@ -151,12 +151,15 @@ public UniversiteIMPL() {
 			throws DonneesInvalides {
 		// TODO Auto-generated method stub
 		
+		
 	}
 	
 	@Override
 	public void deliberationJury() {
 		// TODO Auto-generated method stub
 		TreeMap<String,Double> ListeCandidatAdmis;
+		Double Moyenne = null;
+		int nb;
 		//Récupere la liste des formations
 		Enumeration ListeFormation  = ListeCandidatureParFormation.keys();
 		while(ListeFormation.hasMoreElements()){
@@ -165,11 +168,20 @@ public UniversiteIMPL() {
 			for(int i=0 ; i <= ListeCandidature.size() ; i++){
 				//Récupère le dossier de l'étudiant
 				dossierEtudiant DossEtu = DossierCandidatureEtudiant.get(ListeCandidature.get(i));
-				ListeResultEtu.put(DossEtu.etu.ineEtudiant, DossEtu.listnotes);				
-				//......
+				// ListeResultEtu.put(DossEtu.etu.ineEtudiant,DossEtu.listnotes);
+				
+				//parcours les résultats
+				for (nb = 0; nb <=DossEtu.listnotes.length;nb++){
+					Resultat resultat = DossEtu.listnotes[nb];
+					Moyenne = Moyenne + resultat.moyenne;
+				}
+				Moyenne = Moyenne / nb;
+				ListeCandidatAdmis.put(ListeCandidature.get(i), Moyenne);
 			}
-					 
-	 }
+			
+			
+					
+		}
 	
 		
 		
