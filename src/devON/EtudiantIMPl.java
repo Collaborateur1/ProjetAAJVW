@@ -18,6 +18,7 @@ import java.util.Hashtable;
 import generated.Etudiant;
 
 import org.omg.CORBA.ORBPackage.InvalidName;
+import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
@@ -66,8 +67,14 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		if(setGestionDesProfils(INE))
 		{
 			etu=IEtudiantHelper.narrow(rootPOA.servant_to_reference(this));
-			gdv=gdp.connexion(etu, INE, mdp);
-			cl.configuration_de_connexion(gdp.consulterProfil(INE),gdv.chargerVoeux(INE));
+			//gdv=gdp.connexion(etu, INE, mdp);
+			//cl.configuration_de_connexion(gdp.consulterProfil(INE),gdv.chargerVoeux(INE));
+			
+			gdp.consulterProfil(INE);
+			
+			cl.configuration_de_connexion(gdp.consulterProfil(INE),null);
+		
+			cl.setVisible(true);
 			return true;
 		}
 		
@@ -81,14 +88,17 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	}
 	
 	public boolean setGestionDesProfils(String ine) throws DonneesInvalides
-	{
-		LoadBalancerEtudiant loadBalanceEtu= LoadBalancerEtudiantHelper.narrow( NamingServiceTool.getReferenceIntoNS("LBL"));
-		gdp=loadBalanceEtu.getProfil(ine);
+	{	
+		gdp=loadbalancer.getProfil(ine);
+		if(gdp!=null)
 		return true;
+		
+		return false;
 	}
-	public void setPOA(org.omg.CORBA.ORB orb) throws InvalidName
+	public void setPOA(org.omg.CORBA.ORB orb) throws InvalidName, AdapterInactive
 	{
 		rootPOA=org.omg.PortableServer.POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
+		rootPOA.the_POAManager().activate();
 	}
 	public Client getClient()
 	{
@@ -123,13 +133,13 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		return null;
 	}
 	**/
-public static void main(String[] args) throws RemoteException, InvalidName {
+public static void main(String[] args) throws RemoteException, InvalidName, AdapterInactive {
 	
 	EtudiantIMPl etu=new EtudiantIMPl();
 	org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(new String[0],null);
 	etu.setPOA(orb);
 	etu.getInetfaceConnex().setVisible(true);
-	
+
 	orb.run();
 	
 	

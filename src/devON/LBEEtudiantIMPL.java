@@ -12,12 +12,12 @@ import generated.LoadBalancerEtudiantPOA;
 
 public class LBEEtudiantIMPL extends LoadBalancerEtudiantPOA {
 	
-	Hashtable<Short,GestionDesProfils> listGDP;
+	Hashtable<String,GestionDesProfils> listGDP;
 	/*********************Costructeur******************************/
 	
 public LBEEtudiantIMPL(org.omg.CORBA.ORB orb) {
 		// TODO Auto-generated constructor stub
- listGDP= new 	Hashtable<Short,GestionDesProfils>();
+ listGDP= new 	Hashtable<String,GestionDesProfils>();
  NamingServiceTool.putReferenceIntoNS(orb,"LBL", this);
 	}
 	
@@ -28,12 +28,16 @@ public LBEEtudiantIMPL(org.omg.CORBA.ORB orb) {
 		
 		if(ine.indexOf("G1")!=-1) //si ine contient "G1"  on renvoi GDP1 sinon GDP2 (on fait deux GDP pour linstant)
 	    {
-		 return listGDP.get(1);
+			
+		 return listGDP.get("1");
+		
 	    }
-		else if(ine.indexOf("G1")!=-1)
+		else if(ine.indexOf("G2")!=-1)
 		{
-		 return listGDP.get(2);	
+			
+		 return listGDP.get("2");	
 		}
+		
 		
 		return null;
 	}
@@ -47,7 +51,7 @@ public LBEEtudiantIMPL(org.omg.CORBA.ORB orb) {
 	@Override
 	public void inscriptionGDP(GestionDesProfils iorGestionDesProfils,
 			short numero) throws DonneesInvalides {
-		listGDP.put(numero, iorGestionDesProfils);
+		listGDP.put(String.valueOf(numero), iorGestionDesProfils);
 		// TODO Auto-generated method stub
 		
 	}
