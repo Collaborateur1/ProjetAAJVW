@@ -2,12 +2,15 @@ package devON;
 
 import generated.DonneesInvalides;
 import generated.Etudiant;
+import generated.Resultat;
 import generated.UniversitePOA;
 import generated.Voeu;
 import generated.dossierEtudiant;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.TreeMap;
 
 import javax.lang.model.util.Elements;
 
@@ -26,7 +29,9 @@ Hashtable<String,Hashtable<String,Voeu>> ListeVoeux;
 
 Hashtable<String,Hashtable<String,Double>> ListeAdmiParForamtion;
 
+// formation, liste INE
 Hashtable<String, ArrayList<String>> ListeCandidatureParFormation;
+Hashtable <String, Resultat[] > ListeResultEtu;
 
 
 
@@ -146,11 +151,38 @@ public UniversiteIMPL() {
 			throws DonneesInvalides {
 		// TODO Auto-generated method stub
 		
+		
 	}
 	
 	@Override
 	public void deliberationJury() {
 		// TODO Auto-generated method stub
+		TreeMap<String,Double> ListeCandidatAdmis;
+		Double Moyenne = null;
+		int nb;
+		//Récupere la liste des formations
+		Enumeration ListeFormation  = ListeCandidatureParFormation.keys();
+		while(ListeFormation.hasMoreElements()){
+			//récupère la liste des ine des étudiants candidats à cette formation
+			ArrayList ListeCandidature = ListeCandidatureParFormation.get(ListeFormation.nextElement());
+			for(int i=0 ; i <= ListeCandidature.size() ; i++){
+				//Récupère le dossier de l'étudiant
+				dossierEtudiant DossEtu = DossierCandidatureEtudiant.get(ListeCandidature.get(i));
+				// ListeResultEtu.put(DossEtu.etu.ineEtudiant,DossEtu.listnotes);
+				
+				//parcours les résultats
+				for (nb = 0; nb <=DossEtu.listnotes.length;nb++){
+					Resultat resultat = DossEtu.listnotes[nb];
+					Moyenne = Moyenne + resultat.moyenne;
+				}
+				Moyenne = Moyenne / nb;
+				ListeCandidatAdmis.put(ListeCandidature.get(i), Moyenne);
+			}
+			
+			
+					
+		}
+	
 		
 		
 	}
