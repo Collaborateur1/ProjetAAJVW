@@ -10,7 +10,6 @@ public class LancementLoadB {
      
 		LBEtudiantIMPL lbl=new LBEtudiantIMPL(orb);
 		
-		
 		orb.run();
 
 	}

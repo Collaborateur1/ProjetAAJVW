@@ -28,11 +28,11 @@ public class LBEtudiantIMPL extends LoadBalancerEtudiantPOA {
 		
 		if(ine.indexOf("G1")!=-1) //si ine contient "G1"  on renvoi GDP1 sinon GDP2 (on fait deux GDP pour linstant)
 	    {
-		 return listGDP.get(1);
+			return listGDP.get(1);
 	    }
 		else
 		{
-		 return listGDP.get(2);	
+			return listGDP.get(2);	
 		}
 	}
 
