@@ -17,6 +17,7 @@ public class LancementGDP {
 		Etudiant etu=new Etudiant("patric","francoi","G101","UT3","la rue",null);
 		gdpimpl.setProfil(etu);
 		 etu=new Etudiant("jv","boss","G102","UT1","la volga",null);
+		 etu=new Etudiant("Alex","boss2","F423","UT3","far away",null);
 		 gdpimpl.setProfil(etu);
 		orb.run();
 	}
