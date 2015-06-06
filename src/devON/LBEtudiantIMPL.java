@@ -10,12 +10,12 @@ import generated.GestionDesProfils;
 import generated.GestionDesVoeux;
 import generated.LoadBalancerEtudiantPOA;
 
-public class LBEEtudiantIMPL extends LoadBalancerEtudiantPOA {
+public class LBEtudiantIMPL extends LoadBalancerEtudiantPOA {
 	
 	Hashtable<String,GestionDesProfils> listGDP;
 	/*********************Costructeur******************************/
 	
-	public LBEEtudiantIMPL(org.omg.CORBA.ORB orb) {
+	public LBEtudiantIMPL(org.omg.CORBA.ORB orb) {
 			// TODO Auto-generated constructor stub
 		listGDP= new Hashtable<String,GestionDesProfils>();
 		NamingServiceTool.putReferenceIntoNS(orb,"LBE", this);
