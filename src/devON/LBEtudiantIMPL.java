@@ -10,15 +10,17 @@ import generated.GestionDesProfils;
 import generated.GestionDesVoeux;
 import generated.LoadBalancerEtudiantPOA;
 
-public class LBEEtudiantIMPL extends LoadBalancerEtudiantPOA {
+public class LBEtudiantIMPL extends LoadBalancerEtudiantPOA {
 	
 	Hashtable<String,GestionDesProfils> listGDP;
 	/*********************Costructeur******************************/
 	
-public LBEEtudiantIMPL(org.omg.CORBA.ORB orb) {
-		// TODO Auto-generated constructor stub
- listGDP= new 	Hashtable<String,GestionDesProfils>();
- NamingServiceTool.putReferenceIntoNS(orb,"LBL", this);
+
+	public LBEtudiantIMPL(org.omg.CORBA.ORB orb) {
+			// TODO Auto-generated constructor stub
+		listGDP= new Hashtable<String,GestionDesProfils>();
+		NamingServiceTool.putReferenceIntoNS(orb,"LBE", this);
+
 	}
 	
 	/*********************Fonction généré******************************/
@@ -28,24 +30,20 @@ public LBEEtudiantIMPL(org.omg.CORBA.ORB orb) {
 		
 		if(ine.indexOf("G1")!=-1) //si ine contient "G1"  on renvoi GDP1 sinon GDP2 (on fait deux GDP pour linstant)
 	    {
-			
-		 return listGDP.get("1");
-		
+
+			return listGDP.get(1);
 	    }
-		else if(ine.indexOf("G2")!=-1)
+		else
 		{
-			
-		 return listGDP.get("2");	
+			return listGDP.get(2);	
 		}
-		
-		
-		return null;
+
 	}
 
 	@Override
 	public GestionDesProfils getServProfil(short num) throws DonneesInvalides {
 		// TODO Auto-generated method stub
-		return null;
+		return listGDP.get(num);
 	}
 
 	@Override
