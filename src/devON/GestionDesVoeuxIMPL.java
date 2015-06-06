@@ -73,7 +73,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	public Formation[] rechercherFormation(String motscles) {
 		// TODO Auto-generated method stub
 		
-		
 		return null;
 	}
 
