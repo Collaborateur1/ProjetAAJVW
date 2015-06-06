@@ -12,13 +12,13 @@ import generated.LoadBalancerEtudiantPOA;
 
 public class LBEEtudiantIMPL extends LoadBalancerEtudiantPOA {
 	
-	Hashtable<Short,GestionDesProfils> listGDP;
+	Hashtable<String,GestionDesProfils> listGDP;
 	/*********************Costructeur******************************/
 	
-public LBEEtudiantIMPL(org.omg.CORBA.ORB orb) {
-		// TODO Auto-generated constructor stub
- listGDP= new 	Hashtable<Short,GestionDesProfils>();
- NamingServiceTool.putReferenceIntoNS(orb,"LBL", this);
+	public LBEEtudiantIMPL(org.omg.CORBA.ORB orb) {
+			// TODO Auto-generated constructor stub
+		listGDP= new Hashtable<String,GestionDesProfils>();
+		NamingServiceTool.putReferenceIntoNS(orb,"LBE", this);
 	}
 	
 	/*********************Fonction généré******************************/
@@ -30,24 +30,22 @@ public LBEEtudiantIMPL(org.omg.CORBA.ORB orb) {
 	    {
 		 return listGDP.get(1);
 	    }
-		else if(ine.indexOf("G1")!=-1)
+		else
 		{
 		 return listGDP.get(2);	
 		}
-		
-		return null;
 	}
 
 	@Override
 	public GestionDesProfils getServProfil(short num) throws DonneesInvalides {
 		// TODO Auto-generated method stub
-		return null;
+		return listGDP.get(num);
 	}
 
 	@Override
 	public void inscriptionGDP(GestionDesProfils iorGestionDesProfils,
 			short numero) throws DonneesInvalides {
-		listGDP.put(numero, iorGestionDesProfils);
+		listGDP.put(String.valueOf(numero), iorGestionDesProfils);
 		// TODO Auto-generated method stub
 		
 	}
