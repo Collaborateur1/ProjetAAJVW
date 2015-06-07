@@ -15,10 +15,12 @@ public class LBEtudiantIMPL extends LoadBalancerEtudiantPOA {
 	Hashtable<String,GestionDesProfils> listGDP;
 	/*********************Costructeur******************************/
 	
+
 	public LBEtudiantIMPL(org.omg.CORBA.ORB orb) {
 			// TODO Auto-generated constructor stub
 		listGDP= new Hashtable<String,GestionDesProfils>();
 		NamingServiceTool.putReferenceIntoNS(orb,"LBE", this);
+
 	}
 	
 	/*********************Fonction généré******************************/
@@ -28,12 +30,14 @@ public class LBEtudiantIMPL extends LoadBalancerEtudiantPOA {
 		
 		if(ine.indexOf("G1")!=-1) //si ine contient "G1"  on renvoi GDP1 sinon GDP2 (on fait deux GDP pour linstant)
 	    {
+
 			return listGDP.get(1);
 	    }
 		else
 		{
 			return listGDP.get(2);	
 		}
+
 	}
 
 	@Override

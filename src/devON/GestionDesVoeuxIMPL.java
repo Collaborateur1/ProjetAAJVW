@@ -107,27 +107,31 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		}
 	}
 
+	
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	//IL MANQUE LE NUMERO DE VOEUX ! IDL A REPRENDRE !! ==>C'est fait..
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	@Override
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	//IL MANQUE LE NUMERO DE VOEUX ! IDL A REPRENDRE !!
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	public void repondreAuxPropositions(String ine, decision choixEtu)
-			throws DonneesInvalides, UtilisationInterdite {
+	public void repondreAuxPropositions(String ine, decision choixEtu,
+			short numeroVoeu) throws DonneesInvalides, UtilisationInterdite {
 		// TODO Auto-generated method stub
-		ArrayList lv = ListeVoeuxEtudiant.get(ine);
+		// TODO Auto-generated method stub
+				ArrayList lv = ListeVoeuxEtudiant.get(ine);
+				
+				@SuppressWarnings("rawtypes")
+				Iterator it = lv.iterator();
+				Voeu v = (Voeu) it.next();
+				while(it.hasNext())
+				{
+					if(v.numeroVoeu==numeroVoeu)
+					{
+						v.dcsEtudiant = choixEtu;
+					}
+					v = (Voeu) it.next();
+				}
 		
-		@SuppressWarnings("rawtypes")
-		Iterator it = lv.iterator();
-		Voeu v = (Voeu) it.next();
-		while(it.hasNext())
-		{
-			if(v.numeroVoeux==numeroVoeux)
-			{
-				v.dcsEtudiant = choixEtu;
-			}
-			v = (Voeu) it.next();
-		}
 	}
+	
 
 	@Override
 	public void modifierVoeu(String ine, short numeroVoeu, short ordre)
@@ -195,6 +199,8 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			}
 		}
 	}
+
+
 
 
 }

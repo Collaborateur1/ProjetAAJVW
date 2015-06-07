@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
@@ -246,14 +247,14 @@ jLabel4.setVisible(false);
     	
         jLabel4.setVisible(false);
         
-        if (!ietudiant.ConnexionGDP(jTextField1.getText().toLowerCase(), jPasswordField1.getText()))
+        if (!ietudiant.ConnexionGDP(jTextField1.getText(), jPasswordField1.getText()))
         {
             jLabel4.setText("Echec d'identification.");
             jLabel4.setVisible(true);
             
         }else
         {
-        	
+        	System.out.println("blocage ici?1 ");
             cl.setVisible(true);
             
         }

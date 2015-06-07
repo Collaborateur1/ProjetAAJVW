@@ -96,7 +96,7 @@ module PostLicence {
 
 		//Permet a un étudiant de répondre à la candidature ou il a été pris lors de la première vague
         //--Appelé par IEtudiant
-		void repondreAuxPropositions(in string ine, in decision choixEtu) raises(DonneesInvalides, UtilisationInterdite); //(11)
+		void repondreAuxPropositions(in string ine, in decision choixEtu,in short numeroVoeu) raises(DonneesInvalides, UtilisationInterdite); //(11)
 		
 		//Permet a un étudiant de modifier l'ordre de ce voeu
         //--Appelé par IEtudiant
