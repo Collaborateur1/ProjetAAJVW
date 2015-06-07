@@ -16,11 +16,6 @@ public class NamingServiceTool {
 	 * @param args
 	 */
 	
-	
-	
-
-	
-	
 	public static org.omg.CORBA.Object getReferenceIntoNS(String nameIntoNS) {
 		//1
 		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(new String[0],null);
