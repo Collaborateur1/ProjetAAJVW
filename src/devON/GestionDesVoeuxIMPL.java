@@ -104,8 +104,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			
 		Voeu[] lvc = new Voeu[5];
 		
-		if(!lv.isEmpty())
-		{
 			
 		@SuppressWarnings("rawtypes")
 		Iterator it = lv.iterator();
@@ -117,20 +115,8 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			v = (Voeu) it.next();
 			i++;
 		}
-		}
-		else
-		{ //impossible de renvoyer la valeur null toute les cases du tableau doivent etre remplis sinon cela ne marchera pas
-		  //quand on détectera ce cas on affichera pas le voeux ou on mettra "choisir votre voeu"	
-			Formation fr= new Formation("Choisir un voeux"," Choisir un voeux", "Choisir un voeux", "Choisir un voeux");
-			etatvoeux et=etatvoeux.nonValide;
-			decision dc=decision.NONdefinitif;
-			short temp=0;
-			Voeu vx=new Voeu(fr, et, dc, temp);
-			for(int j=0;j<5;j++)
-			{
-				lvc[j]=vx;
-			}
-		}
+		
+		
 		return lvc;
 	}
 
@@ -138,13 +124,25 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	public Voeu[] faireUnVoeu(String ine, Voeu monVoeux, short ordre)
 			throws DonneesInvalides, UtilisationInterdite {
 		// TODO Auto-generated method stub
-		ArrayList lv = ListeVoeuxEtudiant.get(ine);
+		if( ListeVoeuxEtudiant.containsKey(ine))
+		{	
+			ArrayList lv=ListeVoeuxEtudiant.get(ine);
 		if(lv.size()<6)
 		{
 			monVoeux.numeroVoeu = ordre;
 			lv.add(monVoeux);
 		}
 		return chargerVoeux(ine);
+		}
+		else
+		{
+			ArrayList lv2=new ArrayList<Voeu>();
+			
+			lv2.add(monVoeux);
+			ListeVoeuxEtudiant.put(ine, lv2);
+			return chargerVoeux(ine);
+		}
+		
 	}
 
 	

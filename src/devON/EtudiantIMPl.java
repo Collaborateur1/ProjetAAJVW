@@ -84,7 +84,13 @@ public class EtudiantIMPl extends IEtudiantPOA{
 			
 			etu=IEtudiantHelper.narrow(rootPOA.servant_to_reference(this));
 			gdv=gdp.connexion(etu, INE, mdp);
+			
+			if(gdv.possedeVoeux(INE))
+			{	
 			cl.configuration_de_connexion(gdp.consulterProfil(INE),gdv.chargerVoeux(INE));
+			}
+			
+				
 		    this.INE=INE;
 			cl.setVisible(true);
 			return true;
