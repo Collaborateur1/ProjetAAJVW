@@ -103,18 +103,22 @@ module PostLicence {
 		
 		//Permet a un étudiant de modifier l'ordre de ce voeu
         //--Appelé par IEtudiant
-		void modifierVoeu (in string ine, in short numeroVoeu, in short ordre) raises(DonneesInvalides, UtilisationInterdite); //(12)
+		seqVoeux modifierVoeu (in string ine, in short numeroVoeu, in short ordre) raises(DonneesInvalides, UtilisationInterdite); //(12)
 		
 		//Permet a un étudiant de supprimer un voeu formulé
         //--Appelé par IEtudiant
-		void supprimerVoeux (in string ine, in short numeroVoeu) raises(DonneesInvalides, UtilisationInterdite); //(13)
+		seqVoeux supprimerVoeux (in string ine, in short numeroVoeu) raises(DonneesInvalides, UtilisationInterdite); //(13)
 
 		//Dès que toutes les réponses au candidature des étudiants ont été faites. 
 		//Le Rectorat appel cette méthode pour donné le résultat du meilleurs voeu pour chaque interface étudiante
 		//--Appelé par Rectorat
 		/**modif**/
 		void transmettreDecisionCandidatureRectorat (in string ine, in Voeu Reponse) raises(DonneesInvalides); //(14)
+		//appeler par etudiant pour savoir si il doit chargé sa liste de voeux
 		boolean possedeVoeux (in string ine);
+		
+		boolean existFormation (in string nomFormation);
+		
 	};
 	 
 	 

@@ -30,7 +30,7 @@ public class LancementGeneral {
 	t.start();
 	
 	
-	Thread.sleep(5000);
+	Thread.sleep(2000);
 	
 	
 	Runnable r2 = new Runnable() {
@@ -48,7 +48,7 @@ public class LancementGeneral {
 Thread t2=new Thread(r2);
 t2.start();
 	
-Thread.sleep(5000);	
+Thread.sleep(2000);	
 	
 Runnable r3 = new Runnable() {
 	public void run() {
@@ -61,7 +61,7 @@ Runnable r3 = new Runnable() {
 Thread t3=new Thread(r3);
 t3.start();
 
-Thread.sleep(5000);
+Thread.sleep(2000);
 
 
 
@@ -83,7 +83,7 @@ t4.start();
 
 
 
-Thread.sleep(5000);
+Thread.sleep(2000);
 
 
 

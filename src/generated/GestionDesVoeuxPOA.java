@@ -35,6 +35,8 @@ public abstract class GestionDesVoeuxPOA extends org.omg.PortableServer.Servant
                     new Operation__get_numeroGDV());
             operationMap.put("chargerVoeux",
                     new Operation_chargerVoeux());
+            operationMap.put("existFormation",
+                    new Operation_existFormation());
             operationMap.put("faireUnVoeu",
                     new Operation_faireUnVoeu());
             operationMap.put("inscriptionIE",
@@ -203,9 +205,10 @@ public abstract class GestionDesVoeuxPOA extends org.omg.PortableServer.Servant
 
         try
         {
-            modifierVoeu(arg0_in, arg1_in, arg2_in);
+            generated.Voeu[] _arg_result = modifierVoeu(arg0_in, arg1_in, arg2_in);
 
             _output = handler.createReply();
+            generated.seqVoeuxHelper.write(_output,_arg_result);
 
         }
         catch (generated.DonneesInvalides _exception)
@@ -230,9 +233,10 @@ public abstract class GestionDesVoeuxPOA extends org.omg.PortableServer.Servant
 
         try
         {
-            supprimerVoeux(arg0_in, arg1_in);
+            generated.Voeu[] _arg_result = supprimerVoeux(arg0_in, arg1_in);
 
             _output = handler.createReply();
+            generated.seqVoeuxHelper.write(_output,_arg_result);
 
         }
         catch (generated.DonneesInvalides _exception)
@@ -277,6 +281,20 @@ public abstract class GestionDesVoeuxPOA extends org.omg.PortableServer.Servant
         String arg0_in = _is.read_string();
 
         boolean _arg_result = possedeVoeux(arg0_in);
+
+        _output = handler.createReply();
+        _output.write_boolean(_arg_result);
+
+        return _output;
+    }
+
+    private org.omg.CORBA.portable.OutputStream _invoke_existFormation(
+            final org.omg.CORBA.portable.InputStream _is,
+            final org.omg.CORBA.portable.ResponseHandler handler) {
+        org.omg.CORBA.portable.OutputStream _output;
+        String arg0_in = _is.read_string();
+
+        boolean _arg_result = existFormation(arg0_in);
 
         _output = handler.createReply();
         _output.write_boolean(_arg_result);
@@ -389,6 +407,16 @@ public abstract class GestionDesVoeuxPOA extends org.omg.PortableServer.Servant
                 final org.omg.CORBA.portable.InputStream _is,
                 final org.omg.CORBA.portable.ResponseHandler handler) {
             return target._invoke_possedeVoeux(_is, handler);
+        }
+    }
+
+    private static final class Operation_existFormation extends AbstractOperation
+    {
+        protected org.omg.CORBA.portable.OutputStream invoke(
+                final GestionDesVoeuxPOA target,
+                final org.omg.CORBA.portable.InputStream _is,
+                final org.omg.CORBA.portable.ResponseHandler handler) {
+            return target._invoke_existFormation(_is, handler);
         }
     }
 

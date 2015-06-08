@@ -82,7 +82,11 @@ loadBalancer.inscriptionGDP(GestionDesProfilsHelper.narrow(rootPOA.servant_to_re
 		if(etudiantinscrit.containsKey(ine) )
 		{
 			if( CodeEtudiantInscrit.get(ine).equals(mdp)){
-				GestionDesVoeuxInscrit.inscriptionIE(ine, iorEtudiant);
+				if(!GestionDesVoeuxInscrit.possedeVoeux(ine))
+				   {
+					GestionDesVoeuxInscrit.inscriptionIE(ine, iorEtudiant);
+				   
+				   }
 				
 				return GestionDesVoeuxInscrit;				
 			}

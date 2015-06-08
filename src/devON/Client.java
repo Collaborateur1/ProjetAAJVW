@@ -284,7 +284,12 @@ public class Client extends javax.swing.JFrame {
         jButton1.setText("Monter");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                try {
+					jButton1ActionPerformed(evt);
+				} catch (DonneesInvalides | UtilisationInterdite e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
@@ -335,14 +340,24 @@ public class Client extends javax.swing.JFrame {
         jButton5.setText("descendre");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                try {
+					jButton5ActionPerformed(evt);
+				} catch (DonneesInvalides | UtilisationInterdite e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
-        jButton7.setText("Modifier");
+        jButton7.setText("Supprimer");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                try {
+					jButton7ActionPerformed(evt);
+				} catch (DonneesInvalides | UtilisationInterdite e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
@@ -459,7 +474,7 @@ public class Client extends javax.swing.JFrame {
                                         .addContainerGap(37, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton2)
@@ -496,7 +511,7 @@ public class Client extends javax.swing.JFrame {
                 .addComponent(jLabel14)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 11, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1015, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -523,15 +538,44 @@ public class Client extends javax.swing.JFrame {
 //bouton modifierProfil           
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) throws DonneesInvalides, UtilisationInterdite {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        //bouton "modifier"
+        
+        if(jList2.getSelectedValue()instanceof Voeu )	
+    	{
+        	Voeu Vx=(Voeu) jList2.getSelectedValue();
+        	etudiant.supprimerVoeu(etudiant.getINE(), Vx.numeroVoeu);
+        	
+    	}
         
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) throws DonneesInvalides, UtilisationInterdite {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         //bouton descendre
+    	short derniereplace;
+    	short nouvellePlace=0;
+    	if(jList2.getSelectedValue()instanceof Voeu )	
+    	{
+    		ListModel< Voeu> list =jList2.getModel();
+    		derniereplace=(short) list.getSize();
+    		
+    		if(derniereplace!=1)
+    		{
+    			Voeu Vx=(Voeu) jList2.getSelectedValue();
+    			if(Vx.numeroVoeu!=4)
+            	{
+    				nouvellePlace=(short)(jList2.getSelectedIndex()+2);
+            		etudiant.modifierVoeu(etudiant.getINE(), Vx.numeroVoeu, nouvellePlace);
+            		
+            	}
+    		}
+    	
+        
+        	
+    	}
+    	
+    	
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jList2ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList2ValueChanged
@@ -543,14 +587,21 @@ public class Client extends javax.swing.JFrame {
         // TODO add your handling code here:
        if(!jTextField1.equals(""))
        {
-          Formation[] fr= etudiant.getGDV().rechercherFormation(jTextField1.getText());
-           ArrayList array= new ArrayList<Formation>();
-          for(int i=0;i<fr.length;i++)
-           {
-        	  
-        	  array.add(fr[i]);
-        	  
-           }
+    	   Formation[] fr = null;
+    	   ArrayList array = new ArrayList<Formation>();
+    	   if(etudiant.getGDV().existFormation(jTextField1.getText()))
+    			   {
+    		          fr= etudiant.getGDV().rechercherFormation(jTextField1.getText());
+    		          array= new ArrayList<Formation>();
+    		          for(int i=0;i<fr.length;i++)
+    		           {
+    		        	  
+    		        	  array.add(fr[i]);
+    		        	  
+    		           }
+    			   }
+          
+           
            
           if(!array.isEmpty())
            jList1.setListData(array.toArray());
@@ -573,33 +624,24 @@ public class Client extends javax.swing.JFrame {
      
     	if(jList1.getSelectedValue()instanceof Formation )	
     	{
-    		short placeVoeux =-1;
+    		
     		Voeu vx;
     		int i=0;
-    		 ListModel< Voeu> list =jList2.getModel();
+    		ListModel< Voeu> list =jList2.getModel();
+    		short placeVoeux = (short) (list.getSize()+1);
     		
-    		 while(i<5)
-    		 {
-    			vx= list.getElementAt(i);
-    			
-    			if(vx.formationVoeu.NomFormation.contains("Choisir un voeux"))
-    				{
-    				placeVoeux=(short)i;
-    				i=5;
-    				}
-    			i++;
-    		 }
-    		 short init=-1;
-    		 
-    		 if(!(placeVoeux==init))
-    		 {
-    			 Voeu veux=new Voeu((Formation)jList1.getSelectedValue(), etatvoeux.soumis, decision.NONutilse,(short)0);
-    	    		etudiant.fairVoeux(veux,etudiant.getINE(),placeVoeux); 
-    		 }
-    		 else
-    		 {
-    			 jTextField1.setText("vous avez deja attein le quota de voeux maximum");
-    		 }
+    		if(placeVoeux<6)
+    		{
+    			 Voeu veux=new Voeu((Formation)jList1.getSelectedValue(), etatvoeux.soumis, decision.NONutilse,placeVoeux);
+    	  
+    			 etudiant.fairVoeux(veux,etudiant.getINE(),placeVoeux); 
+    		}
+    		else
+    		{
+    			jTextField1.setText("vous avez deja attein le quota de voeux maximum");
+    		}
+    			 
+    		
     		
     	}
     	else
@@ -610,9 +652,19 @@ public class Client extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
 //Le listerner qui soccupe déffectuer la recherche d'un objet
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws DonneesInvalides, UtilisationInterdite {//GEN-FIRST:event_jButton1ActionPerformed
+short place1=0;
+short nouvellePlace=0;
+      if(jList2.getSelectedValue()instanceof Voeu )	
+    	{
+    	  nouvellePlace=(short)(jList2.getSelectedIndex());
+        	Voeu Vx=(Voeu) jList2.getSelectedValue();
+        	if(Vx.numeroVoeu!=place1)
+        	{
+        		etudiant.modifierVoeu(etudiant.getINE(), Vx.numeroVoeu, nouvellePlace);
+        		
+        	}
+    	}
 
             // }
     }//GEN-LAST:event_jButton1ActionPerformed

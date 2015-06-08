@@ -89,7 +89,10 @@ public class EtudiantIMPl extends IEtudiantPOA{
 			{	
 			cl.configuration_de_connexion(gdp.consulterProfil(INE),gdv.chargerVoeux(INE));
 			}
-			
+			else
+			{
+				cl.configuration_de_connexion(gdp.consulterProfil(INE),null);
+			}
 				
 		    this.INE=INE;
 			cl.setVisible(true);
@@ -162,6 +165,22 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	{
 		int i=0;
 		cl.miseAjourJlist2(gdv.faireUnVoeu(INE, vx, ordre));
+		
+		
+	}
+	
+	public void modifierVoeu( String INE,short numeroVoeux,short ordre) throws DonneesInvalides, UtilisationInterdite
+	{
+		int i=0;
+		cl.miseAjourJlist2(gdv.modifierVoeu(INE, numeroVoeux, ordre));
+		
+		
+	}
+	
+	public void supprimerVoeu( String INE,short numeroVoeux) throws DonneesInvalides, UtilisationInterdite
+	{
+		int i=0;
+		cl.miseAjourJlist2(gdv.supprimerVoeux(INE, numeroVoeux));
 		
 		
 	}
