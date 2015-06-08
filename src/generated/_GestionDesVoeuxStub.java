@@ -354,7 +354,7 @@ public class _GestionDesVoeuxStub extends org.omg.CORBA.portable.ObjectImpl
     /**
      * Operation modifierVoeu
      */
-    public generated.Voeu[] modifierVoeu(String ine, short numeroVoeu, short ordre)
+    public void modifierVoeu(String ine, short numeroVoeu, short ordre)
         throws generated.DonneesInvalides, generated.UtilisationInterdite
     {
         while(true)
@@ -369,8 +369,7 @@ public class _GestionDesVoeuxStub extends org.omg.CORBA.portable.ObjectImpl
                     _output.write_short(numeroVoeu);
                     _output.write_short(ordre);
                     _input = this._invoke(_output);
-                    generated.Voeu[] _arg_ret = generated.seqVoeuxHelper.read(_input);
-                    return _arg_ret;
+                    return;
                 }
                 catch(org.omg.CORBA.portable.RemarshalException _exception)
                 {
@@ -404,7 +403,8 @@ public class _GestionDesVoeuxStub extends org.omg.CORBA.portable.ObjectImpl
                 generated.GestionDesVoeuxOperations _self = (generated.GestionDesVoeuxOperations) _so.servant;
                 try
                 {
-                    return _self.modifierVoeu( ine,  numeroVoeu,  ordre);
+                    _self.modifierVoeu( ine,  numeroVoeu,  ordre);
+                    return;
                 }
                 finally
                 {
@@ -417,7 +417,7 @@ public class _GestionDesVoeuxStub extends org.omg.CORBA.portable.ObjectImpl
     /**
      * Operation supprimerVoeux
      */
-    public generated.Voeu[] supprimerVoeux(String ine, short numeroVoeu)
+    public void supprimerVoeux(String ine, short numeroVoeu)
         throws generated.DonneesInvalides, generated.UtilisationInterdite
     {
         while(true)
@@ -431,8 +431,7 @@ public class _GestionDesVoeuxStub extends org.omg.CORBA.portable.ObjectImpl
                     _output.write_string(ine);
                     _output.write_short(numeroVoeu);
                     _input = this._invoke(_output);
-                    generated.Voeu[] _arg_ret = generated.seqVoeuxHelper.read(_input);
-                    return _arg_ret;
+                    return;
                 }
                 catch(org.omg.CORBA.portable.RemarshalException _exception)
                 {
@@ -466,7 +465,8 @@ public class _GestionDesVoeuxStub extends org.omg.CORBA.portable.ObjectImpl
                 generated.GestionDesVoeuxOperations _self = (generated.GestionDesVoeuxOperations) _so.servant;
                 try
                 {
-                    return _self.supprimerVoeux( ine,  numeroVoeu);
+                    _self.supprimerVoeux( ine,  numeroVoeu);
+                    return;
                 }
                 finally
                 {
@@ -574,56 +574,6 @@ public class _GestionDesVoeuxStub extends org.omg.CORBA.portable.ObjectImpl
                 try
                 {
                     return _self.possedeVoeux( ine);
-                }
-                finally
-                {
-                    _servant_postinvoke(_so);
-                }
-            }
-        }
-    }
-
-    /**
-     * Operation existFormation
-     */
-    public boolean existFormation(String nomFormation)
-    {
-        while(true)
-        {
-            if (!this._is_local())
-            {
-                org.omg.CORBA.portable.InputStream _input = null;
-                try
-                {
-                    org.omg.CORBA.portable.OutputStream _output = this._request("existFormation",true);
-                    _output.write_string(nomFormation);
-                    _input = this._invoke(_output);
-                    boolean _arg_ret = _input.read_boolean();
-                    return _arg_ret;
-                }
-                catch(org.omg.CORBA.portable.RemarshalException _exception)
-                {
-                    continue;
-                }
-                catch(org.omg.CORBA.portable.ApplicationException _exception)
-                {
-                    String _exception_id = _exception.getId();
-                    throw new org.omg.CORBA.UNKNOWN("Unexpected User Exception: "+ _exception_id);
-                }
-                finally
-                {
-                    this._releaseReply(_input);
-                }
-            }
-            else
-            {
-                org.omg.CORBA.portable.ServantObject _so = _servant_preinvoke("existFormation",_opsClass);
-                if (_so == null)
-                   continue;
-                generated.GestionDesVoeuxOperations _self = (generated.GestionDesVoeuxOperations) _so.servant;
-                try
-                {
-                    return _self.existFormation( nomFormation);
                 }
                 finally
                 {

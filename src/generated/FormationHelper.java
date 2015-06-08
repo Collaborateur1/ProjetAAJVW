@@ -73,7 +73,7 @@ public class FormationHelper
                     return org.omg.CORBA.ORB.init().create_recursive_tc(id());
                 _working = true;
                 org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init();
-                org.omg.CORBA.StructMember []_members = new org.omg.CORBA.StructMember[4];
+                org.omg.CORBA.StructMember []_members = new org.omg.CORBA.StructMember[5];
 
                 _members[0] = new org.omg.CORBA.StructMember();
                 _members[0].name = "nomUniv";
@@ -87,6 +87,9 @@ public class FormationHelper
                 _members[3] = new org.omg.CORBA.StructMember();
                 _members[3].name = "nomRectorat";
                 _members[3].type = orb.get_primitive_tc(org.omg.CORBA.TCKind.tk_string);
+                _members[4] = new org.omg.CORBA.StructMember();
+                _members[4].name = "quota";
+                _members[4].type = orb.get_primitive_tc(org.omg.CORBA.TCKind.tk_short);
                 _tc = orb.create_struct_tc(id(),"Formation",_members);
                 _working = false;
             }
@@ -118,6 +121,7 @@ public class FormationHelper
         new_one.NomFormation = istream.read_string();
         new_one.TypeFormation = istream.read_string();
         new_one.nomRectorat = istream.read_string();
+        new_one.quota = istream.read_short();
 
         return new_one;
     }
@@ -133,6 +137,7 @@ public class FormationHelper
         ostream.write_string(value.NomFormation);
         ostream.write_string(value.TypeFormation);
         ostream.write_string(value.nomRectorat);
+        ostream.write_short(value.quota);
     }
 
 }

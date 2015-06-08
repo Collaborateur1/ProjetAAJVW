@@ -117,19 +117,19 @@ public class GestionDesVoeuxPOATie extends GestionDesVoeuxPOA
     /**
      * Operation modifierVoeu
      */
-    public generated.Voeu[] modifierVoeu(String ine, short numeroVoeu, short ordre)
+    public void modifierVoeu(String ine, short numeroVoeu, short ordre)
         throws generated.DonneesInvalides, generated.UtilisationInterdite
     {
-        return _tie.modifierVoeu( ine,  numeroVoeu,  ordre);
+        _tie.modifierVoeu( ine,  numeroVoeu,  ordre);
     }
 
     /**
      * Operation supprimerVoeux
      */
-    public generated.Voeu[] supprimerVoeux(String ine, short numeroVoeu)
+    public void supprimerVoeux(String ine, short numeroVoeu)
         throws generated.DonneesInvalides, generated.UtilisationInterdite
     {
-        return _tie.supprimerVoeux( ine,  numeroVoeu);
+        _tie.supprimerVoeux( ine,  numeroVoeu);
     }
 
     /**
@@ -147,14 +147,6 @@ public class GestionDesVoeuxPOATie extends GestionDesVoeuxPOA
     public boolean possedeVoeux(String ine)
     {
         return _tie.possedeVoeux( ine);
-    }
-
-    /**
-     * Operation existFormation
-     */
-    public boolean existFormation(String nomFormation)
-    {
-        return _tie.existFormation( nomFormation);
     }
 
 }
