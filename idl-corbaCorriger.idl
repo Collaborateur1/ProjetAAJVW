@@ -13,6 +13,7 @@ module PostLicence {
 		string NomFormation;
 		string TypeFormation;
 		string nomRectorat; //Afin de pouvoir orienter les voeux vers le bon rectorat quand les voeux sont transféré
+		short quota;
 	};
 	struct Etudiant {
 		string nomEtudiant;
