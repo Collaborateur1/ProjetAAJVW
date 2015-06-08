@@ -44,13 +44,14 @@ module PostLicence {
 	enum etatvoeux {soumis, nonValide, valide, accepter, refuser, listeDattente};
 	
 	//Enumération utilisée par la méthode repondreAuxPropositions de l'interface GestionDesVoeux
-	enum decision {OUIdefinitif,OUImais, NONdefinitif, NONmais};
+	enum decision {OUIdefinitif,OUImais, NONdefinitif, NONmais,NONutilse};
 	
 	struct Voeu {
 		Formation formationVoeu;
 		etatvoeux etatVoeu;
 		decision dcsEtudiant;
 		short numeroVoeu;
+		
 	};
 	
 	typedef sequence<Voeu> seqVoeux;
@@ -72,6 +73,8 @@ module PostLicence {
 		//--Appelé par GestionDesVoeux
 		void majEtatVoeux(in Voeu UnVoeu); //(2)
 		
+		
+		
 	 };
 
 	 	//La GDV fonctionne de paire avec la GestionDesProfils même explication que pour la GDP
@@ -92,7 +95,7 @@ module PostLicence {
 		
 		//Permet a un étudiant de formuler un voeu
         //--Appelé par IEtudiant
-		void faireUnVoeu(in string ine, in Voeu monVoeux, in short ordre) raises(DonneesInvalides, UtilisationInterdite); //(10)
+		seqVoeux faireUnVoeu(in string ine, in Voeu monVoeux, in short ordre) raises(DonneesInvalides, UtilisationInterdite); //(10)
 
 		//Permet a un étudiant de répondre à la candidature ou il a été pris lors de la première vague
         //--Appelé par IEtudiant
@@ -138,6 +141,14 @@ module PostLicence {
 		//Permet a un serveur de GDV de s'inscrire et d'être contacté par un étudiant venant de ce connecter
 		//--Appelé par GestionDesVoeux
 		void inscriptionGestionDesVoeux(in GestionDesVoeux GDesVx); //(6)
+		
+		 boolean etudiantInscrit(in string ine)raises(DonneesInvalides);
+		 
+		 //Quand un étudiant s'inscrit on récupere son profil pour le mettre dans gestion des profils ici
+		//--appelé par etudiant
+		Etudiant getFicheEtudiant(in string ine)raises(DonneesInvalides);
+		
+		
 	};
 
 
@@ -164,6 +175,12 @@ interface Universite {
 		//--Appelé par Rectorat
 		void repondrePropositionvoeux(in string ine,in Voeu voeu) raises(DonneesInvalides); //(32)
 		
+		//Quand un étudiant s'inscrit on récupere son profil pour le mettre dans gestion des profils ici
+		//--appelé par rectorat
+		Etudiant getFicheEtudiant(in string ine)raises(DonneesInvalides);
+		
+		//--appelé par rectorat
+		boolean estEtudiant(in string ine);
 	     /**modif**/
 		void deliberationJury();
 	};
@@ -203,6 +220,10 @@ interface Universite {
 		
         //**modif**//
 		void deliberationJury();
+		
+		//Quand un étudiant s'inscrit on récupere son profil pour le mettre dans gestion des profils ici
+		//appelé par GDP
+		Etudiant getFicheEtudiant(in string ine)raises(DonneesInvalides);
 	};
 
 
