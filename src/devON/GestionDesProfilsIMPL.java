@@ -19,6 +19,9 @@ import generated.GestionDesVoeux;
 import generated.IEtudiant;
 import generated.LoadBalancerEtudiant;
 import generated.LoadBalancerEtudiantHelper;
+import generated.Ministère;
+import generated.MinistèreHelper;
+import generated.Rectorat;
 
 
 
@@ -34,7 +37,7 @@ GestionDesVoeux GestionDesVoeuxInscrit;
 int nombreGDV;
 LoadBalancerEtudiant loadBalancer;
 org.omg.PortableServer.POA rootPOA;
-
+Rectorat rectorat ;
 
 /*********************Costructeur
  * @throws DonneesInvalides 
@@ -43,17 +46,20 @@ org.omg.PortableServer.POA rootPOA;
  * @throws ServantNotActive 
  * @throws ServantAlreadyActive 
  * @throws AdapterInactive ******************************/
-public GestionDesProfilsIMPL(short nGdp,org.omg.CORBA.ORB orb) throws DonneesInvalides, InvalidName, ServantNotActive, WrongPolicy, ServantAlreadyActive, AdapterInactive {
+public GestionDesProfilsIMPL(short nGdp,org.omg.CORBA.ORB orb,String monRectorat) throws DonneesInvalides, InvalidName, ServantNotActive, WrongPolicy, ServantAlreadyActive, AdapterInactive {
 numGDP=nGdp;
 etudiantConnecter=new Hashtable<String, IEtudiant>();
  etudiantinscrit=new Hashtable <String,Etudiant>();
  CodeEtudiantInscrit= new  Hashtable <String,String>();
 nombreGDV=1;
-loadBalancer= LoadBalancerEtudiantHelper.narrow(NamingServiceTool.getReferenceIntoNS("LBL"));
+loadBalancer= LoadBalancerEtudiantHelper.narrow(NamingServiceTool.getReferenceIntoNS("LBE"));
  rootPOA = org.omg.PortableServer.POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
 
 
 rootPOA.the_POAManager().activate();
+Ministère ministere= MinistèreHelper.narrow(
+		NamingServiceTool.getReferenceIntoNS("Ministere"));
+rectorat=ministere.recupererRectorat(monRectorat);
 
 loadBalancer.inscriptionGDP(GestionDesProfilsHelper.narrow(rootPOA.servant_to_reference(this)), nGdp);
 
@@ -108,6 +114,17 @@ loadBalancer.inscriptionGDP(GestionDesProfilsHelper.narrow(rootPOA.servant_to_re
 	 nombreGDV++;
 	}
 	
+	@Override
+	public boolean etudiantInscrit(String ine) throws DonneesInvalides {
+		// TODO Auto-generated method stub
+		return etudiantinscrit.containsKey(ine);
+	}
+	
+	@Override
+	public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
+		// TODO Auto-generated method stub
+		return rectorat.getFicheEtudiant(ine);
+	}
 	/*********************Fonction rajouté******************************/
 	
 	public void setProfil(Etudiant etu)
@@ -122,5 +139,9 @@ loadBalancer.inscriptionGDP(GestionDesProfilsHelper.narrow(rootPOA.servant_to_re
 	{
 		return loadBalancer;
 	}
+
+	
+
+	
 
 }

@@ -35,8 +35,13 @@ champ Nom :jLabel3
 
 */
 
+import generated.DonneesInvalides;
 import generated.Etudiant;
+import generated.Formation;
+import generated.UtilisationInterdite;
 import generated.Voeu;
+import generated.decision;
+import generated.etatvoeux;
 
 import java.awt.Color;
 import java.io.BufferedReader;
@@ -50,7 +55,9 @@ import java.util.logging.Logger;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.ListModel;
 /**
  *
  * @author Vinss
@@ -81,6 +88,7 @@ public class Client extends javax.swing.JFrame {
     {
         //personnaliser graphiquement la jlist
         jList2.setCellRenderer(new MyCellRenderer());
+        jList1.setCellRenderer(new MyCellRendererRecherche());
            
     }
     
@@ -283,7 +291,12 @@ public class Client extends javax.swing.JFrame {
         jButton2.setText("->Fair un voeu->");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                try {
+					jButton2ActionPerformed(evt);
+				} catch (DonneesInvalides | UtilisationInterdite e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
@@ -530,10 +543,17 @@ public class Client extends javax.swing.JFrame {
         // TODO add your handling code here:
        if(!jTextField1.equals(""))
        {
+          Formation[] fr= etudiant.getGDV().rechercherFormation(jTextField1.getText());
+           ArrayList array= new ArrayList<Formation>();
+          for(int i=0;i<fr.length;i++)
+           {
+        	  
+        	  array.add(fr[i]);
+        	  
+           }
            
-           
-           jTextField1.getText();
-           
+          if(!array.isEmpty())
+           jList1.setListData(array.toArray());
        }    
         
         
@@ -548,9 +568,44 @@ public class Client extends javax.swing.JFrame {
 
     //Permet d'enchérire un objet
     
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//bouton "monter"
-        
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) throws DonneesInvalides, UtilisationInterdite {//GEN-FIRST:event_jButton2ActionPerformed
+//bouton "faire un voeu"
+     
+    	if(jList1.getSelectedValue()instanceof Formation )	
+    	{
+    		short placeVoeux =-1;
+    		Voeu vx;
+    		int i=0;
+    		 ListModel< Voeu> list =jList2.getModel();
+    		
+    		 while(i<5)
+    		 {
+    			vx= list.getElementAt(i);
+    			
+    			if(vx.formationVoeu.NomFormation.contains("Choisir un voeux"))
+    				{
+    				placeVoeux=(short)i;
+    				i=5;
+    				}
+    			i++;
+    		 }
+    		 short init=-1;
+    		 
+    		 if(!(placeVoeux==init))
+    		 {
+    			 Voeu veux=new Voeu((Formation)jList1.getSelectedValue(), etatvoeux.soumis, decision.NONutilse,(short)0);
+    	    		etudiant.fairVoeux(veux,etudiant.getINE(),placeVoeux); 
+    		 }
+    		 else
+    		 {
+    			 jTextField1.setText("vous avez deja attein le quota de voeux maximum");
+    		 }
+    		
+    	}
+    	else
+    	{
+    		jLabel10.setText("Selectionner une formation -.-");
+    	}
                     
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -608,7 +663,20 @@ public class Client extends javax.swing.JFrame {
        
    }
     
-   
+ public void miseAjourJlist2(Voeu[] vx)
+ {
+	 if(vx!=null)
+	   {
+	   ArrayList array=new ArrayList(); 
+	   
+	   for(int i=0;i<vx.length;i++)
+	   {
+		   array.add(vx[i]);
+	   }
+	   jList2.setListData(array.toArray());
+	   
+	   } 
+ }
    
     
     

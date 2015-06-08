@@ -37,7 +37,7 @@ class MyCellRenderer extends JLabel implements ListCellRenderer<Object> {
    ImageIcon selectIconE;
    Color selectCouleur = Color.RED;
    public  MyCellRenderer(){
-      icon = new ImageIcon(getClass().getResource("math.png"));
+      icon = new ImageIcon(getClass().getResource("Postuler.jpg"));
     
    }
   
@@ -48,15 +48,22 @@ public Component getListCellRendererComponent(JList<? extends Object> list,
 		Object values, int index, boolean isSelected, boolean cellHasFocus) {
 	 
     //Le contenu de mon voeux
-    String s = values.toString();
-	
+
+   
     //si lobjet est selectioner 
     if (isSelected) {
-    	Voeu vx=( Voeu)list.getSelectedValue();
+    	 Voeu vx=( Voeu)list.getSelectedValue();
        setBackground(list.getSelectionBackground());
        setForeground(selectCouleur);
        
-      setText(vx.toString());
+       if(vx.formationVoeu.NomFormation.contains("Choisir un voeux"))    	   
+      {
+    	   setText("Emplacement disponible pour un nouveau voeu");
+      }
+      else
+      {
+    	  setText("Université:"+vx.formationVoeu.nomUniv+" type de formation:"+vx.formationVoeu.TypeFormation);
+      }
        if(vx.formationVoeu.TypeFormation.equals("Informatique"))
        {
            //Pour l'instant je leur met tous la meme image.
@@ -71,11 +78,21 @@ public Component getListCellRendererComponent(JList<? extends Object> list,
        }
        
     }else{
-        //j'y comprend rien javais pas comenter *.*"
-        //en gros sa c'est quand on clique pas sur nos voeux
+    
+    	Voeu vx = ( Voeu)values;
+   
+    
+    	if(vx.formationVoeu.NomFormation.contains("Choisir un voeux"))
+        {
+    		setText("Emplacement disponible pour un nouveau voeu");
+        }
+        else
+        {
+      	  setText("Nom Formation:"+vx.formationVoeu.NomFormation+" Etat:"+vx.etatVoeu);
+        }
        setBackground(list.getBackground());
        setForeground(list.getForeground());
-       setText(s);
+    
        setIcon(icon);
     }
     setEnabled(list.isEnabled());

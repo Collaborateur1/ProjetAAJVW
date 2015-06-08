@@ -58,6 +58,17 @@ public UniversiteIMPL() {
 	DossierCandidatureEtudiant=new Hashtable<String,dossierEtudiant>();
 }
 
+@Override
+public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
+	// TODO Auto-generated method stub
+	if (DossierEtudiant.containsKey(ine))
+	{
+		return DossierEtudiant.get(ine).etu;
+	}
+	throw new DonneesInvalides("ine inexistant");
+	
+	
+}
 /**************************Généré*************************************/
 
 	@Override
@@ -176,7 +187,7 @@ public UniversiteIMPL() {
 					Moyenne = Moyenne + resultat.moyenne;
 				}
 				Moyenne = Moyenne / nb;
-				ListeCandidatAdmis.put(ListeCandidature.get(i), Moyenne);
+			//	ListeCandidatAdmis.put(ListeCandidature.get(i), Moyenne);
 			}
 			
 			
@@ -186,6 +197,14 @@ public UniversiteIMPL() {
 		
 		
 	}
+
+	@Override
+	public boolean estEtudiant(String ine) {
+		// TODO Auto-generated method stub
+		return DossierEtudiant.containsKey(ine);
+	}
+
+
 
 	
 

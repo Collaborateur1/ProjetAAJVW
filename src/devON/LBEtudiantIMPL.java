@@ -31,11 +31,13 @@ public class LBEtudiantIMPL extends LoadBalancerEtudiantPOA {
 		if(ine.indexOf("G1")!=-1) //si ine contient "G1"  on renvoi GDP1 sinon GDP2 (on fait deux GDP pour linstant)
 	    {
 
-			return listGDP.get(1);
+			return listGDP.get("1");
 	    }
 		else
 		{
-			return listGDP.get(2);	
+			System.out.println("oui");
+			return listGDP.get("2");	
+			
 		}
 
 	}
@@ -43,7 +45,7 @@ public class LBEtudiantIMPL extends LoadBalancerEtudiantPOA {
 	@Override
 	public GestionDesProfils getServProfil(short num) throws DonneesInvalides {
 		// TODO Auto-generated method stub
-		return listGDP.get(num);
+		return listGDP.get(String.valueOf(num));
 	}
 
 	@Override

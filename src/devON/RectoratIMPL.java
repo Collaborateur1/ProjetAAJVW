@@ -18,6 +18,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 import org.omg.CORBA.ORBPackage.InvalidName;
+import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
@@ -31,29 +32,40 @@ public class RectoratIMPL extends RectoratPOA {
 	Hashtable<String,GestionDesVoeux>LesGDV;
 	String nomRectorat;
 	Ministère MonMinistere;
-    
+	org.omg.PortableServer.POA rootPOA;
 
 	/*************************Constructeur
-	 * @throws DonneesInvalides ***********************************/
-	public RectoratIMPL(Hashtable<String, Universite> listeListUniversite,String nomrectorat) throws DonneesInvalides {
+	 * @throws DonneesInvalides 
+	 * @throws InvalidName 
+	 * @throws AdapterInactive 
+	 * @throws WrongPolicy 
+	 * @throws ServantNotActive ***********************************/
+	public RectoratIMPL(Hashtable<String, Universite> listeListUniversite,String nomrectorat,org.omg.CORBA.ORB orb ) throws DonneesInvalides, InvalidName, AdapterInactive, ServantNotActive, WrongPolicy {
 		super();
 		ListeListUniversite = listeListUniversite;
 		MonMinistere= MinistèreHelper.narrow(
 				NamingServiceTool.getReferenceIntoNS("Ministere"));
 		System.out.println("Reférérence ministere recuperee" );
         this.nomRectorat=nomrectorat;
-        MonMinistere.inscriptionRectorat(this.nomRectorat, this._this());
+        
+        rootPOA = org.omg.PortableServer.POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
+		rootPOA.the_POAManager().activate();
+        MonMinistere.inscriptionRectorat(this.nomRectorat, RectoratHelper.narrow(rootPOA.servant_to_reference(this)));
+    	
 
 	}
 
-	public RectoratIMPL(org.omg.CORBA.ORB orb) throws DonneesInvalides, ServantNotActive, WrongPolicy, InvalidName {
+	public RectoratIMPL(org.omg.CORBA.ORB orb,String nomrectorat) throws DonneesInvalides, ServantNotActive, WrongPolicy, InvalidName, AdapterInactive {
 		super();
 		ListeListUniversite = new Hashtable<String,Universite>();
 		MonMinistere= MinistèreHelper.narrow(
 				NamingServiceTool.getReferenceIntoNS("Ministere"));
 		System.out.println("Reférérence ministere recuperee" );
-		 this.nomRectorat="inconnu";
 		 
+		this.nomRectorat=nomrectorat;
+	  rootPOA = org.omg.PortableServer.POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
+	  rootPOA.the_POAManager().activate();
+	  MonMinistere.inscriptionRectorat(this.nomRectorat, RectoratHelper.narrow(rootPOA.servant_to_reference(this)));
 	
 	}
 
@@ -227,6 +239,22 @@ Enumeration ListeUniv=this.ListeListUniversite.elements();
 			Un.deliberationJury();
 		}
 	}
+	
+	@Override
+	public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
+		// TODO Auto-generated method stub
+		Universite univ;
+		Enumeration<Universite> e= ListeListUniversite.elements();
+		while (e.hasMoreElements())
+		{
+			univ=e.nextElement();
+			if(univ.estEtudiant(ine))
+			{
+				return univ.getFicheEtudiant(ine);
+			}
+		}
+		throw new DonneesInvalides("ine inconnu");
+	}
 
 	/*********************Fonction créé par nous**************/
 
@@ -274,6 +302,7 @@ Enumeration ListeUniv=this.ListeListUniversite.elements();
     
 	}
 
+	
 
 	
 

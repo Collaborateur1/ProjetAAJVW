@@ -6,6 +6,9 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
 
+import org.omg.CORBA.ORBPackage.InvalidName;
+import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
+
 
 public class MinistereIMPL extends MinistèrePOA {
 	
@@ -14,24 +17,27 @@ public class MinistereIMPL extends MinistèrePOA {
 	//La liste des rectorats 
 	Hashtable<String,Rectorat>ListeRectorat;
 	//La liste des formation
-	Formation[] ListeFormation;
+	ArrayList<Formation> ListeFormation;
 
+	org.omg.PortableServer.POA rootPOA;
 
 	/**************************Constructeur***********************************/
 	public MinistereIMPL(org.omg.CORBA.ORB orb,Hashtable<String, Rectorat> listeRectorat,
-			Formation[] listeFormation) {
+			ArrayList listeFormation) {
 		super();
 		ListeRectorat = listeRectorat;
 		ListeFormation = listeFormation;
 	}
 
-	public MinistereIMPL(org.omg.CORBA.ORB orb) {
+	public MinistereIMPL(org.omg.CORBA.ORB orb) throws InvalidName, AdapterInactive {
 		super();
 		ListeRectorat = new Hashtable<String,Rectorat>();
 		//La liste des formation
-		ListeFormation=new Formation[0];
+		ListeFormation=new ArrayList<Formation>();
 		NamingServiceTool.putReferenceIntoNS(orb,"Ministere", this);
-		
+	/*	rootPOA = org.omg.PortableServer.POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
+
+		rootPOA.the_POAManager().activate();*/
 	}
 
 
@@ -40,9 +46,16 @@ public class MinistereIMPL extends MinistèrePOA {
 	@Override
 	public Formation[] madDesFormationsFrance() {
 		// TODO Auto-generated method stub
+		Formation[] Forma=new Formation[ListeFormation.size()];
+		
+for(int i=0;i<this.ListeFormation.size();i++)
+{
+	Forma[i]=this.ListeFormation.get(i);
+	System.out.println("test "+ Forma[i].NomFormation);
+}
 
 
-		return ListeFormation;
+		return Forma;
 	}
 
 	@Override
@@ -55,34 +68,16 @@ public class MinistereIMPL extends MinistèrePOA {
 		//sa correspond a la liste de formation que l'on a créé
 		//elle n'est pas pratique dutt..
 
-		int NombreDeFormationARajouter=ListeFormation.length;
-		int NombreDeFormationDejaExistante=this.ListeFormation.length;
-		int totale=NombreDeFormationARajouter+NombreDeFormationDejaExistante;
-		int j=0;
 	
-		
-
-		Formation[] tempformation=new Formation[totale];
-		
-		for (int i=0; i<NombreDeFormationDejaExistante;i++)
+		int indice=ListeFormation.length;
+	
+		for (int i=0; i<indice;i++)
 		{
-
-			tempformation[i]=ListeFormation[i];
-			j=i;
-			
+			this.ListeFormation.add(ListeFormation[i]);
 		}
-		if (j>0)j++;
+        
+		Formation fr=(Formation)this.ListeFormation.get(2);
 		
-		for (int i=0; i<NombreDeFormationARajouter;i++)
-		{
-
-			tempformation[j]=ListeFormation[i];
-			j++;
-			
-			
-		}
-
-this.ListeFormation=tempformation;
 
 	}
 

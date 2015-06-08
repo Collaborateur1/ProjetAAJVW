@@ -8,12 +8,16 @@ import generated.IEtudiantHelper;
 import generated.IEtudiantPOA;
 import generated.LoadBalancerEtudiant;
 import generated.LoadBalancerEtudiantHelper;
+import generated.UtilisationInterdite;
 import generated.Voeu;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 
 import generated.Etudiant;
 
@@ -29,8 +33,8 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	org.omg.PortableServer.POA rootPOA;
 	GestionDesVoeux gdv;
 	LoadBalancerEtudiant loadbalancer;
-	Hashtable <String,Voeu> ListeVoeuxEtu;
-
+	ArrayList<Voeu> ListeVoeuxEtu;
+    String INE;
 	
 	/**********Constructeur
 	 * @throws RemoteException ************/	
@@ -39,8 +43,8 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		this.cl=cl;
 		cl=new Client(this);
 		interfaceConnexion=new SocialNetworkIHM(this,cl);
-		loadbalancer= LoadBalancerEtudiantHelper.narrow(NamingServiceTool.getReferenceIntoNS("LBL"));
-		
+		loadbalancer= LoadBalancerEtudiantHelper.narrow(NamingServiceTool.getReferenceIntoNS("LBE"));
+		ListeVoeuxEtu=new ArrayList<Voeu>();
 	}
 	
 	/********fonction généré******/
@@ -50,12 +54,21 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		System.out.println (message);
 		
 	}
+	
 	@Override
 	public void majEtatVoeux(Voeu UnVoeu) {
 		// TODO Auto-generated method stub
 		ListeVoeuxEtu.get(UnVoeu.numeroVoeu).etatVoeu = UnVoeu.etatVoeu;
-		
-							
+		int i=0;
+		while(i<5)	
+		{
+			if(ListeVoeuxEtu.get(i).numeroVoeu==UnVoeu.numeroVoeu)
+			{
+				ListeVoeuxEtu.set(i,UnVoeu);
+				i=5;
+			}
+			i++;
+		}
 	}
 
 	
@@ -64,18 +77,20 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	public boolean ConnexionGDP(String INE, String mdp) throws DonneesInvalides, ServantNotActive, WrongPolicy
 	{
 		IEtudiant etu;
-		if(setGestionDesProfils(INE))
+		if(setGestionDesProfils(INE))//ici on récupere le GDP de letudiant selon son ine
 		{
+			if(gdp.etudiantInscrit(INE)){
+				
+			
 			etu=IEtudiantHelper.narrow(rootPOA.servant_to_reference(this));
-			//gdv=gdp.connexion(etu, INE, mdp);
-			//cl.configuration_de_connexion(gdp.consulterProfil(INE),gdv.chargerVoeux(INE));
-			
-			gdp.consulterProfil(INE);
-			
-			cl.configuration_de_connexion(gdp.consulterProfil(INE),null);
-		
+			gdv=gdp.connexion(etu, INE, mdp);
+			cl.configuration_de_connexion(gdp.consulterProfil(INE),gdv.chargerVoeux(INE));
+		    this.INE=INE;
 			cl.setVisible(true);
 			return true;
+			}
+			else
+				return false;
 		}
 		
 		return false;
@@ -133,6 +148,21 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		return null;
 	}
 	**/
+	/***************** Fonction ajouter
+	 * @throws UtilisationInterdite 
+	 * @throws DonneesInvalides ******************/
+	
+	public void fairVoeux(Voeu vx, String INE,short ordre) throws DonneesInvalides, UtilisationInterdite
+	{
+		int i=0;
+		cl.miseAjourJlist2(gdv.faireUnVoeu(INE, vx, ordre));
+		
+		
+	}
+	public String getINE()
+	{
+		return INE;
+	}
 public static void main(String[] args) throws RemoteException, InvalidName, AdapterInactive {
 	
 	EtudiantIMPl etu=new EtudiantIMPl();

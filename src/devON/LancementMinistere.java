@@ -2,31 +2,43 @@
 package devON;
 
 import generated.DonneesInvalides;
+import generated.Formation;
 import generated.Rectorat;
 import generated.RectoratHelper;
 
 import org.omg.CORBA.ORBPackage.InvalidName;
+import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
 public class LancementMinistere {
 
-	public static void main(String[] args) throws InvalidName, DonneesInvalides, ServantNotActive, WrongPolicy {
+	public static void main(String[] args) throws InvalidName, DonneesInvalides, ServantNotActive, WrongPolicy, AdapterInactive {
 		// TODO Auto-generated method stub
 		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(new String[0],null);
 		MinistereIMPL ministere= new MinistereIMPL(orb);
 		
-		/*RectoratIMPL recto=new RectoratIMPL(orb);
+		Formation fr= new Formation("A","A", "A","A");
+		Formation fr1= new Formation("b","b", "b","b");
+		Formation fr2= new Formation("c","c", "c","c");
+		Formation fr3= new Formation("d","d", "d","d");
+		Formation fr4= new Formation("e","e", "e","e");
 		
-		org.omg.PortableServer.POA rootPOA = org.omg.PortableServer.POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
-		//on a créé recto notre rectorat..mais c'est un RectoratIMPL..or le ministere attend un Rectorat tt cours..
-		//on utilise cette fonction pour faire la conversion
-		Rectorat rect= RectoratHelper.narrow(rootPOA.servant_to_reference(recto));
+		Formation[] fr0=new Formation[5];
 		
-		ministere.inscriptionRectorat(recto.nomRectorat(),rect);
 		
-		ministere.test();
-		*/
+			fr0[0]=fr;
+			fr0[1]=fr1;
+			fr0[2]=fr2;
+			fr0[3]=fr3;
+			fr0[4]=fr4;
+			
+		
+		
+		
+		ministere.depotDesFormationsRectorat(fr0);
+		
+		
 		orb.run();
 		
 		
