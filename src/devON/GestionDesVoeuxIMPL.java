@@ -240,6 +240,12 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		}
 	}
 
+	@Override
+	public boolean possedeVoeux(String ine) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 }
 

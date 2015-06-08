@@ -141,4 +141,12 @@ public class GestionDesVoeuxPOATie extends GestionDesVoeuxPOA
         _tie.transmettreDecisionCandidatureRectorat( ine,  Reponse);
     }
 
+    /**
+     * Operation possedeVoeux
+     */
+    public boolean possedeVoeux(String ine)
+    {
+        return _tie.possedeVoeux( ine);
+    }
+
 }

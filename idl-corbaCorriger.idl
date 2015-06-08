@@ -114,6 +114,7 @@ module PostLicence {
 		//--Appelé par Rectorat
 		/**modif**/
 		void transmettreDecisionCandidatureRectorat (in string ine, in Voeu Reponse) raises(DonneesInvalides); //(14)
+		boolean possedeVoeux (in string ine);
 	};
 	 
 	 

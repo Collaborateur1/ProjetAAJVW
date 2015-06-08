@@ -41,6 +41,8 @@ public abstract class GestionDesVoeuxPOA extends org.omg.PortableServer.Servant
                     new Operation_inscriptionIE());
             operationMap.put("modifierVoeu",
                     new Operation_modifierVoeu());
+            operationMap.put("possedeVoeux",
+                    new Operation_possedeVoeux());
             operationMap.put("rechercherFormation",
                     new Operation_rechercherFormation());
             operationMap.put("repondreAuxPropositions",
@@ -268,6 +270,20 @@ public abstract class GestionDesVoeuxPOA extends org.omg.PortableServer.Servant
         return _output;
     }
 
+    private org.omg.CORBA.portable.OutputStream _invoke_possedeVoeux(
+            final org.omg.CORBA.portable.InputStream _is,
+            final org.omg.CORBA.portable.ResponseHandler handler) {
+        org.omg.CORBA.portable.OutputStream _output;
+        String arg0_in = _is.read_string();
+
+        boolean _arg_result = possedeVoeux(arg0_in);
+
+        _output = handler.createReply();
+        _output.write_boolean(_arg_result);
+
+        return _output;
+    }
+
     // operation classes
     private abstract static class AbstractOperation {
         protected abstract org.omg.CORBA.portable.OutputStream invoke(
@@ -363,6 +379,16 @@ public abstract class GestionDesVoeuxPOA extends org.omg.PortableServer.Servant
                 final org.omg.CORBA.portable.InputStream _is,
                 final org.omg.CORBA.portable.ResponseHandler handler) {
             return target._invoke_transmettreDecisionCandidatureRectorat(_is, handler);
+        }
+    }
+
+    private static final class Operation_possedeVoeux extends AbstractOperation
+    {
+        protected org.omg.CORBA.portable.OutputStream invoke(
+                final GestionDesVoeuxPOA target,
+                final org.omg.CORBA.portable.InputStream _is,
+                final org.omg.CORBA.portable.ResponseHandler handler) {
+            return target._invoke_possedeVoeux(_is, handler);
         }
     }
 

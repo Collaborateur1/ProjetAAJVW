@@ -60,4 +60,9 @@ public interface GestionDesVoeuxOperations
     public void transmettreDecisionCandidatureRectorat(String ine, generated.Voeu Reponse)
         throws generated.DonneesInvalides;
 
+    /**
+     * Operation possedeVoeux
+     */
+    public boolean possedeVoeux(String ine);
+
 }
