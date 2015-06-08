@@ -8,6 +8,7 @@ module PostLicence {
 	exception UtilisationInterdite {
 		string message; 
 	};
+	
 	struct Formation {
 		string nomUniv;
 		string NomFormation;
