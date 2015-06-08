@@ -14,7 +14,6 @@ public LancementLoadB(org.omg.CORBA.ORB orb){
 		LBEtudiantIMPL lbl=new LBEtudiantIMPL(orb);
 		
 		orb.run();
-
 	}
 
 }
