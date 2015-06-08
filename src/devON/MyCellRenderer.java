@@ -62,7 +62,7 @@ public Component getListCellRendererComponent(JList<? extends Object> list,
       }
       else
       {
-    	  setText("Université:"+vx.formationVoeu.nomUniv+" type de formation:"+vx.formationVoeu.TypeFormation);
+    	  setText("ordre: "+vx.numeroVoeu+" Université:"+vx.formationVoeu.nomUniv+" type de formation:"+vx.formationVoeu.TypeFormation);
       }
        if(vx.formationVoeu.TypeFormation.equals("Informatique"))
        {

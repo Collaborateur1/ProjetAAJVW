@@ -18,11 +18,11 @@ public class LancementMinistere {
 		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(new String[0],null);
 		MinistereIMPL ministere= new MinistereIMPL(orb);
 		
-		Formation fr= new Formation("A","A", "A","A");
-		Formation fr1= new Formation("b","b", "b","b");
-		Formation fr2= new Formation("c","c", "c","c");
-		Formation fr3= new Formation("d","d", "d","d");
-		Formation fr4= new Formation("e","e", "e","e");
+		Formation fr= new Formation("A","A", "A","A",(short)5);
+		Formation fr1= new Formation("b","b", "b","b",(short)6);
+		Formation fr2= new Formation("c","c", "c","c",(short)7);
+		Formation fr3= new Formation("d","d", "d","d",(short)8);
+		Formation fr4= new Formation("e","e", "e","e",(short)10);
 		
 		Formation[] fr0=new Formation[5];
 		

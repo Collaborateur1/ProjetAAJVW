@@ -2,14 +2,21 @@ package devON;
 
 import generated.DonneesInvalides;
 import generated.Etudiant;
+import generated.Formation;
 import generated.Resultat;
 import generated.UniversitePOA;
 import generated.Voeu;
 import generated.dossierEtudiant;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeMap;
 
 import javax.lang.model.util.Elements;
@@ -27,11 +34,13 @@ Hashtable<String,dossierEtudiant> DossierCandidatureEtudiant;
 Hashtable<String,Hashtable<String,Voeu>> ListeVoeux;
 
 
-Hashtable<String,Hashtable<String,Double>> ListeAdmiParForamtion;
+Hashtable<String,Hashtable<String,Double>> ListeAdmiParFormation;
 
 // formation, liste INE
 Hashtable<String, ArrayList<String>> ListeCandidatureParFormation;
 Hashtable <String, Resultat[] > ListeResultEtu;
+Hashtable <String, Formation>ListeDesFormations;
+Hashtable <String,ArrayList<String>> ListeDattente;
 
 
 
@@ -168,35 +177,70 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 	@Override
 	public void deliberationJury() {
 		// TODO Auto-generated method stub
-		TreeMap<String,Double> ListeCandidatAdmis;
+	    HashMap<String,Double> map = new HashMap<String,Double>();
+	    ValueComparator comparateur =  new ValueComparator(map);	    
+		TreeMap<String,Double> ListeCandidatAdmis = new TreeMap<String,Double>(comparateur);
+		ArrayList <String> ineAttente = null;
+		Voeu voeuEtu;
 		Double Moyenne = null;
 		int nb;
 		//Récupere la liste des formations
 		Enumeration ListeFormation  = ListeCandidatureParFormation.keys();
 		while(ListeFormation.hasMoreElements()){
 			//récupère la liste des ine des étudiants candidats à cette formation
-			ArrayList ListeCandidature = ListeCandidatureParFormation.get(ListeFormation.nextElement());
+			ArrayList<String> ListeCandidature = ListeCandidatureParFormation.get(ListeFormation.nextElement());
 			for(int i=0 ; i <= ListeCandidature.size() ; i++){
 				//Récupère le dossier de l'étudiant
 				dossierEtudiant DossEtu = DossierCandidatureEtudiant.get(ListeCandidature.get(i));
-				// ListeResultEtu.put(DossEtu.etu.ineEtudiant,DossEtu.listnotes);
-				
+							
 				//parcours les résultats
 				for (nb = 0; nb <=DossEtu.listnotes.length;nb++){
 					Resultat resultat = DossEtu.listnotes[nb];
 					Moyenne = Moyenne + resultat.moyenne;
 				}
 				Moyenne = Moyenne / nb;
-			//	ListeCandidatAdmis.put(ListeCandidature.get(i), Moyenne);
+				map.put(ListeCandidature.get(i), Moyenne);
+				ListeCandidatAdmis.putAll(map);
 			}
 			
+		
+			Formation formation = ListeDesFormations.get(ListeFormation.nextElement());
 			
-					
+			Hashtable <String, Double>TreeMapList = null;
+			if (formation.quota >= ListeCandidatAdmis.size()){
+				TreeMapList.putAll(ListeCandidatAdmis);
+				ListeAdmiParFormation.put(formation.NomFormation, TreeMapList);
+				
+
+			}
+			else{
+				for(int i =0; i<= ListeCandidatAdmis.size();i++){	
+					 for (Entry<String, Double> entry:ListeCandidatAdmis.entrySet()) {
+						 if (i <= formation.quota) {
+
+							 TreeMapList.put(entry.getKey(), entry.getValue());
+							 ListeAdmiParFormation.put(formation.NomFormation,TreeMapList);
+						 }
+						 else{
+							 
+							 ineAttente.add(entry.getKey());
+						 }				
+					 }
+				}
+				ListeDattente.put(formation.NomFormation, ineAttente);				
+			}
+			//Maj etatVoeu		
+			// récupère le voeu de l'étudiant pour cette formation;
+			Enumeration ListeDesAdmis = ListeAdmiParFormation.elements();
+			//for (int i = 0; i<=ListeDesAdmis.size();i++){
+				//voeuEtu = ListeVoeux.get(ListeFormation.nextElement()).get(ListeDesAdmis.);
+			//}
 		}
-	
 		
 		
 	}
+
+	
 
 	@Override
 	public boolean estEtudiant(String ine) {

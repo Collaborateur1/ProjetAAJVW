@@ -44,6 +44,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	LoadBalancerEtudiant loadBalancer;
 	Rectorat rect;
 	Ministère ministere;
+	Formation[] listeFormation;
 	
 	public GestionDesVoeuxIMPL(short numServ, org.omg.CORBA.ORB orb) throws InvalidName, ServantNotActive, WrongPolicy, DonneesInvalides, AdapterInactive {
 		
@@ -68,6 +69,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		System.out.println("Reférérence ministere recuperee" );
 		
 		rect=ministere.recupererRectorat("rectorat");
+		listeFormation =ministere.madDesFormationsFrance();
 		gdpRattache = loadBalancer.getServProfil(numServ);
 		/*3) ici je rajoute la classe GestionDesVoeuxIMPL dans le gestion des profils*/
 		//c'est ici que l'on caste GestionDesVoeuxIMPL en GestionDesVoeux GestionDesVoeuxHelper.narrow(rootPOA.servant_to_reference(this))s
@@ -86,35 +88,62 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	public void inscriptionIE(String ine, IEtudiant iorEtudiant)
 			throws DonneesInvalides {
 		// TODO Auto-generated method stub
+		if(!ListeEtudiant.containsKey(ine))
+		{	
 		ListeEtudiant.put(ine, iorEtudiant);
 		ListeVoeuxEtudiant.put(ine, new ArrayList<Voeu>());
+		}
 	}
 
 	@Override
 	public Formation[] rechercherFormation(String motscles) {
 		// TODO Auto-generated method stub
-	
-		return ministere.madDesFormationsFrance();
+		int taille=0;
+		ArrayList<Formation> array=new ArrayList<Formation>();
+		for(int i=0;i<listeFormation.length;i++)
+		{
+			if(listeFormation[i].NomFormation.contains(motscles))
+				array.add(listeFormation[i]);
+		}
+		
+		Formation[] fr =new Formation[array.size()];
+		
+		for(int i=0;i<fr.length;i++)
+		{
+			fr[i]=array.get(i);
+		}
+		return fr;
 	}
 
+	@Override
+	public boolean existFormation(String ine) {
+		// TODO Auto-generated method stub
+		for(int i=0;i<listeFormation.length;i++)
+		{
+			if(listeFormation[i].NomFormation.contains(ine))
+				return true;
+		}
+		
+		return false;
+	}
 	@Override
 	public Voeu[] chargerVoeux(String ine) throws DonneesInvalides {
 		// TODO Auto-generated method stub
 		ArrayList lv = ListeVoeuxEtudiant.get(ine);
 			
-		Voeu[] lvc = new Voeu[5];
+		Voeu[] lvc = new Voeu[lv.size()];
 		
-			
-		@SuppressWarnings("rawtypes")
-		Iterator it = lv.iterator();
-		Voeu v = (Voeu) it.next();
+		Iterator<Voeu> it = lv.iterator();
+		Voeu v ;
 		int i =0;
 		while(it.hasNext())
 		{
+			v =  it.next();
 			lvc[i] = v;
-			v = (Voeu) it.next();
+			
 			i++;
 		}
+		
 		
 		
 		return lvc;
@@ -124,24 +153,17 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	public Voeu[] faireUnVoeu(String ine, Voeu monVoeux, short ordre)
 			throws DonneesInvalides, UtilisationInterdite {
 		// TODO Auto-generated method stub
-		if( ListeVoeuxEtudiant.containsKey(ine))
-		{	
+			
 			ArrayList lv=ListeVoeuxEtudiant.get(ine);
 		if(lv.size()<6)
 		{
 			monVoeux.numeroVoeu = ordre;
 			lv.add(monVoeux);
 		}
+		
 		return chargerVoeux(ine);
-		}
-		else
-		{
-			ArrayList lv2=new ArrayList<Voeu>();
-			
-			lv2.add(monVoeux);
-			ListeVoeuxEtudiant.put(ine, lv2);
-			return chargerVoeux(ine);
-		}
+		
+		
 		
 	}
 
@@ -172,16 +194,18 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	
 
 	@Override
-	public void modifierVoeu(String ine, short numeroVoeu, short ordre)
+	public Voeu[] modifierVoeu(String ine, short numeroVoeu, short ordre)
 			throws DonneesInvalides, UtilisationInterdite {
 		// TODO Auto-generated method stub
 		ArrayList lv = ListeVoeuxEtudiant.get(ine);
 
 		@SuppressWarnings("rawtypes")
 		Iterator it = lv.iterator();
-		Voeu v = (Voeu) it.next();
+		Voeu v ;
 		while(it.hasNext())
 		{
+			
+			v = (Voeu) it.next();
 			if(ordre < numeroVoeu)
 			{
 				if(v.numeroVoeu==numeroVoeu)
@@ -196,15 +220,15 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 				else if(v.numeroVoeu<=ordre && v.numeroVoeu>numeroVoeu)
 					v.numeroVoeu = (short) (v.numeroVoeu-1);
 			}
-			v = (Voeu) it.next();
+			
 		}
 		
-
+return chargerVoeux(ine);
 		
 	}
 
 	@Override
-	public void supprimerVoeux(String ine, short numeroVoeu)
+	public Voeu[] supprimerVoeux(String ine, short numeroVoeu)
 			throws DonneesInvalides, UtilisationInterdite {
 		// TODO Auto-generated method stub
 		ArrayList lv = ListeVoeuxEtudiant.get(ine);
@@ -218,6 +242,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 				lv.remove(v);
 			v = (Voeu) it.next();
 		}
+		return chargerVoeux(ine);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -242,11 +267,20 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	public boolean possedeVoeux(String ine) {
 		// TODO Auto-generated method stub
 		if (ListeVoeuxEtudiant.containsKey(ine)){
+			
+			ArrayList<Voeu> lv=ListeVoeuxEtudiant.get(ine);
+			if(!lv.isEmpty())
 			return true;
+			else
+			{
+			 return false;
+			}
 		}
 		else
 		return false;
 	}
+
+	
 
 
 }
