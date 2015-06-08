@@ -45,13 +45,13 @@ public interface GestionDesVoeuxOperations
     /**
      * Operation modifierVoeu
      */
-    public void modifierVoeu(String ine, short numeroVoeu, short ordre)
+    public generated.Voeu[] modifierVoeu(String ine, short numeroVoeu, short ordre)
         throws generated.DonneesInvalides, generated.UtilisationInterdite;
 
     /**
      * Operation supprimerVoeux
      */
-    public void supprimerVoeux(String ine, short numeroVoeu)
+    public generated.Voeu[] supprimerVoeux(String ine, short numeroVoeu)
         throws generated.DonneesInvalides, generated.UtilisationInterdite;
 
     /**
@@ -64,5 +64,10 @@ public interface GestionDesVoeuxOperations
      * Operation possedeVoeux
      */
     public boolean possedeVoeux(String ine);
+
+    /**
+     * Operation existFormation
+     */
+    public boolean existFormation(String nomFormation);
 
 }
