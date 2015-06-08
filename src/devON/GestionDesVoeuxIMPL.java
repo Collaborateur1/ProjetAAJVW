@@ -241,6 +241,10 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	@Override
 	public boolean possedeVoeux(String ine) {
 		// TODO Auto-generated method stub
+		if (ListeVoeuxEtudiant.containsKey(ine)){
+			return true;
+		}
+		else
 		return false;
 	}
 
