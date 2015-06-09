@@ -54,4 +54,10 @@ public interface GestionDesProfilsOperations
     public boolean autorisationConnexion(String ine, String mdp)
         throws generated.DonneesInvalides;
 
+    /**
+     * Operation inscriptionEtudiant
+     */
+    public boolean inscriptionEtudiant(String ine, String mdp)
+        throws generated.DonneesInvalides;
+
 }

@@ -121,6 +121,8 @@ module PostLicence {
 		
 		boolean existFormation (in string nomFormation);
 		
+		
+		
 	};
 	 
 	 
@@ -156,6 +158,8 @@ module PostLicence {
 		Etudiant getFicheEtudiant(in string ine)raises(DonneesInvalides);
 		
 		boolean autorisationConnexion(in string ine, in string mdp)raises(DonneesInvalides);
+		
+		boolean inscriptionEtudiant(in string ine, in string mdp)raises(DonneesInvalides);
 		
 	};
 

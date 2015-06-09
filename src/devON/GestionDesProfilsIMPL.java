@@ -142,13 +142,31 @@ loadBalancer.inscriptionGDP(GestionDesProfilsHelper.narrow(rootPOA.servant_to_re
 		// TODO Auto-generated method stub
 		return rectorat.getFicheEtudiant(ine);
 	}
+	
+	@Override
+	public boolean inscriptionEtudiant(String ine, String mdp)
+			throws DonneesInvalides {
+		// TODO Auto-generated method stub
+		Etudiant etu=rectorat.getFicheEtudiant(ine);
+		if(etu.formation.NomFormation.contains("aucune"))
+		{
+			return false;
+		}
+		else
+		{
+			etudiantinscrit.put(etu.ineEtudiant,etu);
+			CodeEtudiantInscrit.put(etu.ineEtudiant,"mdp");
+			return true;
+		}
+		
+	}
 	/*********************Fonction rajouté******************************/
 	
 	public void setProfil(Etudiant etu)
 	{
 		etudiantinscrit.put(etu.ineEtudiant,etu);
 		
-		CodeEtudiantInscrit.put(etu.ineEtudiant,"1234");
+		//CodeEtudiantInscrit.put(etu.ineEtudiant,"1234");
 
 	}
 	
@@ -156,6 +174,8 @@ loadBalancer.inscriptionGDP(GestionDesProfilsHelper.narrow(rootPOA.servant_to_re
 	{
 		return loadBalancer;
 	}
+
+
 
 
 	

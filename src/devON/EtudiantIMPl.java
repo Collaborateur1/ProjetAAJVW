@@ -105,7 +105,7 @@ public class EtudiantIMPl extends IEtudiantPOA{
 				return false;
 			
 		 }
-			throw new DonneesInvalides("code éroné");
+			return false;
 		}
 		
 		
