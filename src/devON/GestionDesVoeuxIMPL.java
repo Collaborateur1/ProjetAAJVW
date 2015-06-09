@@ -130,18 +130,13 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	public Voeu[] chargerVoeux(String ine) throws DonneesInvalides {
 		// TODO Auto-generated method stub
 		ArrayList lv = ListeVoeuxEtudiant.get(ine);
-			
-		Voeu[] lvc = new Voeu[lv.size()];
+		Voeu v;
 		
-		Iterator<Voeu> it = lv.iterator();
-		Voeu v ;
-		int i =0;
-		while(it.hasNext())
+		Voeu[] lvc = new Voeu[lv.size()];
+		for(int i=0;i<lv.size();i++)
 		{
-			v =  it.next();
+			v =  (Voeu) lv.get(i);
 			lvc[i] = v;
-			
-			i++;
 		}
 		
 		return lvc;
@@ -152,7 +147,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			throws DonneesInvalides, UtilisationInterdite {
 		// TODO Auto-generated method stub
 			
-			ArrayList lv=ListeVoeuxEtudiant.get(ine);
+		ArrayList lv=ListeVoeuxEtudiant.get(ine);
 		if(lv.size()<6)
 		{
 			monVoeux.numeroVoeu = ordre;
@@ -194,45 +189,47 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		// TODO Auto-generated method stub
 		
 		ArrayList lv = ListeVoeuxEtudiant.get(ine);
-
-		@SuppressWarnings("rawtypes")
-		Iterator it = lv.iterator();
-		short tempNumero = 0;
+		short tempNumero = 0, flag = 0;
 		Voeu va;
 		Voeu vb;
-		for(int i = 0;i<lv.size();i++)
+		//La liste des voeux est retrié a chaque fin de fonction de modifier voeu
+		//on considère donc les voeux comme triés
+		for(int i = 0;i<lv.size() && flag == 0;i++)
 		{
 			va = (Voeu) lv.get(i);
 			if(va.numeroVoeu == numeroVoeu)
 			{
 				if(ordre == 1)
 				{
-					for(int y=0;y<lv.size();y++)
-					{
-						vb = (Voeu) lv.get(y);
-						if(vb.numeroVoeu == numeroVoeu-1)
-						{
-							tempNumero = va.numeroVoeu;
-							va.numeroVoeu = vb.numeroVoeu;
-							vb.numeroVoeu = tempNumero;
-						}
-					}
+					vb = (Voeu) lv.get(i-1);
+					tempNumero = vb.numeroVoeu;
+					vb.numeroVoeu = va.numeroVoeu;
+					va.numeroVoeu = tempNumero;
 				}
 				else
 				{
-					for(int y=0;y<lv.size();y++)
-					{
-						vb = (Voeu) lv.get(y);
-						if(vb.numeroVoeu == numeroVoeu+1)
-						{
-							tempNumero = va.numeroVoeu;
-							va.numeroVoeu = vb.numeroVoeu;
-							vb.numeroVoeu = tempNumero;
-						}
-					}
+					vb = (Voeu) lv.get(i+1);
+					tempNumero = va.numeroVoeu;
+					va.numeroVoeu = vb.numeroVoeu;
+					vb.numeroVoeu = tempNumero;
 				}
+				flag = 1;
 			}
 		}
+		
+		//Fonction de trie des voeux
+		Voeu lvt[] = new Voeu[lv.size()];
+		Voeu v;
+		for(int i=0;i<lv.size();i++)
+		{
+			v = (Voeu) lv.get(i);
+			lvt[v.numeroVoeu-1] = v;
+		}
+		
+		lv.clear();
+		
+		for(int i=0;i<lvt.length;i++)
+			lv.add(lvt[i]);
 		
 		return chargerVoeux(ine);
 		
@@ -248,12 +245,17 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		{
 			v = (Voeu) lv.get(i);
 			if(v.numeroVoeu==numeroVoeu)
+				v.numeroVoeu = 0;
+			else if(v.numeroVoeu>numeroVoeu)
+				v.numeroVoeu--;
+		}
+		for(int i=0;i<lv.size();i++)
+		{
+			v = (Voeu) lv.get(i);
+			if(v.numeroVoeu==0)
 			{
 				lv.remove(v);
-			}
-			else if(v.numeroVoeu>numeroVoeu)
-			{
-				v.numeroVoeu--;
+				System.out.println("voeu 0 : supprimé");
 			}
 		}
 		
@@ -285,11 +287,9 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			
 			ArrayList<Voeu> lv=ListeVoeuxEtudiant.get(ine);
 			if(!lv.isEmpty())
-			return true;
+				return true;
 			else
-			{
-			 return false;
-			}
+				return false;
 		}
 		else
 		return false;
