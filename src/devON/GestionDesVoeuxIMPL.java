@@ -144,8 +144,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			i++;
 		}
 		
-		
-		
 		return lvc;
 	}
 
@@ -168,9 +166,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	}
 
 	
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	//IL MANQUE LE NUMERO DE VOEUX ! IDL A REPRENDRE !! ==>C'est fait..
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	@Override
 	public void repondreAuxPropositions(String ine, decision choixEtu,
 			short numeroVoeu) throws DonneesInvalides, UtilisationInterdite {
@@ -197,33 +192,49 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	public Voeu[] modifierVoeu(String ine, short numeroVoeu, short ordre)
 			throws DonneesInvalides, UtilisationInterdite {
 		// TODO Auto-generated method stub
+		
 		ArrayList lv = ListeVoeuxEtudiant.get(ine);
 
 		@SuppressWarnings("rawtypes")
 		Iterator it = lv.iterator();
-		Voeu v ;
-		while(it.hasNext())
+		short tempNumero = 0;
+		Voeu va;
+		Voeu vb;
+		for(int i = 0;i<lv.size();i++)
 		{
-			
-			v = (Voeu) it.next();
-			if(ordre < numeroVoeu)
+			va = (Voeu) lv.get(i);
+			if(va.numeroVoeu == numeroVoeu)
 			{
-				if(v.numeroVoeu==numeroVoeu)
-					v.numeroVoeu = ordre;
-				else if(v.numeroVoeu>=ordre && v.numeroVoeu<numeroVoeu)
-					v.numeroVoeu = (short) (v.numeroVoeu+1);
+				if(ordre == 1)
+				{
+					for(int y=0;y<lv.size();y++)
+					{
+						vb = (Voeu) lv.get(y);
+						if(vb.numeroVoeu == numeroVoeu-1)
+						{
+							tempNumero = va.numeroVoeu;
+							va.numeroVoeu = vb.numeroVoeu;
+							vb.numeroVoeu = tempNumero;
+						}
+					}
+				}
+				else
+				{
+					for(int y=0;y<lv.size();y++)
+					{
+						vb = (Voeu) lv.get(y);
+						if(vb.numeroVoeu == numeroVoeu+1)
+						{
+							tempNumero = va.numeroVoeu;
+							va.numeroVoeu = vb.numeroVoeu;
+							vb.numeroVoeu = tempNumero;
+						}
+					}
+				}
 			}
-			else
-			{
-				if(v.numeroVoeu==numeroVoeu)
-					v.numeroVoeu = ordre;
-				else if(v.numeroVoeu<=ordre && v.numeroVoeu>numeroVoeu)
-					v.numeroVoeu = (short) (v.numeroVoeu-1);
-			}
-			
 		}
 		
-return chargerVoeux(ine);
+		return chargerVoeux(ine);
 		
 	}
 
@@ -232,16 +243,20 @@ return chargerVoeux(ine);
 			throws DonneesInvalides, UtilisationInterdite {
 		// TODO Auto-generated method stub
 		ArrayList lv = ListeVoeuxEtudiant.get(ine);
-		
-		@SuppressWarnings("rawtypes")
-		Iterator it = lv.iterator();
-		Voeu v = (Voeu) it.next();
-		while(it.hasNext())
+		Voeu v;
+		for(int i = 0;i<lv.size();i++)
 		{
+			v = (Voeu) lv.get(i);
 			if(v.numeroVoeu==numeroVoeu)
+			{
 				lv.remove(v);
-			v = (Voeu) it.next();
+			}
+			else if(v.numeroVoeu>numeroVoeu)
+			{
+				v.numeroVoeu--;
+			}
 		}
+		
 		return chargerVoeux(ine);
 	}
 
