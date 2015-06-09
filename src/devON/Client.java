@@ -554,21 +554,17 @@ public class Client extends javax.swing.JFrame {
         // TODO add your handling code here:
         //bouton descendre
     	short derniereplace;
-    	short nouvellePlace=0;
+    	short descendre=0;
     	if(jList2.getSelectedValue()instanceof Voeu )	
     	{
     		ListModel< Voeu> list =jList2.getModel();
     		derniereplace=(short) list.getSize();
+    		Voeu Vx=(Voeu) jList2.getSelectedValue();
     		
-    		if(derniereplace!=1)
+    		if(derniereplace!=Vx.numeroVoeu)
     		{
-    			Voeu Vx=(Voeu) jList2.getSelectedValue();
-    			if(Vx.numeroVoeu!=4)
-            	{
-    				nouvellePlace=(short)(jList2.getSelectedIndex()+2);
-            		etudiant.modifierVoeu(etudiant.getINE(), Vx.numeroVoeu, nouvellePlace);
-            		
-            	}
+    			etudiant.modifierVoeu(etudiant.getINE(), Vx.numeroVoeu, descendre);
+
     		}
     	
         
@@ -651,17 +647,17 @@ public class Client extends javax.swing.JFrame {
                     
     }//GEN-LAST:event_jButton2ActionPerformed
 
-//Le listerner qui soccupe déffectuer la recherche d'un objet
+//
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws DonneesInvalides, UtilisationInterdite {//GEN-FIRST:event_jButton1ActionPerformed
-short place1=0;
-short nouvellePlace=0;
+short place1=1;
+short monter=1;
       if(jList2.getSelectedValue()instanceof Voeu )	
     	{
-    	  nouvellePlace=(short)(jList2.getSelectedIndex());
+    	  
         	Voeu Vx=(Voeu) jList2.getSelectedValue();
         	if(Vx.numeroVoeu!=place1)
         	{
-        		etudiant.modifierVoeu(etudiant.getINE(), Vx.numeroVoeu, nouvellePlace);
+        		etudiant.modifierVoeu(etudiant.getINE(), Vx.numeroVoeu, monter);
         		
         	}
     	}

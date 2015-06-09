@@ -123,4 +123,13 @@ public class GestionDesProfilsPOATie extends GestionDesProfilsPOA
         return _tie.getFicheEtudiant( ine);
     }
 
+    /**
+     * Operation autorisationConnexion
+     */
+    public boolean autorisationConnexion(String ine, String mdp)
+        throws generated.DonneesInvalides
+    {
+        return _tie.autorisationConnexion( ine,  mdp);
+    }
+
 }

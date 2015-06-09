@@ -48,4 +48,10 @@ public interface GestionDesProfilsOperations
     public generated.Etudiant getFicheEtudiant(String ine)
         throws generated.DonneesInvalides;
 
+    /**
+     * Operation autorisationConnexion
+     */
+    public boolean autorisationConnexion(String ine, String mdp)
+        throws generated.DonneesInvalides;
+
 }

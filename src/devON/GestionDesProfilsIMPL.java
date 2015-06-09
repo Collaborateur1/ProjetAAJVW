@@ -74,6 +74,19 @@ loadBalancer.inscriptionGDP(GestionDesProfilsHelper.narrow(rootPOA.servant_to_re
 		// TODO Auto-generated method stub
 		return numGDP;
 	}
+	
+	@Override
+	public boolean autorisationConnexion(String ine, String mdp)
+			throws DonneesInvalides {
+		if(etudiantinscrit.containsKey(ine) )
+		{
+			if( CodeEtudiantInscrit.get(ine).equals(mdp)){
+				return true;
+			}
+			
+		}
+		return false;
+	}
 
 	@Override
 	public GestionDesVoeux connexion(IEtudiant iorEtudiant, String ine,
@@ -143,6 +156,7 @@ loadBalancer.inscriptionGDP(GestionDesProfilsHelper.narrow(rootPOA.servant_to_re
 	{
 		return loadBalancer;
 	}
+
 
 	
 

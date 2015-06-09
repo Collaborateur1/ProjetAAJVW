@@ -35,6 +35,8 @@ public abstract class GestionDesProfilsPOA extends org.omg.PortableServer.Servan
 
         if (opName.equals("_get_numeroGDP")) {
                 return _invoke__get_numeroGDP(_is, handler);
+        } else if (opName.equals("autorisationConnexion")) {
+                return _invoke_autorisationConnexion(_is, handler);
         } else if (opName.equals("connexion")) {
                 return _invoke_connexion(_is, handler);
         } else if (opName.equals("consulterProfil")) {
@@ -178,6 +180,29 @@ public abstract class GestionDesProfilsPOA extends org.omg.PortableServer.Servan
 
             _output = handler.createReply();
             generated.EtudiantHelper.write(_output,_arg_result);
+
+        }
+        catch (generated.DonneesInvalides _exception)
+        {
+            _output = handler.createExceptionReply();
+            generated.DonneesInvalidesHelper.write(_output,_exception);
+        }
+        return _output;
+    }
+
+    private org.omg.CORBA.portable.OutputStream _invoke_autorisationConnexion(
+            final org.omg.CORBA.portable.InputStream _is,
+            final org.omg.CORBA.portable.ResponseHandler handler) {
+        org.omg.CORBA.portable.OutputStream _output;
+        String arg0_in = _is.read_string();
+        String arg1_in = _is.read_string();
+
+        try
+        {
+            boolean _arg_result = autorisationConnexion(arg0_in, arg1_in);
+
+            _output = handler.createReply();
+            _output.write_boolean(_arg_result);
 
         }
         catch (generated.DonneesInvalides _exception)

@@ -79,6 +79,9 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		IEtudiant etu;
 		if(setGestionDesProfils(INE))//ici on récupere le GDP de letudiant selon son ine
 		{
+			if(gdp.autorisationConnexion(INE, mdp))
+			{
+			
 			if(gdp.etudiantInscrit(INE)){
 				
 			
@@ -100,7 +103,11 @@ public class EtudiantIMPl extends IEtudiantPOA{
 			}
 			else
 				return false;
+			
+		 }
+			throw new DonneesInvalides("code éroné");
 		}
+		
 		
 		return false;
 	}

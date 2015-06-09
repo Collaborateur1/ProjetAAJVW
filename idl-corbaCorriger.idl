@@ -155,6 +155,7 @@ module PostLicence {
 		//--appelé par etudiant
 		Etudiant getFicheEtudiant(in string ine)raises(DonneesInvalides);
 		
+		boolean autorisationConnexion(in string ine, in string mdp)raises(DonneesInvalides);
 		
 	};
 

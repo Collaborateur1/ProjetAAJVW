@@ -254,7 +254,6 @@ jLabel4.setVisible(false);
             
         }else
         {
-        	System.out.println("blocage ici?1 ");
             cl.setVisible(true);
             
         }
