@@ -10,7 +10,7 @@ public class ValueComparator implements Comparator<String>{
 	public ValueComparator(Map<String, Double> base) {
 	    this.base = base;
 	}
-
+	
 	// Note: this comparator imposes orderings that are inconsistent with equals.    
 	public int compare(String a, String b) {
 	    if (base.get(a) <= base.get(b)) {

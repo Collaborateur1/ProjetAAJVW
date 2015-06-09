@@ -3,10 +3,18 @@ package devON;
 import generated.DonneesInvalides;
 import generated.Etudiant;
 import generated.Formation;
+import generated.GestionDesProfilsHelper;
+import generated.Ministère;
+import generated.MinistèreHelper;
+import generated.Rectorat;
 import generated.Resultat;
+import generated.Universite;
+import generated.UniversiteHelper;
 import generated.UniversitePOA;
 import generated.Voeu;
+import generated.decision;
 import generated.dossierEtudiant;
+import generated.etatvoeux;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,11 +29,17 @@ import java.util.TreeMap;
 
 import javax.lang.model.util.Elements;
 
+import org.omg.CORBA.ORBPackage.InvalidName;
+import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
+import org.omg.PortableServer.POAPackage.ServantNotActive;
+import org.omg.PortableServer.POAPackage.WrongPolicy;
+
 public class UniversiteIMPL extends UniversitePOA {
 String NomUniv;
 String Ville;
 String Academie;
-
+Rectorat recto;
+Ministère ministere;
 Hashtable<String,dossierEtudiant> DossierEtudiant;
 Hashtable<String,dossierEtudiant> DossierCandidatureEtudiant;
 //Pour chaque Ine on a une hastable qui contien la liste des voeux 
@@ -66,6 +80,24 @@ public UniversiteIMPL() {
 	ListeCandidatureParFormation=new Hashtable<String,ArrayList<String>>();
 	DossierCandidatureEtudiant=new Hashtable<String,dossierEtudiant>();
 }
+public UniversiteIMPL(String nomUniv, String nomAcad,org.omg.CORBA.ORB orb) throws DonneesInvalides, InvalidName, AdapterInactive, ServantNotActive, WrongPolicy {
+	super();
+
+	DossierEtudiant=new Hashtable<String,dossierEtudiant>();
+	ListeVoeux=new Hashtable<String,Hashtable<String,Voeu>>();
+	
+	org.omg.PortableServer.POA rootPOA = org.omg.PortableServer.POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
+	rootPOA.the_POAManager().activate();
+	
+	 ministere= MinistèreHelper.narrow(
+			NamingServiceTool.getReferenceIntoNS("Ministere"));
+	ListeCandidatureParFormation=new Hashtable<String,ArrayList<String>>();
+	DossierCandidatureEtudiant=new Hashtable<String,dossierEtudiant>();
+	recto=ministere.rectoratRattacherUniv(nomAcad);
+	
+	recto.inscriptionUniv(UniversiteHelper.narrow(rootPOA.servant_to_reference(this)));
+}
+
 
 @Override
 public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
@@ -170,17 +202,24 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 	public void repondrePropositionvoeux(String ine, Voeu voeu)
 			throws DonneesInvalides {
 		// TODO Auto-generated method stub
+		if (voeu.dcsEtudiant.equals(decision.NONdefinitif)){
+			ListeAdmiParFormation.get(voeu.formationVoeu.NomFormation).remove(ine);
+		};
 		
 		
 	}
 	
 	@Override
-	public void deliberationJury() {
+	public void deliberationJury()  {
 		// TODO Auto-generated method stub
+		//le comparateur permet de trier par valeur et non par clé
 	    HashMap<String,Double> map = new HashMap<String,Double>();
 	    ValueComparator comparateur =  new ValueComparator(map);	    
-		TreeMap<String,Double> ListeCandidatAdmis = new TreeMap<String,Double>(comparateur);
-		ArrayList <String> ineAttente = null;
+	    
+		TreeMap<String,Double> TreeMapList = new TreeMap<String,Double>(comparateur);
+		ArrayList<String> ineAttente = null;
+		//Va prendre les ligne de la treemap
+		Hashtable <String, Double>ListeCandidatAdmis = null;
 		Voeu voeuEtu;
 		Double Moyenne = null;
 		int nb;
@@ -198,43 +237,91 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 					Resultat resultat = DossEtu.listnotes[nb];
 					Moyenne = Moyenne + resultat.moyenne;
 				}
+				//Calcul de la moyenne de l'étudiant
 				Moyenne = Moyenne / nb;
 				map.put(ListeCandidature.get(i), Moyenne);
-				ListeCandidatAdmis.putAll(map);
+				TreeMapList.putAll(map);
 			}
 			
 		
-			Formation formation = ListeDesFormations.get(ListeFormation.nextElement());
+			Formation formation = ListeDesFormations.get(ListeFormation.nextElement());		
 			
-			Hashtable <String, Double>TreeMapList = null;
-			if (formation.quota >= ListeCandidatAdmis.size()){
-				TreeMapList.putAll(ListeCandidatAdmis);
-				ListeAdmiParFormation.put(formation.NomFormation, TreeMapList);
+			//Vérifier le nombre des candidatures par rapport au quota de la formation
+			if (formation.quota >= TreeMapList.size()){
+				ListeCandidatAdmis.putAll(TreeMapList);
+				ListeAdmiParFormation.put(formation.NomFormation, ListeCandidatAdmis);
 				
 
 			}
 			else{
-				for(int i =0; i<= ListeCandidatAdmis.size();i++){	
-					 for (Entry<String, Double> entry:ListeCandidatAdmis.entrySet()) {
+				for(int i =0; i<= TreeMapList.size();i++){	
+					 for (Entry<String, Double> entry:TreeMapList.entrySet()) {
 						 if (i <= formation.quota) {
 
-							 TreeMapList.put(entry.getKey(), entry.getValue());
-							 ListeAdmiParFormation.put(formation.NomFormation,TreeMapList);
+							 ListeCandidatAdmis.put(entry.getKey(), entry.getValue());
+							 ListeAdmiParFormation.put(formation.NomFormation,ListeCandidatAdmis);
 						 }
 						 else{
-							 
 							 ineAttente.add(entry.getKey());
+							 
+							 
 						 }				
 					 }
 				}
-				ListeDattente.put(formation.NomFormation, ineAttente);				
+
+				 ListeDattente.put(formation.NomFormation, ineAttente);
+								
 			}
-			//Maj etatVoeu		
-			// récupère le voeu de l'étudiant pour cette formation;
-			Enumeration ListeDesAdmis = ListeAdmiParFormation.elements();
-			//for (int i = 0; i<=ListeDesAdmis.size();i++){
-				//voeuEtu = ListeVoeux.get(ListeFormation.nextElement()).get(ListeDesAdmis.);
-			//}
+		
+			
+			//Maj etatVoeu etudiant admis
+			// récupère le voeu de l'étudiant pour cette formation;			
+			Hashtable<String,Double> ListeAdmis = ListeAdmiParFormation.get(ListeFormation.nextElement());
+			Enumeration ineAdmis = ListeAdmis.keys();
+			while(ineAdmis.hasMoreElements()){
+				voeuEtu = ListeVoeux.get(ListeFormation.nextElement()).get(ineAdmis.nextElement());
+				voeuEtu.etatVoeu = etatvoeux.accepter;
+				if (DossierEtudiant.containsKey(ineAdmis.nextElement())){
+					try {
+						recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(ineAdmis.nextElement()).etu, voeuEtu);
+					} catch (DonneesInvalides e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				else{
+					try {
+						recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(ineAdmis.nextElement()).etu, voeuEtu);
+					} catch (DonneesInvalides e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+					
+			}
+			//Maj etatVoeu etudiant listeAttente
+			for(int i=0; i<=ineAttente.size();i++){
+				voeuEtu = ListeVoeux.get(ListeFormation.nextElement()).get(ineAttente.get(i));
+				voeuEtu.etatVoeu = etatvoeux.listeDattente;
+				if (DossierEtudiant.containsKey(ineAttente.get(i))){
+					try {
+						recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(ineAttente.get(i)).etu, voeuEtu);
+					} catch (DonneesInvalides e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				else{
+					try {
+						recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(ineAdmis.nextElement()).etu, voeuEtu);
+					} catch (DonneesInvalides e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+			}
+			
 		}
 		
 		
