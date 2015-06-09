@@ -622,20 +622,28 @@ public class Client extends javax.swing.JFrame {
     	{
     		
     		Voeu vx;
+    		short flag = 0;
     		int i=0;
-    		ListModel< Voeu> list =jList2.getModel();
+    		ListModel<Voeu> list =jList2.getModel();
     		short placeVoeux = (short) (list.getSize()+1);
+    		
     		
     		if(placeVoeux<6)
     		{
-    			 Voeu veux=new Voeu((Formation)jList1.getSelectedValue(), etatvoeux.soumis, decision.NONutilse,placeVoeux);
-    	  
-    			 etudiant.fairVoeux(veux,etudiant.getINE(),placeVoeux); 
+    			 Voeu voeux=new Voeu((Formation)jList1.getSelectedValue(), etatvoeux.soumis, decision.NONutilse,placeVoeux);
+    			 for(int y=0;y<list.getSize();y++)
+	    		 {
+    				 if(voeux.formationVoeu.NomFormation.equals(list.getElementAt(y).formationVoeu.NomFormation))
+    					 flag = 1;
+	    		 }
+    			 
+    			 if(flag == 0)
+    				 etudiant.fairVoeux(voeux,etudiant.getINE(),placeVoeux);
+    			 else
+    	    		jLabel10.setText("Vous ne pouvez pas faire 2 fois le voeu "+voeux.formationVoeu.NomFormation);
     		}
     		else
-    		{
-    			jTextField1.setText("vous avez deja attein le quota de voeux maximum");
-    		}
+    			jLabel10.setText("Vous avez deja 5 voeux dans votre liste");
     			 
     		
     		
@@ -767,10 +775,10 @@ short monter=1;
    
    //La mise a jour de longlet recherche 
     public void Mise_a_Jour_Recherche(ArrayList array)
-{
-    
-    
-}       
+	{
+	    
+	    
+	}
         
     /**
      * @param args the command line arguments
