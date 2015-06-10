@@ -39,7 +39,7 @@ public interface RectoratOperations
     /**
      * Operation inscriptionUniv
      */
-    public void inscriptionUniv(generated.Universite iorLUniversite);
+    public void inscriptionUniv(generated.Universite iorLUniversite, String nomUniv);
 
     /**
      * Operation inscriptionGDV

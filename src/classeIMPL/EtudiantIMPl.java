@@ -1,4 +1,4 @@
-package devON;
+package classeIMPL;
 
 import generated.DonneesInvalides;
 import generated.GestionDesProfils;
@@ -20,11 +20,15 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 import generated.Etudiant;
+import graphique.Client;
+import graphique.SocialNetworkIHM;
 
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
+
+import outils.NamingServiceTool;
 
 public class EtudiantIMPl extends IEtudiantPOA{
 	Client cl; //il sagit de l'interface principale postbac
@@ -195,6 +199,16 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	{
 		return INE;
 	}
+	
+	public boolean inscription(String ine, String mdp) throws DonneesInvalides
+	{
+		
+		if(setGestionDesProfils(ine)){
+			return gdp.inscriptionEtudiant(ine, mdp);
+		}
+		return false;
+	}
+	
 public static void main(String[] args) throws RemoteException, InvalidName, AdapterInactive {
 	
 	EtudiantIMPl etu=new EtudiantIMPl();

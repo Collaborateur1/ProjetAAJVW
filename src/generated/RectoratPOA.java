@@ -163,8 +163,9 @@ public abstract class RectoratPOA extends org.omg.PortableServer.Servant
             final org.omg.CORBA.portable.ResponseHandler handler) {
         org.omg.CORBA.portable.OutputStream _output;
         generated.Universite arg0_in = generated.UniversiteHelper.read(_is);
+        String arg1_in = _is.read_string();
 
-        inscriptionUniv(arg0_in);
+        inscriptionUniv(arg0_in, arg1_in);
 
         _output = handler.createReply();
 

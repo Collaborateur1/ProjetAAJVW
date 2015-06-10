@@ -1,4 +1,4 @@
-package devON;
+package graphique;
 
 //package ebay_project;
 
@@ -58,6 +58,8 @@ import javax.naming.NamingException;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.ListModel;
+
+import classeIMPL.EtudiantIMPl;
 /**
  *
  * @author Vinss

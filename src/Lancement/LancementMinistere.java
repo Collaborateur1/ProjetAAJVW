@@ -1,5 +1,5 @@
 
-package devON;
+package Lancement;
 
 import generated.DonneesInvalides;
 import generated.Formation;
@@ -10,6 +10,8 @@ import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
+
+import classeIMPL.MinistereIMPL;
 
 public class LancementMinistere {
 
@@ -38,7 +40,7 @@ public class LancementMinistere {
 		
 		ministere.depotDesFormationsRectorat(fr0);
 		
-		
+		System.out.println("ministere  operationel");
 		orb.run();
 		
 		

@@ -1,4 +1,4 @@
-package devON;
+package outils;
 import java.util.Comparator;
 import java.util.Map;
 

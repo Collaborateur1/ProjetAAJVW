@@ -221,7 +221,7 @@ interface Universite {
 
 		//Inscription d'une université à un rectorat
 		//--Appelé par Universite
-		void inscriptionUniv(in Universite iorLUniversite); //(24)
+		void inscriptionUniv(in Universite iorLUniversite, in string nomUniv); //(24)
 		
 		/**modif**/
 		void inscriptionGDV(in GestionDesVoeux Gdv); 

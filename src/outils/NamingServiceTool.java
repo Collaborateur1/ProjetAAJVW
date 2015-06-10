@@ -1,4 +1,4 @@
-package devON;
+package outils;
 
 import org.omg.CORBA.Object;
 import org.omg.CORBA.ORBPackage.InvalidName;

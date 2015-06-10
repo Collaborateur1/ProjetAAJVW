@@ -1,4 +1,4 @@
-package devON;
+package Lancement;
 
 import generated.DonneesInvalides;
 
@@ -45,11 +45,32 @@ public class LancementGeneral {
 		}
 };
 
+
 Thread t2=new Thread(r2);
 t2.start();
 	
 Thread.sleep(2000);	
+
+Runnable r22 = new Runnable() {
+	public void run() {
+    try {
+		LancementUniversite.main(null);
+	} catch (DonneesInvalides | ServantNotActive | WrongPolicy
+			| InvalidName | AdapterInactive e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}                 
+	}
+};
+
+
+Thread t22=new Thread(r22);
+t22.start();
+
+Thread.sleep(2000);	
 	
+
+
 Runnable r3 = new Runnable() {
 	public void run() {
                      

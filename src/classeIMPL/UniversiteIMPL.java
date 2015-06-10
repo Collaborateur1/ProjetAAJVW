@@ -1,4 +1,4 @@
-package devON;
+package classeIMPL;
 
 import generated.DonneesInvalides;
 import generated.Etudiant;
@@ -34,10 +34,13 @@ import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
+import outils.NamingServiceTool;
+import outils.ValueComparator;
+
 public class UniversiteIMPL extends UniversitePOA {
 String NomUniv;
 String Ville;
-String Academie;
+String nomRectorat;
 Rectorat recto;
 Ministère ministere;
 Hashtable<String,dossierEtudiant> DossierEtudiant;
@@ -59,11 +62,11 @@ Hashtable <String,ArrayList<String>> ListeDattente;
 
 
 /**************************Constructeur********************************/
-public UniversiteIMPL(String nomUniv, String ville, String academie, Hashtable<String,dossierEtudiant> dossierEtudiant) {
+public UniversiteIMPL(String nomUniv, String ville, String nomrectorat, Hashtable<String,dossierEtudiant> dossierEtudiant) {
 	super();
 	NomUniv = nomUniv;
 	Ville = ville;
-	Academie = academie;
+	nomRectorat = nomrectorat;
 	
 	DossierEtudiant=dossierEtudiant;
 	ListeVoeux=new Hashtable<String,Hashtable<String,Voeu>>();
@@ -85,17 +88,17 @@ public UniversiteIMPL(String nomUniv, String nomAcad,org.omg.CORBA.ORB orb) thro
 
 	DossierEtudiant=new Hashtable<String,dossierEtudiant>();
 	ListeVoeux=new Hashtable<String,Hashtable<String,Voeu>>();
-	
+	this.NomUniv=nomUniv;
 	org.omg.PortableServer.POA rootPOA = org.omg.PortableServer.POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
 	rootPOA.the_POAManager().activate();
 	
 	 ministere= MinistèreHelper.narrow(
 			NamingServiceTool.getReferenceIntoNS("Ministere"));
+	 
 	ListeCandidatureParFormation=new Hashtable<String,ArrayList<String>>();
 	DossierCandidatureEtudiant=new Hashtable<String,dossierEtudiant>();
 	recto=ministere.rectoratRattacherUniv(nomAcad);
-	
-	recto.inscriptionUniv(UniversiteHelper.narrow(rootPOA.servant_to_reference(this)));
+	recto.inscriptionUniv(UniversiteHelper.narrow(rootPOA.servant_to_reference(this)),nomUniv);
 }
 
 
@@ -127,7 +130,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 	@Override
 	public String academieUniversite() {
 		// TODO Auto-generated method stub
-		return Academie;
+		return nomRectorat;
 	}
 
 	
@@ -335,7 +338,14 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 		return DossierEtudiant.containsKey(ine);
 	}
 
+/*****************fonction ajouter*******************************/
 
+public void ajouterEtudiant(String ine, dossierEtudiant dossier)
+{
+		
+	DossierEtudiant.put(ine, dossier);
+	
+}
 
 	
 

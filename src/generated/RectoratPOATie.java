@@ -108,9 +108,9 @@ public class RectoratPOATie extends RectoratPOA
     /**
      * Operation inscriptionUniv
      */
-    public void inscriptionUniv(generated.Universite iorLUniversite)
+    public void inscriptionUniv(generated.Universite iorLUniversite, String nomUniv)
     {
-        _tie.inscriptionUniv( iorLUniversite);
+        _tie.inscriptionUniv( iorLUniversite,  nomUniv);
     }
 
     /**

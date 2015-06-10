@@ -1,5 +1,6 @@
-package devON;
+package Lancement;
 
+import classeIMPL.LBEtudiantIMPL;
 import generated.Etudiant;
 
 public class LancementLoadB {

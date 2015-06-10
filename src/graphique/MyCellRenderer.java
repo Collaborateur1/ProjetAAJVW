@@ -1,4 +1,4 @@
-package devON;
+package graphique;
 
 //En gros sa permet de modifier larraylist pour donner un meilleur visuel, sa sapplique
 //pour arraylist des voeux
@@ -6,7 +6,6 @@ package devON;
 
 
 
-import generated.Formation;
 import generated.Voeu;
 
 import java.awt.Color;
@@ -30,14 +29,14 @@ import javax.swing.ListCellRenderer;
  *
  * @author puls2
  */
-class MyCellRendererRecherche extends JLabel implements ListCellRenderer<Object> {
+class MyCellRenderer extends JLabel implements ListCellRenderer<Object> {
     
    ImageIcon icon; 
    ImageIcon selectIconI;
    ImageIcon selectIconH;
    ImageIcon selectIconE;
    Color selectCouleur = Color.RED;
-   public  MyCellRendererRecherche(){
+   public  MyCellRenderer(){
       icon = new ImageIcon(getClass().getResource("Postuler.jpg"));
     
    }
@@ -53,20 +52,25 @@ public Component getListCellRendererComponent(JList<? extends Object> list,
    
     //si lobjet est selectioner 
     if (isSelected) {
-    	Formation fr=( Formation)list.getSelectedValue();
+    	 Voeu vx=( Voeu)list.getSelectedValue();
        setBackground(list.getSelectionBackground());
        setForeground(selectCouleur);
        
-    
-    	  setText("Université:"+fr.nomUniv+" type de formation:"+fr.TypeFormation);
-      
-       if(fr.TypeFormation.equals("Informatique"))
+       if(vx.formationVoeu.NomFormation.contains("Choisir un voeux"))    	   
+      {
+    	   setText("Emplacement disponible pour un nouveau voeu");
+      }
+      else
+      {
+    	  setText("ordre: "+vx.numeroVoeu+" Université:"+vx.formationVoeu.nomUniv+" type de formation:"+vx.formationVoeu.TypeFormation);
+      }
+       if(vx.formationVoeu.TypeFormation.equals("Informatique"))
        {
            //Pour l'instant je leur met tous la meme image.
            setIcon(icon);
-       }else if(fr.TypeFormation.equals("math")){
+       }else if(vx.formationVoeu.TypeFormation.equals("math")){
            setIcon(icon);
-       }else if(fr.TypeFormation.equals("physique")){
+       }else if(vx.formationVoeu.TypeFormation.equals("physique")){
            setIcon(icon);
        } else {
            setIcon(icon);
@@ -75,12 +79,17 @@ public Component getListCellRendererComponent(JList<? extends Object> list,
        
     }else{
     
-    	Formation fr = ( Formation)values;
+    	Voeu vx = ( Voeu)values;
    
     
-    	
-      	  setText("Nom Formation:"+fr.NomFormation+" Nom Univ:"+fr.nomUniv);
-        
+    	if(vx.formationVoeu.NomFormation.contains("Choisir un voeux"))
+        {
+    		setText("Emplacement disponible pour un nouveau voeu");
+        }
+        else
+        {
+      	  setText("Nom Formation:"+vx.formationVoeu.NomFormation+" Etat:"+vx.etatVoeu);
+        }
        setBackground(list.getBackground());
        setForeground(list.getForeground());
     

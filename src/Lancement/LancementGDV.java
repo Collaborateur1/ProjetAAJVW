@@ -1,4 +1,4 @@
-package devON;
+package Lancement;
 
 import generated.DonneesInvalides;
 
@@ -6,6 +6,8 @@ import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
+
+import classeIMPL.GestionDesVoeuxIMPL;
 
 public class LancementGDV {
 

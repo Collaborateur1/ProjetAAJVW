@@ -287,7 +287,7 @@ public class _RectoratStub extends org.omg.CORBA.portable.ObjectImpl
     /**
      * Operation inscriptionUniv
      */
-    public void inscriptionUniv(generated.Universite iorLUniversite)
+    public void inscriptionUniv(generated.Universite iorLUniversite, String nomUniv)
     {
         while(true)
         {
@@ -298,6 +298,7 @@ public class _RectoratStub extends org.omg.CORBA.portable.ObjectImpl
                 {
                     org.omg.CORBA.portable.OutputStream _output = this._request("inscriptionUniv",true);
                     generated.UniversiteHelper.write(_output,iorLUniversite);
+                    _output.write_string(nomUniv);
                     _input = this._invoke(_output);
                     return;
                 }
@@ -323,7 +324,7 @@ public class _RectoratStub extends org.omg.CORBA.portable.ObjectImpl
                 generated.RectoratOperations _self = (generated.RectoratOperations) _so.servant;
                 try
                 {
-                    _self.inscriptionUniv( iorLUniversite);
+                    _self.inscriptionUniv( iorLUniversite,  nomUniv);
                     return;
                 }
                 finally

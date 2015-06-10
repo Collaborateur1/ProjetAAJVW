@@ -1,4 +1,4 @@
-package devON;
+package graphique;
 
 
 import generated.DonneesInvalides;
@@ -17,9 +17,14 @@ import java.util.logging.Logger;
 
 
 
+
+
+
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
+
+import classeIMPL.EtudiantIMPl;
 
 
 /*
@@ -94,6 +99,7 @@ jLabel4.setVisible(false);
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("The Social Network.. Stay Connected !!");
@@ -119,13 +125,7 @@ jLabel4.setVisible(false);
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
 					jButton1ActionPerformed(evt);
-				} catch (DonneesInvalides e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ServantNotActive e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (WrongPolicy e) {
+				} catch (DonneesInvalides | ServantNotActive | WrongPolicy e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -144,12 +144,12 @@ jLabel4.setVisible(false);
         jLabel4.setForeground(new java.awt.Color(255, 51, 0));
         jLabel4.setText("Echec d'identification.");
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/devON/logo-apb.jpg"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("logo-apb.jpg"))); // NOI18N
 
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));
         jLabel3.setText("Copyright © 2014 . All rights reserved.");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/devON/minilogo.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("minilogo.png"))); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(59, 89, 152));
@@ -175,6 +175,16 @@ jLabel4.setVisible(false);
                 .addContainerGap())
         );
 
+        jButton2.setBackground(new java.awt.Color(59, 89, 152));
+        jButton2.setForeground(new java.awt.Color(0, 153, 0));
+        jButton2.setText("inscription");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -192,7 +202,9 @@ jLabel4.setVisible(false);
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(23, 23, 23)))
                 .addGap(35, 35, 35))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -224,7 +236,9 @@ jLabel4.setVisible(false);
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, Short.MAX_VALUE)
@@ -232,6 +246,8 @@ jLabel4.setVisible(false);
                 .addComponent(jLabel3)
                 .addContainerGap())
         );
+
+        getAccessibleContext().setAccessibleName("Admission Post Licence");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -267,6 +283,11 @@ jLabel4.setVisible(false);
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+new InscriptionIHM(ietudiant).setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -320,6 +341,7 @@ jLabel4.setVisible(false);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

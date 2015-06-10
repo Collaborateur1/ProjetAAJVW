@@ -1,4 +1,4 @@
-package devON;
+package Lancement;
 
 import generated.DonneesInvalides;
 import generated.Etudiant;
@@ -9,6 +9,8 @@ import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantAlreadyActive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
+
+import classeIMPL.GestionDesProfilsIMPL;
 
 public class LancementGDP {
 

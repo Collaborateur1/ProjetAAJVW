@@ -1,10 +1,11 @@
-package devON;
+package classeIMPL;
 
 
 import java.util.Hashtable;
 
 import org.omg.CORBA.ORB;
 
+import outils.NamingServiceTool;
 import generated.DonneesInvalides;
 import generated.GestionDesProfils;
 import generated.GestionDesVoeux;

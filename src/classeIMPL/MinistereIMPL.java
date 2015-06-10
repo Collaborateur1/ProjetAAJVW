@@ -1,4 +1,4 @@
-package devON;
+package classeIMPL;
 import generated.*;
 
 import java.util.ArrayList;
@@ -9,6 +9,8 @@ import java.util.List;
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 
+import outils.NamingServiceTool;
+
 
 public class MinistereIMPL extends MinistèrePOA {
 	
@@ -16,6 +18,7 @@ public class MinistereIMPL extends MinistèrePOA {
 
 	//La liste des rectorats 
 	Hashtable<String,Rectorat>ListeRectorat;
+	
 	//La liste des formation
 	ArrayList<Formation> ListeFormation;
 
@@ -87,7 +90,7 @@ for(int i=0;i<this.ListeFormation.size();i++)
 		//On rajoute le rectorat dans le ministère
 		
 		ListeRectorat.put(nomRectorat, iorRectorat);
-
+		
 
 	}
 

@@ -1,4 +1,4 @@
-package devON;
+package classeIMPL;
 
 import generated.DonneesInvalides;
 import generated.Etudiant;
@@ -21,6 +21,8 @@ import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
+
+import outils.NamingServiceTool;
 
 
 
@@ -206,10 +208,11 @@ public class RectoratIMPL extends RectoratPOA {
 	
 
 	@Override
-	public void inscriptionUniv(Universite iorLUniversite) {
+	public void inscriptionUniv(Universite iorLUniversite, String nomUniv) {
 		// TODO Auto-generated method stub
+	
+		ListeListUniversite.put(nomUniv, iorLUniversite);
 		
-		ListeListUniversite.put(iorLUniversite.nomUniversite(), iorLUniversite);
 	}
 
 	@Override
