@@ -79,14 +79,16 @@ loadBalancer.inscriptionGDP(GestionDesProfilsHelper.narrow(rootPOA.servant_to_re
 	@Override
 	public boolean autorisationConnexion(String ine, String mdp)
 			throws DonneesInvalides {
-		System.out.println("erf");
+		
 		if(etudiantinscrit.containsKey(ine) )
 		{
 			if( CodeEtudiantInscrit.get(ine).equals(mdp)){
+				
 				return true;
 			}
 			
 		}
+	
 		return false;
 	}
 
@@ -149,20 +151,20 @@ loadBalancer.inscriptionGDP(GestionDesProfilsHelper.narrow(rootPOA.servant_to_re
 	public boolean inscriptionEtudiant(String ine, String mdp)
 			throws DonneesInvalides {
 		// TODO Auto-generated method stub
-		System.out.println("ok0");
+		
 		if(!etudiantinscrit.containsKey(ine))
 		{	
-			System.out.println("ok1");
+			
 		Etudiant etu=rectorat.getFicheEtudiant(ine);
-		System.out.println("ok2");
-		if(etu.formation.NomFormation.contains("aucune"))
+		
+		if(etu.formation.NomFormation.contains("nada"))
 		{
 			return false;
 		}
 		else
 		{
 			etudiantinscrit.put(etu.ineEtudiant,etu);
-			CodeEtudiantInscrit.put(etu.ineEtudiant,"mdp");
+			CodeEtudiantInscrit.put(etu.ineEtudiant,mdp);
 			return true;
 		}
 		}
@@ -173,9 +175,9 @@ loadBalancer.inscriptionGDP(GestionDesProfilsHelper.narrow(rootPOA.servant_to_re
 	
 	public void setProfil(Etudiant etu)
 	{
-		etudiantinscrit.put(etu.ineEtudiant,etu);
+		//etudiantinscrit.put(etu.ineEtudiant,etu);
 		
-		CodeEtudiantInscrit.put(etu.ineEtudiant,"1234");
+		//CodeEtudiantInscrit.put(etu.ineEtudiant,"1234");
 
 	}
 	

@@ -353,7 +353,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 				for(int i =0; i<=nbdispo; i++){
 					//besoin de la moyenne
 					//ListeAdmiParFormation.put(ListeDattente.get(ListeFormation.nextElement())), value));
-					ListeDattente.remove(key, value);
+				//	ListeDattente.remove(key, value);
 				}
 		}
 			

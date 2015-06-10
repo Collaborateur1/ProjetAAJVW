@@ -171,13 +171,15 @@ public class InscriptionIHM extends javax.swing.JFrame {
         {
             jLabel7.setVisible(false);
             
-            if(etu.inscription(jTextField1.getText(), jPasswordField1.getPassword().toString()))
+            if(etu.inscription(jTextField1.getText(), String.copyValueOf(jPasswordField1.getPassword())))
             {
+            	jLabel10.setText("Vous pouver maintenant vous connecter");
             	jLabel10.setVisible(true); 
             }
             else
             {
-            	jLabel7.setVisible(false);	
+            	jLabel10.setText("Probleme INE, deja inscrit ou INE incorrecte");
+            	jLabel10.setVisible(true); 	
             }
               
            
