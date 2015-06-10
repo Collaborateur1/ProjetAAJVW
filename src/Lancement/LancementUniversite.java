@@ -24,12 +24,15 @@ public class LancementUniversite {
 		
 		UniversiteIMPL univ= new UniversiteIMPL("UT3","rectorat",orb);
 		System.out.println("univ UT3 operationel");
+
 		Formation fr= new Formation("jespere"," NomFormation", "TypeFormation", "nomRectorat", (short)1);
 		
 		Voeu voeuEtu = new Voeu(fr,etatvoeux.soumis,decision.NONutilse,(short)1);
 		Voeu voeuEtu2 = new Voeu(fr,etatvoeux.soumis, decision.NONutilse,(short)1);
 		
 		Etudiant etu=new Etudiant("patric","francoi","G101","UT3","la rue",fr);
+		
+
 		
 		Resultat result=new Resultat((short)1,15, (short)10,(short)5);
 		Resultat result2=new Resultat((short)2,14, (short)10,(short)4);
@@ -47,6 +50,7 @@ public class LancementUniversite {
 			resultt[4]=result5;
 			resultt[5]=result6;
 			
+
 				
 		
 		dossierEtudiant detu=new dossierEtudiant(etu, resultt);
@@ -81,6 +85,7 @@ public class LancementUniversite {
 		univ.envoyerCandidatureD(detu2, etu2.ineEtudiant, voeuEtu2);
 		univ.deliberationJury();
 		univ.affichage();
+
 		orb.run();
 
 	}

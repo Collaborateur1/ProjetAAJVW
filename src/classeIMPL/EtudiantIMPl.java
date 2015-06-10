@@ -10,6 +10,7 @@ import generated.LoadBalancerEtudiant;
 import generated.LoadBalancerEtudiantHelper;
 import generated.UtilisationInterdite;
 import generated.Voeu;
+import generated.decision;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -93,7 +94,7 @@ public class EtudiantIMPl extends IEtudiantPOA{
 			gdv=gdp.connexion(etu, INE, mdp);
 			
 			if(gdv.possedeVoeux(INE))
-			{	
+			{
 			cl.configuration_de_connexion(gdp.consulterProfil(INE),gdv.chargerVoeux(INE));
 			}
 			else
@@ -194,6 +195,10 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		cl.miseAjourJlist2(gdv.supprimerVoeux(INE, numeroVoeux));
 		
 		
+	}
+	public void repondreAunVoeu(String ine, short numVoeu, decision choixEtu) throws DonneesInvalides, UtilisationInterdite
+	{
+		gdv.repondreAuxPropositions(ine, choixEtu, numVoeu);
 	}
 	public String getINE()
 	{

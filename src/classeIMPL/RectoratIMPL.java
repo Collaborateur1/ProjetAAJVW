@@ -2,6 +2,7 @@ package classeIMPL;
 
 import generated.DonneesInvalides;
 import generated.Etudiant;
+import generated.Formation;
 import generated.GestionDesVoeux;
 import generated.Ministère;
 import generated.MinistèreHelper;
@@ -256,7 +257,11 @@ Enumeration ListeUniv=this.ListeListUniversite.elements();
 				return univ.getFicheEtudiant(ine);
 			}
 		}
-		throw new DonneesInvalides("ine inconnu");
+		
+		Formation f=new Formation("nada", "nada", "nada", "nada", (short)5);
+		Etudiant t=new Etudiant("nada", "nada", "nada", "nada", "nada",f);
+		return t;
+		
 	}
 
 	/*********************Fonction créé par nous**************/

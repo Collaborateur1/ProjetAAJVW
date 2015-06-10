@@ -168,17 +168,13 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
 				ArrayList lv = ListeVoeuxEtudiant.get(ine);
-				
-				@SuppressWarnings("rawtypes")
-				Iterator it = lv.iterator();
-				Voeu v = (Voeu) it.next();
-				while(it.hasNext())
+				for(int i = 0;i<lv.size();i++)
 				{
+					Voeu v = (Voeu) lv.get(i);;
 					if(v.numeroVoeu==numeroVoeu)
 					{
 						v.dcsEtudiant = choixEtu;
-					}
-					v = (Voeu) it.next();
+					}	
 				}
 		
 	}
