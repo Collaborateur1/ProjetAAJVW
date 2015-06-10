@@ -202,10 +202,9 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 	public void repondrePropositionvoeux(String ine, Voeu voeu)
 			throws DonneesInvalides {
 		// TODO Auto-generated method stub
-		if (voeu.dcsEtudiant.equals(decision.NONdefinitif)){
+		if (voeu.dcsEtudiant.equals(decision.NONdefinitif)||voeu.dcsEtudiant.equals(decision.NONmais)){
 			ListeAdmiParFormation.get(voeu.formationVoeu.NomFormation).remove(ine);
-		};
-		
+		};		
 		
 	}
 	
@@ -333,6 +332,30 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 	public boolean estEtudiant(String ine) {
 		// TODO Auto-generated method stub
 		return DossierEtudiant.containsKey(ine);
+	}
+
+	@Override
+	public void deliberationFinal() {
+		// TODO Auto-generated method stub
+		//Récupere la liste des formations
+		short nbAdmis;
+		short quota;
+		short nbdispo;
+		Enumeration ListeFormation  = ListeAdmiParFormation.keys();
+		while(ListeFormation.hasMoreElements()){
+			nbAdmis =(short) ListeAdmiParFormation.get(ListeFormation.nextElement()).size(); 
+		    quota = ListeDesFormations.get(ListeFormation.nextElement()).quota;
+			if (nbAdmis<quota){
+				nbdispo = (short) (quota - nbAdmis);
+				for(int i =0; i<=nbdispo; i++){
+					//besoin de la moyenne
+					//ListeAdmiParFormation.put(ListeDattente.get(ListeFormation.nextElement())), value));
+					ListeDattente.remove(key, value);
+				}
+		}
+			
+		}
+		
 	}
 
 

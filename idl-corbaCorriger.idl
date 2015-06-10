@@ -195,6 +195,7 @@ interface Universite {
 		boolean estEtudiant(in string ine);
 	     /**modif**/
 		void deliberationJury();
+		void deliberationFinal();
 	};
 	
 	//Un Rectorat possède un ensemble d'universite
