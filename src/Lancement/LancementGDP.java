@@ -38,9 +38,11 @@ public class LancementGDP {
 
 		Formation fr2= new Formation("jespere2"," NomFormation2", "TypeFormation2", "nomRectorat2",(short)5);
 		
-		 etu=new Etudiant("Alex","boss2","F423","UT3","far away",fr2);
+		 etu=new Etudiant("Alex","combe","F423","UT3","far away",fr2);
 
 		 gdpimpl.setProfil(etu);
+		
+		LancementVague.ajouterGDP(gdpimpl);
 		orb.run();
 	}
 

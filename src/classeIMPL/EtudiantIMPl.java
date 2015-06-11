@@ -41,8 +41,8 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	GestionDesVoeux gdv;
 	LoadBalancerEtudiant loadbalancer;
 	ArrayList<Voeu> ListeVoeuxEtu;
-    String INE;
-	
+	String INE;
+
 	/**********Constructeur
 	 * @throws RemoteException ************/	
 	public EtudiantIMPl() throws RemoteException
@@ -53,15 +53,15 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		loadbalancer= LoadBalancerEtudiantHelper.narrow(NamingServiceTool.getReferenceIntoNS("LBE"));
 		ListeVoeuxEtu=new ArrayList<Voeu>();
 	}
-	
+
 	/********fonction généré******/
 	@Override
 	public void notifier(String message) {
 		// TODO Auto-generated method stub
 		System.out.println (message);
-		
+
 	}
-	
+
 	@Override
 	public void majEtatVoeux(Voeu UnVoeu) {
 		// TODO Auto-generated method stub
@@ -78,15 +78,10 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		}
 	}
 
-	@Override
-	public void periode1() {
-		// TODO Auto-generated method stub
-		cl.phase1();
-	}
 
-	
-		/*************Fonction rajouter****************/
-	
+
+	/*************Fonction rajouter****************/
+
 	public boolean ConnexionGDP(String INE, String mdp) throws DonneesInvalides, ServantNotActive, WrongPolicy
 	{
 		IEtudiant etu;
@@ -94,49 +89,48 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		{
 			if(gdp.autorisationConnexion(INE, mdp))
 			{
-			
-			if(gdp.etudiantInscrit(INE)){
-				
-			
-			etu=IEtudiantHelper.narrow(rootPOA.servant_to_reference(this));
-			gdv=gdp.connexion(etu, INE, mdp);
-			
-			if(gdv.possedeVoeux(INE))
-			{
-			cl.configuration_de_connexion(gdp.consulterProfil(INE),gdv.chargerVoeux(INE));
+
+				if(gdp.etudiantInscrit(INE))
+				{
+					etu=IEtudiantHelper.narrow(rootPOA.servant_to_reference(this));
+					gdv=gdp.connexion(etu, INE, mdp);
+
+					if(gdv.possedeVoeux(INE))
+					{
+						cl.configuration_de_connexion(gdp.consulterProfil(INE),gdv.chargerVoeux(INE));
+					}
+					else
+					{
+						cl.configuration_de_connexion(gdp.consulterProfil(INE),null);
+					}
+
+					this.INE=INE;
+					cl.setVisible(true);
+					return true;
+				}
+				else
+					return false;
+
 			}
-			else
-			{
-				cl.configuration_de_connexion(gdp.consulterProfil(INE),null);
-			}
-				
-		    this.INE=INE;
-			cl.setVisible(true);
-			return true;
-			}
-			else
-				return false;
-			
-		 }
 			return false;
 		}
-		
-		
+
+
 		return false;
 	}
 
-	
+
 	public Client getPostLicenceInterface()
 	{
 		return this.cl;
 	}
-	
+
 	public boolean setGestionDesProfils(String ine) throws DonneesInvalides
 	{	
 		gdp=loadbalancer.getProfil(ine);
 		if(gdp!=null)
-		return true;
-		
+			return true;
+
 		return false;
 	}
 	public void setPOA(org.omg.CORBA.ORB orb) throws InvalidName, AdapterInactive
@@ -156,12 +150,12 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	{
 		return gdp;
 	}
-	
+
 	public GestionDesVoeux getGDV()
 	{
 		return gdv;
 	}
-	
+
 	public LoadBalancerEtudiant getLoadBalancer()
 	{
 		return loadbalancer;
@@ -171,38 +165,36 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	{
 		return null;
 	}
-	
+
 	public Seq ConsulterProfilGDP(String INE)
 	{
 		return null;
 	}
-	**/
+	 **/
 	/***************** Fonction ajouter
 	 * @throws UtilisationInterdite 
 	 * @throws DonneesInvalides ******************/
-	
+
 	public void fairVoeux(Voeu vx, String INE,short ordre) throws DonneesInvalides, UtilisationInterdite
 	{
 		int i=0;
 		cl.miseAjourJlist2(gdv.faireUnVoeu(INE, vx, ordre));
-		
-		
+
+
 	}
-	
+
 	public void modifierVoeu( String INE,short numeroVoeux,short ordre) throws DonneesInvalides, UtilisationInterdite
 	{
 		int i=0;
 		cl.miseAjourJlist2(gdv.modifierVoeu(INE, numeroVoeux, ordre));
-		
-		
+
+
 	}
-	
+
 	public void supprimerVoeu( String INE,short numeroVoeux) throws DonneesInvalides, UtilisationInterdite
 	{
 		int i=0;
 		cl.miseAjourJlist2(gdv.supprimerVoeux(INE, numeroVoeux));
-		
-		
 	}
 	public void repondreAunVoeu(String ine, short numVoeu, decision choixEtu) throws DonneesInvalides, UtilisationInterdite
 	{
@@ -212,41 +204,39 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	{
 		return INE;
 	}
-	
+
 	public boolean inscription(String ine, String mdp) throws DonneesInvalides
 	{
-		
+
 		if(setGestionDesProfils(ine)){
 			return gdp.inscriptionEtudiant(ine, mdp);
 		}
 		return false;
 	}
-	
-	public void phaseUn()
-	{
-		
-		
-	}
-	
-	public boolean choixVoeux()
-	{
-		return gdv.peutRepondreVoeux();
-	}
-public static void main(String[] args) throws RemoteException, InvalidName, AdapterInactive {
-	
-	EtudiantIMPl etu=new EtudiantIMPl();
-	org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(new String[0],null);
-	etu.setPOA(orb);
-	etu.getInetfaceConnex().setVisible(true);
 
-	orb.run();
-	
-	
-	
-	
-	
-}
+	@Override
+	public void lancementVague(short numero) {
+		// TODO Auto-generated method stub
+		if(numero == 1)
+		{
+			cl.lancementVague1();
+		}
+		else if(numero == 2)
+		{
+			cl.lancementVague2();
+		}
+	}
 
+	public static void main(String[] args) throws RemoteException, InvalidName, AdapterInactive {
+
+
+		EtudiantIMPl etu=new EtudiantIMPl();
+		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(new String[0],null);
+		etu.setPOA(orb);
+		etu.getInetfaceConnex().setVisible(true);
+
+		orb.run();
+	}
 
 
 }

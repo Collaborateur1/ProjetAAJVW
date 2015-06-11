@@ -74,7 +74,9 @@ module PostLicence {
 		//mettre a jour les voeux de l'étudiant dans sont InterfaceEtudiant
 		//--Appelé par GestionDesVoeux
 		void majEtatVoeux(in Voeu UnVoeu); //(2)
-		void periode1();
+
+		void lancementVague(in short numero);
+
 		
 		
 		
@@ -122,8 +124,9 @@ module PostLicence {
 		
 		boolean existFormation (in string nomFormation);
 		
-		boolean peutRepondreVoeux();
-		
+
+		void lancementVague(in short numero);
+
 		
 	};
 	 
