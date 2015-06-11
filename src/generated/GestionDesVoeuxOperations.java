@@ -70,4 +70,9 @@ public interface GestionDesVoeuxOperations
      */
     public boolean existFormation(String nomFormation);
 
+    /**
+     * Operation lancementVague
+     */
+    public void lancementVague(short numero);
+
 }

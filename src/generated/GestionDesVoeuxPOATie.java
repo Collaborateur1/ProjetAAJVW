@@ -157,4 +157,12 @@ public class GestionDesVoeuxPOATie extends GestionDesVoeuxPOA
         return _tie.existFormation( nomFormation);
     }
 
+    /**
+     * Operation lancementVague
+     */
+    public void lancementVague(short numero)
+    {
+        _tie.lancementVague( numero);
+    }
+
 }

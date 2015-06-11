@@ -291,6 +291,31 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		else
 		return false;
 	}
+
+	@Override
+	public void lancementVague(short numero) {
+		// TODO Auto-generated method stub
+		if(numero == 1)
+		{
+			
+			Enumeration e = ListeVoeuxEtudiant.keys();
+			 
+			ArrayList<Voeu> lv;
+			String ine;
+			//Parourir et afficher les valeurs
+			while(e.hasMoreElements())
+			{
+				ine = (String) e.nextElement();
+				//transformer arraylist voeu en tableau
+				rect.envoyerListeVoeuxGDV(Voeu[] lv, ine);
+			}
+			
+		}
+		else if(numero == 2)
+		{
+			
+		}
+	}
 	
 
 	

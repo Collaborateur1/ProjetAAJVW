@@ -122,7 +122,7 @@ module PostLicence {
 		
 		boolean existFormation (in string nomFormation);
 		
-		
+		void lancementVague(in short numero);
 		
 	};
 	 
