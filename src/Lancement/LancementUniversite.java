@@ -33,7 +33,7 @@ public class LancementUniversite {
 		dossierEtudiant detu4 =dossetu.creerDossierEtudiant("merde", "PD", "G104");
 		univ.ajouterEtudiant("G103", detu4);
 		
-		Formation fr= new Formation("jespere"," NomFormation", "TypeFormation", "nomRectorat", (short)3);
+		Formation fr= new Formation("jespere"," NomFormation", "TypeFormation", "nomRectorat", (short)2);
 		
 		Voeu voeuEtu = new Voeu(fr,etatvoeux.soumis,decision.NONutilse,(short)1);
 		Voeu voeuEtu2 = new Voeu(fr,etatvoeux.soumis, decision.NONutilse,(short)1);
@@ -95,6 +95,16 @@ public class LancementUniversite {
 	    univ.envoyerCandidatureD(detu4, "G104", voeuEtu4);
 	    univ.deliberationJury();
 		univ.affichage();
+		System.out.println("etat voeu etudiant G101: " +voeuEtu.etatVoeu);
+		System.out.println("etat voeu etudiant G102 " +voeuEtu2.etatVoeu);
+		System.out.println("etat voeu etudiant G103: " +voeuEtu3.etatVoeu);
+		System.out.println("etat voeu etudiant G104: " +voeuEtu4.etatVoeu);
+		fr.quota = 3;
+		univ.deliberationFinal();
+		System.out.println("etat voeu etudiant G101: " +voeuEtu.etatVoeu);
+		System.out.println("etat voeu etudiant G102 " +voeuEtu2.etatVoeu);
+		System.out.println("etat voeu etudiant G103: " +voeuEtu3.etatVoeu);
+		System.out.println("etat voeu etudiant G104: " +voeuEtu4.etatVoeu);
 		
 		LancementVague.ajouterUniversiteIMPL(univ);
 		

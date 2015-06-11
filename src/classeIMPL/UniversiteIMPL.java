@@ -350,12 +350,12 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 			if (nbAdmis<quota){
 				nbdispo = (short) (quota - nbAdmis);
 				for(int i =0; i<nbdispo; i++){ 
-					voeuEtu = ListeVoeux.get(ListeDattente.get(nomFormationCourante)).get(nomFormationCourante);
+					voeuEtu = ListeVoeux.get(ListeDattente.get(nomFormationCourante).get(i)).get(nomFormationCourante);
 					//envoyer et mettre à jour le voeu seulement
 					voeuEtu.etatVoeu = etatvoeux.accepter;
-					/*if (DossierEtudiant.containsKey(ineAttente.get(i))){
+					/*if (DossierEtudiant.containsKey(ListeDattente.get(nomFormationCourante))){
 						try {
-							recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(ineAttente.get(i)).etu, voeuEtu);
+							recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(ListeDattente.get(nomFormationCourante)).etu, voeuEtu);
 						} catch (DonneesInvalides e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -363,7 +363,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 					}
 					else{
 						try {
-							recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(ineAdmis.nextElement()).etu, voeuEtu);
+							recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(ListeDattente.get(nomFormationCourante)).etu, voeuEtu);
 						} catch (DonneesInvalides e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
