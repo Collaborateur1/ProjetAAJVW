@@ -21,14 +21,24 @@ public class LancementUniversite {
 	public static void main(String[] args) throws DonneesInvalides, InvalidName, AdapterInactive, ServantNotActive, WrongPolicy {
 		// TODO Auto-generated method stub
 		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(new String[0],null);
+		CreationDossierEtudiant dossetu = null;
+		
 		
 		UniversiteIMPL univ= new UniversiteIMPL("UT3","rectorat",orb);
 		System.out.println("univ UT3 operationel");
+		
 
-		Formation fr= new Formation("jespere"," NomFormation", "TypeFormation", "nomRectorat", (short)1);
+		dossierEtudiant detu3 = dossetu.creerDossierEtudiant("Dupond", "jean", "G103");
+		univ.ajouterEtudiant("G103", detu3);
+		dossierEtudiant detu4 =dossetu.creerDossierEtudiant("merde", "PD", "G104");
+		univ.ajouterEtudiant("G103", detu4);
+		
+		Formation fr= new Formation("jespere"," NomFormation", "TypeFormation", "nomRectorat", (short)3);
 		
 		Voeu voeuEtu = new Voeu(fr,etatvoeux.soumis,decision.NONutilse,(short)1);
 		Voeu voeuEtu2 = new Voeu(fr,etatvoeux.soumis, decision.NONutilse,(short)1);
+		Voeu voeuEtu3 = new Voeu(fr,etatvoeux.soumis,decision.NONutilse,(short)1);
+		Voeu voeuEtu4 = new Voeu(fr,etatvoeux.soumis, decision.NONutilse,(short)1);
 		
 		Etudiant etu=new Etudiant("patric","francoi","G101","UT3","la rue",fr);
 		
@@ -83,7 +93,9 @@ public class LancementUniversite {
 		
 		univ.envoyerCandidatureD(detu, etu.ineEtudiant, voeuEtu);
 		univ.envoyerCandidatureD(detu2, etu2.ineEtudiant, voeuEtu2);
-		univ.deliberationJury();
+	    univ.envoyerCandidatureD(detu3, "G103", voeuEtu3);
+	    univ.envoyerCandidatureD(detu4, "G104", voeuEtu4);
+	    univ.deliberationJury();
 		univ.affichage();
 
 		orb.run();
