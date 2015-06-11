@@ -17,4 +17,9 @@ public interface IEtudiantOperations
      */
     public void majEtatVoeux(generated.Voeu UnVoeu);
 
+    /**
+     * Operation lancementVague
+     */
+    public void lancementVague(short numero);
+
 }

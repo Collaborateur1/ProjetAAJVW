@@ -192,8 +192,6 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	{
 		int i=0;
 		cl.miseAjourJlist2(gdv.supprimerVoeux(INE, numeroVoeux));
-
-
 	}
 	public void repondreAunVoeu(String ine, short numVoeu, decision choixEtu) throws DonneesInvalides, UtilisationInterdite
 	{
@@ -212,6 +210,18 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		}
 		return false;
 	}
+	@Override
+	public void lancementVague(short numero) {
+		// TODO Auto-generated method stub
+		if(numero == 1)
+		{
+			cl.lancementVague1();
+		}
+		else if(numero == 2)
+		{
+			cl.lancementVague2();
+		}
+	}
 
 	public static void main(String[] args) throws RemoteException, InvalidName, AdapterInactive {
 
@@ -221,12 +231,6 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		etu.getInetfaceConnex().setVisible(true);
 
 		orb.run();
-
-
-
-
-
 	}
-
 
 }

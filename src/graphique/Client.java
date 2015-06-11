@@ -75,7 +75,7 @@ public class Client extends javax.swing.JFrame {
 	public void Initialisation_Element_Interface()
 	{
 		//personnaliser graphiquement la jlist
-		jList2.setCellRenderer(new MyCellRenderer());
+		jList2.setCellRenderer(new MyCellRenderer(this));
 		jList1.setCellRenderer(new MyCellRendererRecherche());
 
 	}
@@ -801,6 +801,25 @@ public class Client extends javax.swing.JFrame {
 	public void Mise_a_Jour_Recherche(ArrayList array)
 	{
 
+	}
+	public void lancementVague1()
+	{
+		jButton1.setEnabled(false);
+		jButton2.setEnabled(false);
+		jButton7.setEnabled(false);
+		jButton5.setEnabled(false);
+	}
+	public void lancementVague2()
+	{
+		jButton1.setEnabled(false);
+		jButton2.setEnabled(false);
+		jButton7.setEnabled(false);
+		jButton5.setEnabled(false);
+	}
+	public void bouttonchoix(boolean b)
+	{
+		jButton10.setEnabled(b);
+		jComboBox1.setVisible(b);
 	}
 
 	/**

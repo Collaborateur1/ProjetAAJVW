@@ -32,7 +32,6 @@ import generated.Rectorat;
 public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 	short numGDP;
 	Hashtable <String,IEtudiant> etudiantConnecter;
-
 	Hashtable <String,Etudiant> etudiantinscrit;
 	Hashtable <String,String> CodeEtudiantInscrit;
 	GestionDesVoeux GestionDesVoeuxInscrit;
@@ -103,6 +102,7 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 				if(!GestionDesVoeuxInscrit.possedeVoeux(ine))
 				{
 					GestionDesVoeuxInscrit.inscriptionIE(ine, iorEtudiant);
+					etudiantConnecter.put(ine, iorEtudiant);
 				}
 
 				return GestionDesVoeuxInscrit;				
@@ -123,6 +123,7 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 		while(e.hasMoreElements())
 		{
 			ie = (IEtudiant) e.nextElement();
+			ie.lancementVague((short) 1);
 		}
 	}
 
