@@ -125,25 +125,21 @@ public class RectoratIMPL extends RectoratPOA {
 			NomFormationEtudiant=etu.formation.NomFormation;
 			NomFormationVoeux=lv[i].formationVoeu.NomFormation;
 
-
-
-
-			//La l'université auquel il postule est t'elle dans son rectorat
+			//test si université est dans le rectorat de l'étudiant
 			if(lv[i].formationVoeu.nomRectorat.equals(this.nomRectorat))
 			{
 				//Avant tout! la candidature est elle valide?
 				if(CandidatureConforme(etu.formation.NomFormation,lv[i].formationVoeu.NomFormation))
 				{	
 
-					//postule til dans son université? si oui pas de transfert de dossier
-
+					//postule-t-il dans son université? si oui pas de transfert de dossier
 					if(lv[i].formationVoeu.nomUniv.equals(etu.nomUniv))
 					{	
 
 						univEtudiant.envoyerCandidature(etu.ineEtudiant, lv[i]);
 					}
-					//sinnon bin on récupere le dossier dans luniv de letudiant
-					//et on lenvoi a lautre univ qui est elle aussi dans le rectorat
+					//sinon bin on récupere le dossier dans luniv de letudiant
+					//et on lenvoi a lautre univ qui est, elle aussi dans le rectorat
 					else
 					{
 						dossierEtu=univEtudiant.madDossier(etu.ineEtudiant);
@@ -233,12 +229,12 @@ public class RectoratIMPL extends RectoratPOA {
 	@Override
 	public void deliberationJury() {
 		// TODO Auto-generated method stub
-Enumeration ListeUniv=this.ListeListUniversite.elements();
-		
+		Enumeration ListeUniv=this.ListeListUniversite.elements();
+
 		while(ListeUniv.hasMoreElements())
 		{
 			Universite Un=null;
-			
+
 			Un=(Universite) ListeUniv.nextElement();
 			Un.deliberationJury();
 		}

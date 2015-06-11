@@ -33,7 +33,9 @@ public abstract class IEtudiantPOA extends org.omg.PortableServer.Servant
             final org.omg.CORBA.portable.ResponseHandler handler)
     {
 
-        if (opName.equals("majEtatVoeux")) {
+        if (opName.equals("lancementVague")) {
+                return _invoke_lancementVague(_is, handler);
+        } else if (opName.equals("majEtatVoeux")) {
                 return _invoke_majEtatVoeux(_is, handler);
         } else if (opName.equals("notifier")) {
                 return _invoke_notifier(_is, handler);
@@ -63,6 +65,19 @@ public abstract class IEtudiantPOA extends org.omg.PortableServer.Servant
         generated.Voeu arg0_in = generated.VoeuHelper.read(_is);
 
         majEtatVoeux(arg0_in);
+
+        _output = handler.createReply();
+
+        return _output;
+    }
+
+    private org.omg.CORBA.portable.OutputStream _invoke_lancementVague(
+            final org.omg.CORBA.portable.InputStream _is,
+            final org.omg.CORBA.portable.ResponseHandler handler) {
+        org.omg.CORBA.portable.OutputStream _output;
+        short arg0_in = _is.read_short();
+
+        lancementVague(arg0_in);
 
         _output = handler.createReply();
 

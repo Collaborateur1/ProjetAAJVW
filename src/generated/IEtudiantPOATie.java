@@ -78,4 +78,12 @@ public class IEtudiantPOATie extends IEtudiantPOA
         _tie.majEtatVoeux( UnVoeu);
     }
 
+    /**
+     * Operation lancementVague
+     */
+    public void lancementVague(short numero)
+    {
+        _tie.lancementVague( numero);
+    }
+
 }

@@ -60,8 +60,6 @@ public class LancementUniversite {
 			resultt[4]=result5;
 			resultt[5]=result6;
 			
-
-				
 		
 		dossierEtudiant detu=new dossierEtudiant(etu, resultt);
 		univ.ajouterEtudiant(etu.ineEtudiant, detu);
@@ -97,7 +95,9 @@ public class LancementUniversite {
 	    univ.envoyerCandidatureD(detu4, "G104", voeuEtu4);
 	    univ.deliberationJury();
 		univ.affichage();
-
+		
+		LancementVague.ajouterUniversiteIMPL(univ);
+		
 		orb.run();
 
 	}

@@ -291,6 +291,49 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		else
 		return false;
 	}
+
+	@Override
+	public void lancementVague(short numero) {
+		// TODO Auto-generated method stub
+		if(numero == 1)//période 1
+		{
+			
+			Enumeration e = ListeVoeuxEtudiant.keys();
+			 
+			ArrayList<Voeu> lv;
+			Etudiant et=null;
+			String ine;
+			//Parourir et afficher les valeurs
+			while(e.hasMoreElements())
+			{
+				ine = (String) e.nextElement();
+				lv = ListeVoeuxEtudiant.get(ine);
+				try {
+					et = gdpRattache.consulterProfil(ine);
+				} catch (DonneesInvalides e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				Voeu[] tabVoeu = new Voeu[lv.size()];
+				//transformer arraylist voeu en tableau
+				for(int i = 0;i<lv.size();i++)
+				{
+					tabVoeu[i] = lv.get(i);
+				}
+				try {
+					rect.envoyerListeVoeuxGDV(tabVoeu, et);
+				} catch (DonneesInvalides e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			
+		}
+		else if(numero == 2)//période 2
+		{
+			
+		}
+	}
 	
 
 	

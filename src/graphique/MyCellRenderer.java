@@ -37,9 +37,10 @@ class MyCellRenderer extends JLabel implements ListCellRenderer<Object> {
 	ImageIcon selectIconH;
 	ImageIcon selectIconE;
 	Color selectCouleur = Color.RED;
-	public  MyCellRenderer(){
+	Client cl;
+	public  MyCellRenderer(Client clp){
 		icon = new ImageIcon(getClass().getResource("Postuler.jpg"));
-
+		cl = clp;
 	}
 
 
@@ -78,9 +79,15 @@ class MyCellRenderer extends JLabel implements ListCellRenderer<Object> {
 			Voeu vx = ( Voeu)values;
 
 			if(vx.dcsEtudiant!=decision.NONutilse)
+			{
 				setText("Nom Formation:"+vx.formationVoeu.NomFormation+" Reponse:"+vx.dcsEtudiant);
+				cl.bouttonchoix(true);
+			}
 			else
+			{
 				setText("Nom Formation:"+vx.formationVoeu.NomFormation+" Etat:"+vx.etatVoeu);
+				cl.bouttonchoix(false);
+			}
 
 			setBackground(list.getBackground());
 			setForeground(list.getForeground());
