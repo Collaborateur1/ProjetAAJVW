@@ -72,20 +72,7 @@ public class Client extends javax.swing.JFrame {
        
       EtudiantIMPl etudiant;  
         
-       
       
-        
-         
-       
-      
-           
-
-  
-
-   
-        
-   
-    
     public void Initialisation_Element_Interface()
     {
         //personnaliser graphiquement la jlist
@@ -100,7 +87,7 @@ public class Client extends javax.swing.JFrame {
        
         etudiant=etu;
         Initialisation_Element_Interface();
-    
+        jComboBox1.setVisible(etu.choixVoeux());
        
     }
     
@@ -571,7 +558,7 @@ public class Client extends javax.swing.JFrame {
 
    //Listener du bouton connexion, valide ou pas la connexion
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-//bouton modifierProfil           
+etudiant.periode1();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) throws DonneesInvalides, UtilisationInterdite {//GEN-FIRST:event_jButton7ActionPerformed
@@ -840,7 +827,13 @@ short monter=1;
         
     }   
    
-   
+   public void phase1()
+   {
+	   jButton1.setEnabled(false);
+	   jButton5.setEnabled(false);
+	   jButton7.setEnabled(false);
+	   jComboBox1.setVisible(true);
+   }
    
       
    

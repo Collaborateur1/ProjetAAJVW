@@ -74,6 +74,7 @@ module PostLicence {
 		//mettre a jour les voeux de l'étudiant dans sont InterfaceEtudiant
 		//--Appelé par GestionDesVoeux
 		void majEtatVoeux(in Voeu UnVoeu); //(2)
+		void periode1();
 		
 		
 		
@@ -121,6 +122,7 @@ module PostLicence {
 		
 		boolean existFormation (in string nomFormation);
 		
+		boolean peutRepondreVoeux();
 		
 		
 	};
@@ -196,6 +198,7 @@ interface Universite {
 	     /**modif**/
 		void deliberationJury();
 		void deliberationFinal();
+		
 	};
 	
 	//Un Rectorat possède un ensemble d'universite

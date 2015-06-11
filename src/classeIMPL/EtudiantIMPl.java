@@ -20,6 +20,8 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
+import javax.swing.JButton;
+
 import generated.Etudiant;
 import graphique.Client;
 import graphique.SocialNetworkIHM;
@@ -74,6 +76,12 @@ public class EtudiantIMPl extends IEtudiantPOA{
 			}
 			i++;
 		}
+	}
+
+	@Override
+	public void periode1() {
+		// TODO Auto-generated method stub
+		cl.phase1();
 	}
 
 	
@@ -214,6 +222,16 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		return false;
 	}
 	
+	public void phaseUn()
+	{
+		
+		
+	}
+	
+	public boolean choixVoeux()
+	{
+		return gdv.peutRepondreVoeux();
+	}
 public static void main(String[] args) throws RemoteException, InvalidName, AdapterInactive {
 	
 	EtudiantIMPl etu=new EtudiantIMPl();
@@ -228,6 +246,7 @@ public static void main(String[] args) throws RemoteException, InvalidName, Adap
 	
 	
 }
+
 
 
 }

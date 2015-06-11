@@ -37,6 +37,7 @@ import generated.etatvoeux;
 public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	
 	short numGDV;
+	boolean repondreVoeux=false;
 	
 	Hashtable<String,Formation>ListeFormation;
 	Hashtable<String,IEtudiant>ListeEtudiant;
@@ -179,6 +180,11 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		
 	}
 	
+	@Override
+	public boolean peutRepondreVoeux() {
+		// TODO Auto-generated method stub
+		return repondreVoeux;
+	}
 
 	@Override
 	public Voeu[] modifierVoeu(String ine, short numeroVoeu, short ordre)
@@ -291,9 +297,14 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		else
 		return false;
 	}
-	
 
-	
+
+	/**************Fonction générer***************/
+
+	public void période1()
+	{
+		
+	}
 
 
 }
