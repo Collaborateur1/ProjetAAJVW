@@ -16,6 +16,7 @@ public class LancementGDV {
 		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(new String[0],null);
 		short sh=1;
 		GestionDesVoeuxIMPL gdv= new GestionDesVoeuxIMPL(sh, orb);
+		LancementVague.ajouterGDV(gdv);
 		orb.run();
 	}
 

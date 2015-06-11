@@ -35,16 +35,12 @@ public class LancementMinistere {
 			fr0[3]=fr3;
 			fr0[4]=fr4;
 			
-		
-		
-		
 		ministere.depotDesFormationsRectorat(fr0);
+		
+		LancementVague.ajouterMinistereIMPL(ministere);
 		
 		System.out.println("ministere  operationel");
 		orb.run();
-		
-		
-		
 	}
 
 }
