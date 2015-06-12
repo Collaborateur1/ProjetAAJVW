@@ -299,6 +299,10 @@ public class RectoratIMPL extends RectoratPOA {
 		return ListeListUniversite.get(univ);
 
 	}
+	
+	public void setValidationFormation(String nomFormation, ArrayList<String> prerequis){
+		ValidationFormation.put(nomFormation, prerequis);		
+	}
 
 	public static void main(String[] args) throws DonneesInvalides, ServantNotActive, WrongPolicy, InvalidName {
 
