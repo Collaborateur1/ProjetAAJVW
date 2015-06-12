@@ -175,6 +175,7 @@ public class RectoratIMPL extends RectoratPOA {
 	public void envoyerDecisionCandidatureRectorat(String ine, Voeu voeu)
 			throws DonneesInvalides {
 		// TODO Auto-generated method stub
+		
 
 	}
 

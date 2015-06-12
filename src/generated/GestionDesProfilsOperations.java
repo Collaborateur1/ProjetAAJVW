@@ -60,4 +60,9 @@ public interface GestionDesProfilsOperations
     public boolean inscriptionEtudiant(String ine, String mdp)
         throws generated.DonneesInvalides;
 
+    /**
+     * Operation getGDV
+     */
+    public generated.GestionDesVoeux getGDV();
+
 }

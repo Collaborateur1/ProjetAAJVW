@@ -190,9 +190,9 @@ public class _LoadBalancerEtudiantStub extends org.omg.CORBA.portable.ObjectImpl
     }
 
     /**
-     * Operation getAllNumGDV
+     * Operation getAllGDP
      */
-    public short[] getAllNumGDV()
+    public generated.GestionDesProfils[] getAllGDP()
     {
         while(true)
         {
@@ -201,9 +201,9 @@ public class _LoadBalancerEtudiantStub extends org.omg.CORBA.portable.ObjectImpl
                 org.omg.CORBA.portable.InputStream _input = null;
                 try
                 {
-                    org.omg.CORBA.portable.OutputStream _output = this._request("getAllNumGDV",true);
+                    org.omg.CORBA.portable.OutputStream _output = this._request("getAllGDP",true);
                     _input = this._invoke(_output);
-                    short[] _arg_ret = generated.seqNumeroGDVHelper.read(_input);
+                    generated.GestionDesProfils[] _arg_ret = generated.seqGDPHelper.read(_input);
                     return _arg_ret;
                 }
                 catch(org.omg.CORBA.portable.RemarshalException _exception)
@@ -222,13 +222,13 @@ public class _LoadBalancerEtudiantStub extends org.omg.CORBA.portable.ObjectImpl
             }
             else
             {
-                org.omg.CORBA.portable.ServantObject _so = _servant_preinvoke("getAllNumGDV",_opsClass);
+                org.omg.CORBA.portable.ServantObject _so = _servant_preinvoke("getAllGDP",_opsClass);
                 if (_so == null)
                    continue;
                 generated.LoadBalancerEtudiantOperations _self = (generated.LoadBalancerEtudiantOperations) _so.servant;
                 try
                 {
-                    return _self.getAllNumGDV();
+                    return _self.getAllGDP();
                 }
                 finally
                 {

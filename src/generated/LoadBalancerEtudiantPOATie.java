@@ -90,11 +90,11 @@ public class LoadBalancerEtudiantPOATie extends LoadBalancerEtudiantPOA
     }
 
     /**
-     * Operation getAllNumGDV
+     * Operation getAllGDP
      */
-    public short[] getAllNumGDV()
+    public generated.GestionDesProfils[] getAllGDP()
     {
-        return _tie.getAllNumGDV();
+        return _tie.getAllGDP();
     }
 
 }

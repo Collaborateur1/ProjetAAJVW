@@ -6,6 +6,7 @@
 package Lancement;
 
 import generated.GestionDesProfils;
+import generated.GestionDesVoeux;
 import generated.LoadBalancerEtudiant;
 import generated.LoadBalancerEtudiantHelper;
 
@@ -37,11 +38,6 @@ public class LancementVague extends javax.swing.JFrame {
         
     	
         initComponents();
-    }
-    
-    public void ajouterGDV(GestionDesVoeuxIMPL gdvp)
-    {
-    	gdv.add(gdvp);
     }
 
     /**
@@ -105,12 +101,30 @@ public class LancementVague extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Naming
+        GestionDesProfils[] tabGDP = lbe.getAllGDP();
+        GestionDesProfils gdp;
+        GestionDesVoeux gdv;
+        
+        for(int i=0;i<tabGDP.length;i++)
+        {
+        	gdp = tabGDP[i];
+        	gdv = gdp.getGDV();
+        	gdv.lancementVague((short) 1);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+    	GestionDesProfils[] tabGDP = lbe.getAllGDP();
+        GestionDesProfils gdp;
+        GestionDesVoeux gdv;
         
+        for(int i=0;i<tabGDP.length;i++)
+        {
+        	gdp = tabGDP[i];
+        	gdv = gdp.getGDV();
+        	gdv.lancementVague((short) 2);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

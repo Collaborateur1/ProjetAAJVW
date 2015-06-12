@@ -325,6 +325,8 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 				}
 				try {
 					rect.envoyerListeVoeuxGDV(tabVoeu, et);
+					ListeEtudiant.get(ine).lancementVague((short) 1);
+					
 				} catch (DonneesInvalides e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -337,7 +339,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			
 		}
 	}
-	
 
 
 	/**************Fonction générer***************/

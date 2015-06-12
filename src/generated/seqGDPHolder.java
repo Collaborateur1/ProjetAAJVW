@@ -1,58 +1,58 @@
 package generated;
 
 /**
- * Holder class for : seqNumeroGDV
+ * Holder class for : seqGDP
  * 
  * @author OpenORB Compiler
  */
-final public class seqNumeroGDVHolder
+final public class seqGDPHolder
         implements org.omg.CORBA.portable.Streamable
 {
     /**
-     * Internal seqNumeroGDV value
+     * Internal seqGDP value
      */
-    public short[] value;
+    public generated.GestionDesProfils[] value;
 
     /**
      * Default constructor
      */
-    public seqNumeroGDVHolder()
+    public seqGDPHolder()
     { }
 
     /**
      * Constructor with value initialisation
      * @param initial the initial value
      */
-    public seqNumeroGDVHolder(short[] initial)
+    public seqGDPHolder(generated.GestionDesProfils[] initial)
     {
         value = initial;
     }
 
     /**
-     * Read seqNumeroGDV from a marshalled stream
+     * Read seqGDP from a marshalled stream
      * @param istream the input stream
      */
     public void _read(org.omg.CORBA.portable.InputStream istream)
     {
-        value = seqNumeroGDVHelper.read(istream);
+        value = seqGDPHelper.read(istream);
     }
 
     /**
-     * Write seqNumeroGDV into a marshalled stream
+     * Write seqGDP into a marshalled stream
      * @param ostream the output stream
      */
     public void _write(org.omg.CORBA.portable.OutputStream ostream)
     {
-        seqNumeroGDVHelper.write(ostream,value);
+        seqGDPHelper.write(ostream,value);
     }
 
     /**
-     * Return the seqNumeroGDV TypeCode
+     * Return the seqGDP TypeCode
      * @return a TypeCode
      */
     public org.omg.CORBA.TypeCode _type()
     {
-        return seqNumeroGDVHelper.type();
+        return seqGDPHelper.type();
     }
 
 }

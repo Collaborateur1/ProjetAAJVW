@@ -113,19 +113,6 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public void lancementVague1()
-	{
-		Enumeration e = etudiantConnecter.elements();
-		 
-		IEtudiant ie;
-		//Parourir et afficher les valeurs
-		while(e.hasMoreElements())
-		{
-			ie = (IEtudiant) e.nextElement();
-			ie.lancementVague((short) 1);
-		}
-	}
 
 	@Override
 	public Etudiant consulterProfil(String ine) throws DonneesInvalides {
@@ -198,6 +185,12 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 	public LoadBalancerEtudiant getLoadBalancer()
 	{
 		return loadBalancer;
+	}
+
+	@Override
+	public GestionDesVoeux getGDV() {
+		// TODO Auto-generated method stub
+		return GestionDesVoeuxInscrit;
 	}
 
 

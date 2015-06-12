@@ -141,4 +141,12 @@ public class GestionDesProfilsPOATie extends GestionDesProfilsPOA
         return _tie.inscriptionEtudiant( ine,  mdp);
     }
 
+    /**
+     * Operation getGDV
+     */
+    public generated.GestionDesVoeux getGDV()
+    {
+        return _tie.getGDV();
+    }
+
 }

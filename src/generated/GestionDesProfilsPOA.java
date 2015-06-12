@@ -43,6 +43,8 @@ public abstract class GestionDesProfilsPOA extends org.omg.PortableServer.Servan
                     new Operation_etudiantInscrit());
             operationMap.put("getFicheEtudiant",
                     new Operation_getFicheEtudiant());
+            operationMap.put("getGDV",
+                    new Operation_getGDV());
             operationMap.put("inscriptionEtudiant",
                     new Operation_inscriptionEtudiant());
             operationMap.put("inscriptionGestionDesVoeux",
@@ -247,6 +249,19 @@ public abstract class GestionDesProfilsPOA extends org.omg.PortableServer.Servan
         return _output;
     }
 
+    private org.omg.CORBA.portable.OutputStream _invoke_getGDV(
+            final org.omg.CORBA.portable.InputStream _is,
+            final org.omg.CORBA.portable.ResponseHandler handler) {
+        org.omg.CORBA.portable.OutputStream _output;
+
+        generated.GestionDesVoeux _arg_result = getGDV();
+
+        _output = handler.createReply();
+        generated.GestionDesVoeuxHelper.write(_output,_arg_result);
+
+        return _output;
+    }
+
     // operation classes
     private abstract static class AbstractOperation {
         protected abstract org.omg.CORBA.portable.OutputStream invoke(
@@ -342,6 +357,16 @@ public abstract class GestionDesProfilsPOA extends org.omg.PortableServer.Servan
                 final org.omg.CORBA.portable.InputStream _is,
                 final org.omg.CORBA.portable.ResponseHandler handler) {
             return target._invoke_inscriptionEtudiant(_is, handler);
+        }
+    }
+
+    private static final class Operation_getGDV extends AbstractOperation
+    {
+        protected org.omg.CORBA.portable.OutputStream invoke(
+                final GestionDesProfilsPOA target,
+                final org.omg.CORBA.portable.InputStream _is,
+                final org.omg.CORBA.portable.ResponseHandler handler) {
+            return target._invoke_getGDV(_is, handler);
         }
     }
 

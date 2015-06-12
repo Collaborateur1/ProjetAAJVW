@@ -33,8 +33,8 @@ public abstract class LoadBalancerEtudiantPOA extends org.omg.PortableServer.Ser
             final org.omg.CORBA.portable.ResponseHandler handler)
     {
 
-        if (opName.equals("getAllNumGDV")) {
-                return _invoke_getAllNumGDV(_is, handler);
+        if (opName.equals("getAllGDP")) {
+                return _invoke_getAllGDP(_is, handler);
         } else if (opName.equals("getProfil")) {
                 return _invoke_getProfil(_is, handler);
         } else if (opName.equals("getServProfil")) {
@@ -113,15 +113,15 @@ public abstract class LoadBalancerEtudiantPOA extends org.omg.PortableServer.Ser
         return _output;
     }
 
-    private org.omg.CORBA.portable.OutputStream _invoke_getAllNumGDV(
+    private org.omg.CORBA.portable.OutputStream _invoke_getAllGDP(
             final org.omg.CORBA.portable.InputStream _is,
             final org.omg.CORBA.portable.ResponseHandler handler) {
         org.omg.CORBA.portable.OutputStream _output;
 
-        short[] _arg_result = getAllNumGDV();
+        generated.GestionDesProfils[] _arg_result = getAllGDP();
 
         _output = handler.createReply();
-        generated.seqNumeroGDVHelper.write(_output,_arg_result);
+        generated.seqGDPHelper.write(_output,_arg_result);
 
         return _output;
     }

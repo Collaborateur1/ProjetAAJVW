@@ -44,7 +44,7 @@ module PostLicence {
 	
 	typedef sequence<Formation> seqFormations;
 	
-	typedef sequence<short> seqNumeroGDV;
+	
 	
  	
 	enum etatvoeux {soumis, nonValide, valide, accepter, refuser, listeDattente};
@@ -170,8 +170,9 @@ module PostLicence {
 		
 		boolean inscriptionEtudiant(in string ine, in string mdp)raises(DonneesInvalides);
 		
-		
+		GestionDesVoeux getGDV();
 	};
+
 
 
 interface Universite {
@@ -284,7 +285,7 @@ interface Universite {
 	//Une Université possède un ensemble de Formation
 	
 
-
+typedef sequence<GestionDesProfils> seqGDP;
 	//Un LoadBalancer est définit par academie et possède plusieurs (au moins 2 pour notre projet) serveur de GestionDesProfils et GestionDesVoeux.
 	//Chaque serveur fonctionnant par couple et gérant une plage d'ine. 
 	//Exemple : GestionDesProfils1 fonctionne avec GestionDesVoeux1 gère les ine de X00001 a X10000
@@ -306,7 +307,7 @@ interface Universite {
 		void inscriptionGDP(in GestionDesProfils iorGestionDesProfils, in short numero) raises(DonneesInvalides); //(30)
 		
 		//--Appelé par Vague, pour connaitre toute les GDV
-		seqNumeroGDV getAllNumGDV();
+		seqGDP getAllGDP();
 	};
 };
 

@@ -56,16 +56,24 @@ public class LBEtudiantIMPL extends LoadBalancerEtudiantPOA {
 		// TODO Auto-generated method stub
 		
 	}
-	@Override
-	public short[] getAllNumGDV() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+	
 
 	public static void main(String[] args) {
 	
 	
 		
+	}
+
+	@Override
+	public GestionDesProfils[] getAllGDP() {
+		// TODO Auto-generated method stub
+		GestionDesProfils[] tabGDP = new GestionDesProfils[listGDP.size()];
+		for(int i=0;i<listGDP.size();i++)
+		{
+			tabGDP[i] = listGDP.get(i);
+		}
+		return tabGDP;
 	}
 
 }

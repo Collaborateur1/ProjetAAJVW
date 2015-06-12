@@ -26,8 +26,8 @@ public interface LoadBalancerEtudiantOperations
         throws generated.DonneesInvalides;
 
     /**
-     * Operation getAllNumGDV
+     * Operation getAllGDP
      */
-    public short[] getAllNumGDV();
+    public generated.GestionDesProfils[] getAllGDP();
 
 }
