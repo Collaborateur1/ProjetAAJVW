@@ -106,8 +106,6 @@ public class LancementUniversite {
 		System.out.println("etat voeu etudiant G103: " +voeuEtu3.etatVoeu);
 		System.out.println("etat voeu etudiant G104: " +voeuEtu4.etatVoeu);
 		
-		LancementVague.ajouterUniversiteIMPL(univ);
-		
 		orb.run();
 
 	}
