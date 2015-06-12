@@ -83,7 +83,7 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 		if(etudiantinscrit.containsKey(ine) )
 		{
 			if( CodeEtudiantInscrit.get(ine).equals(mdp)){
-
+				
 				return true;
 			}
 
@@ -177,6 +177,7 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 			else
 			{
 				etudiantinscrit.put(etu.ineEtudiant,etu);
+				
 				CodeEtudiantInscrit.put(etu.ineEtudiant,mdp);
 				return true;
 			}

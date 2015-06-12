@@ -31,7 +31,7 @@ public class LancementUniversite {
 		dossierEtudiant detu3 = dossetu.creerDossierEtudiant("Dupond", "jean", "G103");
 		univ.ajouterEtudiant("G103", detu3);
 		dossierEtudiant detu4 =dossetu.creerDossierEtudiant("merde", "PD", "G104");
-		univ.ajouterEtudiant("G103", detu4);
+		univ.ajouterEtudiant("G104", detu4);
 		
 		Formation fr= new Formation("jespere"," NomFormation", "TypeFormation", "nomRectorat", (short)2);
 		
