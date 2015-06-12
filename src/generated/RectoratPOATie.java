@@ -147,4 +147,12 @@ public class RectoratPOATie extends RectoratPOA
         return _tie.getFicheEtudiant( ine);
     }
 
+    /**
+     * Operation ajoutPrerequis
+     */
+    public void ajoutPrerequis(String nomFormation, String[] prerequis)
+    {
+        _tie.ajoutPrerequis( nomFormation,  prerequis);
+    }
+
 }

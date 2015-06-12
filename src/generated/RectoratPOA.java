@@ -33,6 +33,8 @@ public abstract class RectoratPOA extends org.omg.PortableServer.Servant
     static {
             operationMap.put("_get_nomRectorat",
                     new Operation__get_nomRectorat());
+            operationMap.put("ajoutPrerequis",
+                    new Operation_ajoutPrerequis());
             operationMap.put("deliberationJury",
                     new Operation_deliberationJury());
             operationMap.put("envoyerDecisionCandidatureRectorat",
@@ -241,6 +243,20 @@ public abstract class RectoratPOA extends org.omg.PortableServer.Servant
         return _output;
     }
 
+    private org.omg.CORBA.portable.OutputStream _invoke_ajoutPrerequis(
+            final org.omg.CORBA.portable.InputStream _is,
+            final org.omg.CORBA.portable.ResponseHandler handler) {
+        org.omg.CORBA.portable.OutputStream _output;
+        String arg0_in = _is.read_string();
+        String[] arg1_in = generated.ListePrerequisHelper.read(_is);
+
+        ajoutPrerequis(arg0_in, arg1_in);
+
+        _output = handler.createReply();
+
+        return _output;
+    }
+
     // operation classes
     private abstract static class AbstractOperation {
         protected abstract org.omg.CORBA.portable.OutputStream invoke(
@@ -346,6 +362,16 @@ public abstract class RectoratPOA extends org.omg.PortableServer.Servant
                 final org.omg.CORBA.portable.InputStream _is,
                 final org.omg.CORBA.portable.ResponseHandler handler) {
             return target._invoke_getFicheEtudiant(_is, handler);
+        }
+    }
+
+    private static final class Operation_ajoutPrerequis extends AbstractOperation
+    {
+        protected org.omg.CORBA.portable.OutputStream invoke(
+                final RectoratPOA target,
+                final org.omg.CORBA.portable.InputStream _is,
+                final org.omg.CORBA.portable.ResponseHandler handler) {
+            return target._invoke_ajoutPrerequis(_is, handler);
         }
     }
 

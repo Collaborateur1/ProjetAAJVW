@@ -34,6 +34,8 @@ module PostLicence {
 	
 	typedef sequence<Resultat> ListeNotes;
 	
+	typedef sequence<string> ListePrerequis;
+	
 	struct dossierEtudiant {
 		Etudiant etu;
 		ListeNotes listnotes;
@@ -168,6 +170,7 @@ module PostLicence {
 		
 		boolean inscriptionEtudiant(in string ine, in string mdp)raises(DonneesInvalides);
 		
+		
 	};
 
 
@@ -245,6 +248,9 @@ interface Universite {
 		//Quand un étudiant s'inscrit on récupere son profil pour le mettre dans gestion des profils ici
 		//appelé par GDP
 		Etudiant getFicheEtudiant(in string ine)raises(DonneesInvalides);
+		
+		//Ajout des prerequis
+		void ajoutPrerequis (in string nomFormation, in ListePrerequis prerequis);
 	};
 
 

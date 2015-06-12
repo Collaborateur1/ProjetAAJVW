@@ -63,4 +63,9 @@ public interface RectoratOperations
     public generated.Etudiant getFicheEtudiant(String ine)
         throws generated.DonneesInvalides;
 
+    /**
+     * Operation ajoutPrerequis
+     */
+    public void ajoutPrerequis(String nomFormation, String[] prerequis);
+
 }
