@@ -189,4 +189,53 @@ public class _LoadBalancerEtudiantStub extends org.omg.CORBA.portable.ObjectImpl
         }
     }
 
+    /**
+     * Operation getAllNumGDV
+     */
+    public short[] getAllNumGDV()
+    {
+        while(true)
+        {
+            if (!this._is_local())
+            {
+                org.omg.CORBA.portable.InputStream _input = null;
+                try
+                {
+                    org.omg.CORBA.portable.OutputStream _output = this._request("getAllNumGDV",true);
+                    _input = this._invoke(_output);
+                    short[] _arg_ret = generated.seqNumeroGDVHelper.read(_input);
+                    return _arg_ret;
+                }
+                catch(org.omg.CORBA.portable.RemarshalException _exception)
+                {
+                    continue;
+                }
+                catch(org.omg.CORBA.portable.ApplicationException _exception)
+                {
+                    String _exception_id = _exception.getId();
+                    throw new org.omg.CORBA.UNKNOWN("Unexpected User Exception: "+ _exception_id);
+                }
+                finally
+                {
+                    this._releaseReply(_input);
+                }
+            }
+            else
+            {
+                org.omg.CORBA.portable.ServantObject _so = _servant_preinvoke("getAllNumGDV",_opsClass);
+                if (_so == null)
+                   continue;
+                generated.LoadBalancerEtudiantOperations _self = (generated.LoadBalancerEtudiantOperations) _so.servant;
+                try
+                {
+                    return _self.getAllNumGDV();
+                }
+                finally
+                {
+                    _servant_postinvoke(_so);
+                }
+            }
+        }
+    }
+
 }

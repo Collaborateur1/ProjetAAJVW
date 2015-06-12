@@ -9,7 +9,6 @@ package graphique;
  */
 /*
 Liste des Boutons:
-
 bouton "recherche" jButton3
 bouton  "->Fair un voeu->" jButton2
 bouton "modifier" jButton7
@@ -26,13 +25,10 @@ bouton a cocher "psyco" jCheckBox15
 Le champs pour rentrer les recherche jTextfield1
 la liste qui affiche les recherches  jList1
 la liste qui affiche les voeux choisie  jList2
-
 champ Nom :jLabel3
  prenom : jLabel6
  adresse : jLabel7
  mail  : jLabel5
-
-
  */
 
 import generated.DonneesInvalides;

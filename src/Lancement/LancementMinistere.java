@@ -37,7 +37,6 @@ public class LancementMinistere {
 			
 		ministere.depotDesFormationsRectorat(fr0);
 		
-		LancementVague.ajouterMinistereIMPL(ministere);
 		
 		System.out.println("ministere  operationel");
 		orb.run();

@@ -20,6 +20,8 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
+import javax.swing.JButton;
+
 import generated.Etudiant;
 import graphique.Client;
 import graphique.SocialNetworkIHM;
@@ -75,6 +77,7 @@ public class EtudiantIMPl extends IEtudiantPOA{
 			i++;
 		}
 	}
+
 
 
 	/*************Fonction rajouter****************/
@@ -210,6 +213,7 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		}
 		return false;
 	}
+
 	@Override
 	public void lancementVague(short numero) {
 		// TODO Auto-generated method stub
@@ -225,6 +229,7 @@ public class EtudiantIMPl extends IEtudiantPOA{
 
 	public static void main(String[] args) throws RemoteException, InvalidName, AdapterInactive {
 
+
 		EtudiantIMPl etu=new EtudiantIMPl();
 		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(new String[0],null);
 		etu.setPOA(orb);
@@ -232,5 +237,6 @@ public class EtudiantIMPl extends IEtudiantPOA{
 
 		orb.run();
 	}
+
 
 }

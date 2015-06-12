@@ -37,6 +37,7 @@ import generated.etatvoeux;
 public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	
 	short numGDV;
+	boolean repondreVoeux=false;
 	
 	Hashtable<String,Formation>ListeFormation;
 	Hashtable<String,IEtudiant>ListeEtudiant;
@@ -180,6 +181,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	}
 	
 
+
 	@Override
 	public Voeu[] modifierVoeu(String ine, short numeroVoeu, short ordre)
 			throws DonneesInvalides, UtilisationInterdite {
@@ -292,6 +294,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		return false;
 	}
 
+
 	@Override
 	public void lancementVague(short numero) {
 		// TODO Auto-generated method stub
@@ -336,7 +339,13 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	}
 	
 
-	
+
+	/**************Fonction générer***************/
+
+	public void période1()
+	{
+		
+	}
 
 
 }
