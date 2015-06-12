@@ -280,7 +280,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 				String unAdmis =(String) ineAdmis.nextElement(); 
 				voeuEtu = ListeVoeux.get(unAdmis).get(nomFormationCourante);
 				voeuEtu.etatVoeu = etatvoeux.accepter;
-				/*if (DossierEtudiant.containsKey(unAdmis)){
+				if (DossierEtudiant.containsKey(unAdmis)){
 					try {
 						recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(unAdmis).etu, voeuEtu);
 					} catch (DonneesInvalides e) {
@@ -289,20 +289,20 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 					}
 				}
 				else{
-					 {
+					try{
 						recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(unAdmis).etu, voeuEtu);
 					} catch (DonneesInvalides e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}*/
+				}
 					
 			}
 			//Maj etatVoeu etudiant listeAttente
 			for(int i=0; i<ineAttente.size();i++){
 				voeuEtu = ListeVoeux.get(ineAttente.get(i)).get(nomFormationCourante);
 				voeuEtu.etatVoeu = etatvoeux.listeDattente;
-				/*if (DossierEtudiant.containsKey(ineAttente.get(i))){
+				if (DossierEtudiant.containsKey(ineAttente.get(i))){
 					try {
 						recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(ineAttente.get(i)).etu, voeuEtu);
 					} catch (DonneesInvalides e) {
@@ -317,7 +317,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}*/
+				}
 				
 			}
 			
@@ -353,7 +353,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 					voeuEtu = ListeVoeux.get(ListeDattente.get(nomFormationCourante).get(i)).get(nomFormationCourante);
 					//envoyer et mettre à jour le voeu seulement
 					voeuEtu.etatVoeu = etatvoeux.accepter;
-					/*if (DossierEtudiant.containsKey(ListeDattente.get(nomFormationCourante))){
+					if (DossierEtudiant.containsKey(ListeDattente.get(nomFormationCourante))){
 						try {
 							recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(ListeDattente.get(nomFormationCourante)).etu, voeuEtu);
 						} catch (DonneesInvalides e) {
@@ -368,7 +368,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					}*/
+					}
 				}
 		}
 			
@@ -387,13 +387,13 @@ public void ajouterEtudiant(String ine, dossierEtudiant dossier)
 	
 }
 
-public void ajouterFormation(Formation fr,ArrayList<String> frRequises)
+public void ajouterFormation(Formation fr,String[] frRequises)
 {
 	ArrayList<String>ListEtu = new ArrayList <String>();
 	
 	ListeCandidatureParFormation.put(fr.NomFormation,ListEtu);
 	ListeDesFormations.put(fr.NomFormation, fr);
-	//recto.
+	recto.ajoutPrerequis(fr.NomFormation, frRequises);
 	
 }
 
