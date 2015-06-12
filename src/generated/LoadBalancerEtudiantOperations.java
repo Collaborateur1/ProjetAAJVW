@@ -25,4 +25,9 @@ public interface LoadBalancerEtudiantOperations
     public void inscriptionGDP(generated.GestionDesProfils iorGestionDesProfils, short numero)
         throws generated.DonneesInvalides;
 
+    /**
+     * Operation getAllNumGDV
+     */
+    public short[] getAllNumGDV();
+
 }

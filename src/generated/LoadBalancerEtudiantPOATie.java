@@ -89,4 +89,12 @@ public class LoadBalancerEtudiantPOATie extends LoadBalancerEtudiantPOA
         _tie.inscriptionGDP( iorGestionDesProfils,  numero);
     }
 
+    /**
+     * Operation getAllNumGDV
+     */
+    public short[] getAllNumGDV()
+    {
+        return _tie.getAllNumGDV();
+    }
+
 }

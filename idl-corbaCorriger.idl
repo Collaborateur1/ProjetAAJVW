@@ -42,6 +42,8 @@ module PostLicence {
 	
 	typedef sequence<Formation> seqFormations;
 	
+	typedef sequence<short> seqNumeroGDV;
+	
  	
 	enum etatvoeux {soumis, nonValide, valide, accepter, refuser, listeDattente};
 	
@@ -296,6 +298,9 @@ interface Universite {
 		//Un serveur de GestionDesProfils
 		//--Appelé par GestionDesProfils s'inscrit avec un numero qui permettra a la GestionDesVoeux de le retrouver
 		void inscriptionGDP(in GestionDesProfils iorGestionDesProfils, in short numero) raises(DonneesInvalides); //(30)
+		
+		//--Appelé par Vague, pour connaitre toute les GDV
+		seqNumeroGDV getAllNumGDV();
 	};
 };
 
