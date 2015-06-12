@@ -5,8 +5,13 @@
  */
 package Lancement;
 
+import generated.GestionDesProfils;
+import generated.LoadBalancerEtudiant;
+import generated.LoadBalancerEtudiantHelper;
+
 import java.util.ArrayList;
 
+import outils.NamingServiceTool;
 import classeIMPL.EtudiantIMPl;
 import classeIMPL.GestionDesProfilsIMPL;
 import classeIMPL.GestionDesVoeuxIMPL;
@@ -23,10 +28,14 @@ public class LancementVague extends javax.swing.JFrame {
     /**
      * Creates new form Vague
      */
+	ArrayList<GestionDesProfils> gdp;
+	LoadBalancerEtudiant lbe;
 	
-	ArrayList<GestionDesVoeuxIMPL> gdv;
-	
-    public LancementVague(EtudiantIMPl etu) {
+    public LancementVague() {
+    	
+    	 lbe=LoadBalancerEtudiantHelper.narrow(NamingServiceTool.getReferenceIntoNS("LBE"));
+        
+    	
         initComponents();
     }
     
@@ -96,7 +105,7 @@ public class LancementVague extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        //gdp.lancementVague1();
+        Naming
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -135,7 +144,7 @@ public class LancementVague extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LancementVague(null).setVisible(true);
+                new LancementVague().setVisible(true);
             }
         });
     }
