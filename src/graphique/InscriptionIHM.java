@@ -170,7 +170,7 @@ public class InscriptionIHM extends javax.swing.JFrame {
         }else
         {
             jLabel7.setVisible(false);
-            
+            System.out.println(jTextField1.getText()+" test "+String.copyValueOf(jPasswordField1.getPassword()));
             if(etu.inscription(jTextField1.getText(), String.copyValueOf(jPasswordField1.getPassword())))
             {
             	jLabel10.setText("Vous pouver maintenant vous connecter");

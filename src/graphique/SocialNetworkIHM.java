@@ -147,13 +147,13 @@ jLabel4.setVisible(false);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("logo-apb.jpg"))); // NOI18N
 
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel3.setText("Copyright Â© 2014 . All rights reserved.");
+        jLabel3.setText("Copyright © 2014 . All rights reserved.");
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("minilogo.png"))); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(59, 89, 152));
-        jLabel7.setText("Admission post bac vous permet de continuer vos Ã©tude ");
+        jLabel7.setText("Admission post bac vous permet de continuer vos études ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
