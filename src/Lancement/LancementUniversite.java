@@ -87,7 +87,7 @@ public class LancementUniversite {
 		univ.ajouterEtudiant(etu2.ineEtudiant, detu2);
 		
 		System.out.println("etudiant 1 rajouter");
-		univ.ajouterFormation(fr);
+		//univ.ajouterFormation(fr);
 		
 		univ.envoyerCandidatureD(detu, etu.ineEtudiant, voeuEtu);
 		univ.envoyerCandidatureD(detu2, etu2.ineEtudiant, voeuEtu2);
@@ -105,8 +105,7 @@ public class LancementUniversite {
 		System.out.println("etat voeu etudiant G102 " +voeuEtu2.etatVoeu);
 		System.out.println("etat voeu etudiant G103: " +voeuEtu3.etatVoeu);
 		System.out.println("etat voeu etudiant G104: " +voeuEtu4.etatVoeu);
-		
-		LancementVague.ajouterUniversiteIMPL(univ);
+
 		
 		orb.run();
 

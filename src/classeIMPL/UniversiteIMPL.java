@@ -387,12 +387,13 @@ public void ajouterEtudiant(String ine, dossierEtudiant dossier)
 	
 }
 
-public void ajouterFormation(Formation fr)
+public void ajouterFormation(Formation fr,ArrayList<String> frRequises)
 {
 	ArrayList<String>ListEtu = new ArrayList <String>();
 	
 	ListeCandidatureParFormation.put(fr.NomFormation,ListEtu);
 	ListeDesFormations.put(fr.NomFormation, fr);
+	//recto.
 	
 }
 

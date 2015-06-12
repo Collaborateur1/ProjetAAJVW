@@ -42,7 +42,6 @@ public class LancementGDP {
 
 		 gdpimpl.setProfil(etu);
 		
-		LancementVague.ajouterGDP(gdpimpl);
 		orb.run();
 	}
 

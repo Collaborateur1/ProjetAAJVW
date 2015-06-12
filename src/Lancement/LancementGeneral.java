@@ -12,18 +12,6 @@ public class LancementGeneral {
 
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
-
-		Runnable r0 = new Runnable() {
-			public void run() {
-				LancementVague.main(null);
-			}
-		};
-
-		Thread t0=new Thread(r0);
-		t0.start();
-
-
-		Thread.sleep(1000);
 		
 		Runnable r1 = new Runnable() {
 			public void run() {
@@ -132,6 +120,15 @@ public class LancementGeneral {
 
 		Thread t5=new Thread(r5);
 		t5.start();
+		
+		Runnable r6 = new Runnable() {
+			public void run() {
+				LancementVague.main(null);
+			}
+		};
+
+		Thread t6=new Thread(r6);
+		t6.start();
 
 	}
 

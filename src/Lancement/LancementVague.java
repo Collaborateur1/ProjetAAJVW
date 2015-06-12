@@ -5,6 +5,8 @@
  */
 package Lancement;
 
+import java.util.ArrayList;
+
 import classeIMPL.EtudiantIMPl;
 import classeIMPL.GestionDesProfilsIMPL;
 import classeIMPL.GestionDesVoeuxIMPL;
@@ -21,35 +23,16 @@ public class LancementVague extends javax.swing.JFrame {
     /**
      * Creates new form Vague
      */
-	static GestionDesProfilsIMPL gdp;
-	static GestionDesVoeuxIMPL gdv;
-	static MinistereIMPL m;
-	static UniversiteIMPL u;
-	static RectoratIMPL r;
+	
+	ArrayList<GestionDesVoeuxIMPL> gdv;
 	
     public LancementVague(EtudiantIMPl etu) {
         initComponents();
     }
     
-    public static void ajouterGDP(GestionDesProfilsIMPL gdpp)
+    public void ajouterGDV(GestionDesVoeuxIMPL gdvp)
     {
-    	gdp = gdpp;
-    }
-    public static void ajouterGDV(GestionDesVoeuxIMPL gdvp)
-    {
-    	gdv = gdvp;
-    }
-    public static void ajouterMinistereIMPL(MinistereIMPL mp)
-    {
-    	m = mp;
-    }
-    public static void ajouterUniversiteIMPL(UniversiteIMPL up)
-    {
-    	u = up;
-    }
-    public static void ajouterRectoratIMPL(RectoratIMPL rp)
-    {
-    	r = rp;
+    	gdv.add(gdvp);
     }
 
     /**
@@ -113,7 +96,7 @@ public class LancementVague extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        gdp.lancementVague1();
+        //gdp.lancementVague1();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
