@@ -1,6 +1,7 @@
 package classeIMPL;
 
 
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 import org.omg.CORBA.ORB;
@@ -69,10 +70,18 @@ public class LBEtudiantIMPL extends LoadBalancerEtudiantPOA {
 	public GestionDesProfils[] getAllGDP() {
 		// TODO Auto-generated method stub
 		GestionDesProfils[] tabGDP = new GestionDesProfils[listGDP.size()];
-		for(int i=0;i<listGDP.size();i++)
-		{
-			tabGDP[i] = listGDP.get(i);
+		Enumeration<GestionDesProfils> lesGDP = listGDP.elements();
+		int i=0;
+		
+		while(lesGDP.hasMoreElements()){
+			
+			
+				tabGDP[i] = lesGDP.nextElement();
+			i++;
+			
 		}
+		
+		
 		return tabGDP;
 	}
 

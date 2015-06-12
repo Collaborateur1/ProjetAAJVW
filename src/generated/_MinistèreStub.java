@@ -72,7 +72,7 @@ public class _MinistèreStub extends org.omg.CORBA.portable.ObjectImpl
     /**
      * Operation depotDesFormationsRectorat
      */
-    public void depotDesFormationsRectorat(generated.Formation[] ListeFormation)
+    public void depotDesFormationsRectorat(generated.Formation Formation)
     {
         while(true)
         {
@@ -82,7 +82,7 @@ public class _MinistèreStub extends org.omg.CORBA.portable.ObjectImpl
                 try
                 {
                     org.omg.CORBA.portable.OutputStream _output = this._request("depotDesFormationsRectorat",true);
-                    generated.seqFormationsHelper.write(_output,ListeFormation);
+                    generated.FormationHelper.write(_output,Formation);
                     _input = this._invoke(_output);
                     return;
                 }
@@ -108,7 +108,7 @@ public class _MinistèreStub extends org.omg.CORBA.portable.ObjectImpl
                 generated.MinistèreOperations _self = (generated.MinistèreOperations) _so.servant;
                 try
                 {
-                    _self.depotDesFormationsRectorat( ListeFormation);
+                    _self.depotDesFormationsRectorat( Formation);
                     return;
                 }
                 finally

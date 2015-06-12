@@ -23,6 +23,8 @@ public class NamingServiceTool {
 		
 		try {
 			org.omg.CosNaming.NamingContext nameRoot = org.omg.CosNaming.NamingContextHelper.narrow(orb.resolve_initial_references("NameService"));
+			//org.omg.CosNaming.NamingContext nameRoot2 = org.omg.CosNaming.NamingContextHelper.narrow(orb.string_to_object("corbaloc:iiop:1.2@192.168.56.1:2001/NameService"));
+			
 			// Recherche de l'objet
 			org.omg.CosNaming.NameComponent[] Obj = new org.omg.CosNaming.NameComponent[1];
 			Obj[0] = new org.omg.CosNaming.NameComponent(nameIntoNS,"");

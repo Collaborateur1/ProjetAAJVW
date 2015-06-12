@@ -1,5 +1,7 @@
 package Lancement;
 
+import java.util.ArrayList;
+
 import generated.DonneesInvalides;
 import generated.Etudiant;
 import generated.Formation;
@@ -33,7 +35,7 @@ public class LancementUniversite {
 		dossierEtudiant detu4 =dossetu.creerDossierEtudiant("merde", "PD", "G104");
 		univ.ajouterEtudiant("G104", detu4);
 		
-		Formation fr= new Formation("jespere"," NomFormation", "TypeFormation", "nomRectorat", (short)2);
+		Formation fr= new Formation("UT3"," NomFormation", "TypeFormation", "rectorat", (short)2);
 		
 		Voeu voeuEtu = new Voeu(fr,etatvoeux.soumis,decision.NONutilse,(short)1);
 		Voeu voeuEtu2 = new Voeu(fr,etatvoeux.soumis, decision.NONutilse,(short)1);
@@ -87,7 +89,9 @@ public class LancementUniversite {
 		univ.ajouterEtudiant(etu2.ineEtudiant, detu2);
 		
 		System.out.println("etudiant 1 rajouter");
-		//univ.ajouterFormation(fr);
+		String []ListePrereq = new String[1];
+		ListePrereq[0]= "Miage";
+		univ.ajouterFormation(fr,ListePrereq);
 		
 		univ.envoyerCandidatureD(detu, etu.ineEtudiant, voeuEtu);
 		univ.envoyerCandidatureD(detu2, etu2.ineEtudiant, voeuEtu2);

@@ -781,6 +781,16 @@ public class Client extends javax.swing.JFrame {
 
 		} 
 	}
+	
+	public void miseAjourJlist2(ArrayList array)
+	{
+		if(array!=null)
+		{
+			
+			jList2.setListData(array.toArray());
+
+		} 
+	}
 	public void deconnexion()
 	{
 

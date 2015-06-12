@@ -60,30 +60,13 @@ for(int i=0;i<this.ListeFormation.size();i++)
 
 		return Forma;
 	}
-
+	
 	@Override
-	public void depotDesFormationsRectorat(Formation[] ListeFormation) {
+	public void depotDesFormationsRectorat(Formation Formation) {
 		// TODO Auto-generated method stub
-		//A chaque fois que l'on rajoute des formations
-		//on crée un new tableau on copi les anciennes et les nouvelle données
-		//et on remplace le tableau courant
-		//pas tres jojo..faudrai modifier IDL pour pa utilisé de Formation[]
-		//sa correspond a la liste de formation que l'on a créé
-		//elle n'est pas pratique dutt..
-
-	
-		int indice=ListeFormation.length;
-	
-		for (int i=0; i<indice;i++)
-		{
-			this.ListeFormation.add(ListeFormation[i]);
-		}
-        
-		Formation fr=(Formation)this.ListeFormation.get(2);
-		
-
+		this.ListeFormation.add(Formation);
 	}
-
+	
 	@Override
 	public void inscriptionRectorat(String nomRectorat, Rectorat iorRectorat)throws DonneesInvalides {
 		// TODO Auto-generated method stub
@@ -146,6 +129,8 @@ for(int i=0;i<this.ListeFormation.size();i++)
 	public static void main(String[] args) {
 		
 	}
+
+
 
 
 

@@ -247,7 +247,7 @@ public abstract class RectoratPOA extends org.omg.PortableServer.Servant
             final org.omg.CORBA.portable.InputStream _is,
             final org.omg.CORBA.portable.ResponseHandler handler) {
         org.omg.CORBA.portable.OutputStream _output;
-        String arg0_in = _is.read_string();
+        generated.Formation arg0_in = generated.FormationHelper.read(_is);
         String[] arg1_in = generated.ListePrerequisHelper.read(_is);
 
         ajoutPrerequis(arg0_in, arg1_in);

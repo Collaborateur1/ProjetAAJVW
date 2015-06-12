@@ -550,7 +550,7 @@ public class _RectoratStub extends org.omg.CORBA.portable.ObjectImpl
     /**
      * Operation ajoutPrerequis
      */
-    public void ajoutPrerequis(String nomFormation, String[] prerequis)
+    public void ajoutPrerequis(generated.Formation formation, String[] prerequis)
     {
         while(true)
         {
@@ -560,7 +560,7 @@ public class _RectoratStub extends org.omg.CORBA.portable.ObjectImpl
                 try
                 {
                     org.omg.CORBA.portable.OutputStream _output = this._request("ajoutPrerequis",true);
-                    _output.write_string(nomFormation);
+                    generated.FormationHelper.write(_output,formation);
                     generated.ListePrerequisHelper.write(_output,prerequis);
                     _input = this._invoke(_output);
                     return;
@@ -587,7 +587,7 @@ public class _RectoratStub extends org.omg.CORBA.portable.ObjectImpl
                 generated.RectoratOperations _self = (generated.RectoratOperations) _so.servant;
                 try
                 {
-                    _self.ajoutPrerequis( nomFormation,  prerequis);
+                    _self.ajoutPrerequis( formation,  prerequis);
                     return;
                 }
                 finally

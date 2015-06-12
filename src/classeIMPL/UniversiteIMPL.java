@@ -83,7 +83,7 @@ public UniversiteIMPL(String nomUniv, String nomAcad,org.omg.CORBA.ORB orb) thro
 	DossierCandidatureEtudiant=new Hashtable<String,dossierEtudiant>();
 	recto=ministere.rectoratRattacherUniv(nomAcad);
 	recto.inscriptionUniv(UniversiteHelper.narrow(rootPOA.servant_to_reference(this)),nomUniv);
-	
+
 	
 }
 
@@ -281,7 +281,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 				voeuEtu = ListeVoeux.get(unAdmis).get(nomFormationCourante);
 				voeuEtu.etatVoeu = etatvoeux.accepter;
 				if (DossierEtudiant.containsKey(unAdmis)){
-					try {
+					/*try {
 						recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(unAdmis).etu, voeuEtu);
 					} catch (DonneesInvalides e) {
 						// TODO Auto-generated catch block
@@ -294,7 +294,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 					} catch (DonneesInvalides e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
+					}*/
 				}
 					
 			}
@@ -303,7 +303,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 				voeuEtu = ListeVoeux.get(ineAttente.get(i)).get(nomFormationCourante);
 				voeuEtu.etatVoeu = etatvoeux.listeDattente;
 				if (DossierEtudiant.containsKey(ineAttente.get(i))){
-					try {
+					/*try {
 						recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(ineAttente.get(i)).etu, voeuEtu);
 					} catch (DonneesInvalides e) {
 						// TODO Auto-generated catch block
@@ -316,7 +316,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 					} catch (DonneesInvalides e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
+					}*/
 				}
 				
 			}
@@ -362,12 +362,12 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 						}
 					}
 					else{
-						try {
+						/*try {
 							recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(ListeDattente.get(nomFormationCourante)).etu, voeuEtu);
 						} catch (DonneesInvalides e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}
+						}*/
 					}
 				}
 		}
@@ -393,7 +393,11 @@ public void ajouterFormation(Formation fr,String[] frRequises)
 	
 	ListeCandidatureParFormation.put(fr.NomFormation,ListEtu);
 	ListeDesFormations.put(fr.NomFormation, fr);
-	recto.ajoutPrerequis(fr.NomFormation, frRequises);
+	
+	
+	recto.ajoutPrerequis(fr, frRequises);
+	
+	
 	
 }
 

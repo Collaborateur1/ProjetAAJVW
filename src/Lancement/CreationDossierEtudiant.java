@@ -21,7 +21,7 @@ public class CreationDossierEtudiant {
 	public static dossierEtudiant creerDossierEtudiant(String nom, String prenom, String ine)
 	{
 		Formation f= new Formation("UT3","MIAGE", "Info-Gestion", "Midi-pyrenees", (short)30);
-		Etudiant etu=new Etudiant(nom,prenom,ine,"UT3 Paul sabatier","adresse test",f);
+		Etudiant etu=new Etudiant(nom,prenom,ine,"UT3","adresse test",f);
 		
 		Random rand = new Random();
 		int note = 0, classement =0,nbResultat = 6;

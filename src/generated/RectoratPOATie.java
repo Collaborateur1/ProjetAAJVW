@@ -150,9 +150,9 @@ public class RectoratPOATie extends RectoratPOA
     /**
      * Operation ajoutPrerequis
      */
-    public void ajoutPrerequis(String nomFormation, String[] prerequis)
+    public void ajoutPrerequis(generated.Formation formation, String[] prerequis)
     {
-        _tie.ajoutPrerequis( nomFormation,  prerequis);
+        _tie.ajoutPrerequis( formation,  prerequis);
     }
 
 }

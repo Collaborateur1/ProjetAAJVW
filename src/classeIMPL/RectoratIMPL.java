@@ -12,7 +12,9 @@ import generated.RectoratPOA;
 import generated.RectoratPOATie;
 import generated.Universite;
 import generated.Voeu;
+import generated.decision;
 import generated.dossierEtudiant;
+import generated.etatvoeux;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -61,6 +63,7 @@ public class RectoratIMPL extends RectoratPOA {
 	public RectoratIMPL(org.omg.CORBA.ORB orb,String nomrectorat) throws DonneesInvalides, ServantNotActive, WrongPolicy, InvalidName, AdapterInactive {
 		super();
 		ListeListUniversite = new Hashtable<String,Universite>();
+		ValidationFormation=new Hashtable<String, ArrayList<String>>();
 		MonMinistere= MinistèreHelper.narrow(
 				NamingServiceTool.getReferenceIntoNS("Ministere"));
 		System.out.println("Reférérence ministere recuperee" );
@@ -114,20 +117,23 @@ public class RectoratIMPL extends RectoratPOA {
 			throws DonneesInvalides {
 		// TODO Auto-generated method stub
 		dossierEtudiant dossierEtu;
+		System.out.println("888" );
 		Universite univEtudiant =GetUniversiteDansRecorat(etu.nomUniv);
+		
 		String NomFormationEtudiant;
 		String NomFormationVoeux;
-
+		System.out.println("marche" );
 
 		for(int i=0;i<lv.length;i++)
 		{
 			/*histoire de vous faciliter la compréhention*/
 			NomFormationEtudiant=etu.formation.NomFormation;
 			NomFormationVoeux=lv[i].formationVoeu.NomFormation;
-
+			System.out.println("000" );
 			//test si université est dans le rectorat de l'étudiant
 			if(lv[i].formationVoeu.nomRectorat.equals(this.nomRectorat))
 			{
+				System.out.println("111" );
 				//Avant tout! la candidature est elle valide?
 				if(CandidatureConforme(etu.formation.NomFormation,lv[i].formationVoeu.NomFormation))
 				{	
@@ -149,6 +155,9 @@ public class RectoratIMPL extends RectoratPOA {
 				}
 				else
 				{
+					System.out.println("222" );
+					lv[i].etatVoeu = etatvoeux.nonValide;
+					LesGDV.get("1").transmettreDecisionCandidatureRectorat(etu.ineEtudiant, lv[i]);
 					//il faut la renvoyer a létudiant! A toi de jouer ;)
 				}
 			}
@@ -156,10 +165,13 @@ public class RectoratIMPL extends RectoratPOA {
 			else
 			{
 
-
+				System.out.println("amel theori" );
 				Rectorat recorat_a_Joindre=MonMinistere.recupererRectorat(lv[i].formationVoeu.nomRectorat);
+				System.out.println("amel theori2" );
 				dossierEtu=univEtudiant.madDossier(etu.ineEtudiant);
+				System.out.println("amel theori3" );
 				recorat_a_Joindre.transfertDossier(dossierEtu, lv[i]);
+				System.out.println("amel theori4" );
 
 
 
@@ -309,14 +321,19 @@ public class RectoratIMPL extends RectoratPOA {
     
 	}
 
+
+
 	@Override
-	public void ajoutPrerequis(String nomFormation, String[] prerequis) {
+	public void ajoutPrerequis(Formation formation, String[] prerequis) {
 		// TODO Auto-generated method stub
+		
 		ArrayList<String> Prereq = new ArrayList<String>();
 		for(int i =0 ; i<prerequis.length; i++){
 			Prereq.add(prerequis[i]);
 		}
-		ValidationFormation.put(nomFormation, Prereq);	
+		
+		ValidationFormation.put(formation.NomFormation, Prereq);
+		MonMinistere.depotDesFormationsRectorat(formation);
 	}
 
 	

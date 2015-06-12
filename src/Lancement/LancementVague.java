@@ -104,11 +104,13 @@ public class LancementVague extends javax.swing.JFrame {
         GestionDesProfils[] tabGDP = lbe.getAllGDP();
         GestionDesProfils gdp;
         GestionDesVoeux gdv;
-        
+        System.out.println("test"+tabGDP.length);
         for(int i=0;i<tabGDP.length;i++)
         {
         	gdp = tabGDP[i];
+        	gdp.getGDV();
         	gdv = gdp.getGDV();
+        	
         	gdv.lancementVague((short) 1);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

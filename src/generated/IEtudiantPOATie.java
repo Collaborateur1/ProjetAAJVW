@@ -73,9 +73,9 @@ public class IEtudiantPOATie extends IEtudiantPOA
     /**
      * Operation majEtatVoeux
      */
-    public void majEtatVoeux(generated.Voeu UnVoeu)
+    public void majEtatVoeux(generated.Voeu[] Voeux)
     {
-        _tie.majEtatVoeux( UnVoeu);
+        _tie.majEtatVoeux( Voeux);
     }
 
     /**

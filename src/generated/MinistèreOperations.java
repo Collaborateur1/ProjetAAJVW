@@ -15,7 +15,7 @@ public interface MinistèreOperations
     /**
      * Operation depotDesFormationsRectorat
      */
-    public void depotDesFormationsRectorat(generated.Formation[] ListeFormation);
+    public void depotDesFormationsRectorat(generated.Formation Formation);
 
     /**
      * Operation inscriptionRectorat

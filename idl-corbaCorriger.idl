@@ -77,7 +77,7 @@ module PostLicence {
 		//Lorsqu'un rectorat aura transmis les réponses des voeux des étudiants, la GDV appelera cette méthode pour 
 		//mettre a jour les voeux de l'étudiant dans sont InterfaceEtudiant
 		//--Appelé par GestionDesVoeux
-		void majEtatVoeux(in Voeu UnVoeu); //(2)
+		void majEtatVoeux(in seqVoeux Voeux); //(2)
 
 		void lancementVague(in short numero);
 
@@ -251,7 +251,7 @@ interface Universite {
 		Etudiant getFicheEtudiant(in string ine)raises(DonneesInvalides);
 		
 		//Ajout des prerequis
-		void ajoutPrerequis (in string nomFormation, in ListePrerequis prerequis);
+		void ajoutPrerequis (in Formation formation, in ListePrerequis prerequis);
 	};
 
 
@@ -264,7 +264,7 @@ interface Universite {
 		//Permet de donner au minister la liste des formations dispensé par les universités du rectorat appelé
 		//--Appelé par Rectorat
 		/**Modif*/
-		void depotDesFormationsRectorat(in seqFormations ListeFormation); //(19)
+		void depotDesFormationsRectorat(in Formation Formation); //(19)
 		
 		//permet au ministère d'avoir la liste des rectorat
 		//--Appelé par Rectorat
@@ -280,6 +280,7 @@ interface Universite {
 		
 		/**modif**/
 		void deliberationJury();
+		
 	};
 
 	//Une Université possède un ensemble de Formation

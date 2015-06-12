@@ -15,7 +15,7 @@ public interface IEtudiantOperations
     /**
      * Operation majEtatVoeux
      */
-    public void majEtatVoeux(generated.Voeu UnVoeu);
+    public void majEtatVoeux(generated.Voeu[] Voeux);
 
     /**
      * Operation lancementVague

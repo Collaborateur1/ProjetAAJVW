@@ -68,7 +68,7 @@ public abstract class MinistèrePOA extends org.omg.PortableServer.Servant
             final org.omg.CORBA.portable.InputStream _is,
             final org.omg.CORBA.portable.ResponseHandler handler) {
         org.omg.CORBA.portable.OutputStream _output;
-        generated.Formation[] arg0_in = generated.seqFormationsHelper.read(_is);
+        generated.Formation arg0_in = generated.FormationHelper.read(_is);
 
         depotDesFormationsRectorat(arg0_in);
 

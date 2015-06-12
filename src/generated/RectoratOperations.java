@@ -66,6 +66,6 @@ public interface RectoratOperations
     /**
      * Operation ajoutPrerequis
      */
-    public void ajoutPrerequis(String nomFormation, String[] prerequis);
+    public void ajoutPrerequis(generated.Formation formation, String[] prerequis);
 
 }

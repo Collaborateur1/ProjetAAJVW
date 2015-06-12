@@ -73,9 +73,9 @@ public class MinistèrePOATie extends MinistèrePOA
     /**
      * Operation depotDesFormationsRectorat
      */
-    public void depotDesFormationsRectorat(generated.Formation[] ListeFormation)
+    public void depotDesFormationsRectorat(generated.Formation Formation)
     {
-        _tie.depotDesFormationsRectorat( ListeFormation);
+        _tie.depotDesFormationsRectorat( Formation);
     }
 
     /**

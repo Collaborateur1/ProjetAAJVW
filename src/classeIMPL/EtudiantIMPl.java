@@ -63,19 +63,10 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	}
 
 	@Override
-	public void majEtatVoeux(Voeu UnVoeu) {
+	public void majEtatVoeux(Voeu[] Voeux) {
 		// TODO Auto-generated method stub
-		ListeVoeuxEtu.get(UnVoeu.numeroVoeu).etatVoeu = UnVoeu.etatVoeu;
-		int i=0;
-		while(i<5)	
-		{
-			if(ListeVoeuxEtu.get(i).numeroVoeu==UnVoeu.numeroVoeu)
-			{
-				ListeVoeuxEtu.set(i,UnVoeu);
-				i=5;
-			}
-			i++;
-		}
+		
+		cl.miseAjourJlist2(Voeux);
 	}
 
 
@@ -237,6 +228,8 @@ public class EtudiantIMPl extends IEtudiantPOA{
 
 		orb.run();
 	}
+
+	
 
 
 }

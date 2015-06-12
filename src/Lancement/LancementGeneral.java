@@ -1,5 +1,7 @@
 package Lancement;
 
+import java.rmi.RemoteException;
+
 import generated.DonneesInvalides;
 
 import org.omg.CORBA.ORBPackage.InvalidName;
@@ -7,6 +9,8 @@ import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantAlreadyActive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
+
+import classeIMPL.EtudiantIMPl;
 
 public class LancementGeneral {
 
@@ -129,6 +133,24 @@ public class LancementGeneral {
 
 		Thread t6=new Thread(r6);
 		t6.start();
+		
+		
+		Thread.sleep(1000);
+		
+		Runnable r7 = new Runnable() {
+			public void run() {
+				try {
+					EtudiantIMPl.main(null);
+				} catch (RemoteException | InvalidName | AdapterInactive e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		};
+
+		Thread t7=new Thread(r7);
+		t7.start();
+		
 
 	}
 
