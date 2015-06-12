@@ -300,14 +300,22 @@ public class RectoratIMPL extends RectoratPOA {
 
 	}
 	
-	public void setValidationFormation(String nomFormation, ArrayList<String> prerequis){
-		ValidationFormation.put(nomFormation, prerequis);		
-	}
+
 
 	public static void main(String[] args) throws DonneesInvalides, ServantNotActive, WrongPolicy, InvalidName {
 
   
     
+	}
+
+	@Override
+	public void ajoutPrerequis(String nomFormation, String[] prerequis) {
+		// TODO Auto-generated method stub
+		ArrayList<String> Prereq = new ArrayList<String>();
+		for(int i =0 ; i<prerequis.length; i++){
+			Prereq.add(prerequis[i]);
+		}
+		ValidationFormation.put(nomFormation, Prereq);	
 	}
 
 	

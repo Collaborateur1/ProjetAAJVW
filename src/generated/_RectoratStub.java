@@ -547,4 +547,55 @@ public class _RectoratStub extends org.omg.CORBA.portable.ObjectImpl
         }
     }
 
+    /**
+     * Operation ajoutPrerequis
+     */
+    public void ajoutPrerequis(String nomFormation, String[] prerequis)
+    {
+        while(true)
+        {
+            if (!this._is_local())
+            {
+                org.omg.CORBA.portable.InputStream _input = null;
+                try
+                {
+                    org.omg.CORBA.portable.OutputStream _output = this._request("ajoutPrerequis",true);
+                    _output.write_string(nomFormation);
+                    generated.ListePrerequisHelper.write(_output,prerequis);
+                    _input = this._invoke(_output);
+                    return;
+                }
+                catch(org.omg.CORBA.portable.RemarshalException _exception)
+                {
+                    continue;
+                }
+                catch(org.omg.CORBA.portable.ApplicationException _exception)
+                {
+                    String _exception_id = _exception.getId();
+                    throw new org.omg.CORBA.UNKNOWN("Unexpected User Exception: "+ _exception_id);
+                }
+                finally
+                {
+                    this._releaseReply(_input);
+                }
+            }
+            else
+            {
+                org.omg.CORBA.portable.ServantObject _so = _servant_preinvoke("ajoutPrerequis",_opsClass);
+                if (_so == null)
+                   continue;
+                generated.RectoratOperations _self = (generated.RectoratOperations) _so.servant;
+                try
+                {
+                    _self.ajoutPrerequis( nomFormation,  prerequis);
+                    return;
+                }
+                finally
+                {
+                    _servant_postinvoke(_so);
+                }
+            }
+        }
+    }
+
 }
