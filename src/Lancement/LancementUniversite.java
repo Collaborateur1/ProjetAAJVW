@@ -87,7 +87,7 @@ public class LancementUniversite {
 		univ.ajouterEtudiant(etu2.ineEtudiant, detu2);
 		
 		System.out.println("etudiant 1 rajouter");
-		univ.ajouterFormation(fr);
+		//univ.ajouterFormation(fr);
 		
 		univ.envoyerCandidatureD(detu, etu.ineEtudiant, voeuEtu);
 		univ.envoyerCandidatureD(detu2, etu2.ineEtudiant, voeuEtu2);
