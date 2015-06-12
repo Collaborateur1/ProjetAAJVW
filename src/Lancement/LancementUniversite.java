@@ -29,7 +29,7 @@ public class LancementUniversite {
 		UniversiteIMPL univ= new UniversiteIMPL("UT3","rectorat",orb);
 		System.out.println("univ UT3 operationel");
 		
-
+		
 		dossierEtudiant detu3 = dossetu.creerDossierEtudiant("Dupond", "jean", "G103");
 		univ.ajouterEtudiant("G103", detu3);
 		dossierEtudiant detu4 =dossetu.creerDossierEtudiant("merde", "PD", "G104");
@@ -37,34 +37,7 @@ public class LancementUniversite {
 		
 		Formation fr= new Formation("UT3"," NomFormation", "TypeFormation", "rectorat", (short)2);
 		
-		Voeu voeuEtu = new Voeu(fr,etatvoeux.soumis,decision.NONutilse,(short)1);
-		Voeu voeuEtu2 = new Voeu(fr,etatvoeux.soumis, decision.NONutilse,(short)1);
-		Voeu voeuEtu3 = new Voeu(fr,etatvoeux.soumis,decision.NONutilse,(short)1);
-		Voeu voeuEtu4 = new Voeu(fr,etatvoeux.soumis, decision.NONutilse,(short)1);
 		
-		Etudiant etu=new Etudiant("patric","francoi","G101","UT3","la rue",fr);
-		
-
-		
-		Resultat result=new Resultat((short)1,15, (short)10,(short)5);
-		Resultat result2=new Resultat((short)2,14, (short)10,(short)4);
-		Resultat result3=new Resultat((short)3,13, (short)10,(short)6);
-		Resultat result4=new Resultat((short)4,16, (short)10,(short)1);
-		Resultat result5=new Resultat((short)5,12, (short)10,(short)10);
-		Resultat result6=new Resultat((short)6,11, (short)10,(short)9);
-		
-		Resultat[] resultt = new Resultat[6];
-		
-			resultt[0]=result;
-			resultt[1]=result2;
-			resultt[2]=result3;
-			resultt[3]=result4;
-			resultt[4]=result5;
-			resultt[5]=result6;
-			
-		
-		dossierEtudiant detu=new dossierEtudiant(etu, resultt);
-		univ.ajouterEtudiant(etu.ineEtudiant, detu);
 		System.out.println("etudiant 2 rajouter");
 		
 		Etudiant etu2=new Etudiant("toto","titi","G102","UT3","lavenue",fr);
@@ -88,29 +61,41 @@ public class LancementUniversite {
 		dossierEtudiant detu2=new dossierEtudiant(etu2, resultats);
 		univ.ajouterEtudiant(etu2.ineEtudiant, detu2);
 		
-		System.out.println("etudiant 1 rajouter");
+		System.out.println("etudiant 2 rajouter");
 		String []ListePrereq = new String[1];
-		ListePrereq[0]= "Miage";
+		ListePrereq[0]= "NomFormation";
 		univ.ajouterFormation(fr,ListePrereq);
+	
+		UniversiteIMPL univ2= new UniversiteIMPL("UT1","rectorat2",orb);
+		System.out.println("univ UT1 operationel");
 		
-		univ.envoyerCandidatureD(detu, etu.ineEtudiant, voeuEtu);
-		univ.envoyerCandidatureD(detu2, etu2.ineEtudiant, voeuEtu2);
-	    univ.envoyerCandidatureD(detu3, "G103", voeuEtu3);
-	    univ.envoyerCandidatureD(detu4, "G104", voeuEtu4);
-	    univ.deliberationJury();
-		univ.affichage();
-		System.out.println("etat voeu etudiant G101: " +voeuEtu.etatVoeu);
-		System.out.println("etat voeu etudiant G102 " +voeuEtu2.etatVoeu);
-		System.out.println("etat voeu etudiant G103: " +voeuEtu3.etatVoeu);
-		System.out.println("etat voeu etudiant G104: " +voeuEtu4.etatVoeu);
-		fr.quota = 3;
-		univ.deliberationFinal();
-		System.out.println("etat voeu etudiant G101: " +voeuEtu.etatVoeu);
-		System.out.println("etat voeu etudiant G102 " +voeuEtu2.etatVoeu);
-		System.out.println("etat voeu etudiant G103: " +voeuEtu3.etatVoeu);
-		System.out.println("etat voeu etudiant G104: " +voeuEtu4.etatVoeu);
-
+		Formation fr2= new Formation("UT1","Miage", "TypeFormation", "rectorat2", (short)2);
+		Formation fr3= new Formation("UT1","DUT", "TypeFormation", "rectorat2", (short)2);
 		
+Etudiant etu=new Etudiant("patric","francoi","G101","UT3","la rue",fr3);
+	
+		Resultat result=new Resultat((short)1,15, (short)10,(short)5);
+		Resultat result2=new Resultat((short)2,14, (short)10,(short)4);
+		Resultat result3=new Resultat((short)3,13, (short)10,(short)6);
+		Resultat result4=new Resultat((short)4,16, (short)10,(short)1);
+		Resultat result5=new Resultat((short)5,12, (short)10,(short)10);
+		Resultat result6=new Resultat((short)6,11, (short)10,(short)9);
+		
+		Resultat[] resultt = new Resultat[6];
+		
+			resultt[0]=result;
+			resultt[1]=result2;
+			resultt[2]=result3;
+			resultt[3]=result4;
+			resultt[4]=result5;
+			resultt[5]=result6;
+			
+		
+		dossierEtudiant detu=new dossierEtudiant(etu, resultt);
+		univ.ajouterEtudiant(etu.ineEtudiant, detu);
+		
+		ListePrereq[0]= "DUT";
+		univ.ajouterFormation(fr2,ListePrereq);
 		orb.run();
 
 	}

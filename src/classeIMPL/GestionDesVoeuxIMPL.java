@@ -73,9 +73,11 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		rect=ministere.recupererRectorat("rectorat");
 		listeFormation =ministere.madDesFormationsFrance();
 		gdpRattache = loadBalancer.getServProfil(numServ);
+		GestionDesVoeux thisdGdv=GestionDesVoeuxHelper.narrow(rootPOA.servant_to_reference(this));
+		rect.inscriptionGDV(numServ,thisdGdv);
 		/*3) ici je rajoute la classe GestionDesVoeuxIMPL dans le gestion des profils*/
 		//c'est ici que l'on caste GestionDesVoeuxIMPL en GestionDesVoeux GestionDesVoeuxHelper.narrow(rootPOA.servant_to_reference(this))s
-		/*3*/gdpRattache.inscriptionGestionDesVoeux(GestionDesVoeuxHelper.narrow(rootPOA.servant_to_reference(this)));
+		/*3*/gdpRattache.inscriptionGestionDesVoeux(thisdGdv);
 		// TODO Auto-generated constructor stub
 	
 	}

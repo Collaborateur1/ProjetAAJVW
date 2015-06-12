@@ -57,6 +57,7 @@ module PostLicence {
 		etatvoeux etatVoeu;
 		decision dcsEtudiant;
 		short numeroVoeu;
+		short numerogdv;
 		
 	};
 	
@@ -237,7 +238,7 @@ interface Universite {
 		void inscriptionUniv(in Universite iorLUniversite, in string nomUniv); //(24)
 		
 		/**modif**/
-		void inscriptionGDV(in GestionDesVoeux Gdv); 
+		void inscriptionGDV(in short numeroGDV,in GestionDesVoeux Gdv); 
 		
 		//La GDV transmet la décision de l'étudiant, la décision se trouve dans le voeu
 		//--Appelé par GDV

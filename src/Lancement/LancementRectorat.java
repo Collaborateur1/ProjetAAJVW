@@ -15,8 +15,8 @@ public static void main(String[] args) throws DonneesInvalides, ServantNotActive
 	
 	org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(new String[0],null);
 
-	RectoratIMPL recto = new RectoratIMPL(orb,"rectorat");
-	System.out.println("rectorat operationel");
+	RectoratIMPL recto = new RectoratIMPL(orb,args[0]);
+	System.out.println("rectorat "+args[0]+" operationel");
 	orb.run();
 }
 }

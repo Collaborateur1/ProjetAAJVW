@@ -17,7 +17,7 @@ public class LancementGeneral {
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 		
-		Runnable r1 = new Runnable() {
+		Runnable ministere = new Runnable() {
 			public void run() {
 
 				try {
@@ -30,17 +30,19 @@ public class LancementGeneral {
 			}
 		};
 
-		Thread t1=new Thread(r1);
-		t1.start();
+		Thread mini=new Thread(ministere);
+		mini.start();
 
 
 		Thread.sleep(1000);
 
 
-		Runnable r2 = new Runnable() {
+		Runnable recto1 = new Runnable() {
 			public void run() {
 				try {
-					LancementRectorat.main(null);
+					String[]st=new String[1];
+					st[0]="rectorat";
+					LancementRectorat.main(st);
 				} catch (DonneesInvalides | ServantNotActive | WrongPolicy
 						| InvalidName | AdapterInactive e) {
 					// TODO Auto-generated catch block
@@ -50,12 +52,33 @@ public class LancementGeneral {
 		};
 
 
-		Thread t2=new Thread(r2);
-		t2.start();
+		Thread rect1=new Thread(recto1);
+		rect1.start();
+
+		Thread.sleep(1000);
+		
+		Runnable recto2 = new Runnable() {
+			public void run() {
+				try {
+					String[]st=new String[1];
+					st[0]="rectorat2";
+					LancementRectorat.main(st);
+				} catch (DonneesInvalides | ServantNotActive | WrongPolicy
+						| InvalidName | AdapterInactive e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}                 
+			}
+		};
+
+
+		Thread rect2=new Thread(recto2);
+		rect2.start();
 
 		Thread.sleep(1000);
 
-		Runnable r22 = new Runnable() {
+		
+		Runnable unive1 = new Runnable() {
 			public void run() {
 				try {
 					LancementUniversite.main(null);
@@ -68,8 +91,26 @@ public class LancementGeneral {
 		};
 
 
-		Thread t22=new Thread(r22);
-		t22.start();
+		Thread univ1=new Thread(unive1);
+		univ1.start();
+
+		Thread.sleep(1000);	
+		
+		Runnable unive2 = new Runnable() {
+			public void run() {
+				try {
+					LancementUniversite.main(null);
+				} catch (DonneesInvalides | ServantNotActive | WrongPolicy
+						| InvalidName | AdapterInactive e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}                 
+			}
+		};
+
+
+		Thread univ2=new Thread(unive2);
+		univ2.start();
 
 		Thread.sleep(1000);	
 

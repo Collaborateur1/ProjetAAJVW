@@ -178,9 +178,10 @@ public abstract class RectoratPOA extends org.omg.PortableServer.Servant
             final org.omg.CORBA.portable.InputStream _is,
             final org.omg.CORBA.portable.ResponseHandler handler) {
         org.omg.CORBA.portable.OutputStream _output;
-        generated.GestionDesVoeux arg0_in = generated.GestionDesVoeuxHelper.read(_is);
+        short arg0_in = _is.read_short();
+        generated.GestionDesVoeux arg1_in = generated.GestionDesVoeuxHelper.read(_is);
 
-        inscriptionGDV(arg0_in);
+        inscriptionGDV(arg0_in, arg1_in);
 
         _output = handler.createReply();
 

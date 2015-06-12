@@ -116,9 +116,9 @@ public class RectoratPOATie extends RectoratPOA
     /**
      * Operation inscriptionGDV
      */
-    public void inscriptionGDV(generated.GestionDesVoeux Gdv)
+    public void inscriptionGDV(short numeroGDV, generated.GestionDesVoeux Gdv)
     {
-        _tie.inscriptionGDV( Gdv);
+        _tie.inscriptionGDV( numeroGDV,  Gdv);
     }
 
     /**

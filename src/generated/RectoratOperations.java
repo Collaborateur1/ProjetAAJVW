@@ -44,7 +44,7 @@ public interface RectoratOperations
     /**
      * Operation inscriptionGDV
      */
-    public void inscriptionGDV(generated.GestionDesVoeux Gdv);
+    public void inscriptionGDV(short numeroGDV, generated.GestionDesVoeux Gdv);
 
     /**
      * Operation repondrePropositionVoeux

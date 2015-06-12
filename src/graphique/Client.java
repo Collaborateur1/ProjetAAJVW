@@ -643,7 +643,7 @@ public class Client extends javax.swing.JFrame {
 
 			if(placeVoeux<6)
 			{
-				Voeu voeux=new Voeu((Formation)jList1.getSelectedValue(), etatvoeux.soumis, decision.NONutilse,placeVoeux);
+				Voeu voeux=new Voeu((Formation)jList1.getSelectedValue(), etatvoeux.soumis, decision.NONutilse,placeVoeux,etudiant.getGDV().numeroGDV());
 				for(int y=0;y<list.getSize();y++)
 				{
 					if(voeux.formationVoeu.NomFormation.equals(list.getElementAt(y).formationVoeu.NomFormation))

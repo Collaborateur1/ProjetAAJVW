@@ -73,7 +73,7 @@ public class VoeuHelper
                     return org.omg.CORBA.ORB.init().create_recursive_tc(id());
                 _working = true;
                 org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init();
-                org.omg.CORBA.StructMember []_members = new org.omg.CORBA.StructMember[4];
+                org.omg.CORBA.StructMember []_members = new org.omg.CORBA.StructMember[5];
 
                 _members[0] = new org.omg.CORBA.StructMember();
                 _members[0].name = "formationVoeu";
@@ -87,6 +87,9 @@ public class VoeuHelper
                 _members[3] = new org.omg.CORBA.StructMember();
                 _members[3].name = "numeroVoeu";
                 _members[3].type = orb.get_primitive_tc(org.omg.CORBA.TCKind.tk_short);
+                _members[4] = new org.omg.CORBA.StructMember();
+                _members[4].name = "numerogdv";
+                _members[4].type = orb.get_primitive_tc(org.omg.CORBA.TCKind.tk_short);
                 _tc = orb.create_struct_tc(id(),"Voeu",_members);
                 _working = false;
             }
@@ -118,6 +121,7 @@ public class VoeuHelper
         new_one.etatVoeu = generated.etatvoeuxHelper.read(istream);
         new_one.dcsEtudiant = generated.decisionHelper.read(istream);
         new_one.numeroVoeu = istream.read_short();
+        new_one.numerogdv = istream.read_short();
 
         return new_one;
     }
@@ -133,6 +137,7 @@ public class VoeuHelper
         generated.etatvoeuxHelper.write(ostream,value.etatVoeu);
         generated.decisionHelper.write(ostream,value.dcsEtudiant);
         ostream.write_short(value.numeroVoeu);
+        ostream.write_short(value.numerogdv);
     }
 
 }

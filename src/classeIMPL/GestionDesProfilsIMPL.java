@@ -95,22 +95,25 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 	@Override
 	public GestionDesVoeux connexion(IEtudiant iorEtudiant, String ine,
 			String mdp) throws DonneesInvalides {
-
+		
 		if(etudiantinscrit.containsKey(ine) )
 		{
 			if( CodeEtudiantInscrit.get(ine).equals(mdp)){
+				
 				if(!GestionDesVoeuxInscrit.possedeVoeux(ine))
 				{
+					
 					GestionDesVoeuxInscrit.inscriptionIE(ine, iorEtudiant);
 					etudiantConnecter.put(ine, iorEtudiant);
 				}
-
+				
 				return GestionDesVoeuxInscrit;				
 			}
 
 
 		}
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -132,6 +135,7 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 	public void inscriptionGestionDesVoeux(GestionDesVoeux GDesVx) {
 		// TODO Auto-generated method stub
 		GestionDesVoeuxInscrit=GDesVx;
+		
 		nombreGDV++;
 	}
 

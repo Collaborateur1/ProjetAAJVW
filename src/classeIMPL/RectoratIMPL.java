@@ -67,7 +67,7 @@ public class RectoratIMPL extends RectoratPOA {
 		MonMinistere= MinistèreHelper.narrow(
 				NamingServiceTool.getReferenceIntoNS("Ministere"));
 		System.out.println("Reférérence ministere recuperee" );
-		 
+		LesGDV=new Hashtable<String, GestionDesVoeux>();
 		this.nomRectorat=nomrectorat;
 	  rootPOA = org.omg.PortableServer.POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
 	  rootPOA.the_POAManager().activate();
@@ -129,11 +129,11 @@ public class RectoratIMPL extends RectoratPOA {
 			/*histoire de vous faciliter la compréhention*/
 			NomFormationEtudiant=etu.formation.NomFormation;
 			NomFormationVoeux=lv[i].formationVoeu.NomFormation;
-			System.out.println("000" );
+			
 			//test si université est dans le rectorat de l'étudiant
 			if(lv[i].formationVoeu.nomRectorat.equals(this.nomRectorat))
-			{
-				System.out.println("111" );
+			{System.out.println("000" );
+				
 				//Avant tout! la candidature est elle valide?
 				if(CandidatureConforme(etu.formation.NomFormation,lv[i].formationVoeu.NomFormation))
 				{	
@@ -141,13 +141,14 @@ public class RectoratIMPL extends RectoratPOA {
 					//postule-t-il dans son université? si oui pas de transfert de dossier
 					if(lv[i].formationVoeu.nomUniv.equals(etu.nomUniv))
 					{	
-
+						System.out.println("ca va.." );
 						univEtudiant.envoyerCandidature(etu.ineEtudiant, lv[i]);
 					}
 					//sinon bin on récupere le dossier dans luniv de letudiant
 					//et on lenvoi a lautre univ qui est, elle aussi dans le rectorat
 					else
 					{
+						System.out.println("ca va pas..." );
 						dossierEtu=univEtudiant.madDossier(etu.ineEtudiant);
 						Universite univPostuler =GetUniversiteDansRecorat(lv[i].formationVoeu.nomUniv);
 						univPostuler.envoyerCandidatureD(dossierEtu, etu.ineEtudiant, lv[i]);
@@ -157,7 +158,7 @@ public class RectoratIMPL extends RectoratPOA {
 				{
 					System.out.println("222" );
 					lv[i].etatVoeu = etatvoeux.nonValide;
-					LesGDV.get("1").transmettreDecisionCandidatureRectorat(etu.ineEtudiant, lv[i]);
+					LesGDV.get(String.valueOf(lv[i].numerogdv)).transmettreDecisionCandidatureRectorat(etu.ineEtudiant, lv[i]);
 					//il faut la renvoyer a létudiant! A toi de jouer ;)
 				}
 			}
@@ -231,12 +232,11 @@ public class RectoratIMPL extends RectoratPOA {
 		// TODO Auto-generated method stub
 
 	}
-	
 
 	@Override
-	public void inscriptionGDV(GestionDesVoeux Gdv) {
+	public void inscriptionGDV(short numeroGDV, GestionDesVoeux Gdv) {
 		// TODO Auto-generated method stub
-		LesGDV.put(String.valueOf(Gdv.numeroGDV()), Gdv);
+		LesGDV.put(String.valueOf(numeroGDV), Gdv);
 	}
 
 	@Override
@@ -278,15 +278,16 @@ public class RectoratIMPL extends RectoratPOA {
 	//Vérifier q'une candidature est conforme
 
 	public boolean CandidatureConforme(String NomFormationEtudiant,String Nomformationvoeu)
-	{
+	{System.out.println(" NomFormationEtudiant: "+ NomFormationEtudiant+" Nomformationvoeu: "+Nomformationvoeu);
 		//On récupere la liste des formations valide pour la formation auquel il a postuler
 		ArrayList<String> ListeFormationValidePrCandidature=ValidationFormation.get(Nomformationvoeu);
 
 		//On cherche si on trouve la formation de létudiant dans les formations valide
 		for (int i=0;i< ListeFormationValidePrCandidature.size();i++)
-		{
+		{System.out.println(" NomFormationEtudiant: "+ListeFormationValidePrCandidature.get(i));
 			if(ListeFormationValidePrCandidature.get(i).equals(NomFormationEtudiant))
 			{
+				System.out.println(" NomFormationEtudiant: "+ListeFormationValidePrCandidature.get(i));
 				return true;
 			}	
 		}
@@ -335,6 +336,8 @@ public class RectoratIMPL extends RectoratPOA {
 		ValidationFormation.put(formation.NomFormation, Prereq);
 		MonMinistere.depotDesFormationsRectorat(formation);
 	}
+
+	
 
 	
 

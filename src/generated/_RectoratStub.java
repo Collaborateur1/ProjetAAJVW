@@ -338,7 +338,7 @@ public class _RectoratStub extends org.omg.CORBA.portable.ObjectImpl
     /**
      * Operation inscriptionGDV
      */
-    public void inscriptionGDV(generated.GestionDesVoeux Gdv)
+    public void inscriptionGDV(short numeroGDV, generated.GestionDesVoeux Gdv)
     {
         while(true)
         {
@@ -348,6 +348,7 @@ public class _RectoratStub extends org.omg.CORBA.portable.ObjectImpl
                 try
                 {
                     org.omg.CORBA.portable.OutputStream _output = this._request("inscriptionGDV",true);
+                    _output.write_short(numeroGDV);
                     generated.GestionDesVoeuxHelper.write(_output,Gdv);
                     _input = this._invoke(_output);
                     return;
@@ -374,7 +375,7 @@ public class _RectoratStub extends org.omg.CORBA.portable.ObjectImpl
                 generated.RectoratOperations _self = (generated.RectoratOperations) _so.servant;
                 try
                 {
-                    _self.inscriptionGDV( Gdv);
+                    _self.inscriptionGDV( numeroGDV,  Gdv);
                     return;
                 }
                 finally
