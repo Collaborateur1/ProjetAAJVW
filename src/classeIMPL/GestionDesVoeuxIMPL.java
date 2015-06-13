@@ -314,26 +314,26 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			while(e.hasMoreElements())
 			{
 				ine = (String) e.nextElement();
-				System.out.println("pipi");
+				
 				lv = ListeVoeuxEtudiant.get(ine);
 				try {
 					et = gdpRattache.consulterProfil(ine);
-					System.out.println("chier");
+					
 				} catch (DonneesInvalides e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				Voeu[] tabVoeu = new Voeu[lv.size()];
-				System.out.println("merde");
+				
 				//transformer arraylist voeu en tableau
 				for(int i = 0;i<lv.size();i++)
 				{
 					tabVoeu[i] = lv.get(i);
 				}
 				try {
-					System.out.println("rectorat encore!");
+					
 					ministere.GetRectoratEtudiant(ine).envoyerListeVoeuxGDV(tabVoeu, et);
-					System.out.println("kaka");
+					
 					ListeEtudiant.get(ine).lancementVague((short) 1);
 					
 				} catch (DonneesInvalides e1) {
@@ -345,7 +345,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		}
 		else if(numero == 2)//période 2
 		{
-			
+			ministere.deliberationJury();
 		}
 	}
 

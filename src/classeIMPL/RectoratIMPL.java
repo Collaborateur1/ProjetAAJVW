@@ -254,13 +254,13 @@ public class RectoratIMPL extends RectoratPOA {
 	@Override
 	public void deliberationJury() {
 		// TODO Auto-generated method stub
-		Enumeration ListeUniv=this.ListeListUniversite.elements();
+		Enumeration<Universite> ListeUniv=this.ListeListUniversite.elements();
 
 		while(ListeUniv.hasMoreElements())
 		{
 			Universite Un=null;
 
-			Un=(Universite) ListeUniv.nextElement();
+			Un= ListeUniv.nextElement();
 			Un.deliberationJury();
 		}
 	}

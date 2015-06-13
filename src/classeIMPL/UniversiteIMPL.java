@@ -282,7 +282,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 				voeuEtu = ListeVoeux.get(unAdmis).get(nomFormationCourante);
 				voeuEtu.etatVoeu = etatvoeux.accepter;
 				if (DossierEtudiant.containsKey(unAdmis)){
-					/*try {
+					try {
 						recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(unAdmis).etu, voeuEtu);
 					} catch (DonneesInvalides e) {
 						// TODO Auto-generated catch block
@@ -295,7 +295,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 					} catch (DonneesInvalides e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}*/
+					}
 				}
 					
 			}
@@ -304,7 +304,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 				voeuEtu = ListeVoeux.get(ineAttente.get(i)).get(nomFormationCourante);
 				voeuEtu.etatVoeu = etatvoeux.listeDattente;
 				if (DossierEtudiant.containsKey(ineAttente.get(i))){
-					/*try {
+					try {
 						recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(ineAttente.get(i)).etu, voeuEtu);
 					} catch (DonneesInvalides e) {
 						// TODO Auto-generated catch block
@@ -317,7 +317,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 					} catch (DonneesInvalides e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}*/
+					}
 				}
 				
 			}
@@ -363,12 +363,12 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 						}
 					}
 					else{
-						/*try {
+						try {
 							recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(ListeDattente.get(nomFormationCourante)).etu, voeuEtu);
 						} catch (DonneesInvalides e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}*/
+						}
 					}
 				}
 		}
