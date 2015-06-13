@@ -88,7 +88,8 @@ for(int i=0;i<this.ListeFormation.size();i++)
 	@Override
 	public void deliberationJuryFinal() {
 		// TODO Auto-generated method stub
-Enumeration ListeRectorat=this.ListeRectorat.elements();
+		System.out.println("*************************2");
+		Enumeration ListeRectorat=this.ListeRectorat.elements();
 		
 		while(ListeRectorat.hasMoreElements())
 		{

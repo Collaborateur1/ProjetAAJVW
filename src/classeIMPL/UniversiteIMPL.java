@@ -278,6 +278,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 				}
 				
 				 ListeDattente.put(formation.NomFormation, ineAttente);
+				 System.out.println("nb attente"+ListeDattente.size());
 								
 			}
 		
@@ -352,35 +353,48 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 		short quota;
 		short nbdispo;
 		Voeu voeuEtu = null;
-		Enumeration ListeFormation  = ListeAdmiParFormation.keys();
+		Enumeration <String> ListeFormation  = ListeAdmiParFormation.keys();
+		System.out.println("si ya que ca jai raisonn "+NomUniv);
 		while(ListeFormation.hasMoreElements()){
-			String nomFormationCourante = (String) ListeFormation.nextElement();
+			
+			String nomFormationCourante = ListeFormation.nextElement();
 			nbAdmis =(short) ListeAdmiParFormation.get(nomFormationCourante).size(); 
 		    quota = ListeDesFormations.get(nomFormationCourante).quota;
+		    System.out.println(nomFormationCourante+" le nom de formation courante");
 			if (nbAdmis<quota){
 				nbdispo = (short) (quota - nbAdmis);
 				for(int i =0; i<nbdispo; i++){ 
-					voeuEtu = ListeVoeux.get(ListeDattente.get(nomFormationCourante).get(i)).get(nomFormationCourante);
-					//envoyer et mettre à jour le voeu seulement
-					voeuEtu.etatVoeu = etatvoeux.accepter;
-					if (DossierEtudiant.containsKey(ListeDattente.get(nomFormationCourante))){
-						try {
-							recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(ListeDattente.get(nomFormationCourante)).etu, voeuEtu);
-						} catch (DonneesInvalides e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+					System.out.println("test"+ListeDattente.size()+ NomUniv);
+					if(ListeDattente.size()> 0){
+						System.out.println("test"+ListeDattente.size());
+						voeuEtu = ListeVoeux.get(ListeDattente.get(nomFormationCourante).get(i)).get(nomFormationCourante);
+						System.out.println("le voeu"+ voeuEtu);
+						//envoyer et mettre à jour le voeu seulement
+						voeuEtu.etatVoeu = etatvoeux.accepter;
+						if (DossierEtudiant.containsKey(ListeDattente.get(nomFormationCourante).get(i))){
+							try {
+								recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(ListeDattente.get(nomFormationCourante).get(i)).etu, voeuEtu);
+							} catch (DonneesInvalides e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 						}
-					}
-					else{
-						try {
-							recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(ListeDattente.get(nomFormationCourante)).etu, voeuEtu);
-						} catch (DonneesInvalides e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+						else{
+							try {
+								recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(ListeDattente.get(nomFormationCourante).get(i)).etu, voeuEtu);
+							} catch (DonneesInvalides e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 						}
+						
 					}
+
 				}
-		}
+			}
+			else{
+				
+			}
 			
 		}
 		

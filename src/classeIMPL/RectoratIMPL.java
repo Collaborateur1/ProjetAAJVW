@@ -88,6 +88,7 @@ public class RectoratIMPL extends RectoratPOA {
 	@Override
 	public void deliberationJuryFinal() {
 		// TODO Auto-generated method stub
+		System.out.println("****************************4");
 		Enumeration<Universite> ListeUniv=this.ListeListUniversite.elements();
 
 		while(ListeUniv.hasMoreElements())
@@ -95,7 +96,9 @@ public class RectoratIMPL extends RectoratPOA {
 			Universite Un=null;
 
 			Un= ListeUniv.nextElement();
+			System.out.println(Un.nomUniversite()+"*******************");
 			Un.deliberationFinal();
+			
 		}
 	}
 	
@@ -261,7 +264,16 @@ public class RectoratIMPL extends RectoratPOA {
 	public void repondrePropositionVoeux(String ine, Voeu voeu)
 			throws DonneesInvalides {
 		// TODO Auto-generated method stub
-
+		Universite univ;
+		Enumeration<Universite> e= ListeListUniversite.elements();
+		while (e.hasMoreElements())
+		{
+			univ=e.nextElement();
+			if(univ.nomUniversite().equals(voeu.formationVoeu.nomUniv))
+			{
+				univ.repondrePropositionvoeux(ine, voeu);
+			}
+		}
 	}
 
 	@Override

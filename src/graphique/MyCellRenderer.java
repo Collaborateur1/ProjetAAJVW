@@ -58,7 +58,7 @@ class MyCellRenderer extends JLabel implements ListCellRenderer<Object> {
 			Voeu vx=( Voeu)list.getSelectedValue();
 			setBackground(list.getSelectionBackground());
 			setForeground(selectCouleur);
-			if(vx.dcsEtudiant!=decision.NONutilse)
+			/*if(vx.dcsEtudiant!=decision.NONutilse)
 			{
 			
 				cl.bouttonchoix(true);
@@ -66,7 +66,7 @@ class MyCellRenderer extends JLabel implements ListCellRenderer<Object> {
 			else
 			{
 				cl.bouttonchoix(false);	
-			}
+			}*/
 			
 			if(vx.etatVoeu==etatvoeux.accepter)
 			{

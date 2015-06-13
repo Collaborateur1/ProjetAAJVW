@@ -176,9 +176,11 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 					if(v.numeroVoeu==numeroVoeu)
 					{
 						v.dcsEtudiant = choixEtu;
+						ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,v);
+						
 					}	
 				}
-		
+	ListeEtudiant.get(ine).majEtatVoeux(chargerVoeux(ine));
 	}
 	
 
@@ -348,6 +350,8 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		}
 		else if(numero==3)
 		{
+			System.out.println("*************************1");
+			
 			ministere.deliberationJuryFinal();
 		}
 	}
