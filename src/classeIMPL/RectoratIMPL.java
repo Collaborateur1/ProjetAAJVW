@@ -254,6 +254,7 @@ public class RectoratIMPL extends RectoratPOA {
 	@Override
 	public void deliberationJury() {
 		// TODO Auto-generated method stub
+		System.out.println("test3");
 		Enumeration<Universite> ListeUniv=this.ListeListUniversite.elements();
 
 		while(ListeUniv.hasMoreElements())

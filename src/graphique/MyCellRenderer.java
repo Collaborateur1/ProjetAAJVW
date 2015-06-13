@@ -8,6 +8,7 @@ package graphique;
 
 import generated.Voeu;
 import generated.decision;
+import generated.etatvoeux;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -57,7 +58,25 @@ class MyCellRenderer extends JLabel implements ListCellRenderer<Object> {
 			Voeu vx=( Voeu)list.getSelectedValue();
 			setBackground(list.getSelectionBackground());
 			setForeground(selectCouleur);
-
+			if(vx.dcsEtudiant!=decision.NONutilse)
+			{
+			
+				cl.bouttonchoix(true);
+			}
+			else
+			{
+				cl.bouttonchoix(false);	
+			}
+			
+			if(vx.etatVoeu==etatvoeux.valide)
+			{
+				cl.BoutonAccepterRefuser(true);
+			}
+			else
+			{
+				cl.BoutonAccepterRefuser(false);
+			}
+			
 			setText("ordre: "+vx.numeroVoeu+" Université:"+vx.formationVoeu.nomUniv+" type de formation:"+vx.formationVoeu.TypeFormation);
 			
 			if(vx.formationVoeu.TypeFormation.equals("Informatique"))

@@ -119,7 +119,7 @@ for(int i=0;i<this.ListeFormation.size();i++)
 		// TODO Auto-generated method stub
 		
 		//On fait juste passé le message..enfin une appel de fonction quoi
-		
+		System.out.println("test2");
 		Enumeration ListeRectorat=this.ListeRectorat.elements();
 		
 		while(ListeRectorat.hasMoreElements())

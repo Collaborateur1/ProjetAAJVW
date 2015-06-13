@@ -69,7 +69,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 				NamingServiceTool.getReferenceIntoNS("Ministere"));
 		System.out.println("Reférérence ministere recuperee" );
 		
-		
 		listeFormation =ministere.madDesFormationsFrance();
 		gdpRattache = loadBalancer.getServProfil(numServ);
 		GestionDesVoeux thisdGdv=GestionDesVoeuxHelper.narrow(rootPOA.servant_to_reference(this));
@@ -344,7 +343,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			
 		}
 		else if(numero == 2)//période 2
-		{
+		{System.out.println("test1");
 			ministere.deliberationJury();
 		}
 	}
