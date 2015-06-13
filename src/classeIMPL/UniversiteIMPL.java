@@ -194,6 +194,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 		// TODO Auto-generated method stub
 		if (voeu.dcsEtudiant.equals(decision.NONdefinitif)||voeu.dcsEtudiant.equals(decision.NONmais)){
 			ListeAdmiParFormation.get(voeu.formationVoeu.NomFormation).remove(ine);
+			
 		};		
 		
 	}
@@ -374,6 +375,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 						if (DossierEtudiant.containsKey(ListeDattente.get(nomFormationCourante).get(i))){
 							try {
 								recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(ListeDattente.get(nomFormationCourante).get(i)).etu, voeuEtu);
+								ListeDattente.get(nomFormationCourante).remove(i);
 							} catch (DonneesInvalides e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -382,6 +384,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 						else{
 							try {
 								recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(ListeDattente.get(nomFormationCourante).get(i)).etu, voeuEtu);
+								ListeDattente.get(nomFormationCourante).remove(i);
 							} catch (DonneesInvalides e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -393,6 +396,29 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 				}
 			}
 			else{
+				if(ListeDattente.size()>0){
+					for(int i =0; i<ListeDattente.size();i++){
+						voeuEtu = ListeVoeux.get(ListeDattente.get(nomFormationCourante).get(i)).get(nomFormationCourante);
+						voeuEtu.etatVoeu = etatvoeux.refuser;
+						if (DossierEtudiant.containsKey(ListeDattente.get(nomFormationCourante).get(i))){
+							try {
+								recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(ListeDattente.get(nomFormationCourante).get(i)).etu, voeuEtu);
+								} catch (DonneesInvalides e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						else{
+							try {
+								recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(ListeDattente.get(nomFormationCourante).get(i)).etu, voeuEtu);								
+							} catch (DonneesInvalides e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						
+					}
+				}
 				
 			}
 			

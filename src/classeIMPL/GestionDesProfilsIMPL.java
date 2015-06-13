@@ -104,12 +104,14 @@ System.out.println("*************************");
 			
 			if( CodeEtudiantInscrit.get(ine).equals(mdp)){
 				
-				if(!GestionDesVoeuxInscrit.possedeVoeux(ine))
-				{
+				
 					
 					GestionDesVoeuxInscrit.inscriptionIE(ine, iorEtudiant);
-					etudiantConnecter.put(ine, iorEtudiant);
-				}
+					if(etudiantConnecter.contains(ine))
+						etudiantConnecter.replace(ine, iorEtudiant);
+					else
+						etudiantConnecter.put(ine, iorEtudiant);
+				
 				
 				
 				return GestionDesVoeuxInscrit;				

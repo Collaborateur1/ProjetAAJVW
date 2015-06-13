@@ -544,6 +544,8 @@ public class Client extends javax.swing.JFrame {
 	// La deconnexion
 	private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 		//bouton déconnecter
+		etudiant.deconnexion(etudiant.getINE());
+		this.dispose();
 	}//GEN-LAST:event_jButton6ActionPerformed
 
 	//Listener du bouton connexion, valide ou pas la connexion

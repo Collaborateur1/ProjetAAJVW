@@ -75,4 +75,9 @@ public interface GestionDesVoeuxOperations
      */
     public void lancementVague(short numero);
 
+    /**
+     * Operation deconnexion
+     */
+    public void deconnexion(String ine);
+
 }

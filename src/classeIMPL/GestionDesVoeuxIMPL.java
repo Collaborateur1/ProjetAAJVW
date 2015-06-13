@@ -93,9 +93,12 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		// TODO Auto-generated method stub
 		if(!ListeEtudiant.containsKey(ine))
 		{	
-		ListeEtudiant.put(ine, iorEtudiant);
-		ListeVoeuxEtudiant.put(ine, new ArrayList<Voeu>());
+			ListeEtudiant.put(ine, iorEtudiant);		
 		}
+		if (!ListeVoeuxEtudiant.containsKey(ine)){
+			ListeVoeuxEtudiant.put(ine, new ArrayList<Voeu>());
+		}
+	
 	}
 
 	@Override
@@ -180,7 +183,32 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 						
 					}	
 				}
-	ListeEtudiant.get(ine).majEtatVoeux(chargerVoeux(ine));
+				ListeEtudiant.get(ine).majEtatVoeux(chargerVoeux(ine));
+				if (choixEtu.equals(decision.NONdefinitif)){
+					ListeVoeuxEtudiant.remove(ine);
+				}
+				else if(choixEtu.equals(decision.NONmais)){
+					for(int i =0; i<ListeVoeuxEtudiant.size(); i++){
+						if(ListeVoeuxEtudiant.get(ine).get(i).numeroVoeu >=numeroVoeu){
+							ListeVoeuxEtudiant.get(ine).remove(i);
+						}
+					}
+				}
+				else if(choixEtu.equals(decision.OUIdefinitif)){
+					for(int i =0; i<ListeVoeuxEtudiant.size(); i++){
+						if(ListeVoeuxEtudiant.get(ine).get(i).numeroVoeu !=numeroVoeu){
+							ListeVoeuxEtudiant.get(ine).remove(i);
+						}
+					}
+				}
+				else{
+					for(int i =0; i<ListeVoeuxEtudiant.size(); i++){
+						if(ListeVoeuxEtudiant.get(ine).get(i).numeroVoeu >numeroVoeu){
+							ListeVoeuxEtudiant.get(ine).remove(i);
+						}
+					}
+					
+				}
 	}
 	
 
@@ -354,6 +382,12 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			
 			ministere.deliberationJuryFinal();
 		}
+	}
+
+	@Override
+	public void deconnexion(String ine) {
+		// TODO Auto-generated method stub
+		ListeEtudiant.remove(ine);
 	}
 
 

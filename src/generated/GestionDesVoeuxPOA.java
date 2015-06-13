@@ -35,6 +35,8 @@ public abstract class GestionDesVoeuxPOA extends org.omg.PortableServer.Servant
                     new Operation__get_numeroGDV());
             operationMap.put("chargerVoeux",
                     new Operation_chargerVoeux());
+            operationMap.put("deconnexion",
+                    new Operation_deconnexion());
             operationMap.put("existFormation",
                     new Operation_existFormation());
             operationMap.put("faireUnVoeu",
@@ -317,6 +319,19 @@ public abstract class GestionDesVoeuxPOA extends org.omg.PortableServer.Servant
         return _output;
     }
 
+    private org.omg.CORBA.portable.OutputStream _invoke_deconnexion(
+            final org.omg.CORBA.portable.InputStream _is,
+            final org.omg.CORBA.portable.ResponseHandler handler) {
+        org.omg.CORBA.portable.OutputStream _output;
+        String arg0_in = _is.read_string();
+
+        deconnexion(arg0_in);
+
+        _output = handler.createReply();
+
+        return _output;
+    }
+
     // operation classes
     private abstract static class AbstractOperation {
         protected abstract org.omg.CORBA.portable.OutputStream invoke(
@@ -442,6 +457,16 @@ public abstract class GestionDesVoeuxPOA extends org.omg.PortableServer.Servant
                 final org.omg.CORBA.portable.InputStream _is,
                 final org.omg.CORBA.portable.ResponseHandler handler) {
             return target._invoke_lancementVague(_is, handler);
+        }
+    }
+
+    private static final class Operation_deconnexion extends AbstractOperation
+    {
+        protected org.omg.CORBA.portable.OutputStream invoke(
+                final GestionDesVoeuxPOA target,
+                final org.omg.CORBA.portable.InputStream _is,
+                final org.omg.CORBA.portable.ResponseHandler handler) {
+            return target._invoke_deconnexion(_is, handler);
         }
     }
 

@@ -229,7 +229,9 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		orb.run();
 	}
 
-	
+	public void deconnexion (String ine){
+		gdv.deconnexion(ine);
+	}
 
 
 }

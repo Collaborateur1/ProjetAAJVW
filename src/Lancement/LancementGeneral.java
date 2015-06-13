@@ -204,7 +204,7 @@ public class LancementGeneral {
 		t6.start();
 		
 		
-		Thread.sleep(1000);
+		/*Thread.sleep(1000);
 		
 		Runnable r7 = new Runnable() {
 			public void run() {
@@ -218,7 +218,7 @@ public class LancementGeneral {
 		};
 
 		Thread t7=new Thread(r7);
-		t7.start();
+		t7.start();*/
 		
 
 	}

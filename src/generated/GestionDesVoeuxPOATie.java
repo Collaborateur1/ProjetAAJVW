@@ -165,4 +165,12 @@ public class GestionDesVoeuxPOATie extends GestionDesVoeuxPOA
         _tie.lancementVague( numero);
     }
 
+    /**
+     * Operation deconnexion
+     */
+    public void deconnexion(String ine)
+    {
+        _tie.deconnexion( ine);
+    }
+
 }

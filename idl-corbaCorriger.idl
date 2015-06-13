@@ -127,10 +127,11 @@ module PostLicence {
 		//appeler par etudiant pour savoir si il doit chargé sa liste de voeux
 		boolean possedeVoeux (in string ine);
 		
-		boolean existFormation (in string nomFormation);
-		
+		boolean existFormation (in string nomFormation);		
 
 		void lancementVague(in short numero);
+		
+		void deconnexion (in string ine);
 
 		
 	};
