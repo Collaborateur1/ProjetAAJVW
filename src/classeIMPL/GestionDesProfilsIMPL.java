@@ -38,7 +38,8 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 	int nombreGDV;
 	LoadBalancerEtudiant loadBalancer;
 	org.omg.PortableServer.POA rootPOA;
-	Rectorat rectorat ;
+	
+	Ministère ministere;
 
 	/*********************Costructeur
 	 * @throws DonneesInvalides 
@@ -58,9 +59,9 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 
 
 		rootPOA.the_POAManager().activate();
-		Ministère ministere= MinistèreHelper.narrow(
+		 ministere= MinistèreHelper.narrow(
 				NamingServiceTool.getReferenceIntoNS("Ministere"));
-		rectorat=ministere.recupererRectorat(monRectorat);
+		
 
 		loadBalancer.inscriptionGDP(GestionDesProfilsHelper.narrow(rootPOA.servant_to_reference(this)), nGdp);
 
@@ -84,7 +85,9 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 		{
 			if( CodeEtudiantInscrit.get(ine).equals(mdp)){
 				
+				
 				return true;
+				
 			}
 
 		}
@@ -98,6 +101,7 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 		
 		if(etudiantinscrit.containsKey(ine) )
 		{
+			
 			if( CodeEtudiantInscrit.get(ine).equals(mdp)){
 				
 				if(!GestionDesVoeuxInscrit.possedeVoeux(ine))
@@ -106,6 +110,7 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 					GestionDesVoeuxInscrit.inscriptionIE(ine, iorEtudiant);
 					etudiantConnecter.put(ine, iorEtudiant);
 				}
+				
 				
 				return GestionDesVoeuxInscrit;				
 			}
@@ -142,25 +147,27 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 	@Override
 	public boolean etudiantInscrit(String ine) throws DonneesInvalides {
 		// TODO Auto-generated method stub
+		
 		return etudiantinscrit.containsKey(ine);
 	}
 
 	@Override
 	public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 		// TODO Auto-generated method stub
-		return rectorat.getFicheEtudiant(ine);
+		return ministere.GetRectoratEtudiant(ine).getFicheEtudiant(ine);
 	}
 
 	@Override
 	public boolean inscriptionEtudiant(String ine, String mdp)
 			throws DonneesInvalides {
 		// TODO Auto-generated method stub
-
+		
 		if(!etudiantinscrit.containsKey(ine))
 		{	
-
-			Etudiant etu=rectorat.getFicheEtudiant(ine);
-
+			
+			
+			Etudiant etu=ministere.GetRectoratEtudiant(ine).getFicheEtudiant(ine);
+			
 			if(etu.formation.NomFormation.contains("nada"))
 			{
 				return false;
@@ -173,6 +180,7 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 				return true;
 			}
 		}
+	
 		return false;
 
 	}

@@ -40,4 +40,20 @@ public interface MinistèreOperations
      */
     public void deliberationJury();
 
+    /**
+     * Operation GetRectoratEtudiant
+     */
+    public generated.Rectorat GetRectoratEtudiant(String ine)
+        throws generated.DonneesInvalides;
+
+    /**
+     * Operation EnregistrerRectoratEtudiant
+     */
+    public void EnregistrerRectoratEtudiant(String ine, generated.Rectorat recto);
+
+    /**
+     * Operation InscriptionGDVDansRectorats
+     */
+    public void InscriptionGDVDansRectorats(short num, generated.GestionDesVoeux gdv);
+
 }

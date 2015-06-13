@@ -81,7 +81,11 @@ public class LancementGeneral {
 		Runnable unive1 = new Runnable() {
 			public void run() {
 				try {
-					LancementUniversite.main(null);
+					
+					String[]st=new String[1];
+					st[0]="UT3";
+					
+					LancementUniversite.main(st);
 				} catch (DonneesInvalides | ServantNotActive | WrongPolicy
 						| InvalidName | AdapterInactive e) {
 					// TODO Auto-generated catch block
@@ -99,7 +103,31 @@ public class LancementGeneral {
 		Runnable unive2 = new Runnable() {
 			public void run() {
 				try {
-					LancementUniversite.main(null);
+					
+					String[]st=new String[1];
+					st[0]="UT1";
+					LancementUniversite.main(st);
+				} catch (DonneesInvalides | ServantNotActive | WrongPolicy
+						| InvalidName | AdapterInactive e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}                 
+			}
+		};
+		
+		Thread univ2=new Thread(unive2);
+		univ2.start();
+
+		Thread.sleep(1000);	
+		
+		
+		Runnable unive3 = new Runnable() {
+			public void run() {
+				try {
+					
+					String[]st=new String[1];
+					st[0]="UT2";
+					LancementUniversite.main(st);
 				} catch (DonneesInvalides | ServantNotActive | WrongPolicy
 						| InvalidName | AdapterInactive e) {
 					// TODO Auto-generated catch block
@@ -109,8 +137,8 @@ public class LancementGeneral {
 		};
 
 
-		Thread univ2=new Thread(unive2);
-		univ2.start();
+		Thread univ3=new Thread(unive3);
+		univ3.start();
 
 		Thread.sleep(1000);	
 

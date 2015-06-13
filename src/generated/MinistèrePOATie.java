@@ -113,4 +113,29 @@ public class MinistèrePOATie extends MinistèrePOA
         _tie.deliberationJury();
     }
 
+    /**
+     * Operation GetRectoratEtudiant
+     */
+    public generated.Rectorat GetRectoratEtudiant(String ine)
+        throws generated.DonneesInvalides
+    {
+        return _tie.GetRectoratEtudiant( ine);
+    }
+
+    /**
+     * Operation EnregistrerRectoratEtudiant
+     */
+    public void EnregistrerRectoratEtudiant(String ine, generated.Rectorat recto)
+    {
+        _tie.EnregistrerRectoratEtudiant( ine,  recto);
+    }
+
+    /**
+     * Operation InscriptionGDVDansRectorats
+     */
+    public void InscriptionGDVDansRectorats(short num, generated.GestionDesVoeux gdv)
+    {
+        _tie.InscriptionGDVDansRectorats( num,  gdv);
+    }
+
 }

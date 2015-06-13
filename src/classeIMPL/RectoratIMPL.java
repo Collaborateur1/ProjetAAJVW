@@ -108,6 +108,15 @@ public class RectoratIMPL extends RectoratPOA {
 		}
 		else
 		{
+			try {
+				voeu.etatVoeu=etatvoeux.nonValide;
+				Rectorat recorat_a_Joindre=MonMinistere.recupererRectorat(dossierEtu.etu.formation.nomRectorat);
+				recorat_a_Joindre.envoyerDecisionCandidatureRectorat(dossierEtu.etu.ineEtudiant, voeu);
+				
+			} catch (DonneesInvalides e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			//si la candidature n'est pas conforme il faut la renvoyer a létudiant...good luck..
 		}
 
@@ -117,12 +126,12 @@ public class RectoratIMPL extends RectoratPOA {
 			throws DonneesInvalides {
 		// TODO Auto-generated method stub
 		dossierEtudiant dossierEtu;
-		System.out.println("888" );
+
 		Universite univEtudiant =GetUniversiteDansRecorat(etu.nomUniv);
-		
+	
 		String NomFormationEtudiant;
 		String NomFormationVoeux;
-		System.out.println("marche" );
+		
 
 		for(int i=0;i<lv.length;i++)
 		{
@@ -132,7 +141,7 @@ public class RectoratIMPL extends RectoratPOA {
 			
 			//test si université est dans le rectorat de l'étudiant
 			if(lv[i].formationVoeu.nomRectorat.equals(this.nomRectorat))
-			{System.out.println("000" );
+			{
 				
 				//Avant tout! la candidature est elle valide?
 				if(CandidatureConforme(etu.formation.NomFormation,lv[i].formationVoeu.NomFormation))
@@ -141,17 +150,20 @@ public class RectoratIMPL extends RectoratPOA {
 					//postule-t-il dans son université? si oui pas de transfert de dossier
 					if(lv[i].formationVoeu.nomUniv.equals(etu.nomUniv))
 					{	
-						System.out.println("ca va.." );
+						
 						univEtudiant.envoyerCandidature(etu.ineEtudiant, lv[i]);
 					}
 					//sinon bin on récupere le dossier dans luniv de letudiant
 					//et on lenvoi a lautre univ qui est, elle aussi dans le rectorat
 					else
 					{
-						System.out.println("ca va pas..." );
+						
 						dossierEtu=univEtudiant.madDossier(etu.ineEtudiant);
+						System.out.println("ici?" );
 						Universite univPostuler =GetUniversiteDansRecorat(lv[i].formationVoeu.nomUniv);
+						System.out.println("ou encor la" );
 						univPostuler.envoyerCandidatureD(dossierEtu, etu.ineEtudiant, lv[i]);
+						System.out.println("comprend rien --.-" );
 					}
 				}
 				else
@@ -166,9 +178,9 @@ public class RectoratIMPL extends RectoratPOA {
 			else
 			{
 
-				System.out.println("amel theori" );
+				
 				Rectorat recorat_a_Joindre=MonMinistere.recupererRectorat(lv[i].formationVoeu.nomRectorat);
-				System.out.println("amel theori2" );
+				System.out.println("amel theori2"+nomRectorat );
 				dossierEtu=univEtudiant.madDossier(etu.ineEtudiant);
 				System.out.println("amel theori3" );
 				recorat_a_Joindre.transfertDossier(dossierEtu, lv[i]);
@@ -189,7 +201,7 @@ public class RectoratIMPL extends RectoratPOA {
 			throws DonneesInvalides {
 		// TODO Auto-generated method stub
 		
-
+		LesGDV.get(String.valueOf(voeu.numerogdv)).transmettreDecisionCandidatureRectorat(ine, voeu);
 	}
 
 	@Override

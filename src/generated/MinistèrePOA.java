@@ -28,26 +28,41 @@ public abstract class MinistèrePOA extends org.omg.PortableServer.Servant
         return _ids_list;
     }
 
+    private static final java.util.Map operationMap = new java.util.HashMap();
+
+    static {
+            operationMap.put("EnregistrerRectoratEtudiant",
+                    new Operation_EnregistrerRectoratEtudiant());
+            operationMap.put("GetRectoratEtudiant",
+                    new Operation_GetRectoratEtudiant());
+            operationMap.put("InscriptionGDVDansRectorats",
+                    new Operation_InscriptionGDVDansRectorats());
+            operationMap.put("deliberationJury",
+                    new Operation_deliberationJury());
+            operationMap.put("depotDesFormationsRectorat",
+                    new Operation_depotDesFormationsRectorat());
+            operationMap.put("inscriptionRectorat",
+                    new Operation_inscriptionRectorat());
+            operationMap.put("madDesFormationsFrance",
+                    new Operation_madDesFormationsFrance());
+            operationMap.put("rectoratRattacherUniv",
+                    new Operation_rectoratRattacherUniv());
+            operationMap.put("recupererRectorat",
+                    new Operation_recupererRectorat());
+    }
+
     public final org.omg.CORBA.portable.OutputStream _invoke(final String opName,
             final org.omg.CORBA.portable.InputStream _is,
             final org.omg.CORBA.portable.ResponseHandler handler)
     {
 
-        if (opName.equals("deliberationJury")) {
-                return _invoke_deliberationJury(_is, handler);
-        } else if (opName.equals("depotDesFormationsRectorat")) {
-                return _invoke_depotDesFormationsRectorat(_is, handler);
-        } else if (opName.equals("inscriptionRectorat")) {
-                return _invoke_inscriptionRectorat(_is, handler);
-        } else if (opName.equals("madDesFormationsFrance")) {
-                return _invoke_madDesFormationsFrance(_is, handler);
-        } else if (opName.equals("rectoratRattacherUniv")) {
-                return _invoke_rectoratRattacherUniv(_is, handler);
-        } else if (opName.equals("recupererRectorat")) {
-                return _invoke_recupererRectorat(_is, handler);
-        } else {
+        final AbstractOperation operation = (AbstractOperation)operationMap.get(opName);
+
+        if (null == operation) {
             throw new org.omg.CORBA.BAD_OPERATION(opName);
         }
+
+        return operation.invoke(this, _is, handler);
     }
 
     // helper methods
@@ -153,6 +168,154 @@ public abstract class MinistèrePOA extends org.omg.PortableServer.Servant
         _output = handler.createReply();
 
         return _output;
+    }
+
+    private org.omg.CORBA.portable.OutputStream _invoke_GetRectoratEtudiant(
+            final org.omg.CORBA.portable.InputStream _is,
+            final org.omg.CORBA.portable.ResponseHandler handler) {
+        org.omg.CORBA.portable.OutputStream _output;
+        String arg0_in = _is.read_string();
+
+        try
+        {
+            generated.Rectorat _arg_result = GetRectoratEtudiant(arg0_in);
+
+            _output = handler.createReply();
+            generated.RectoratHelper.write(_output,_arg_result);
+
+        }
+        catch (generated.DonneesInvalides _exception)
+        {
+            _output = handler.createExceptionReply();
+            generated.DonneesInvalidesHelper.write(_output,_exception);
+        }
+        return _output;
+    }
+
+    private org.omg.CORBA.portable.OutputStream _invoke_EnregistrerRectoratEtudiant(
+            final org.omg.CORBA.portable.InputStream _is,
+            final org.omg.CORBA.portable.ResponseHandler handler) {
+        org.omg.CORBA.portable.OutputStream _output;
+        String arg0_in = _is.read_string();
+        generated.Rectorat arg1_in = generated.RectoratHelper.read(_is);
+
+        EnregistrerRectoratEtudiant(arg0_in, arg1_in);
+
+        _output = handler.createReply();
+
+        return _output;
+    }
+
+    private org.omg.CORBA.portable.OutputStream _invoke_InscriptionGDVDansRectorats(
+            final org.omg.CORBA.portable.InputStream _is,
+            final org.omg.CORBA.portable.ResponseHandler handler) {
+        org.omg.CORBA.portable.OutputStream _output;
+        short arg0_in = _is.read_short();
+        generated.GestionDesVoeux arg1_in = generated.GestionDesVoeuxHelper.read(_is);
+
+        InscriptionGDVDansRectorats(arg0_in, arg1_in);
+
+        _output = handler.createReply();
+
+        return _output;
+    }
+
+    // operation classes
+    private abstract static class AbstractOperation {
+        protected abstract org.omg.CORBA.portable.OutputStream invoke(
+                MinistèrePOA target,
+                org.omg.CORBA.portable.InputStream _is,
+                org.omg.CORBA.portable.ResponseHandler handler);
+    }
+
+    private static final class Operation_madDesFormationsFrance extends AbstractOperation
+    {
+        protected org.omg.CORBA.portable.OutputStream invoke(
+                final MinistèrePOA target,
+                final org.omg.CORBA.portable.InputStream _is,
+                final org.omg.CORBA.portable.ResponseHandler handler) {
+            return target._invoke_madDesFormationsFrance(_is, handler);
+        }
+    }
+
+    private static final class Operation_depotDesFormationsRectorat extends AbstractOperation
+    {
+        protected org.omg.CORBA.portable.OutputStream invoke(
+                final MinistèrePOA target,
+                final org.omg.CORBA.portable.InputStream _is,
+                final org.omg.CORBA.portable.ResponseHandler handler) {
+            return target._invoke_depotDesFormationsRectorat(_is, handler);
+        }
+    }
+
+    private static final class Operation_inscriptionRectorat extends AbstractOperation
+    {
+        protected org.omg.CORBA.portable.OutputStream invoke(
+                final MinistèrePOA target,
+                final org.omg.CORBA.portable.InputStream _is,
+                final org.omg.CORBA.portable.ResponseHandler handler) {
+            return target._invoke_inscriptionRectorat(_is, handler);
+        }
+    }
+
+    private static final class Operation_recupererRectorat extends AbstractOperation
+    {
+        protected org.omg.CORBA.portable.OutputStream invoke(
+                final MinistèrePOA target,
+                final org.omg.CORBA.portable.InputStream _is,
+                final org.omg.CORBA.portable.ResponseHandler handler) {
+            return target._invoke_recupererRectorat(_is, handler);
+        }
+    }
+
+    private static final class Operation_rectoratRattacherUniv extends AbstractOperation
+    {
+        protected org.omg.CORBA.portable.OutputStream invoke(
+                final MinistèrePOA target,
+                final org.omg.CORBA.portable.InputStream _is,
+                final org.omg.CORBA.portable.ResponseHandler handler) {
+            return target._invoke_rectoratRattacherUniv(_is, handler);
+        }
+    }
+
+    private static final class Operation_deliberationJury extends AbstractOperation
+    {
+        protected org.omg.CORBA.portable.OutputStream invoke(
+                final MinistèrePOA target,
+                final org.omg.CORBA.portable.InputStream _is,
+                final org.omg.CORBA.portable.ResponseHandler handler) {
+            return target._invoke_deliberationJury(_is, handler);
+        }
+    }
+
+    private static final class Operation_GetRectoratEtudiant extends AbstractOperation
+    {
+        protected org.omg.CORBA.portable.OutputStream invoke(
+                final MinistèrePOA target,
+                final org.omg.CORBA.portable.InputStream _is,
+                final org.omg.CORBA.portable.ResponseHandler handler) {
+            return target._invoke_GetRectoratEtudiant(_is, handler);
+        }
+    }
+
+    private static final class Operation_EnregistrerRectoratEtudiant extends AbstractOperation
+    {
+        protected org.omg.CORBA.portable.OutputStream invoke(
+                final MinistèrePOA target,
+                final org.omg.CORBA.portable.InputStream _is,
+                final org.omg.CORBA.portable.ResponseHandler handler) {
+            return target._invoke_EnregistrerRectoratEtudiant(_is, handler);
+        }
+    }
+
+    private static final class Operation_InscriptionGDVDansRectorats extends AbstractOperation
+    {
+        protected org.omg.CORBA.portable.OutputStream invoke(
+                final MinistèrePOA target,
+                final org.omg.CORBA.portable.InputStream _is,
+                final org.omg.CORBA.portable.ResponseHandler handler) {
+            return target._invoke_InscriptionGDVDansRectorats(_is, handler);
+        }
     }
 
 }

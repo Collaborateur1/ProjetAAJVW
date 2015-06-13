@@ -184,7 +184,8 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 	@Override
 	public dossierEtudiant madDossier(String ine) {
 		// TODO Auto-generated method stub
-		return DossierCandidatureEtudiant.get(ine);
+		System.out.println("*ine***********************************************"+ine);
+		return DossierEtudiant.get(ine);
 	}
 
 	@Override
@@ -384,6 +385,8 @@ public void ajouterEtudiant(String ine, dossierEtudiant dossier)
 {
 		
 	DossierEtudiant.put(ine, dossier);
+	ministere.EnregistrerRectoratEtudiant(ine, recto);
+	
 	
 }
 

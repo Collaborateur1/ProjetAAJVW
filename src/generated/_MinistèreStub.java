@@ -337,4 +337,162 @@ public class _MinistèreStub extends org.omg.CORBA.portable.ObjectImpl
         }
     }
 
+    /**
+     * Operation GetRectoratEtudiant
+     */
+    public generated.Rectorat GetRectoratEtudiant(String ine)
+        throws generated.DonneesInvalides
+    {
+        while(true)
+        {
+            if (!this._is_local())
+            {
+                org.omg.CORBA.portable.InputStream _input = null;
+                try
+                {
+                    org.omg.CORBA.portable.OutputStream _output = this._request("GetRectoratEtudiant",true);
+                    _output.write_string(ine);
+                    _input = this._invoke(_output);
+                    generated.Rectorat _arg_ret = generated.RectoratHelper.read(_input);
+                    return _arg_ret;
+                }
+                catch(org.omg.CORBA.portable.RemarshalException _exception)
+                {
+                    continue;
+                }
+                catch(org.omg.CORBA.portable.ApplicationException _exception)
+                {
+                    String _exception_id = _exception.getId();
+                    if (_exception_id.equals(generated.DonneesInvalidesHelper.id()))
+                    {
+                        throw generated.DonneesInvalidesHelper.read(_exception.getInputStream());
+                    }
+
+                    throw new org.omg.CORBA.UNKNOWN("Unexpected User Exception: "+ _exception_id);
+                }
+                finally
+                {
+                    this._releaseReply(_input);
+                }
+            }
+            else
+            {
+                org.omg.CORBA.portable.ServantObject _so = _servant_preinvoke("GetRectoratEtudiant",_opsClass);
+                if (_so == null)
+                   continue;
+                generated.MinistèreOperations _self = (generated.MinistèreOperations) _so.servant;
+                try
+                {
+                    return _self.GetRectoratEtudiant( ine);
+                }
+                finally
+                {
+                    _servant_postinvoke(_so);
+                }
+            }
+        }
+    }
+
+    /**
+     * Operation EnregistrerRectoratEtudiant
+     */
+    public void EnregistrerRectoratEtudiant(String ine, generated.Rectorat recto)
+    {
+        while(true)
+        {
+            if (!this._is_local())
+            {
+                org.omg.CORBA.portable.InputStream _input = null;
+                try
+                {
+                    org.omg.CORBA.portable.OutputStream _output = this._request("EnregistrerRectoratEtudiant",true);
+                    _output.write_string(ine);
+                    generated.RectoratHelper.write(_output,recto);
+                    _input = this._invoke(_output);
+                    return;
+                }
+                catch(org.omg.CORBA.portable.RemarshalException _exception)
+                {
+                    continue;
+                }
+                catch(org.omg.CORBA.portable.ApplicationException _exception)
+                {
+                    String _exception_id = _exception.getId();
+                    throw new org.omg.CORBA.UNKNOWN("Unexpected User Exception: "+ _exception_id);
+                }
+                finally
+                {
+                    this._releaseReply(_input);
+                }
+            }
+            else
+            {
+                org.omg.CORBA.portable.ServantObject _so = _servant_preinvoke("EnregistrerRectoratEtudiant",_opsClass);
+                if (_so == null)
+                   continue;
+                generated.MinistèreOperations _self = (generated.MinistèreOperations) _so.servant;
+                try
+                {
+                    _self.EnregistrerRectoratEtudiant( ine,  recto);
+                    return;
+                }
+                finally
+                {
+                    _servant_postinvoke(_so);
+                }
+            }
+        }
+    }
+
+    /**
+     * Operation InscriptionGDVDansRectorats
+     */
+    public void InscriptionGDVDansRectorats(short num, generated.GestionDesVoeux gdv)
+    {
+        while(true)
+        {
+            if (!this._is_local())
+            {
+                org.omg.CORBA.portable.InputStream _input = null;
+                try
+                {
+                    org.omg.CORBA.portable.OutputStream _output = this._request("InscriptionGDVDansRectorats",true);
+                    _output.write_short(num);
+                    generated.GestionDesVoeuxHelper.write(_output,gdv);
+                    _input = this._invoke(_output);
+                    return;
+                }
+                catch(org.omg.CORBA.portable.RemarshalException _exception)
+                {
+                    continue;
+                }
+                catch(org.omg.CORBA.portable.ApplicationException _exception)
+                {
+                    String _exception_id = _exception.getId();
+                    throw new org.omg.CORBA.UNKNOWN("Unexpected User Exception: "+ _exception_id);
+                }
+                finally
+                {
+                    this._releaseReply(_input);
+                }
+            }
+            else
+            {
+                org.omg.CORBA.portable.ServantObject _so = _servant_preinvoke("InscriptionGDVDansRectorats",_opsClass);
+                if (_so == null)
+                   continue;
+                generated.MinistèreOperations _self = (generated.MinistèreOperations) _so.servant;
+                try
+                {
+                    _self.InscriptionGDVDansRectorats( num,  gdv);
+                    return;
+                }
+                finally
+                {
+                    _servant_postinvoke(_so);
+                }
+            }
+        }
+    }
+
 }

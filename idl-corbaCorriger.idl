@@ -282,6 +282,12 @@ interface Universite {
 		/**modif**/
 		void deliberationJury();
 		
+		Rectorat GetRectoratEtudiant(in string ine)raises(DonneesInvalides);
+		
+		void EnregistrerRectoratEtudiant(in string ine, in Rectorat recto);
+		
+		void InscriptionGDVDansRectorats(in short num ,  in GestionDesVoeux gdv);
+		
 	};
 
 	//Une Université possède un ensemble de Formation

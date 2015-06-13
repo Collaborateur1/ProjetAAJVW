@@ -44,7 +44,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	Hashtable<String,ArrayList<Voeu>>ListeVoeuxEtudiant;
 	GestionDesProfils gdpRattache;
 	LoadBalancerEtudiant loadBalancer;
-	Rectorat rect;
 	Ministère ministere;
 	Formation[] listeFormation;
 	
@@ -70,11 +69,12 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 				NamingServiceTool.getReferenceIntoNS("Ministere"));
 		System.out.println("Reférérence ministere recuperee" );
 		
-		rect=ministere.recupererRectorat("rectorat");
+		
 		listeFormation =ministere.madDesFormationsFrance();
 		gdpRattache = loadBalancer.getServProfil(numServ);
 		GestionDesVoeux thisdGdv=GestionDesVoeuxHelper.narrow(rootPOA.servant_to_reference(this));
-		rect.inscriptionGDV(numServ,thisdGdv);
+		
+		ministere.InscriptionGDVDansRectorats(numServ, thisdGdv);
 		/*3) ici je rajoute la classe GestionDesVoeuxIMPL dans le gestion des profils*/
 		//c'est ici que l'on caste GestionDesVoeuxIMPL en GestionDesVoeux GestionDesVoeuxHelper.narrow(rootPOA.servant_to_reference(this))s
 		/*3*/gdpRattache.inscriptionGestionDesVoeux(thisdGdv);
@@ -332,7 +332,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 				}
 				try {
 					System.out.println("rectorat encore!");
-					rect.envoyerListeVoeuxGDV(tabVoeu, et);
+					ministere.GetRectoratEtudiant(ine).envoyerListeVoeuxGDV(tabVoeu, et);
 					System.out.println("kaka");
 					ListeEtudiant.get(ine).lancementVague((short) 1);
 					

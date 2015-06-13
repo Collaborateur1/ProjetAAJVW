@@ -19,6 +19,8 @@ public class MinistereIMPL extends MinistèrePOA {
 	//La liste des rectorats 
 	Hashtable<String,Rectorat>ListeRectorat;
 	
+	Hashtable<String,Rectorat>IneRectorat;
+	
 	//La liste des formation
 	ArrayList<Formation> ListeFormation;
 
@@ -37,6 +39,7 @@ public class MinistereIMPL extends MinistèrePOA {
 		ListeRectorat = new Hashtable<String,Rectorat>();
 		//La liste des formation
 		ListeFormation=new ArrayList<Formation>();
+		IneRectorat=new Hashtable<String, Rectorat>();
 		NamingServiceTool.putReferenceIntoNS(orb,"Ministere", this);
 	/*	rootPOA = org.omg.PortableServer.POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
 
@@ -59,6 +62,21 @@ for(int i=0;i<this.ListeFormation.size();i++)
 
 
 		return Forma;
+	}
+	
+
+	@Override
+	public Rectorat GetRectoratEtudiant(String ine) throws DonneesInvalides {
+		// TODO Auto-generated method stub
+		
+		return IneRectorat.get(ine);
+	}
+
+	@Override
+	public void EnregistrerRectoratEtudiant(String ine, Rectorat recto) {
+		// TODO Auto-generated method stub
+		IneRectorat.put(ine, recto);
+		
 	}
 	
 	@Override
@@ -129,6 +147,19 @@ for(int i=0;i<this.ListeFormation.size();i++)
 	public static void main(String[] args) {
 		
 	}
+
+	@Override
+	public void InscriptionGDVDansRectorats(short num, GestionDesVoeux gdv) {
+		// TODO Auto-generated method stub
+		Enumeration<Rectorat> ele =ListeRectorat.elements();
+		
+		while(ele.hasMoreElements())
+		{
+			ele.nextElement().inscriptionGDV(num, gdv);
+		}
+		
+	}
+
 
 
 
