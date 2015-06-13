@@ -322,7 +322,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 				}
 				else{
 					try {
-						recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(ineAdmis.nextElement()).etu, voeuEtu);
+						recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(ineAttente.get(i)).etu, voeuEtu);
 					} catch (DonneesInvalides e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

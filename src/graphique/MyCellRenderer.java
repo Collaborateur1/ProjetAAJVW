@@ -68,13 +68,13 @@ class MyCellRenderer extends JLabel implements ListCellRenderer<Object> {
 				cl.bouttonchoix(false);	
 			}
 			
-			if(vx.etatVoeu==etatvoeux.valide)
+			if(vx.etatVoeu==etatvoeux.accepter)
 			{
-				cl.BoutonAccepterRefuser(true);
+				cl.bouttonchoix(true);
 			}
 			else
 			{
-				cl.BoutonAccepterRefuser(false);
+				cl.bouttonchoix(false);
 			}
 			
 			setText("ordre: "+vx.numeroVoeu+" Université:"+vx.formationVoeu.nomUniv+" type de formation:"+vx.formationVoeu.TypeFormation);

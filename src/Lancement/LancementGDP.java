@@ -16,14 +16,7 @@ public class LancementGDP {
 
 	public LancementGDP(org.omg.CORBA.ORB orb) throws DonneesInvalides, InvalidName, ServantNotActive, WrongPolicy, ServantAlreadyActive, AdapterInactive
 	{
-		short sh=1;
-		GestionDesProfilsIMPL gdpimpl=new GestionDesProfilsIMPL(sh,orb,"rectorat");
-		Formation fr= new Formation("jespere"," NomFormation", "TypeFormation", "nomRectorat", (short)10);
-		Etudiant etu=new Etudiant("patric","francoi","G101","UT3","la rue",fr);
-		gdpimpl.setProfil(etu);
-		Formation fr2= new Formation("jespere2"," NomFormation2", "TypeFormation2", "nomRectorat2",(short)5);
-		 etu=new Etudiant("jv","boss","G102","UT1","la volga",fr2);
-		 gdpimpl.setProfil(etu);
+		
 	}
 	
 	
@@ -32,13 +25,6 @@ public class LancementGDP {
 		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(new String[0],null);
         short sh=1;
 		GestionDesProfilsIMPL gdpimpl=new GestionDesProfilsIMPL(sh,orb,"rectorat");
-		
-
-		Formation fr2= new Formation("UT3","NomFormation", "TypeFormation2", "rectorat",(short)5);
-		
-		Etudiant etu=new Etudiant("jv","boss","G102","UT3","la volga",fr2);
-
-		// gdpimpl.setProfil(etu);
 		
 		orb.run();
 	}

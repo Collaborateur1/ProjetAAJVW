@@ -67,7 +67,7 @@ public class LancementUniversite {
 			UniversiteIMPL univ= new UniversiteIMPL("UT3","rectorat",orb);
 			System.out.println("univ UT3 operationel");
 			Formation fr= new Formation("UT3","NomFormation", "TypeFormation", "rectorat", (short)2);
-			Formation frr= new Formation("UT3","chimi", "TypeFormation", "rectorat", (short)2);
+			Formation frr= new Formation("UT3","chimi", "TypeFormation", "rectorat", (short)1);
 			Etudiant etu2=new Etudiant("toto","titi","G102","UT3","lavenue",fr);
 			
 			Resultat resultat1=new Resultat((short)1,15, (short)10,(short)5);

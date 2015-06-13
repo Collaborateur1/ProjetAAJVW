@@ -823,12 +823,7 @@ public class Client extends javax.swing.JFrame {
 		jButton5.setEnabled(false);
 	}
 	
-	public void BoutonAccepterRefuser(boolean bl)
-	{
-		jButton8.setEnabled(bl);
-		jButton9.setEnabled(bl);
-		
-	}
+	
 	public void bouttonchoix(boolean b)
 	{
 		jButton10.setEnabled(b);

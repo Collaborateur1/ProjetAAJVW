@@ -91,7 +91,7 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 			}
 
 		}
-
+System.out.println("*************************");
 		return false;
 	}
 
@@ -188,9 +188,9 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 
 	public void setProfil(Etudiant etu)
 	{
-		etudiantinscrit.put(etu.ineEtudiant,etu);
+		/*etudiantinscrit.put(etu.ineEtudiant,etu);
 
-		CodeEtudiantInscrit.put(etu.ineEtudiant,"1234");
+		CodeEtudiantInscrit.put(etu.ineEtudiant,"1234");*/
 
 	}
 
