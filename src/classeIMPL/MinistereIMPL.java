@@ -86,6 +86,20 @@ for(int i=0;i<this.ListeFormation.size();i++)
 	}
 	
 	@Override
+	public void deliberationJuryFinal() {
+		// TODO Auto-generated method stub
+Enumeration ListeRectorat=this.ListeRectorat.elements();
+		
+		while(ListeRectorat.hasMoreElements())
+		{
+			Rectorat rt=null;
+			
+			rt=(Rectorat) ListeRectorat.nextElement();
+			rt.deliberationJuryFinal();
+		}
+	}
+	
+	@Override
 	public void inscriptionRectorat(String nomRectorat, Rectorat iorRectorat)throws DonneesInvalides {
 		// TODO Auto-generated method stub
 		//On rajoute le rectorat dans le ministère
@@ -159,6 +173,8 @@ for(int i=0;i<this.ListeFormation.size();i++)
 		}
 		
 	}
+
+	
 
 
 

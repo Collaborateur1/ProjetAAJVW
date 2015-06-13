@@ -493,6 +493,55 @@ public class _RectoratStub extends org.omg.CORBA.portable.ObjectImpl
     }
 
     /**
+     * Operation deliberationJuryFinal
+     */
+    public void deliberationJuryFinal()
+    {
+        while(true)
+        {
+            if (!this._is_local())
+            {
+                org.omg.CORBA.portable.InputStream _input = null;
+                try
+                {
+                    org.omg.CORBA.portable.OutputStream _output = this._request("deliberationJuryFinal",true);
+                    _input = this._invoke(_output);
+                    return;
+                }
+                catch(org.omg.CORBA.portable.RemarshalException _exception)
+                {
+                    continue;
+                }
+                catch(org.omg.CORBA.portable.ApplicationException _exception)
+                {
+                    String _exception_id = _exception.getId();
+                    throw new org.omg.CORBA.UNKNOWN("Unexpected User Exception: "+ _exception_id);
+                }
+                finally
+                {
+                    this._releaseReply(_input);
+                }
+            }
+            else
+            {
+                org.omg.CORBA.portable.ServantObject _so = _servant_preinvoke("deliberationJuryFinal",_opsClass);
+                if (_so == null)
+                   continue;
+                generated.RectoratOperations _self = (generated.RectoratOperations) _so.servant;
+                try
+                {
+                    _self.deliberationJuryFinal();
+                    return;
+                }
+                finally
+                {
+                    _servant_postinvoke(_so);
+                }
+            }
+        }
+    }
+
+    /**
      * Operation getFicheEtudiant
      */
     public generated.Etudiant getFicheEtudiant(String ine)

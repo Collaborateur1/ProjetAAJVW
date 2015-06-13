@@ -86,6 +86,20 @@ public class RectoratIMPL extends RectoratPOA {
 	}
 
 	@Override
+	public void deliberationJuryFinal() {
+		// TODO Auto-generated method stub
+		Enumeration<Universite> ListeUniv=this.ListeListUniversite.elements();
+
+		while(ListeUniv.hasMoreElements())
+		{
+			Universite Un=null;
+
+			Un= ListeUniv.nextElement();
+			Un.deliberationFinal();
+		}
+	}
+	
+	@Override
 	public void transfertDossier(dossierEtudiant dossierEtu, Voeu voeu) {
 
 		// TODO Auto-generated method stub
@@ -97,9 +111,12 @@ public class RectoratIMPL extends RectoratPOA {
 		{	
 
 			try {
+				
 				Universite universiteAcontacter;	
 				universiteAcontacter =ListeListUniversite.get(voeu.formationVoeu.nomUniv);
 				universiteAcontacter.envoyerCandidatureD(dossierEtu,dossierEtu.etu.ineEtudiant, voeu);
+				voeu.etatVoeu=etatvoeux.valide;
+				this.envoyerDecisionCandidatureRectorat(dossierEtu.etu.ineEtudiant, voeu);
 
 			} catch (DonneesInvalides e) {
 				// TODO Auto-generated catch block
@@ -165,6 +182,8 @@ public class RectoratIMPL extends RectoratPOA {
 						univPostuler.envoyerCandidatureD(dossierEtu, etu.ineEtudiant, lv[i]);
 						System.out.println("comprend rien --.-" );
 					}
+					lv[i].etatVoeu = etatvoeux.valide;
+					LesGDV.get(String.valueOf(lv[i].numerogdv)).transmettreDecisionCandidatureRectorat(etu.ineEtudiant, lv[i]);
 				}
 				else
 				{
@@ -216,7 +235,7 @@ public class RectoratIMPL extends RectoratPOA {
 			//Pour faire simple..le numero de voeu correspond a son GDV comme sa
 			//facile de le retrouver
 			GestionDesVoeux Gdv;
-			Gdv=LesGDV.get(String.valueOf(voeu.numeroVoeu));
+			Gdv=LesGDV.get(String.valueOf(voeu.numerogdv));
 			Gdv.transmettreDecisionCandidatureRectorat(etu.ineEtudiant, voeu);
 		}
 		//sinnon faut le passer au bon recorat
@@ -348,6 +367,8 @@ public class RectoratIMPL extends RectoratPOA {
 		ValidationFormation.put(formation.NomFormation, Prereq);
 		MonMinistere.depotDesFormationsRectorat(formation);
 	}
+
+	
 
 	
 

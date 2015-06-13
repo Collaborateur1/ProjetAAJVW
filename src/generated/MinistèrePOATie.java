@@ -138,4 +138,12 @@ public class MinistèrePOATie extends MinistèrePOA
         _tie.InscriptionGDVDansRectorats( num,  gdv);
     }
 
+    /**
+     * Operation deliberationJuryFinal
+     */
+    public void deliberationJuryFinal()
+    {
+        _tie.deliberationJuryFinal();
+    }
+
 }

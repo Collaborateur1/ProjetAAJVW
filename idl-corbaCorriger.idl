@@ -246,6 +246,7 @@ interface Universite {
 		
         //**modif**//
 		void deliberationJury();
+		void deliberationJuryFinal();
 		
 		//Quand un étudiant s'inscrit on récupere son profil pour le mettre dans gestion des profils ici
 		//appelé par GDP
@@ -287,6 +288,8 @@ interface Universite {
 		void EnregistrerRectoratEtudiant(in string ine, in Rectorat recto);
 		
 		void InscriptionGDVDansRectorats(in short num ,  in GestionDesVoeux gdv);
+		
+		void deliberationJuryFinal();
 		
 	};
 

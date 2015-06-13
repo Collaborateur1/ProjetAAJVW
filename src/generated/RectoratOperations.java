@@ -58,6 +58,11 @@ public interface RectoratOperations
     public void deliberationJury();
 
     /**
+     * Operation deliberationJuryFinal
+     */
+    public void deliberationJuryFinal();
+
+    /**
      * Operation getFicheEtudiant
      */
     public generated.Etudiant getFicheEtudiant(String ine)

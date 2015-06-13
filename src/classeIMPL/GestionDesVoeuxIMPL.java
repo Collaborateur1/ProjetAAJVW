@@ -347,6 +347,10 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		{
 			ministere.deliberationJury();
 		}
+		else if(numero==3)
+		{
+			ministere.deliberationJuryFinal();
+		}
 	}
 
 

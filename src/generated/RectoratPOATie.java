@@ -139,6 +139,14 @@ public class RectoratPOATie extends RectoratPOA
     }
 
     /**
+     * Operation deliberationJuryFinal
+     */
+    public void deliberationJuryFinal()
+    {
+        _tie.deliberationJuryFinal();
+    }
+
+    /**
      * Operation getFicheEtudiant
      */
     public generated.Etudiant getFicheEtudiant(String ine)

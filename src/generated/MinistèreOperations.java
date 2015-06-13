@@ -56,4 +56,9 @@ public interface MinistèreOperations
      */
     public void InscriptionGDVDansRectorats(short num, generated.GestionDesVoeux gdv);
 
+    /**
+     * Operation deliberationJuryFinal
+     */
+    public void deliberationJuryFinal();
+
 }

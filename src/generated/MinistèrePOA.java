@@ -39,6 +39,8 @@ public abstract class MinistèrePOA extends org.omg.PortableServer.Servant
                     new Operation_InscriptionGDVDansRectorats());
             operationMap.put("deliberationJury",
                     new Operation_deliberationJury());
+            operationMap.put("deliberationJuryFinal",
+                    new Operation_deliberationJuryFinal());
             operationMap.put("depotDesFormationsRectorat",
                     new Operation_depotDesFormationsRectorat());
             operationMap.put("inscriptionRectorat",
@@ -220,6 +222,18 @@ public abstract class MinistèrePOA extends org.omg.PortableServer.Servant
         return _output;
     }
 
+    private org.omg.CORBA.portable.OutputStream _invoke_deliberationJuryFinal(
+            final org.omg.CORBA.portable.InputStream _is,
+            final org.omg.CORBA.portable.ResponseHandler handler) {
+        org.omg.CORBA.portable.OutputStream _output;
+
+        deliberationJuryFinal();
+
+        _output = handler.createReply();
+
+        return _output;
+    }
+
     // operation classes
     private abstract static class AbstractOperation {
         protected abstract org.omg.CORBA.portable.OutputStream invoke(
@@ -315,6 +329,16 @@ public abstract class MinistèrePOA extends org.omg.PortableServer.Servant
                 final org.omg.CORBA.portable.InputStream _is,
                 final org.omg.CORBA.portable.ResponseHandler handler) {
             return target._invoke_InscriptionGDVDansRectorats(_is, handler);
+        }
+    }
+
+    private static final class Operation_deliberationJuryFinal extends AbstractOperation
+    {
+        protected org.omg.CORBA.portable.OutputStream invoke(
+                final MinistèrePOA target,
+                final org.omg.CORBA.portable.InputStream _is,
+                final org.omg.CORBA.portable.ResponseHandler handler) {
+            return target._invoke_deliberationJuryFinal(_is, handler);
         }
     }
 

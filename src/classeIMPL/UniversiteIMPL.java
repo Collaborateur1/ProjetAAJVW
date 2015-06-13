@@ -213,6 +213,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 		Double Moyenne = (double) 0;
 		int nb;
 		String nomFormationCourante;
+		dossierEtudiant DossEtu;
 		//Récupere la liste des formations
 		Enumeration ListeFormation  = ListeCandidatureParFormation.keys();
 		while(ListeFormation.hasMoreElements()){
@@ -220,12 +221,20 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 			System.out.println("nom formation"+nomFormationCourante);
 			//récupère la liste des ine des étudiants candidats à cette formation
 			ArrayList<String> ListeCandidature = ListeCandidatureParFormation.get(nomFormationCourante);
+			System.out.println("nb candidat"+ListeCandidature.size());
 			for(int i=0 ; i < ListeCandidature.size() ; i++){
+				System.out.println("candidat"+ListeCandidature.get(i));
 				//Récupère le dossier de l'étudiant
-				dossierEtudiant DossEtu = DossierCandidatureEtudiant.get(ListeCandidature.get(i));
-							
+				//On vérifie si l'etudiant postule dans son universite
+				if (DossierCandidatureEtudiant.containsKey(ListeCandidature.get(i)))
+					DossEtu = DossierCandidatureEtudiant.get(ListeCandidature.get(i));
+				else 
+					DossEtu = DossierEtudiant.get(ListeCandidature.get(i));
+				
+				System.out.println("doss etu"+DossEtu.listnotes);			
 				//parcours les résultats
 				for (nb = 0; nb <DossEtu.listnotes.length;nb++){
+					System.out.println("doss etu"+DossEtu.listnotes.length);
 					Resultat resultat = DossEtu.listnotes[nb];
 					Moyenne = Moyenne + resultat.moyenne;
 				}

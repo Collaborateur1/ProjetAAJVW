@@ -37,6 +37,8 @@ public abstract class RectoratPOA extends org.omg.PortableServer.Servant
                     new Operation_ajoutPrerequis());
             operationMap.put("deliberationJury",
                     new Operation_deliberationJury());
+            operationMap.put("deliberationJuryFinal",
+                    new Operation_deliberationJuryFinal());
             operationMap.put("envoyerDecisionCandidatureRectorat",
                     new Operation_envoyerDecisionCandidatureRectorat());
             operationMap.put("envoyerDecisionCandidatureUniv",
@@ -222,6 +224,18 @@ public abstract class RectoratPOA extends org.omg.PortableServer.Servant
         return _output;
     }
 
+    private org.omg.CORBA.portable.OutputStream _invoke_deliberationJuryFinal(
+            final org.omg.CORBA.portable.InputStream _is,
+            final org.omg.CORBA.portable.ResponseHandler handler) {
+        org.omg.CORBA.portable.OutputStream _output;
+
+        deliberationJuryFinal();
+
+        _output = handler.createReply();
+
+        return _output;
+    }
+
     private org.omg.CORBA.portable.OutputStream _invoke_getFicheEtudiant(
             final org.omg.CORBA.portable.InputStream _is,
             final org.omg.CORBA.portable.ResponseHandler handler) {
@@ -353,6 +367,16 @@ public abstract class RectoratPOA extends org.omg.PortableServer.Servant
                 final org.omg.CORBA.portable.InputStream _is,
                 final org.omg.CORBA.portable.ResponseHandler handler) {
             return target._invoke_deliberationJury(_is, handler);
+        }
+    }
+
+    private static final class Operation_deliberationJuryFinal extends AbstractOperation
+    {
+        protected org.omg.CORBA.portable.OutputStream invoke(
+                final RectoratPOA target,
+                final org.omg.CORBA.portable.InputStream _is,
+                final org.omg.CORBA.portable.ResponseHandler handler) {
+            return target._invoke_deliberationJuryFinal(_is, handler);
         }
     }
 
