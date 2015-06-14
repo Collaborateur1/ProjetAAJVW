@@ -9,6 +9,7 @@ import org.omg.PortableServer.POAPackage.ServantAlreadyActive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
+import Databases.DBGestionDesProfils;
 import outils.NamingServiceTool;
 import generated.DonneesInvalides;
 import generated.Etudiant;
@@ -38,6 +39,7 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 	int nombreGDV;
 	LoadBalancerEtudiant loadBalancer;
 	org.omg.PortableServer.POA rootPOA;
+	DBGestionDesProfils bddGVP;
 	
 	Ministère ministere;
 

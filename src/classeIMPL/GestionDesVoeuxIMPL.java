@@ -13,6 +13,7 @@ import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
+import Databases.DBGestionDesVoeux;
 import outils.NamingServiceTool;
 import generated.DonneesInvalides;
 import generated.Etudiant;
@@ -46,6 +47,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	LoadBalancerEtudiant loadBalancer;
 	Ministère ministere;
 	Formation[] listeFormation;
+	DBGestionDesVoeux bddGDV;
 	
 	public GestionDesVoeuxIMPL(short numServ, org.omg.CORBA.ORB orb) throws InvalidName, ServantNotActive, WrongPolicy, DonneesInvalides, AdapterInactive {
 		
@@ -78,7 +80,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		//c'est ici que l'on caste GestionDesVoeuxIMPL en GestionDesVoeux GestionDesVoeuxHelper.narrow(rootPOA.servant_to_reference(this))s
 		/*3*/gdpRattache.inscriptionGestionDesVoeux(thisdGdv);
 		// TODO Auto-generated constructor stub
-	
+		bddGDV=new DBGestionDesVoeux();
 	}
 
 	@Override
@@ -212,7 +214,8 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 				ListeEtudiant.get(ine).majEtatVoeux(chargerVoeux(ine));
 				if (choixEtu.equals(decision.NONdefinitif)){
 					if(v.numeroVoeu!=(short)1)
-						{repondreAuxPropositions(ine,decision.NONdefinitif,(short)(v.numeroVoeu-1) );}
+						{
+						   repondreAuxPropositions(ine,decision.NONdefinitif,(short)(v.numeroVoeu-1) );}
 					
 					if(v.numeroVoeu==(short)1)
 					{ListeVoeuxEtudiant.remove(ine);}
