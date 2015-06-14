@@ -100,12 +100,12 @@ class MyCellRenderer extends JLabel implements ListCellRenderer<Object> {
 			if(vx.dcsEtudiant!=decision.NONutilse)
 			{
 				setText("Nom Formation:"+vx.formationVoeu.NomFormation+" Reponse:"+vx.dcsEtudiant);
-				cl.bouttonchoix(true);
+				
 			}
 			else
 			{
 				setText("Nom Formation:"+vx.formationVoeu.NomFormation+" Etat:"+vx.etatVoeu);
-				cl.bouttonchoix(false);
+				
 			}
 
 			setBackground(list.getBackground());

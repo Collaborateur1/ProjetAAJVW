@@ -82,7 +82,7 @@ public class Client extends javax.swing.JFrame {
 
 		etudiant=etu;
 		Initialisation_Element_Interface();
-
+		
 
 	}
 

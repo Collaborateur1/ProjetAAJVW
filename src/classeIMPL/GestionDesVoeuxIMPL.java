@@ -137,14 +137,31 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		// TODO Auto-generated method stub
 		ArrayList lv = ListeVoeuxEtudiant.get(ine);
 		Voeu v;
+		int nbVoeuxAafficher=0;
+		boolean voeuxValider=false;
 		
 		Voeu[] lvc = new Voeu[lv.size()];
 		for(int i=0;i<lv.size();i++)
 		{
 			v =  (Voeu) lv.get(i);
 			lvc[i] = v;
+			if(!voeuxValider &&v.etatVoeu==etatvoeux.accepter)
+			{	nbVoeuxAafficher=i+1;
+			voeuxValider=true;
+			}
+			
 		}
 		
+		if(voeuxValider)
+		{
+			Voeu[] lvc2 = new Voeu[nbVoeuxAafficher];
+			
+			for(int j=0;j<nbVoeuxAafficher; j++)
+			{
+				lvc2[j]=lvc[j];
+			}
+			return lvc2;
+		}
 		return lvc;
 	}
 

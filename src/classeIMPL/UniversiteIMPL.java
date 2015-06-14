@@ -363,10 +363,14 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 		    quota = ListeDesFormations.get(nomFormationCourante).quota;
 		    System.out.println(nomFormationCourante+" le nom de formation courante");
 			if (nbAdmis<quota){
+				
 				nbdispo = (short) (quota - nbAdmis);
 				for(int i =0; i<nbdispo; i++){ 
+					
 					System.out.println("test"+ListeDattente.size()+ NomUniv);
+					
 					if(ListeDattente.size()> 0){
+						
 						System.out.println("test"+ListeDattente.size());
 						voeuEtu = ListeVoeux.get(ListeDattente.get(nomFormationCourante).get(i)).get(nomFormationCourante);
 						System.out.println("le voeu"+ voeuEtu);
@@ -375,6 +379,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 						if (DossierEtudiant.containsKey(ListeDattente.get(nomFormationCourante).get(i))){
 							try {
 								recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(ListeDattente.get(nomFormationCourante).get(i)).etu, voeuEtu);
+								ListeAdmiParFormation.get(nomFormationCourante).put(ListeDattente.get(nomFormationCourante).get(i),10.0);
 								ListeDattente.get(nomFormationCourante).remove(i);
 							} catch (DonneesInvalides e) {
 								// TODO Auto-generated catch block
@@ -384,6 +389,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 						else{
 							try {
 								recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(ListeDattente.get(nomFormationCourante).get(i)).etu, voeuEtu);
+								ListeAdmiParFormation.get(nomFormationCourante).put(ListeDattente.get(nomFormationCourante).get(i),10.0);
 								ListeDattente.get(nomFormationCourante).remove(i);
 							} catch (DonneesInvalides e) {
 								// TODO Auto-generated catch block
