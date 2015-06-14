@@ -14,7 +14,8 @@ import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
-import Databases.DBGestionDesVoeux;
+
+//import Databases.DBGestionDesVoeux;
 import outils.NamingServiceTool;
 import generated.DonneesInvalides;
 import generated.Etudiant;
@@ -48,7 +49,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	LoadBalancerEtudiant loadBalancer;
 	Ministère ministere;
 	Formation[] listeFormation;
-	DBGestionDesVoeux bddGDV;
+	//DBGestionDesVoeux bddGDV;
 	
 	public GestionDesVoeuxIMPL(short numServ, org.omg.CORBA.ORB orb) throws InvalidName, ServantNotActive, WrongPolicy, DonneesInvalides, AdapterInactive {
 		
@@ -81,7 +82,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		//c'est ici que l'on caste GestionDesVoeuxIMPL en GestionDesVoeux GestionDesVoeuxHelper.narrow(rootPOA.servant_to_reference(this))s
 		/*3*/gdpRattache.inscriptionGestionDesVoeux(thisdGdv);
 		// TODO Auto-generated constructor stub
-		bddGDV=new DBGestionDesVoeux();
+		//bddGDV=new DBGestionDesVoeux();
 	}
 
 	@Override
@@ -208,8 +209,9 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 					{
 						v.dcsEtudiant = choixEtu;
 						if(v.etatVoeu==etatvoeux.listeDattente||v.etatVoeu==etatvoeux.accepter)
-						ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,v);
-						
+							System.out.println("recto etudiant gdv" +ministere.GetRectoratEtudiant(ine) );	
+							ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,v);
+							System.out.println("ine etudiant gdv" +ine );
 					}	
 				}
 				
