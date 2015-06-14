@@ -363,7 +363,6 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 		    quota = ListeDesFormations.get(nomFormationCourante).quota;
 		    System.out.println(nomFormationCourante+" le nom de formation courante");
 			if (nbAdmis<quota){
-				
 				nbdispo = (short) (quota - nbAdmis);
 				for(int i =0; i<nbdispo; i++){ 
 					
