@@ -9,6 +9,8 @@ import org.omg.PortableServer.POAPackage.ServantAlreadyActive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
+
+import Databases.DBGestionDesProfils;
 //import Databases.DBGestionDesProfils;
 import outils.NamingServiceTool;
 import generated.DonneesInvalides;
@@ -66,7 +68,7 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 		
 
 		loadBalancer.inscriptionGDP(GestionDesProfilsHelper.narrow(rootPOA.servant_to_reference(this)), nGdp);
-		bddGVP=new DBGestionDesProfils();
+		//bddGVP=new DBGestionDesProfils();
 		// TODO Auto-generated constructor stub
 
 	}

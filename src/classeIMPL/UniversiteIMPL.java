@@ -184,7 +184,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 	@Override
 	public dossierEtudiant madDossier(String ine) {
 		// TODO Auto-generated method stub
-		System.out.println("*ine***********************************************"+ine);
+		
 		return DossierEtudiant.get(ine);
 	}
 
@@ -192,9 +192,11 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 	public void repondrePropositionvoeux(String ine, Voeu voeu)
 			throws DonneesInvalides {
 		// TODO Auto-generated method stub
-		if (voeu.dcsEtudiant.equals(decision.NONdefinitif)||voeu.dcsEtudiant.equals(decision.NONmais)){
+		System.out.println("**************************je suis dans université j'ai répondu "+voeu.dcsEtudiant+" au voeu "+voeu.formationVoeu.NomFormation+"je suis ine etudiant recto" +ine );
+	
+		if (voeu.dcsEtudiant==decision.NONdefinitif||voeu.dcsEtudiant==decision.NONmais){
 			if (ListeAdmiParFormation.get(voeu.formationVoeu.NomFormation).contains(ine)){
-				System.out.println("ine etudiant" +ListeAdmiParFormation.get(voeu.formationVoeu.NomFormation)+ine );
+				
 				ListeAdmiParFormation.get(voeu.formationVoeu.NomFormation).remove(ine);
 			}
 			else if(ListeDattente.containsKey(voeu.formationVoeu.NomFormation))

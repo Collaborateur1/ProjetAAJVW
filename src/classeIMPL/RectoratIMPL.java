@@ -266,17 +266,17 @@ public class RectoratIMPL extends RectoratPOA {
 		// TODO Auto-generated method stub
 		Universite univ;
 		Enumeration<Universite> e= ListeListUniversite.elements();
-		System.out.println("**************************je suis dans recto 1" );
+	
 		
 		while (e.hasMoreElements())
 		{
-			System.out.println("***********************je suis dans recto 2" );
+			
 			univ=e.nextElement();
 			if(univ.nomUniversite().equals(voeu.formationVoeu.nomUniv))
 			{
-				System.out.println("************************je suis dans recto 3" );
+				
 				univ.repondrePropositionvoeux(ine, voeu);
-				System.out.println("**************************ine etudiant recto" +ine );
+				System.out.println("**************************j'ai répondu "+voeu.dcsEtudiant+" au voeu "+voeu.formationVoeu.NomFormation+"je suis ine etudiant recto" +ine );
 			}
 		}
 	}

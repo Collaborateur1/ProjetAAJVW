@@ -15,6 +15,8 @@ import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
 
+
+import Databases.DBGestionDesVoeux;
 //import Databases.DBGestionDesVoeux;
 import outils.NamingServiceTool;
 import generated.DonneesInvalides;
@@ -209,9 +211,10 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 					{
 						v.dcsEtudiant = choixEtu;
 						if(v.etatVoeu==etatvoeux.listeDattente||v.etatVoeu==etatvoeux.accepter)
-							System.out.println("recto etudiant gdv" +ministere.GetRectoratEtudiant(ine) );	
+							{
 							ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,v);
-							System.out.println("ine etudiant gdv" +ine );
+							System.out.println("on passe bien la"  );	
+							}
 					}	
 				}
 				
@@ -319,12 +322,12 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			v = (Voeu) lv.get(i);
 			if(v.numeroVoeu==numeroVoeu)
 				{v.numeroVoeu = 0;
-				try {
+				/*try {
 					bddGDV.supprimerVoeux(v, ine);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
 				}
 			else if(v.numeroVoeu>numeroVoeu)
 				v.numeroVoeu--;
@@ -460,7 +463,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 public void initialisation() throws SQLException
 
 {
-	ListeVoeuxEtudiant=bddGDV.Chargervoeu();
+	//ListeVoeuxEtudiant=bddGDV.Chargervoeu();
 	
 	
 	
