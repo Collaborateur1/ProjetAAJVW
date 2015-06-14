@@ -230,14 +230,14 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 					
 				}
 				else if(choixEtu.equals(decision.NONmais)){
-					for(int i =0; i<ListeVoeuxEtudiant.size(); i++){
+					for(int i =0; i<ListeVoeuxEtudiant.get(ine).size(); i++){
 						if(ListeVoeuxEtudiant.get(ine).get(i).numeroVoeu ==numeroVoeu||ListeVoeuxEtudiant.get(ine).get(i).etatVoeu==etatvoeux.refuser){
 							ListeVoeuxEtudiant.get(ine).remove(i);
 						}
 					}
 				}
 				else if(choixEtu.equals(decision.OUIdefinitif)){
-					for(int i =0; i<ListeVoeuxEtudiant.size(); i++){
+					for(int i =0; i<ListeVoeuxEtudiant.get(ine).size(); i++){
 						if(ListeVoeuxEtudiant.get(ine).get(i).numeroVoeu <numeroVoeu)
 							{
 								
@@ -247,7 +247,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 					}
 				}
 				else{
-					for(int i =0; i<ListeVoeuxEtudiant.size(); i++){
+					for(int i =0; i<ListeVoeuxEtudiant.get(ine).size(); i++){
 						if(ListeVoeuxEtudiant.get(ine).get(i).etatVoeu==etatvoeux.refuser){
 							ListeVoeuxEtudiant.get(ine).remove(i);
 						}
