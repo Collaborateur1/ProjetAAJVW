@@ -197,15 +197,17 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 		if (voeu.dcsEtudiant==decision.NONdefinitif||voeu.dcsEtudiant==decision.NONmais){
 			
 			if (ListeAdmiParFormation.get(voeu.formationVoeu.NomFormation).containsKey(ine)){
-				
+				System.out.println("***************");
 				ListeAdmiParFormation.get(voeu.formationVoeu.NomFormation).remove(ine);
 			}
-			else if(ListeDattente.containsKey(voeu.formationVoeu.NomFormation))
+			else if(ListeDattente.containsKey(voeu.formationVoeu.NomFormation)){
+				System.out.println("***************22");
 				if(ListeDattente.get(voeu.formationVoeu.NomFormation).contains(ine)){
+					System.out.println("***************dd");
 					System.out.println("ine etudiant" +ListeDattente.get(voeu.formationVoeu.NomFormation)+ine );
 				ListeDattente.get(voeu.formationVoeu.NomFormation).remove(ine);
+			   }
 			}
-
 		}
 		
 	}

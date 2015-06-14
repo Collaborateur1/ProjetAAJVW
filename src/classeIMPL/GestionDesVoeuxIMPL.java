@@ -152,7 +152,9 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			v =  (Voeu) lv.get(i);
 			lvc[i] = v;
 			if(!voeuxValider &&v.etatVoeu==etatvoeux.accepter)
-			{	nbVoeuxAafficher=i+1;
+			{	
+				System.out.println("**********************wtf? "+ine +"voeux "+v.formationVoeu.NomFormation  );
+				nbVoeuxAafficher=i+1;
 			voeuxValider=true;
 			}
 			
@@ -165,13 +167,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			for(int j=0;j<nbVoeuxAafficher; j++)
 			{
 				lvc2[j]=lvc[j];
-			}
-			if(nbVoeuxAafficher<lv.size())
-			{
-				for(int t=nbVoeuxAafficher;t<lv.size();t++)
-				{
-					nettoyageListeVoeux(lvc[t],ine);
-				}
 			}
 			return lvc2;
 		}
@@ -212,48 +207,77 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 						v.dcsEtudiant = choixEtu;
 						if(v.etatVoeu==etatvoeux.listeDattente||v.etatVoeu==etatvoeux.accepter)
 							{
+							System.out.println("ici je renvoi la reponse "+v.dcsEtudiant+" pour la formation "+v.formationVoeu.NomFormation+"et je suis "+ine  );
 							ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,v);
-							System.out.println("on passe bien la"  );	
+								
 							}
 					}	
 				}
 				
-				ListeEtudiant.get(ine).majEtatVoeux(chargerVoeux(ine));
+				
 				if (choixEtu.equals(decision.NONdefinitif)){
-					if(v.numeroVoeu!=(short)1)
-						{
-						   repondreAuxPropositions(ine,decision.NONdefinitif,(short)(v.numeroVoeu-1) );}
 					
-					if(v.numeroVoeu==(short)1)
-					{ListeVoeuxEtudiant.remove(ine);}
+					for(int i =0; i<ListeVoeuxEtudiant.get(ine).size(); i++){
+						ListeVoeuxEtudiant.get(ine).get(i).dcsEtudiant=decision.NONdefinitif;
+						ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,ListeVoeuxEtudiant.get(ine).get(i));
+						
+					}
+					ListeVoeuxEtudiant.remove(ine);
 					
 					
 				}
 				else if(choixEtu.equals(decision.NONmais)){
-					for(int i =0; i<ListeVoeuxEtudiant.get(ine).size(); i++){
-						if(ListeVoeuxEtudiant.get(ine).get(i).numeroVoeu ==numeroVoeu||ListeVoeuxEtudiant.get(ine).get(i).etatVoeu==etatvoeux.refuser){
+					
+					for(int i=0;i<numeroVoeu-1;i++)
+					{
+						if(ListeVoeuxEtudiant.get(ine).get(i).etatVoeu==etatvoeux.nonValide||ListeVoeuxEtudiant.get(ine).get(i).etatVoeu==etatvoeux.refuser)
+						{
 							ListeVoeuxEtudiant.get(ine).remove(i);
 						}
+					}
+					
+					for(int i =v.numeroVoeu-1; i<ListeVoeuxEtudiant.get(ine).size(); i++){
+						
+						ListeVoeuxEtudiant.get(ine).get(i).dcsEtudiant=decision.NONdefinitif;
+						ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,ListeVoeuxEtudiant.get(ine).get(i));
+						ListeVoeuxEtudiant.get(ine).remove(i);
+						
 					}
 				}
 				else if(choixEtu.equals(decision.OUIdefinitif)){
 					for(int i =0; i<ListeVoeuxEtudiant.get(ine).size(); i++){
-						if(ListeVoeuxEtudiant.get(ine).get(i).numeroVoeu <numeroVoeu)
+						if(ListeVoeuxEtudiant.get(ine).get(i).numeroVoeu !=numeroVoeu)
 							{
 								
-							repondreAuxPropositions(ine,decision.NONmais,ListeVoeuxEtudiant.get(ine).get(i).numeroVoeu);
+							ListeVoeuxEtudiant.get(ine).get(i).dcsEtudiant=decision.NONdefinitif;
+							ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,ListeVoeuxEtudiant.get(ine).get(i));
+							ListeVoeuxEtudiant.get(ine).remove(i);
 							
 							}						
 					}
 				}
 				else{
-					for(int i =0; i<ListeVoeuxEtudiant.get(ine).size(); i++){
-						if(ListeVoeuxEtudiant.get(ine).get(i).etatVoeu==etatvoeux.refuser){
+					
+					for(int i=0;i<numeroVoeu-1;i++)
+					{
+						if(ListeVoeuxEtudiant.get(ine).get(i).etatVoeu==etatvoeux.nonValide||ListeVoeuxEtudiant.get(ine).get(i).etatVoeu==etatvoeux.refuser)
+						{
 							ListeVoeuxEtudiant.get(ine).remove(i);
 						}
 					}
 					
+                      for(int i =v.numeroVoeu; i<ListeVoeuxEtudiant.get(ine).size(); i++){
+						
+						ListeVoeuxEtudiant.get(ine).get(i).dcsEtudiant=decision.NONdefinitif;
+						ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,ListeVoeuxEtudiant.get(ine).get(i));
+						ListeVoeuxEtudiant.get(ine).remove(i);
+						
+					}
+					
+					
 				}
+				
+				ListeEtudiant.get(ine).majEtatVoeux(chargerVoeux(ine));
 	}
 	
 
@@ -443,22 +467,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		ListeEtudiant.remove(ine);
 	}
 	
-	public void nettoyageListeVoeux(Voeu v,String ine) throws DonneesInvalides
-	{
-		for(int i =0; i<ListeVoeuxEtudiant.size(); i++){
-			if(ListeVoeuxEtudiant.get(ine).get(i).numeroVoeu ==v.numeroVoeu){
-				if(v.etatVoeu==etatvoeux.accepter||v.etatVoeu==etatvoeux.listeDattente)
-				{
-					v.dcsEtudiant=decision.NONdefinitif;
-					ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,v);
-				}
-				
-				
-				ListeVoeuxEtudiant.get(ine).remove(i);
-			}
-		}
-	}
-
+	
 
 public void initialisation() throws SQLException
 
