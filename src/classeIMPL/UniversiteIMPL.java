@@ -195,7 +195,8 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 		System.out.println("**************************je suis dans université j'ai répondu "+voeu.dcsEtudiant+" au voeu "+voeu.formationVoeu.NomFormation+"je suis ine etudiant recto" +ine );
 	
 		if (voeu.dcsEtudiant==decision.NONdefinitif||voeu.dcsEtudiant==decision.NONmais){
-			if (ListeAdmiParFormation.get(voeu.formationVoeu.NomFormation).contains(ine)){
+			
+			if (ListeAdmiParFormation.get(voeu.formationVoeu.NomFormation).containsKey(ine)){
 				
 				ListeAdmiParFormation.get(voeu.formationVoeu.NomFormation).remove(ine);
 			}
