@@ -231,13 +231,12 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 				}
 				else if(choixEtu.equals(decision.OUIdefinitif)){
 					for(int i =0; i<ListeVoeuxEtudiant.size(); i++){
-						if(ListeVoeuxEtudiant.get(ine).get(i).numeroVoeu <numeroVoeu){
+						if(ListeVoeuxEtudiant.get(ine).get(i).numeroVoeu <numeroVoeu)
 							{
 								
 							repondreAuxPropositions(ine,decision.NONmais,ListeVoeuxEtudiant.get(ine).get(i).numeroVoeu);
 							
-							}
-						}
+							}						
 					}
 				}
 				else{
