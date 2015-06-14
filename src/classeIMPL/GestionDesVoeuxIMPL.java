@@ -160,6 +160,13 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			{
 				lvc2[j]=lvc[j];
 			}
+			if(nbVoeuxAafficher<lv.size())
+			{
+				for(int t=nbVoeuxAafficher;t<lv.size();t++)
+				{
+					nettoyageListeVoeux(lvc[t],ine);
+				}
+			}
 			return lvc2;
 		}
 		return lvc;
@@ -190,9 +197,10 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
 				ArrayList lv = ListeVoeuxEtudiant.get(ine);
+				Voeu v = null;
 				for(int i = 0;i<lv.size();i++)
 				{
-					Voeu v = (Voeu) lv.get(i);;
+					 v = (Voeu) lv.get(i);;
 					if(v.numeroVoeu==numeroVoeu)
 					{
 						v.dcsEtudiant = choixEtu;
@@ -200,27 +208,38 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 						
 					}	
 				}
+				
 				ListeEtudiant.get(ine).majEtatVoeux(chargerVoeux(ine));
 				if (choixEtu.equals(decision.NONdefinitif)){
-					ListeVoeuxEtudiant.remove(ine);
+					if(v.numeroVoeu!=(short)1)
+						{repondreAuxPropositions(ine,decision.NONdefinitif,(short)(v.numeroVoeu-1) );}
+					
+					if(v.numeroVoeu==(short)1)
+					{ListeVoeuxEtudiant.remove(ine);}
+					
+					
 				}
 				else if(choixEtu.equals(decision.NONmais)){
 					for(int i =0; i<ListeVoeuxEtudiant.size(); i++){
-						if(ListeVoeuxEtudiant.get(ine).get(i).numeroVoeu >=numeroVoeu){
+						if(ListeVoeuxEtudiant.get(ine).get(i).numeroVoeu ==numeroVoeu||ListeVoeuxEtudiant.get(ine).get(i).etatVoeu==etatvoeux.refuser){
 							ListeVoeuxEtudiant.get(ine).remove(i);
 						}
 					}
 				}
 				else if(choixEtu.equals(decision.OUIdefinitif)){
 					for(int i =0; i<ListeVoeuxEtudiant.size(); i++){
-						if(ListeVoeuxEtudiant.get(ine).get(i).numeroVoeu !=numeroVoeu){
-							ListeVoeuxEtudiant.get(ine).remove(i);
+						if(ListeVoeuxEtudiant.get(ine).get(i).numeroVoeu <numeroVoeu){
+							{
+								
+							repondreAuxPropositions(ine,decision.NONmais,ListeVoeuxEtudiant.get(ine).get(i).numeroVoeu);
+							
+							}
 						}
 					}
 				}
 				else{
 					for(int i =0; i<ListeVoeuxEtudiant.size(); i++){
-						if(ListeVoeuxEtudiant.get(ine).get(i).numeroVoeu >numeroVoeu){
+						if(ListeVoeuxEtudiant.get(ine).get(i).etatVoeu==etatvoeux.refuser){
 							ListeVoeuxEtudiant.get(ine).remove(i);
 						}
 					}
@@ -405,6 +424,22 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	public void deconnexion(String ine) {
 		// TODO Auto-generated method stub
 		ListeEtudiant.remove(ine);
+	}
+	
+	public void nettoyageListeVoeux(Voeu v,String ine) throws DonneesInvalides
+	{
+		for(int i =0; i<ListeVoeuxEtudiant.size(); i++){
+			if(ListeVoeuxEtudiant.get(ine).get(i).numeroVoeu ==v.numeroVoeu){
+				if(v.etatVoeu==etatvoeux.accepter||v.etatVoeu==etatvoeux.listeDattente)
+				{
+					v.dcsEtudiant=decision.NONdefinitif;
+					ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,v);
+				}
+				
+				
+				ListeVoeuxEtudiant.get(ine).remove(i);
+			}
+		}
 	}
 
 
