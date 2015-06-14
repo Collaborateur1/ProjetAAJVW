@@ -193,8 +193,9 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 			throws DonneesInvalides {
 		// TODO Auto-generated method stub
 		if (voeu.dcsEtudiant.equals(decision.NONdefinitif)||voeu.dcsEtudiant.equals(decision.NONmais)){
+			//if (ListeAdmiParFormation.get()...)
 			ListeAdmiParFormation.get(voeu.formationVoeu.NomFormation).remove(ine);
-			
+
 		};		
 		
 	}
