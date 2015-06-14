@@ -205,7 +205,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 				ArrayList lv = ListeVoeuxEtudiant.get(ine);
 				Voeu v = null;
 				for(int i = 0;i<lv.size();i++)
-				{
+				{ 
 					 v = (Voeu) lv.get(i);;
 					if(v.numeroVoeu==numeroVoeu)
 					{
