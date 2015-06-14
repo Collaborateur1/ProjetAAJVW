@@ -206,6 +206,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 					if(v.numeroVoeu==numeroVoeu)
 					{
 						v.dcsEtudiant = choixEtu;
+						if(v.etatVoeu==etatvoeux.listeDattente||v.etatVoeu==etatvoeux.accepter)
 						ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,v);
 						
 					}	
