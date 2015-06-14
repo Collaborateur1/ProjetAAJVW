@@ -1,6 +1,7 @@
 
 package classeIMPL;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -310,11 +311,19 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		// TODO Auto-generated method stub
 		ArrayList lv = ListeVoeuxEtudiant.get(ine);
 		Voeu v;
+		
 		for(int i = 0;i<lv.size();i++)
 		{
 			v = (Voeu) lv.get(i);
 			if(v.numeroVoeu==numeroVoeu)
-				v.numeroVoeu = 0;
+				{v.numeroVoeu = 0;
+				try {
+					bddGDV.supprimerVoeux(v, ine);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				}
 			else if(v.numeroVoeu>numeroVoeu)
 				v.numeroVoeu--;
 		}
@@ -324,7 +333,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			if(v.numeroVoeu==0)
 			{
 				lv.remove(v);
-				System.out.println("voeu 0 : supprimé");
+				
 			}
 		}
 		
@@ -446,7 +455,14 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	}
 
 
-	/**************Fonction générer***************/
+public void initialisation() throws SQLException
+
+{
+	ListeVoeuxEtudiant=bddGDV.Chargervoeu();
+	
+	
+	
+}
 
 
 

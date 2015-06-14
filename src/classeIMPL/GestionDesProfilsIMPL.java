@@ -66,7 +66,7 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 		
 
 		loadBalancer.inscriptionGDP(GestionDesProfilsHelper.narrow(rootPOA.servant_to_reference(this)), nGdp);
-
+		bddGVP=new DBGestionDesProfils();
 		// TODO Auto-generated constructor stub
 
 	}
