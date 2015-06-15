@@ -16,6 +16,7 @@ import generated.decision;
 import generated.dossierEtudiant;
 import generated.etatvoeux;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -35,6 +36,8 @@ import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 import org.openorb.compiler.parser.Symbole;
 
+import Databases.BDDEtudiantHelper;
+import Databases.DBGestionDesProfils;
 import Databases.DBUniversite;
 import outils.NamingServiceTool;
 import outils.ValueComparator;
@@ -87,6 +90,18 @@ public UniversiteIMPL(String nomUniv, String nomAcad,org.omg.CORBA.ORB orb) thro
 	recto.inscriptionUniv(UniversiteHelper.narrow(rootPOA.servant_to_reference(this)),nomUniv);
 	bddUNIV=new DBUniversite();
 	
+	ArrayList<dossierEtudiant> le = null;
+	try {
+		le = bddUNIV.ChargerEtudiant();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	for(int i =0;i<le.size();i++)
+	{
+		
+	}
 }
 
 

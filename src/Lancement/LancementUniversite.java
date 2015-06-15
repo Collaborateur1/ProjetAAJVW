@@ -1,5 +1,6 @@
 package Lancement;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import generated.DonneesInvalides;
@@ -16,6 +17,8 @@ import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
+import Databases.BDDEtudiantHelper;
+import Databases.DBGestionDesProfils;
 import classeIMPL.UniversiteIMPL;
 
 public class LancementUniversite {
@@ -24,7 +27,7 @@ public class LancementUniversite {
 		// TODO Auto-generated method stub
 		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(new String[0],null);
 		CreationDossierEtudiant dossetu = null;
-		
+			
 		if(args[0].equals("UT1"))
 		{
 			
