@@ -13,14 +13,14 @@ import outils.NamingServiceTool;
 
 
 public class MinistereIMPL extends MinistèrePOA {
-	
-	
+
+
 
 	//La liste des rectorats 
 	Hashtable<String,Rectorat>ListeRectorat;
-	
+
 	Hashtable<String,Rectorat>IneRectorat;
-	
+
 	//La liste des formation
 	ArrayList<Formation> ListeFormation;
 
@@ -41,7 +41,7 @@ public class MinistereIMPL extends MinistèrePOA {
 		ListeFormation=new ArrayList<Formation>();
 		IneRectorat=new Hashtable<String, Rectorat>();
 		NamingServiceTool.putReferenceIntoNS(orb,"Ministere", this);
-	/*	rootPOA = org.omg.PortableServer.POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
+		/*	rootPOA = org.omg.PortableServer.POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
 
 		rootPOA.the_POAManager().activate();*/
 	}
@@ -53,22 +53,22 @@ public class MinistereIMPL extends MinistèrePOA {
 	public Formation[] madDesFormationsFrance() {
 		// TODO Auto-generated method stub
 		Formation[] Forma=new Formation[ListeFormation.size()];
-		
-for(int i=0;i<this.ListeFormation.size();i++)
-{
-	Forma[i]=this.ListeFormation.get(i);
-	System.out.println("test "+ Forma[i].NomFormation);
-}
+
+		for(int i=0;i<this.ListeFormation.size();i++)
+		{
+			Forma[i]=this.ListeFormation.get(i);
+			System.out.println("test "+ Forma[i].NomFormation);
+		}
 
 
 		return Forma;
 	}
-	
+
 
 	@Override
 	public Rectorat GetRectoratEtudiant(String ine) throws DonneesInvalides {
 		// TODO Auto-generated method stub
-		
+
 		return IneRectorat.get(ine);
 	}
 
@@ -76,37 +76,37 @@ for(int i=0;i<this.ListeFormation.size();i++)
 	public void EnregistrerRectoratEtudiant(String ine, Rectorat recto) {
 		// TODO Auto-generated method stub
 		IneRectorat.put(ine, recto);
-		
+
 	}
-	
+
 	@Override
 	public void depotDesFormationsRectorat(Formation Formation) {
 		// TODO Auto-generated method stub
 		this.ListeFormation.add(Formation);
 	}
-	
+
 	@Override
 	public void deliberationJuryFinal() {
 		// TODO Auto-generated method stub
 		System.out.println("*************************2");
 		Enumeration ListeRectorat=this.ListeRectorat.elements();
-		
+
 		while(ListeRectorat.hasMoreElements())
 		{
 			Rectorat rt=null;
-			
+
 			rt=(Rectorat) ListeRectorat.nextElement();
 			rt.deliberationJuryFinal();
 		}
 	}
-	
+
 	@Override
 	public void inscriptionRectorat(String nomRectorat, Rectorat iorRectorat)throws DonneesInvalides {
 		// TODO Auto-generated method stub
 		//On rajoute le rectorat dans le ministère
-		
+
 		ListeRectorat.put(nomRectorat, iorRectorat);
-		
+
 
 	}
 
@@ -132,15 +132,15 @@ for(int i=0;i<this.ListeFormation.size();i++)
 	@Override
 	public void deliberationJury() {
 		// TODO Auto-generated method stub
-		
+
 		//On fait juste passé le message..enfin une appel de fonction quoi
 		System.out.println("test2");
 		Enumeration ListeRectorat=this.ListeRectorat.elements();
-		
+
 		while(ListeRectorat.hasMoreElements())
 		{
 			Rectorat rt=null;
-			
+
 			rt=(Rectorat) ListeRectorat.nextElement();
 			rt.deliberationJury();
 		}
@@ -149,33 +149,33 @@ for(int i=0;i<this.ListeFormation.size();i++)
 	/**********************Fonction rajouter*********************/
 	public void test()
 	{
-		
-	
+
+
 		//un test pour voir si les rectorats vienne bien ce rajouter
-			if(!ListeRectorat.isEmpty())
+		if(!ListeRectorat.isEmpty())
 			System.out.println("sa ka maché3: ");
-		
+
 	}
 
 	/**********************Le Main pour enregistrer dans le NS*************************/
 
 	public static void main(String[] args) {
-		
+
 	}
 
 	@Override
 	public void InscriptionGDVDansRectorats(short num, GestionDesVoeux gdv) {
 		// TODO Auto-generated method stub
 		Enumeration<Rectorat> ele =ListeRectorat.elements();
-		
+
 		while(ele.hasMoreElements())
 		{
 			ele.nextElement().inscriptionGDV(num, gdv);
 		}
-		
+
 	}
 
-	
+
 
 
 

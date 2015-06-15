@@ -14,16 +14,20 @@ import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
+import Databases.DBGestionDesProfils;
 import Databases.DBUniversite;
 
 public class remplissageBDD {
 
 	DBUniversite bddUNIV;
+	DBGestionDesProfils bddGDP;
 	String nomUniv;
 	
 	public remplissageBDD(String nomUnivp)
 	{
+		System.out.println("Création de la BDD "+nomUnivp);
 		bddUNIV = new DBUniversite(nomUnivp);
+		bddGDP = new DBGestionDesProfils();
 		nomUniv = nomUnivp;
 		
 		Formation fr1= new Formation("UT1","Miage", "Info Gest", "Midi Pyrenees", (short)2);
@@ -33,20 +37,23 @@ public class remplissageBDD {
 		Formation fr5= new Formation("UT1","Meca", "Mecanique des fluide", "Midi Pyrenees", (short)2);
 		Formation fr6= new Formation("UT3","GSI", "Info Gest", "Midi Pyrenees", (short)2);
 		
-		String []ListePrereq = new String[1];
+		String []ListePrereq = new String[3];
 		ListePrereq[0]= "DUT";
 		ListePrereq[1]= "BTS";
-		ListePrereq[1]= "Licence 2";
+		ListePrereq[2]= "Licence 2";
 		
 		if(nomUniv=="UT1")
 		{
-			dossierEtudiant detu1 = CreationDossierEtudiant.creerDossierEtudiant("Patrick", "François", "PF001", nomUniv, fr2);
-			dossierEtudiant detu2 = CreationDossierEtudiant.creerDossierEtudiant("DOSSANTOS", "Marc", "DM001", nomUniv, fr3);
-			dossierEtudiant detu3 = CreationDossierEtudiant.creerDossierEtudiant("CARTIER", "Axel", "CA001", nomUniv, fr2);
+			dossierEtudiant detu1 = CreationDossierEtudiant.creerDossierEtudiant("Patrick", "François", "1PF001", nomUniv, fr2);
+			dossierEtudiant detu2 = CreationDossierEtudiant.creerDossierEtudiant("DOSSANTOS", "Marc", "1DM001", nomUniv, fr3);
+			dossierEtudiant detu3 = CreationDossierEtudiant.creerDossierEtudiant("CARTIER", "Axel", "1CA001", nomUniv, fr2);
 			try {
 				bddUNIV.ajouterEtudiant(detu1.etu.ineEtudiant, detu1);
 				bddUNIV.ajouterEtudiant(detu2.etu.ineEtudiant, detu2);
 				bddUNIV.ajouterEtudiant(detu3.etu.ineEtudiant, detu3);
+				bddGDP.ajouterEtudiant(detu1.etu.ineEtudiant, detu1.etu);
+				bddGDP.ajouterEtudiant(detu2.etu.ineEtudiant, detu2.etu);
+				bddGDP.ajouterEtudiant(detu3.etu.ineEtudiant, detu3.etu);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -61,13 +68,16 @@ public class remplissageBDD {
 		}
 		else if(nomUniv=="UT2")
 		{
-			dossierEtudiant detu4 = CreationDossierEtudiant.creerDossierEtudiant("GAINIER", "Clemence", "GC001", nomUniv, fr3);
-			dossierEtudiant detu5 = CreationDossierEtudiant.creerDossierEtudiant("VACHER", "Simon", "VS001", nomUniv, fr2);
-			dossierEtudiant detu6 = CreationDossierEtudiant.creerDossierEtudiant("LECOEUR", "Elise", "LE001", nomUniv, fr3);
+			dossierEtudiant detu4 = CreationDossierEtudiant.creerDossierEtudiant("GAINIER", "Clemence", "1GC001", nomUniv, fr3);
+			dossierEtudiant detu5 = CreationDossierEtudiant.creerDossierEtudiant("VACHER", "Simon", "1VS001", nomUniv, fr2);
+			dossierEtudiant detu6 = CreationDossierEtudiant.creerDossierEtudiant("LECOEUR", "Elise", "2LE001", nomUniv, fr3);
 			try {
 				bddUNIV.ajouterEtudiant(detu4.etu.ineEtudiant, detu4);
 				bddUNIV.ajouterEtudiant(detu5.etu.ineEtudiant, detu5);
 				bddUNIV.ajouterEtudiant(detu6.etu.ineEtudiant, detu6);
+				bddGDP.ajouterEtudiant(detu4.etu.ineEtudiant, detu4.etu);
+				bddGDP.ajouterEtudiant(detu5.etu.ineEtudiant, detu5.etu);
+				bddGDP.ajouterEtudiant(detu6.etu.ineEtudiant, detu6.etu);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -82,15 +92,19 @@ public class remplissageBDD {
 		}
 		else
 		{
-			dossierEtudiant detu7 = CreationDossierEtudiant.creerDossierEtudiant("BOUBAKOUR", "Malik", "BM001", nomUniv, fr2);
-			dossierEtudiant detu8 = CreationDossierEtudiant.creerDossierEtudiant("DEVANNE", "Lucie", "DL001", nomUniv, fr3);
-			dossierEtudiant detu9 = CreationDossierEtudiant.creerDossierEtudiant("CLAUDIN", "Anthony", "CA002", nomUniv, fr2);
-			dossierEtudiant detu10 = CreationDossierEtudiant.creerDossierEtudiant("PONGE", "Anais", "PA001", nomUniv, fr3);
+			dossierEtudiant detu7 = CreationDossierEtudiant.creerDossierEtudiant("BOUBAKOUR", "Malik", "2BM001", nomUniv, fr2);
+			dossierEtudiant detu8 = CreationDossierEtudiant.creerDossierEtudiant("DEVANNE", "Lucie", "2DL001", nomUniv, fr3);
+			dossierEtudiant detu9 = CreationDossierEtudiant.creerDossierEtudiant("CLAUDIN", "Anthony", "2CA002", nomUniv, fr2);
+			dossierEtudiant detu10 = CreationDossierEtudiant.creerDossierEtudiant("PONGE", "Anais", "2PA001", nomUniv, fr3);
 			try {
 				bddUNIV.ajouterEtudiant(detu7.etu.ineEtudiant, detu7);
 				bddUNIV.ajouterEtudiant(detu8.etu.ineEtudiant, detu8);
 				bddUNIV.ajouterEtudiant(detu9.etu.ineEtudiant, detu9);
 				bddUNIV.ajouterEtudiant(detu10.etu.ineEtudiant, detu10);
+				bddGDP.ajouterEtudiant(detu7.etu.ineEtudiant, detu7.etu);
+				bddGDP.ajouterEtudiant(detu8.etu.ineEtudiant, detu8.etu);
+				bddGDP.ajouterEtudiant(detu9.etu.ineEtudiant, detu9.etu);
+				bddGDP.ajouterEtudiant(detu10.etu.ineEtudiant, detu10.etu);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -148,6 +162,7 @@ public class remplissageBDD {
 
 	public static void main(String[] args) throws DonneesInvalides, InvalidName, AdapterInactive, ServantNotActive, WrongPolicy {
 		// TODO Auto-generated method stub
+		System.out.println("Lancement création BDD");
 		remplissageBDD rbdd1 = new remplissageBDD("UT1");
 		remplissageBDD rbdd2 = new remplissageBDD("UT2");
 		remplissageBDD rbdd3 = new remplissageBDD("UT3");

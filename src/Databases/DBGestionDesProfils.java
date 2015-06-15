@@ -50,7 +50,7 @@ public class DBGestionDesProfils {
 		        			" NOMFORMATION VARCHAR( 30 ) NOT NULL , " +
 		        			" TYPEFORMATION VARCHAR( 30 ) NOT NULL , " +
 		        			" NOMRECTORAT VARCHAR( 30 ) NOT NULL , " +
-		        			" MOTSDEPASSE VARCHAR( 30 ) NOT NULL , " +
+		        			" MOTSDEPASSE VARCHAR( 30 ) NULL , " +
 		        			" QUOTA SMALLINT ,"+
 		        			" ADRESSE VARCHAR( 50 ) ,PRIMARY KEY(IDETUDIANT))");
 		      
@@ -68,26 +68,24 @@ public class DBGestionDesProfils {
 			
 	}	
 
-	public void ajouterEtudiant(String ine, Etudiant detu, String mdp) throws Exception
+	public void ajouterEtudiant(String ine, Etudiant detu) throws Exception
 	{
 		
-		 Statement s = null;
-		 String query ="select * from ETUDIANT WHERE INEETUDIANT='"+ine+"'";
-		 
-		 ResultSet re = null;
-		 
+		Statement s = null;
+		ResultSet re = null;
+
 		try {
 			s = conn.createStatement();
 
-			 
+
 			s.executeUpdate("insert into ETUDIANT values (NULL,'"+detu.nomEtudiant+"','"+
-			detu.prenomEtudiant+"','"+detu.ineEtudiant+"','"+detu.nomUniv+"','"+detu.formation.nomUniv+"','"+
-			detu.formation.NomFormation+"','"+detu.formation.TypeFormation+"','"+
-			detu.formation.nomRectorat+"','"+mdp+"',"+detu.formation.quota+",'"+
-			detu.adresse+"')");
-			
-			
-			
+					detu.prenomEtudiant+"','"+detu.ineEtudiant+"','"+detu.nomUniv+"','"+detu.formation.nomUniv+"','"+
+					detu.formation.NomFormation+"','"+detu.formation.TypeFormation+"','"+
+					detu.formation.nomRectorat+"','',"+detu.formation.quota+",'"+
+					detu.adresse+"')");
+
+
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -95,11 +93,27 @@ public class DBGestionDesProfils {
 		
 	}
 	
-	 public ArrayList<BDDEtudiantHelper> ChargerEtudiant() throws SQLException
+	public void ajouterMotDePass(String ine, String mdp)
+	{
+		Statement s = null;
+		ResultSet re = null;
+
+		try {
+
+			s = conn.createStatement();
+			s.executeUpdate("update ETUDIANT set MOTSDEPASSE='"+mdp+"' WHERE INEETUDIANT='"+ine+"')");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	 public ArrayList<BDDEtudiantHelper> ChargerEtudiant(short num) throws SQLException
 		{
 	        	
 			
-			 String query ="select * from ETUDIANT ";
+			 String query ="select * from ETUDIANT WHERE INEETUDIANT LIKE'1%'";
 			 
 			 Statement s = null;
 			 ResultSet re = null;

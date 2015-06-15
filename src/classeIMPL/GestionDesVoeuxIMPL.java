@@ -75,7 +75,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 				NamingServiceTool.getReferenceIntoNS("Ministere"));
 		System.out.println("Reférérence ministere recuperee" );
 		
-		listeFormation =ministere.madDesFormationsFrance();
+		listeFormation = ministere.madDesFormationsFrance();
 		gdpRattache = loadBalancer.getServProfil(numServ);
 		GestionDesVoeux thisdGdv=GestionDesVoeuxHelper.narrow(rootPOA.servant_to_reference(this));
 		
