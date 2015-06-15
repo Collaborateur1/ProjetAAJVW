@@ -177,6 +177,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			return lvc2;
 		}
 		return lvc;
+		
 	}
 
 	@Override
@@ -398,6 +399,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 				lv.set(i, Reponse);
 			}
 		}
+		if(ListeEtudiant.containsKey(ine))
 		ListeEtudiant.get(ine).majEtatVoeux(chargerVoeux(ine));
 	}
 
