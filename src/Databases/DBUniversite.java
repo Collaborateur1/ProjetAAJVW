@@ -24,13 +24,13 @@ public class DBUniversite {
 
 	}
 
-	public DBUniversite()
+	public DBUniversite(String nomUniv)
 	{
 		//Création de la base de données si non créée
 
 		try {
 			Class.forName("org.h2.Driver");
-			conn = DriverManager.getConnection("jdbc:h2:"+"BddsnDBUniversite"+";IGNORECASE=TRUE", "sa", "");
+			conn = DriverManager.getConnection("jdbc:h2:"+"BddsnDBUniversite_"+nomUniv+";IGNORECASE=TRUE", "sa", "");
 			// Création d'un objet Statement qui va permettre l'execution des requetes
 			Statement s = conn.createStatement();
 
