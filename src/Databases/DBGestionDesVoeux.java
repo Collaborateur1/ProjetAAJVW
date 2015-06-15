@@ -164,7 +164,6 @@ public class DBGestionDesVoeux {
 		try {
 			s = conn.createStatement();
 			s.executeUpdate("UPDATE  VOEU set ETATVOEUX='"+vx.etatVoeu+"' WHERE INEETUDIANT='"+ine+"' AND NUMEROVOEU="+vx.numeroVoeu);
-	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

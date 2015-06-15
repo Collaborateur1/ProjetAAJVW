@@ -198,11 +198,16 @@ public class EtudiantIMPl extends IEtudiantPOA{
 
 	public boolean inscription(String ine, String mdp) throws DonneesInvalides
 	{
-
-		if(setGestionDesProfils(ine)){
+		
+		if(setGestionDesProfils(ine))
+		{
 			return gdp.inscriptionEtudiant(ine, mdp);
 		}
-		return false;
+		else
+		{
+			System.out.println("Probleme récup GDP");
+			return false;
+		}
 	}
 
 	@Override

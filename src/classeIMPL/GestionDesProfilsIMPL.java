@@ -84,7 +84,8 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 		{
 			e = le.get(i);
 			etudiantinscrit.put(e.getEtu().ineEtudiant, e.getEtu());
-			if(e.getMdp()!=null)
+			//System.out.println("Ajout de l'étudiant : "+e.getEtu().ineEtudiant);
+			if(e.getMdp()!="")
 				CodeEtudiantInscrit.put(e.getEtu().ineEtudiant, e.getMdp());
 		}
 	}
@@ -176,8 +177,8 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 	public boolean inscriptionEtudiant(String ine, String mdp)
 			throws DonneesInvalides {
 		// TODO Auto-generated method stub
-		
-		if(!CodeEtudiantInscrit.containsKey(ine))
+		System.out.println("Entree dans comparaison");
+		if(CodeEtudiantInscrit.containsKey(ine) == false)
 		{
 			if(etudiantinscrit.containsKey(ine))
 			{
@@ -186,10 +187,16 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 				return true;
 			}
 			else
+			{
+				System.out.println("Etudiant pas chargé avec la BD");
 				return false;
+			}
 		}
 		else
+		{
+			System.out.println("Mot de passe déja rentrée");
 			return false;
+		}
 		/*
 		if(!etudiantinscrit.containsKey(ine))
 		{

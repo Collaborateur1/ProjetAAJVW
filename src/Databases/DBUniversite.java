@@ -259,30 +259,30 @@ public class DBUniversite {
 
 			s = conn.createStatement();
 			eta=s.executeQuery(query);
-			Resultat[] result= new Resultat[5];
+			Resultat[] result= new Resultat[6];
 
 			if(eta.next())
-				result[0]= new Resultat((short)1, eta.getFloat("MOYENNE"), eta.getShort("CODEOBTENTION"),  eta.getShort("CLASSEMENT")) ;
-
-			eta=s.executeQuery(query);
-			if(eta.next())
-				result[1]= new Resultat((short)2, eta.getFloat("MOYENNE2"), eta.getShort("CODEOBTENTION2"),  eta.getShort("CLASSEMENT2")) ;
+				result[0]= new Resultat((short)1, eta.getFloat("MOYENNE"), eta.getShort("CODEOBTENTION"),  eta.getShort("CLASSEMENT"));
 
 			eta=s.executeQuery(query);
 			if(eta.next())
-				result[2]= new Resultat((short)3, eta.getFloat("MOYENNE3"), eta.getShort("CODEOBTENTION3"),  eta.getShort("CLASSEMENT3")) ;
+				result[1]= new Resultat((short)2, eta.getFloat("MOYENNE2"), eta.getShort("CODEOBTENTION2"),  eta.getShort("CLASSEMENT2"));
 
 			eta=s.executeQuery(query);
 			if(eta.next())
-				result[3]= new Resultat((short)4, eta.getFloat("MOYENNE3"), eta.getShort("CODEOBTENTION3"),  eta.getShort("CLASSEMENT3")) ;
+				result[2]= new Resultat((short)3, eta.getFloat("MOYENNE3"), eta.getShort("CODEOBTENTION3"),  eta.getShort("CLASSEMENT3"));
 
 			eta=s.executeQuery(query);
 			if(eta.next())
-				result[4]= new Resultat((short)5, eta.getFloat("MOYENNE3"), eta.getShort("CODEOBTENTION3"),  eta.getShort("CLASSEMENT3")) ;
+				result[3]= new Resultat((short)4, eta.getFloat("MOYENNE4"), eta.getShort("CODEOBTENTION4"),  eta.getShort("CLASSEMENT4"));
 
 			eta=s.executeQuery(query);
 			if(eta.next())
-				result[5]= new Resultat((short)6, eta.getFloat("MOYENNE3"), eta.getShort("CODEOBTENTION3"),  eta.getShort("CLASSEMENT3")) ;
+				result[4]= new Resultat((short)5, eta.getFloat("MOYENNE5"), eta.getShort("CODEOBTENTION5"),  eta.getShort("CLASSEMENT5"));
+
+			eta=s.executeQuery(query);
+			if(eta.next())
+				result[5]= new Resultat((short)6, eta.getFloat("MOYENNE6"), eta.getShort("CODEOBTENTION6"),  eta.getShort("CLASSEMENT6"));
 
 			return result;
 		} catch (SQLException e) {
