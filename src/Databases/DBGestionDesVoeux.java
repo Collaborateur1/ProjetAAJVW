@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 public class DBGestionDesVoeux {
@@ -83,7 +84,24 @@ public class DBGestionDesVoeux {
 				
 				
 			}
-			
+			ArrayList<Voeu> array= new ArrayList<Voeu>();
+			Enumeration<String> ele=helpV.getListeVoeuxEtudiant().keys();
+			Voeu v;
+			while(ele.hasMoreElements())
+			{
+				array=helpV.getListeVoeuxEtudiant().get(ele.nextElement());
+				Voeu lvt[] = new Voeu[array.size()];
+				for(int i=0;i<array.size();i++)
+				{
+					v = array.get(i);
+					lvt[v.numeroVoeu-1] = v;
+				}
+				
+				array.clear();
+				
+				for(int i=0;i<lvt.length;i++)
+					array.add(lvt[i]);
+			}
 			return helpV.getListeVoeuxEtudiant();				
 			
 		
@@ -170,7 +188,26 @@ public class DBGestionDesVoeux {
 		
 	}
 	
-	public void supprimerAllVoeux(Voeu vx, String ine) throws SQLException
+	
+	public void ChangerOrdreVoeux(short anciennum , String ine, short changement) throws SQLException
+	{
+		
+		 Statement s = null;
+	
+		try {
+			s = conn.createStatement();
+			System.out.println("Fonction BDD pour ine : "+ine+" / ancienNum : "+anciennum+"/ NouveauNum : "+changement);
+			s.executeUpdate("UPDATE  VOEU set NUMEROVOEU=0 WHERE INEETUDIANT='"+ine+"' AND NUMEROVOEU="+anciennum);
+			s.executeUpdate("UPDATE  VOEU set NUMEROVOEU="+anciennum+" WHERE INEETUDIANT='"+ine+"' AND NUMEROVOEU="+changement);
+			s.executeUpdate("UPDATE  VOEU set NUMEROVOEU="+changement+" WHERE INEETUDIANT='"+ine+"' AND NUMEROVOEU=0");
+	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	public void supprimerAllVoeux(String ine) throws SQLException
 	{
 		
 		 Statement s = null;
