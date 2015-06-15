@@ -41,7 +41,7 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 	int nombreGDV;
 	LoadBalancerEtudiant loadBalancer;
 	org.omg.PortableServer.POA rootPOA;
-	//DBGestionDesProfils bddGVP;
+	DBGestionDesProfils bddGVP;
 	
 	Ministère ministere;
 
@@ -68,7 +68,7 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 		
 
 		loadBalancer.inscriptionGDP(GestionDesProfilsHelper.narrow(rootPOA.servant_to_reference(this)), nGdp);
-		//bddGVP=new DBGestionDesProfils();
+		bddGVP=new DBGestionDesProfils();
 		// TODO Auto-generated constructor stub
 
 	}

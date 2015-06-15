@@ -23,7 +23,7 @@ public class DBGestionDesVoeux {
 	        Statement s = conn.createStatement();
 	
 	        // On regarde si la table existe deja
-	        String query = "select * from VOEU 1";
+	        String query = "select * from VOEU limit 1";
 	       
 	       
 	        try {

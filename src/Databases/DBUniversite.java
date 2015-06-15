@@ -35,11 +35,25 @@ public class DBUniversite {
 		        Statement s = conn.createStatement();
 		
 		        // On vérifie si la table existe deja
-		        String query = "select * from ETUDIANT 1";
+		        String query = "select * from ETUDIANT limit 1";
 		        String query1 = "select * from  FORMATION limit 1";
 		        String query3 = "select * from RESULTAT limit 1";
 		        String query4 = "select * from PREREQUIS limit 1";
-		       
+		        
+		        try {
+		        	s.executeQuery(query1);
+		        	
+		        } catch(Exception e) 
+		        {
+		        	s.execute("create table FORMATION  ( " +
+		        			" IDFORMATION SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT, " +
+		        			" NOMUNIVERSITE VARCHAR( 30 ) NOT NULL , " +
+		        			" NOMFORMATION VARCHAR( 30 ) NOT NULL , " +
+		        			" TYPEFORMATION VARCHAR( 30 ) NOT NULL , " +
+		        			" NOMRECTORAT VARCHAR( 30 ) NOT NULL , " +
+		        			" QUOTA SMALLINT ,PRIMARY KEY(IDFORMATION))");			        	
+		        }    
+		        
 		        try {
 		        	s.executeQuery(query);
 		        	
@@ -64,19 +78,7 @@ public class DBUniversite {
 		        	
 		        }
 		        
-		        try {
-		        	s.executeQuery(query1);
-		        	
-		        } catch(Exception e) 
-		        {
-		        	s.execute("create table FORMATION  ( " +
-		        			" IDFORMATION SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT, " +
-		        			" NOMUNIVERSITE VARCHAR( 30 ) NOT NULL , " +
-		        			" NOMFORMATION VARCHAR( 30 ) NOT NULL , " +
-		        			" TYPEFORMATION VARCHAR( 30 ) NOT NULL , " +
-		        			" NOMRECTORAT VARCHAR( 30 ) NOT NULL , " +
-		        			" QUOTA SMALLINT ,PRIMARY KEY(IDFORMATION))");			        	
-		        }    
+		        
 		         
 	        	
 	        	 try {
@@ -115,7 +117,7 @@ public class DBUniversite {
 			        {
 			        	s.execute("create table PREREQUIS  ( " +
 			        			" NomFormation VARCHAR( 30 ) NOT NULL , " +
-			        			" Prerequis VARCHAR( 30 ) NOT NULL , REFERENCES FORMATION (NOMFORMATION)");
+			        			" Prerequis VARCHAR( 30 ) NOT NULL )");
 			        }
 	        	 
 	        	 

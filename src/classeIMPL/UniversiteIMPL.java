@@ -35,6 +35,7 @@ import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 import org.openorb.compiler.parser.Symbole;
 
+import Databases.DBUniversite;
 import outils.NamingServiceTool;
 import outils.ValueComparator;
 
@@ -46,6 +47,7 @@ Rectorat recto;
 Ministère ministere;
 Hashtable<String,dossierEtudiant> DossierEtudiant;
 Hashtable<String,dossierEtudiant> DossierCandidatureEtudiant;
+DBUniversite bddUNIV;
 //Pour chaque Ine on a une hastable qui contien la liste des voeux 
 //qui sont identifier par le nom de la formation ..
 //concretement..hashtable<INE,Liste<NomFormation,Voeu>>
@@ -83,7 +85,7 @@ public UniversiteIMPL(String nomUniv, String nomAcad,org.omg.CORBA.ORB orb) thro
 	DossierCandidatureEtudiant=new Hashtable<String,dossierEtudiant>();
 	recto=ministere.rectoratRattacherUniv(nomAcad);
 	recto.inscriptionUniv(UniversiteHelper.narrow(rootPOA.servant_to_reference(this)),nomUniv);
-
+	bddUNIV=new DBUniversite();
 	
 }
 
@@ -192,19 +194,18 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 	public void repondrePropositionvoeux(String ine, Voeu voeu)
 			throws DonneesInvalides {
 		// TODO Auto-generated method stub
-		System.out.println("**************************je suis dans université j'ai répondu "+voeu.dcsEtudiant+" au voeu "+voeu.formationVoeu.NomFormation+"je suis ine etudiant recto" +ine );
+		
 	
 		if (voeu.dcsEtudiant==decision.NONdefinitif||voeu.dcsEtudiant==decision.NONmais){
 			
 			if (ListeAdmiParFormation.get(voeu.formationVoeu.NomFormation).containsKey(ine)){
-				System.out.println("***************");
+				
 				ListeAdmiParFormation.get(voeu.formationVoeu.NomFormation).remove(ine);
 			}
 			else if(ListeDattente.containsKey(voeu.formationVoeu.NomFormation)){
-				System.out.println("***************22");
+				
 				if(ListeDattente.get(voeu.formationVoeu.NomFormation).contains(ine)){
-					System.out.println("***************dd");
-					System.out.println("ine etudiant" +ListeDattente.get(voeu.formationVoeu.NomFormation)+ine );
+										
 				ListeDattente.get(voeu.formationVoeu.NomFormation).remove(ine);
 			   }
 			}

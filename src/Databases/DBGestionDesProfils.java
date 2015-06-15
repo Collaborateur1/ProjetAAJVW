@@ -30,7 +30,7 @@ public class DBGestionDesProfils {
 		        Statement s = conn.createStatement();
 		
 		        // On regarde si la table existe deja
-		        String query = "select * from ETUDIANT 1";
+		        String query = "select * from ETUDIANT limit 1";
 		       
 		       
 		        try {
