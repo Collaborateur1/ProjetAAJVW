@@ -159,7 +159,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			lvc[i] = v;
 			if(!voeuxValider &&v.etatVoeu==etatvoeux.accepter)
 			{	
-				System.out.println("**********************wtf? "+ine +"voeux "+v.formationVoeu.NomFormation  );
+				
 				nbVoeuxAafficher=i+1;
 			voeuxValider=true;
 			}
@@ -236,7 +236,12 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 						
 					}
 					ListeVoeuxEtudiant.remove(ine);
-					
+					try {
+						bddGDV.supprimerAllVoeux(ine);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 				}
 				else if(choixEtu.equals(decision.NONmais)){
@@ -245,7 +250,14 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 					{
 						if(ListeVoeuxEtudiant.get(ine).get(i).etatVoeu==etatvoeux.nonValide||ListeVoeuxEtudiant.get(ine).get(i).etatVoeu==etatvoeux.refuser)
 						{
+							try {
+								bddGDV.supprimerVoeux(ListeVoeuxEtudiant.get(ine).get(i), ine);
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 							ListeVoeuxEtudiant.get(ine).remove(i);
+							
 						}
 					}
 					
@@ -253,6 +265,12 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 						
 						ListeVoeuxEtudiant.get(ine).get(i).dcsEtudiant=decision.NONdefinitif;
 						ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,ListeVoeuxEtudiant.get(ine).get(i));
+						try {
+							bddGDV.supprimerVoeux(ListeVoeuxEtudiant.get(ine).get(i), ine);
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						ListeVoeuxEtudiant.get(ine).remove(i);
 						
 					}
@@ -264,6 +282,12 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 								
 							ListeVoeuxEtudiant.get(ine).get(i).dcsEtudiant=decision.NONdefinitif;
 							ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,ListeVoeuxEtudiant.get(ine).get(i));
+							try {
+								bddGDV.supprimerVoeux(ListeVoeuxEtudiant.get(ine).get(i), ine);
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 							ListeVoeuxEtudiant.get(ine).remove(i);
 							
 							}						
@@ -275,6 +299,12 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 					{
 						if(ListeVoeuxEtudiant.get(ine).get(i).etatVoeu==etatvoeux.nonValide||ListeVoeuxEtudiant.get(ine).get(i).etatVoeu==etatvoeux.refuser)
 						{
+							try {
+								bddGDV.supprimerVoeux(ListeVoeuxEtudiant.get(ine).get(i), ine);
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 							ListeVoeuxEtudiant.get(ine).remove(i);
 						}
 					}
@@ -283,6 +313,12 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 						
 						ListeVoeuxEtudiant.get(ine).get(i).dcsEtudiant=decision.NONdefinitif;
 						ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,ListeVoeuxEtudiant.get(ine).get(i));
+						try {
+							bddGDV.supprimerVoeux(ListeVoeuxEtudiant.get(ine).get(i), ine);
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						ListeVoeuxEtudiant.get(ine).remove(i);
 						
 					}
@@ -315,13 +351,31 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 				{
 					vb = (Voeu) lv.get(i-1);
 					tempNumero = vb.numeroVoeu;
-					vb.numeroVoeu = va.numeroVoeu;
-					va.numeroVoeu = tempNumero;
+					try {
+						bddGDV.ChangerOrdreVoeux(vb.numeroVoeu, ine, va.numeroVoeu);
+						vb.numeroVoeu = va.numeroVoeu;
+						va.numeroVoeu = tempNumero;
+						
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
+					
 				}
 				else
 				{
 					vb = (Voeu) lv.get(i+1);
 					tempNumero = va.numeroVoeu;
+					try {
+						bddGDV.ChangerOrdreVoeux(va.numeroVoeu, ine, vb.numeroVoeu);
+						bddGDV.ChangerOrdreVoeux(vb.numeroVoeu, ine, tempNumero);
+						
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					va.numeroVoeu = vb.numeroVoeu;
 					vb.numeroVoeu = tempNumero;
 				}
@@ -470,7 +524,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		}
 		else if(numero==3)
 		{
-			System.out.println("*************************1");
+			
 			
 			ministere.deliberationJuryFinal();
 		}
