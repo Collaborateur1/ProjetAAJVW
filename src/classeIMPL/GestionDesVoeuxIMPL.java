@@ -282,6 +282,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 								
 							ListeVoeuxEtudiant.get(ine).get(i).dcsEtudiant=decision.NONdefinitif;
 							ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,ListeVoeuxEtudiant.get(ine).get(i));
+							System.out.println("test oui definitif "+ListeVoeuxEtudiant.get(ine).get(i).formationVoeu.NomFormation );
 							/*try {
 								//bddGDV.supprimerVoeux(ListeVoeuxEtudiant.get(ine).get(i), ine);
 							} catch (SQLException e) {
@@ -325,8 +326,15 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 					
 					
 				}
-				
+				if(ListeVoeuxEtudiant.containsKey(ine))
+				{
+					
 				ListeEtudiant.get(ine).majEtatVoeux(chargerVoeux(ine));
+				
+				}
+				else{
+					ListeEtudiant.get(ine).notifier("vous navez plus de voeux");
+				}
 	}
 	
 
@@ -453,8 +461,13 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 				lv.set(i, Reponse);
 			}
 		}
-		if(ListeEtudiant.containsKey(ine))
+		if(ListeVoeuxEtudiant.containsKey(ine))
+		{
 		ListeEtudiant.get(ine).majEtatVoeux(chargerVoeux(ine));
+		}
+		else{
+			ListeEtudiant.get(ine).notifier("vous navez plus de voeux");
+		}
 	}
 
 	@Override

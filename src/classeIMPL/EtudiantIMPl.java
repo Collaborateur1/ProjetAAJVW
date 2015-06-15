@@ -58,7 +58,7 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	@Override
 	public void notifier(String message) {
 		// TODO Auto-generated method stub
-		System.out.println (message);
+		cl.notification(message);
 
 	}
 

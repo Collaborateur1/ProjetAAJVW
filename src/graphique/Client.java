@@ -799,7 +799,11 @@ public class Client extends javax.swing.JFrame {
 	}
 	public void notification( String st) 
 	{
-
+     jLabel10.setText(st);
+     if(st.equals("vous navez plus de voeux"))
+     {
+    	 jList2.removeAll();
+     }
 	}
 	public void Mise_a_Jour_Parametre_ConnexionEtablit() 
 	{
