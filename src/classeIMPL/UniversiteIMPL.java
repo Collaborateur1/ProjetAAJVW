@@ -118,7 +118,7 @@ public UniversiteIMPL(String nomUniv, String nomAcad,org.omg.CORBA.ORB orb) thro
 	for(int i = 0;i<bdhf.size();i++)
 	{
 		b = bdhf.get(i);
-		ListeDesFormations.put(b.getFr().NomFormation, b.getFr());
+		this.ajouterFormation(b.getFr(), bddUNIV.chargerPrerequis(b.getFr().NomFormation));
 	}
 }
 
@@ -496,12 +496,7 @@ public void ajouterFormation(Formation fr,String[] frRequises)
 	ArrayList<String>ListEtu = new ArrayList <String>();
 	ListeCandidatureParFormation.put(fr.NomFormation,ListEtu);
 	ListeDesFormations.put(fr.NomFormation, fr);
-	
-	
 	recto.ajoutPrerequis(fr, frRequises);
-	
-	
-	
 }
 
 public void affichage(){
