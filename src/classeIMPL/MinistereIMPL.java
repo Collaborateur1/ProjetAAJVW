@@ -57,7 +57,7 @@ public class MinistereIMPL extends MinistèrePOA {
 		for(int i=0;i<this.ListeFormation.size();i++)
 		{
 			Forma[i]=this.ListeFormation.get(i);
-			System.out.println("test "+ Forma[i].NomFormation);
+			//System.out.println("Formation "+i+" ajoutée : "+ Forma[i].NomFormation);
 		}
 
 

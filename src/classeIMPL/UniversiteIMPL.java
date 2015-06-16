@@ -118,6 +118,7 @@ public UniversiteIMPL(String nomUniv, String nomAcad,org.omg.CORBA.ORB orb) thro
 	for(int i = 0;i<bdhf.size();i++)
 	{
 		b = bdhf.get(i);
+		//System.out.println("Dans Univ "+nomUniv+" : Ajout formation "+b.getFr().NomFormation);
 		this.ajouterFormation(b.getFr(), bddUNIV.chargerPrerequis(b.getFr().NomFormation));
 	}
 }
@@ -487,8 +488,6 @@ public void ajouterEtudiant(String ine, dossierEtudiant dossier)
 		
 	DossierEtudiant.put(ine, dossier);
 	ministere.EnregistrerRectoratEtudiant(ine, recto);
-	
-	
 }
 
 public void ajouterFormation(Formation fr,String[] frRequises)

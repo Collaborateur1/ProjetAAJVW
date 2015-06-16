@@ -29,12 +29,8 @@ public class LancementUniversite {
 		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(new String[0],null);
 		CreationDossierEtudiant dossetu = null;
 
-		UniversiteIMPL univ1= new UniversiteIMPL("UT1","rectorat",orb);
-		UniversiteIMPL univ2= new UniversiteIMPL("UT2","rectorat",orb);
-		UniversiteIMPL univ3= new UniversiteIMPL("UT3","rectorat",orb);
-		System.out.println("Université UT1 opérationnelle");
-		System.out.println("Université UT2 opérationnelle");
-		System.out.println("Université UT3 opérationnelle");
+		UniversiteIMPL univ1= new UniversiteIMPL(args[0],"rectorat",orb);
+		System.out.println("Université "+args[0]+" opérationnelle");
 
 		orb.run();
 	}
