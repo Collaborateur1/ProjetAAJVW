@@ -51,7 +51,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	LoadBalancerEtudiant loadBalancer;
 	Ministère ministere;
 	Formation[] listeFormation;
-	//DBGestionDesVoeux bddGDV;
+	DBGestionDesVoeux bddGDV;
 	
 	public GestionDesVoeuxIMPL(short numServ, org.omg.CORBA.ORB orb) throws InvalidName, ServantNotActive, WrongPolicy, DonneesInvalides, AdapterInactive {
 		
@@ -84,13 +84,15 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		//c'est ici que l'on caste GestionDesVoeuxIMPL en GestionDesVoeux GestionDesVoeuxHelper.narrow(rootPOA.servant_to_reference(this))s
 		/*3*/gdpRattache.inscriptionGestionDesVoeux(thisdGdv);
 		// TODO Auto-generated constructor stub
-	//	bddGDV=new DBGestionDesVoeux();
+		bddGDV = new DBGestionDesVoeux();
+		
 		try {
-			initialisation();
+			ListeVoeuxEtudiant = bddGDV.Chargervoeu();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 
 	@Override
@@ -190,18 +192,15 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		{
 			monVoeux.numeroVoeu = ordre;
 			lv.add(monVoeux);
-			/*try {
+			try {
 				bddGDV.ajouterVoeux(monVoeux, ine);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}*/
+			}
 		}
 		
 		return chargerVoeux(ine);
-		
-		
-		
 	}
 
 	
@@ -548,20 +547,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		// TODO Auto-generated method stub
 		ListeEtudiant.remove(ine);
 	}
-	
-	
-
-public void initialisation() throws SQLException
-
-{
-	//ListeVoeuxEtudiant=bddGDV.Chargervoeu();
-	
-	
-	
-}
-
-
-
 
 }
 
