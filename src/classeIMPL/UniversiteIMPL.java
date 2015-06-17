@@ -108,6 +108,7 @@ public UniversiteIMPL(String nomUniv, String nomAcad,org.omg.CORBA.ORB orb) thro
 	
 	
 	try {
+		System.out.println("formation recupéré");
 		bdhf = bddUNIV.getFormation();
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
@@ -118,7 +119,8 @@ public UniversiteIMPL(String nomUniv, String nomAcad,org.omg.CORBA.ORB orb) thro
 	for(int i = 0;i<bdhf.size();i++)
 	{
 		b = bdhf.get(i);
-		ListeDesFormations.put(b.getFr().NomFormation, b.getFr());
+		//System.out.println("Dans Univ "+nomUniv+" : Ajout formation "+b.getFr().NomFormation);
+		this.ajouterFormation(b.getFr(), bddUNIV.chargerPrerequis(b.getFr().NomFormation));
 	}
 }
 
@@ -487,8 +489,6 @@ public void ajouterEtudiant(String ine, dossierEtudiant dossier)
 		
 	DossierEtudiant.put(ine, dossier);
 	ministere.EnregistrerRectoratEtudiant(ine, recto);
-	
-	
 }
 
 public void ajouterFormation(Formation fr,String[] frRequises)
@@ -496,12 +496,7 @@ public void ajouterFormation(Formation fr,String[] frRequises)
 	ArrayList<String>ListEtu = new ArrayList <String>();
 	ListeCandidatureParFormation.put(fr.NomFormation,ListEtu);
 	ListeDesFormations.put(fr.NomFormation, fr);
-	
-	
 	recto.ajoutPrerequis(fr, frRequises);
-	
-	
-	
 }
 
 public void affichage(){

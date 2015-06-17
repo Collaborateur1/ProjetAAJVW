@@ -214,7 +214,38 @@ public class DBUniversite {
 			e.printStackTrace();
 		}
 
+		return null;
+	}
+	
+	public String[] chargerPrerequis(String nomForm)
+	{
+		String query ="select * from PREREQUIS WHERE NOMFORMATION='"+nomForm+"'";
+		Statement s = null;
+		ResultSet re = null;
 
+		try {
+			s = conn.createStatement();
+			re=s.executeQuery(query);
+
+			ArrayList<String> array = new ArrayList<String>();
+
+			while(re.next())
+			{
+				array.add(re.getString("PREREQUIS"));
+			}
+			
+			String[] array2 = new String[array.size()];
+			for(int i=0;i<array.size();i++)
+			{
+				array2[i] = array.get(i);
+			}
+
+			return array2;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
