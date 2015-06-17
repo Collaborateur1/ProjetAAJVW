@@ -94,7 +94,7 @@ public class DBGestionDesVoeux {
 				for(int i=0;i<array.size();i++)
 				{
 					v = array.get(i);
-					lvt[v.numeroVoeu-1] = v;
+					lvt[i] = v;
 				}
 				
 				array.clear();
