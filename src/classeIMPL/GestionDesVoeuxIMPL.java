@@ -92,7 +92,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
 	@Override
