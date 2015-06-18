@@ -232,6 +232,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 					
 					for(int i =0; i<ListeVoeuxEtudiant.get(ine).size(); i++){
 						ListeVoeuxEtudiant.get(ine).get(i).dcsEtudiant=decision.NONdefinitif;
+						System.out.println("ici je jannule le voeux "+ListeVoeuxEtudiant.get(ine).get(i).formationVoeu.NomFormation);
 						ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,ListeVoeuxEtudiant.get(ine).get(i));
 						
 					}
@@ -259,11 +260,13 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 							ListeVoeuxEtudiant.get(ine).remove(i);
 							
 						}
+						
 					}
 					
 					for(int i =v.numeroVoeu-1; i<ListeVoeuxEtudiant.get(ine).size(); i++){
 						
 						ListeVoeuxEtudiant.get(ine).get(i).dcsEtudiant=decision.NONdefinitif;
+						System.out.println("ici je jannule le voeux avec non mais "+ListeVoeuxEtudiant.get(ine).get(i).formationVoeu.NomFormation);
 						ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,ListeVoeuxEtudiant.get(ine).get(i));
 					/*	try {
 						//	bddGDV.supprimerVoeux(ListeVoeuxEtudiant.get(ine).get(i), ine);

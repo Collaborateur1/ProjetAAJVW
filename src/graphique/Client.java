@@ -43,6 +43,7 @@ import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -800,9 +801,11 @@ public class Client extends javax.swing.JFrame {
 	public void notification( String st) 
 	{
      jLabel10.setText(st);
-     if(st.equals("vous navez plus de voeux"))
+     if(st.contains("vous navez plus de voeux"))
      {
-    	 jList2.removeAll();
+    	ArrayList<Voeu> array =new ArrayList<Voeu>();
+    	
+    	 jList2.setListData(array.toArray());
      }
 	}
 	public void Mise_a_Jour_Parametre_ConnexionEtablit() 

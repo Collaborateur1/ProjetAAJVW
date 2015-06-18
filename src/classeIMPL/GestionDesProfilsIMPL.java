@@ -171,8 +171,15 @@ System.out.println("*************************");
 		if(!etudiantinscrit.containsKey(ine))
 		{	
 			
-			
-			Etudiant etu=ministere.GetRectoratEtudiant(ine).getFicheEtudiant(ine);
+			Etudiant etu = null;
+			if(ministere.containsEtudiant(ine))
+			{
+			 etu=ministere.GetRectoratEtudiant(ine).getFicheEtudiant(ine);
+			}
+			else
+			{
+				return false;
+			}
 			
 			if(etu.formation.NomFormation.contains("nada"))
 			{

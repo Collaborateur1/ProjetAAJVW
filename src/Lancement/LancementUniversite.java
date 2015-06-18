@@ -56,8 +56,9 @@ public class LancementUniversite {
 			
 			dossierEtudiant detu=new dossierEtudiant(etu, resultt);
 			univ2.ajouterEtudiant(etu.ineEtudiant, detu);
-			String []ListePrereq = new String[1];
+			String []ListePrereq = new String[2];
 			ListePrereq[0]= "DUT";
+			ListePrereq[1]= "NomFormation";
 			univ2.ajouterFormation(fr2,ListePrereq);
 			System.out.println("univ UT1 operationel");
 			
@@ -99,7 +100,7 @@ public class LancementUniversite {
 			System.out.println("univ UT2 operationel");
 			Formation fr= new Formation("UT2","NomFormation", "TypeFormation", "rectorat2", (short)2);
 			Formation frf= new Formation("UT2","math", "TypeFormation", "rectorat2", (short)2);
-			Etudiant etu2=new Etudiant("toto","titi","G105","UT2","lavenue",fr);
+			Etudiant etu2=new Etudiant("lolita","margerite","G105","UT2","lopete",fr);
 			Resultat resultat1=new Resultat((short)1,15, (short)10,(short)5);
 			Resultat resultat2=new Resultat((short)2,14, (short)10,(short)4);
 			Resultat resultat3=new Resultat((short)3,19, (short)10,(short)6);
