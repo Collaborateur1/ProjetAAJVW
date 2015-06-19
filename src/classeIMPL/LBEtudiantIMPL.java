@@ -30,16 +30,13 @@ public class LBEtudiantIMPL extends LoadBalancerEtudiantPOA {
 	public GestionDesProfils getProfil(String ine) throws DonneesInvalides {
 		// TODO Auto-generated method stub
 		
-		if(ine.indexOf("G1")!=-1) //si ine contient "G1"  on renvoi GDP1 sinon GDP2 (on fait deux GDP pour linstant)
+		if(ine.startsWith("1")) //si ine contient "G1"  on renvoi GDP1 sinon GDP2 (on fait deux GDP pour linstant)
 	    {
-
 			return listGDP.get("1");
 	    }
 		else
 		{
-			System.out.println("oui");
 			return listGDP.get("2");	
-			
 		}
 
 	}

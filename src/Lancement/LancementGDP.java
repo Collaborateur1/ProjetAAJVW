@@ -23,8 +23,8 @@ public class LancementGDP {
 	public static void main(String[] args) throws DonneesInvalides, InvalidName, ServantNotActive, WrongPolicy, ServantAlreadyActive, AdapterInactive {
 		// TODO Auto-generated method stub
 		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(new String[0],null);
-        short sh=1;
-		GestionDesProfilsIMPL gdpimpl=new GestionDesProfilsIMPL(sh,orb,"rectorat");
+        short numGPD=1;
+		GestionDesProfilsIMPL gdpimpl=new GestionDesProfilsIMPL(numGPD,orb,"rectorat");
 		
 		orb.run();
 	}

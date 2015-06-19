@@ -18,10 +18,9 @@ import classeIMPL.UniversiteIMPL;
 
 public class CreationDossierEtudiant {
 	
-	public static dossierEtudiant creerDossierEtudiant(String nom, String prenom, String ine)
+	public static dossierEtudiant creerDossierEtudiant(String nom, String prenom, String ine, String nomUniv, Formation f)
 	{
-		Formation f= new Formation("UT3","MIAGE", "Info-Gestion", "Midi-pyrenees", (short)30);
-		Etudiant etu=new Etudiant(nom,prenom,ine,"UT3","adresse test",f);
+		Etudiant etu=new Etudiant(nom,prenom,ine,nomUniv,"adresse test",f);
 		
 		Random rand = new Random();
 		int note = 0, classement =0,nbResultat = 6;
@@ -40,7 +39,7 @@ public class CreationDossierEtudiant {
 	public static void main(String[] args) throws DonneesInvalides, InvalidName, AdapterInactive, ServantNotActive, WrongPolicy {
 		// TODO Auto-generated method stub
 		System.out.println("Test d'ajout d'étudiant");
-		dossierEtudiant de = creerDossierEtudiant("Alex", "Combe", "XB3635");
+		dossierEtudiant de = creerDossierEtudiant("Alex", "Combe", "XB3635", "UT3", new Formation("Paul Sabatier", "MIAGE", "Info Gest", "Midi Pyrenees", (short) 30));
 		System.out.println("Fin Test d'ajout d'étudiant");
 	}
 }

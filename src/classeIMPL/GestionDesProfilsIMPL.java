@@ -1,5 +1,7 @@
 package classeIMPL;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -9,7 +11,7 @@ import org.omg.PortableServer.POAPackage.ServantAlreadyActive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
-
+import Databases.BDDEtudiantHelper;
 import Databases.DBGestionDesProfils;
 //import Databases.DBGestionDesProfils;
 import outils.NamingServiceTool;
@@ -42,7 +44,7 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 	LoadBalancerEtudiant loadBalancer;
 	org.omg.PortableServer.POA rootPOA;
 	DBGestionDesProfils bddGVP;
-	
+
 	Ministère ministere;
 
 	/*********************Costructeur
@@ -63,14 +65,29 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 
 
 		rootPOA.the_POAManager().activate();
-		 ministere= MinistèreHelper.narrow(
+		ministere= MinistèreHelper.narrow(
 				NamingServiceTool.getReferenceIntoNS("Ministere"));
-		
+
 
 		loadBalancer.inscriptionGDP(GestionDesProfilsHelper.narrow(rootPOA.servant_to_reference(this)), nGdp);
-		bddGVP=new DBGestionDesProfils();
-		// TODO Auto-generated constructor stub
-
+		bddGVP = new DBGestionDesProfils();
+		
+		ArrayList<BDDEtudiantHelper> le=null;
+		try {
+			le =  bddGVP.ChargerEtudiant(numGDP);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BDDEtudiantHelper e;
+		for(int i=0;i<le.size();i++)
+		{
+			e = le.get(i);
+			etudiantinscrit.put(e.getEtu().ineEtudiant, e.getEtu());
+			//System.out.println("Ajout de l'étudiant : "+e.getEtu().ineEtudiant);
+			if(e.getMdp()!="")
+				CodeEtudiantInscrit.put(e.getEtu().ineEtudiant, e.getMdp());
+		}
 	}
 
 	/*********************Fonction généré******************************/
@@ -87,44 +104,37 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 
 		if(etudiantinscrit.containsKey(ine) )
 		{
-			if( CodeEtudiantInscrit.get(ine).equals(mdp)){
-				
-				
+			if(CodeEtudiantInscrit.get(ine).equals(mdp))
+			{
 				return true;
-				
 			}
-
 		}
-System.out.println("*************************");
+		System.out.println("*************************");
 		return false;
 	}
 
 	@Override
 	public GestionDesVoeux connexion(IEtudiant iorEtudiant, String ine,
 			String mdp) throws DonneesInvalides {
-		
+
 		if(etudiantinscrit.containsKey(ine) )
 		{
-			
-			if( CodeEtudiantInscrit.get(ine).equals(mdp)){
-				
-				
-					
-					GestionDesVoeuxInscrit.inscriptionIE(ine, iorEtudiant);
-					if(etudiantConnecter.contains(ine))
-						etudiantConnecter.replace(ine, iorEtudiant);
-					else
-						etudiantConnecter.put(ine, iorEtudiant);
-				
-				
-				
+
+			if(CodeEtudiantInscrit.get(ine).equals(mdp))
+			{
+				GestionDesVoeuxInscrit.inscriptionIE(ine, iorEtudiant);
+				if(etudiantConnecter.contains(ine))
+					etudiantConnecter.replace(ine, iorEtudiant);
+				else
+					etudiantConnecter.put(ine, iorEtudiant);
+
 				return GestionDesVoeuxInscrit;				
 			}
 
 
 		}
 		// TODO Auto-generated method stub
-		
+
 		return null;
 	}
 
@@ -146,14 +156,14 @@ System.out.println("*************************");
 	public void inscriptionGestionDesVoeux(GestionDesVoeux GDesVx) {
 		// TODO Auto-generated method stub
 		GestionDesVoeuxInscrit=GDesVx;
-		
+
 		nombreGDV++;
 	}
 
 	@Override
 	public boolean etudiantInscrit(String ine) throws DonneesInvalides {
 		// TODO Auto-generated method stub
-		
+
 		return etudiantinscrit.containsKey(ine);
 	}
 
@@ -167,8 +177,29 @@ System.out.println("*************************");
 	public boolean inscriptionEtudiant(String ine, String mdp)
 			throws DonneesInvalides {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Entree dans comparaison");
+		if(CodeEtudiantInscrit.containsKey(ine) == false)
+		{
+			if(etudiantinscrit.containsKey(ine))
+			{
+				CodeEtudiantInscrit.put(ine,mdp);
+				bddGVP.ajouterMotDePass(ine,mdp);
+				return true;
+			}
+			else
+			{
+				System.out.println("Etudiant pas chargé avec la BD");
+				return false;
+			}
+		}
+		else
+		{
+			System.out.println("Mot de passe déja rentrée");
+			return false;
+		}
+		/*
 		if(!etudiantinscrit.containsKey(ine))
+<<<<<<< HEAD
 		{	
 			
 			Etudiant etu = null;
@@ -180,7 +211,12 @@ System.out.println("*************************");
 			{
 				return false;
 			}
+=======
+		{
+>>>>>>> c46051c3838df5d9d4e053620c79dba205a732a7
 			
+			Etudiant etu=etudiantinscrit.get(ine);
+
 			if(etu.formation.NomFormation.contains("nada"))
 			{
 				return false;
@@ -188,13 +224,14 @@ System.out.println("*************************");
 			else
 			{
 				etudiantinscrit.put(etu.ineEtudiant,etu);
+
 				
-				CodeEtudiantInscrit.put(etu.ineEtudiant,mdp);
 				return true;
 			}
 		}
-	
+
 		return false;
+		*/
 
 	}
 	/*********************Fonction rajouté******************************/

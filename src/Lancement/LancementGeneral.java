@@ -120,7 +120,6 @@ public class LancementGeneral {
 
 		Thread.sleep(1000);	
 		
-		
 		Runnable unive3 = new Runnable() {
 			public void run() {
 				try {

@@ -77,13 +77,12 @@ public class DBGestionDesVoeux {
 				
 			while(re.next())
 			{
-				
 				helpV.ajouterVoeu(re.getString("INEETUDIANT"), re.getString("NOMUNIVERSITE"), re.getString("NOMFORMATION"),
 				re.getString("TYPEFORMATION"), re.getString("NOMRECTORAT"), re.getShort("QUOTA"),re.getString("ETATVOEUX"),
 				re.getString("DECISION"), re.getShort("NUMEROVOEU"), re.getShort("NUMEROGDV"));
-				
-				
 			}
+			
+			//Trie des voeux
 			ArrayList<Voeu> array= new ArrayList<Voeu>();
 			Enumeration<String> ele=helpV.getListeVoeuxEtudiant().keys();
 			Voeu v;
@@ -102,6 +101,7 @@ public class DBGestionDesVoeux {
 				for(int i=0;i<lvt.length;i++)
 					array.add(lvt[i]);
 			}
+			
 			return helpV.getListeVoeuxEtudiant();				
 			
 		
@@ -164,7 +164,6 @@ public class DBGestionDesVoeux {
 		try {
 			s = conn.createStatement();
 			s.executeUpdate("UPDATE  VOEU set ETATVOEUX='"+vx.etatVoeu+"' WHERE INEETUDIANT='"+ine+"' AND NUMEROVOEU="+vx.numeroVoeu);
-	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

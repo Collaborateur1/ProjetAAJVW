@@ -16,6 +16,7 @@ import generated.decision;
 import generated.dossierEtudiant;
 import generated.etatvoeux;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -35,6 +36,9 @@ import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 import org.openorb.compiler.parser.Symbole;
 
+import Databases.BDDEtudiantHelper;
+import Databases.BddHelperFormation;
+import Databases.DBGestionDesProfils;
 import Databases.DBUniversite;
 import outils.NamingServiceTool;
 import outils.ValueComparator;
@@ -47,7 +51,6 @@ Rectorat recto;
 Ministère ministere;
 Hashtable<String,dossierEtudiant> DossierEtudiant;
 Hashtable<String,dossierEtudiant> DossierCandidatureEtudiant;
-DBUniversite bddUNIV;
 //Pour chaque Ine on a une hastable qui contien la liste des voeux 
 //qui sont identifier par le nom de la formation ..
 //concretement..hashtable<INE,Liste<NomFormation,Voeu>>
@@ -62,6 +65,7 @@ Hashtable <String, Resultat[] > ListeResultEtu;
 Hashtable <String, Formation>ListeDesFormations;
 Hashtable <String,ArrayList<String>> ListeDattente;
 
+DBUniversite bddUNIV;;
 
 
 /**************************Constructeur********************************/
@@ -85,8 +89,39 @@ public UniversiteIMPL(String nomUniv, String nomAcad,org.omg.CORBA.ORB orb) thro
 	DossierCandidatureEtudiant=new Hashtable<String,dossierEtudiant>();
 	recto=ministere.rectoratRattacherUniv(nomAcad);
 	recto.inscriptionUniv(UniversiteHelper.narrow(rootPOA.servant_to_reference(this)),nomUniv);
-	bddUNIV=new DBUniversite();
+	bddUNIV = new DBUniversite(nomUniv);
+	ArrayList<dossierEtudiant> le = null;
+	ArrayList<BddHelperFormation> bdhf = null;
+	try {
+		le = bddUNIV.ChargerEtudiant();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	
+	dossierEtudiant de = null;
+	for(int i =0;i<le.size();i++)
+	{
+		de = le.get(i);
+		DossierEtudiant.put(de.etu.ineEtudiant, de);
+	}
+	
+	
+	try {
+		System.out.println("formation recupéré");
+		bdhf = bddUNIV.getFormation();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	BddHelperFormation b = null;
+	for(int i = 0;i<bdhf.size();i++)
+	{
+		b = bdhf.get(i);
+		//System.out.println("Dans Univ "+nomUniv+" : Ajout formation "+b.getFr().NomFormation);
+		this.ajouterFormation(b.getFr(), bddUNIV.chargerPrerequis(b.getFr().NomFormation));
+	}
 }
 
 
@@ -454,22 +489,14 @@ public void ajouterEtudiant(String ine, dossierEtudiant dossier)
 		
 	DossierEtudiant.put(ine, dossier);
 	ministere.EnregistrerRectoratEtudiant(ine, recto);
-	
-	
 }
 
 public void ajouterFormation(Formation fr,String[] frRequises)
 {
 	ArrayList<String>ListEtu = new ArrayList <String>();
-	
 	ListeCandidatureParFormation.put(fr.NomFormation,ListEtu);
 	ListeDesFormations.put(fr.NomFormation, fr);
-	
-	
 	recto.ajoutPrerequis(fr, frRequises);
-	
-	
-	
 }
 
 public void affichage(){
