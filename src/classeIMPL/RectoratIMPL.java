@@ -38,6 +38,7 @@ public class RectoratIMPL extends RectoratPOA {
 	String nomRectorat;
 	Ministère MonMinistere;
 	org.omg.PortableServer.POA rootPOA;
+	boolean deliberationJury=false;
 
 	/*************************Constructeur
 	 * @throws DonneesInvalides 
@@ -290,15 +291,18 @@ public class RectoratIMPL extends RectoratPOA {
 	@Override
 	public void deliberationJury() {
 		// TODO Auto-generated method stub
-		System.out.println("test3");
+		if(!deliberationJury){
 		Enumeration<Universite> ListeUniv=this.ListeListUniversite.elements();
 
 		while(ListeUniv.hasMoreElements())
 		{
 			Universite Un=null;
-
+			
 			Un= ListeUniv.nextElement();
+			System.out.println("déliberation jury univ "+Un.nomUniversite());
 			Un.deliberationJury();
+		}
+		deliberationJury=true;
 		}
 	}
 	

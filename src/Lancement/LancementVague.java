@@ -12,6 +12,8 @@ import generated.GestionDesProfils;
 import generated.GestionDesVoeux;
 import generated.LoadBalancerEtudiant;
 import generated.LoadBalancerEtudiantHelper;
+import generated.Ministère;
+import generated.MinistèreHelper;
 
 /**
  *
@@ -118,30 +120,18 @@ public class LancementVague extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-    	GestionDesProfils[] tabGDP = lbe.getAllGDP();
-        GestionDesProfils gdp;
-        GestionDesVoeux gdv;
-        
-        for(int i=0;i<tabGDP.length;i++)
-        {
-        	gdp = tabGDP[i];
-        	gdv = gdp.getGDV();
-        	gdv.lancementVague((short) 2);
-        }
+    	Ministère ministere;
+    	 ministere= MinistèreHelper.narrow(
+    				NamingServiceTool.getReferenceIntoNS("Ministere"));
+    	 ministere.deliberationJury();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-    	GestionDesProfils[] tabGDP = lbe.getAllGDP();
-        GestionDesProfils gdp;
-        GestionDesVoeux gdv;
-        
-        for(int i=0;i<tabGDP.length;i++)
-        {
-        	gdp = tabGDP[i];
-        	gdv = gdp.getGDV();
-        	gdv.lancementVague((short) 3);
-        }
+    	Ministère ministere;
+   	 ministere= MinistèreHelper.narrow(
+   				NamingServiceTool.getReferenceIntoNS("Ministere"));
+   	 ministere.deliberationJuryFinal();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

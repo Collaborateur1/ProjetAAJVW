@@ -96,6 +96,8 @@ public class EtudiantIMPl extends IEtudiantPOA{
 
 					this.INE=INE;
 					cl.setVisible(true);
+					this.interfaceConnexion.setVisible(false);
+					
 					return true;
 				}
 				else
