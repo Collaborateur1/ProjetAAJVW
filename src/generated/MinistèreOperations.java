@@ -61,4 +61,10 @@ public interface MinistèreOperations
      */
     public void deliberationJuryFinal();
 
+    /**
+     * Operation containsEtudiant
+     */
+    public boolean containsEtudiant(String ine)
+        throws generated.DonneesInvalides;
+
 }

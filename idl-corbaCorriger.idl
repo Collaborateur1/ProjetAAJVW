@@ -292,6 +292,8 @@ interface Universite {
 		
 		void deliberationJuryFinal();
 		
+		boolean containsEtudiant(in string ine) raises(DonneesInvalides);
+		
 	};
 
 	//Une Université possède un ensemble de Formation

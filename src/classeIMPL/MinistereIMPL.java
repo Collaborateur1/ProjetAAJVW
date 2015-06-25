@@ -71,7 +71,12 @@ public class MinistereIMPL extends MinistèrePOA {
 
 		return IneRectorat.get(ine);
 	}
-
+	
+	@Override
+	public boolean containsEtudiant(String ine) throws DonneesInvalides {
+		// TODO Auto-generated method stub
+		return IneRectorat.containsKey(ine);
+	}
 	@Override
 	public void EnregistrerRectoratEtudiant(String ine, Rectorat recto) {
 		// TODO Auto-generated method stub

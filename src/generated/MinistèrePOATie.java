@@ -146,4 +146,13 @@ public class MinistèrePOATie extends MinistèrePOA
         _tie.deliberationJuryFinal();
     }
 
+    /**
+     * Operation containsEtudiant
+     */
+    public boolean containsEtudiant(String ine)
+        throws generated.DonneesInvalides
+    {
+        return _tie.containsEtudiant( ine);
+    }
+
 }

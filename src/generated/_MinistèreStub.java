@@ -544,4 +544,60 @@ public class _MinistèreStub extends org.omg.CORBA.portable.ObjectImpl
         }
     }
 
+    /**
+     * Operation containsEtudiant
+     */
+    public boolean containsEtudiant(String ine)
+        throws generated.DonneesInvalides
+    {
+        while(true)
+        {
+            if (!this._is_local())
+            {
+                org.omg.CORBA.portable.InputStream _input = null;
+                try
+                {
+                    org.omg.CORBA.portable.OutputStream _output = this._request("containsEtudiant",true);
+                    _output.write_string(ine);
+                    _input = this._invoke(_output);
+                    boolean _arg_ret = _input.read_boolean();
+                    return _arg_ret;
+                }
+                catch(org.omg.CORBA.portable.RemarshalException _exception)
+                {
+                    continue;
+                }
+                catch(org.omg.CORBA.portable.ApplicationException _exception)
+                {
+                    String _exception_id = _exception.getId();
+                    if (_exception_id.equals(generated.DonneesInvalidesHelper.id()))
+                    {
+                        throw generated.DonneesInvalidesHelper.read(_exception.getInputStream());
+                    }
+
+                    throw new org.omg.CORBA.UNKNOWN("Unexpected User Exception: "+ _exception_id);
+                }
+                finally
+                {
+                    this._releaseReply(_input);
+                }
+            }
+            else
+            {
+                org.omg.CORBA.portable.ServantObject _so = _servant_preinvoke("containsEtudiant",_opsClass);
+                if (_so == null)
+                   continue;
+                generated.MinistèreOperations _self = (generated.MinistèreOperations) _so.servant;
+                try
+                {
+                    return _self.containsEtudiant( ine);
+                }
+                finally
+                {
+                    _servant_postinvoke(_so);
+                }
+            }
+        }
+    }
+
 }

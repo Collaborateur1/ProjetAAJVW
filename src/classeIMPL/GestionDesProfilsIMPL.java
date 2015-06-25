@@ -199,7 +199,21 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 		}
 		/*
 		if(!etudiantinscrit.containsKey(ine))
+<<<<<<< HEAD
+		{	
+			
+			Etudiant etu = null;
+			if(ministere.containsEtudiant(ine))
+			{
+			 etu=ministere.GetRectoratEtudiant(ine).getFicheEtudiant(ine);
+			}
+			else
+			{
+				return false;
+			}
+=======
 		{
+>>>>>>> c46051c3838df5d9d4e053620c79dba205a732a7
 			
 			Etudiant etu=etudiantinscrit.get(ine);
 
