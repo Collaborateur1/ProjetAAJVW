@@ -32,7 +32,6 @@ public class LancementUniversite {
 		UniversiteIMPL univ1= new UniversiteIMPL(args[0],"rectorat",orb);
 		System.out.println("Université "+args[0]+" opérationnelle");
 
-
 		orb.run();
 	}
 
