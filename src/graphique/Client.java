@@ -625,8 +625,9 @@ public class Client extends javax.swing.JFrame {
 	private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) throws DonneesInvalides, UtilisationInterdite {//GEN-FIRST:event_jButton10ActionPerformed
 		// TODO add your handling code here:
 		String choixVoeu = (String) jComboBox1.getSelectedItem();
+		System.out.println("my godddddddddddd");
 		if(jList2.getSelectedValue()instanceof Voeu )	
-		{
+		{System.out.println("my ok");
 			Voeu v=(Voeu) jList2.getSelectedValue();
 
 			switch (choixVoeu)
