@@ -103,7 +103,7 @@ public UniversiteIMPL(String nomUniv, String nomAcad,org.omg.CORBA.ORB orb) thro
 	for(int i =0;i<le.size();i++)
 	{
 		de = le.get(i);
-		DossierEtudiant.put(de.etu.ineEtudiant, de);
+		this.ajouterEtudiant(de.etu.ineEtudiant, de);
 	}
 	
 	

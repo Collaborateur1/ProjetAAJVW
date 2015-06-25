@@ -73,7 +73,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		
 		ministere= MinistèreHelper.narrow(
 				NamingServiceTool.getReferenceIntoNS("Ministere"));
-		System.out.println("Reférérence ministere recuperee" );
+		System.out.println("Reférence ministere recuperee" );
 		
 		listeFormation = ministere.madDesFormationsFrance();
 		gdpRattache = loadBalancer.getServProfil(numServ);
@@ -462,7 +462,9 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		}
 		if(ListeVoeuxEtudiant.containsKey(ine))
 		{
-		ListeEtudiant.get(ine).majEtatVoeux(chargerVoeux(ine));
+			if (ListeEtudiant.containsKey(ine))
+			{ListeEtudiant.get(ine).majEtatVoeux(chargerVoeux(ine));}
+			
 		}
 		else{
 			ListeEtudiant.get(ine).notifier("vous navez plus de voeux");
@@ -519,9 +521,11 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 				}
 				try {
 					
+					//System.out.println("rectorat"+ministere.GetRectoratEtudiant(ine).nomRectorat());
 					ministere.GetRectoratEtudiant(ine).envoyerListeVoeuxGDV(tabVoeu, et);
 					
-					ListeEtudiant.get(ine).lancementVague((short) 1);
+					if(ListeEtudiant.containsKey(ine))
+						ListeEtudiant.get(ine).lancementVague((short) 1);
 					
 				} catch (DonneesInvalides e1) {
 					// TODO Auto-generated catch block

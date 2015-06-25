@@ -202,9 +202,9 @@ public class RectoratIMPL extends RectoratPOA {
 
 				
 				Rectorat recorat_a_Joindre=MonMinistere.recupererRectorat(lv[i].formationVoeu.nomRectorat);
-				System.out.println("amel theori2"+nomRectorat );
+				System.out.println("nom rect form : "+lv[i].formationVoeu.nomRectorat );
 				dossierEtu=univEtudiant.madDossier(etu.ineEtudiant);
-				System.out.println("amel theori3" );
+				System.out.println("recto : "+recorat_a_Joindre.nomRectorat());
 				recorat_a_Joindre.transfertDossier(dossierEtu, lv[i]);
 				System.out.println("amel theori4" );
 
@@ -327,13 +327,15 @@ public class RectoratIMPL extends RectoratPOA {
 	//Vérifier q'une candidature est conforme
 
 	public boolean CandidatureConforme(String NomFormationEtudiant,String Nomformationvoeu)
-	{System.out.println(" NomFormationEtudiant: "+ NomFormationEtudiant+" Nomformationvoeu: "+Nomformationvoeu);
+	{
+		//System.out.println(" NomFormationEtudiant: "+ NomFormationEtudiant+" Nomformationvoeu: "+Nomformationvoeu);
 		//On récupere la liste des formations valide pour la formation auquel il a postuler
 		ArrayList<String> ListeFormationValidePrCandidature=ValidationFormation.get(Nomformationvoeu);
-
+		System.out.println(ValidationFormation.toString());
 		//On cherche si on trouve la formation de létudiant dans les formations valide
 		for (int i=0;i< ListeFormationValidePrCandidature.size();i++)
-		{System.out.println(" NomFormationEtudiant: "+ListeFormationValidePrCandidature.get(i));
+		{
+			System.out.println(" NomFormationEtudiant: "+ListeFormationValidePrCandidature.get(i));
 			if(ListeFormationValidePrCandidature.get(i).equals(NomFormationEtudiant))
 			{
 				System.out.println(" NomFormationEtudiant: "+ListeFormationValidePrCandidature.get(i));
