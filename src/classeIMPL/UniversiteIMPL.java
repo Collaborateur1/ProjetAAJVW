@@ -449,13 +449,19 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 
 				}
 			}
-			else{
+			else if (nbAdmis ==quota && ListeDattente.containsKey(nomFormationCourante) ){ 
 				if(ListeDattente.size()>0){
+					System.out.println("******************************ici annulation voeu "+nomFormationCourante);
 					for(int i =0; i<ListeDattente.size();i++){
+						
+					
+						
 						voeuEtu = ListeVoeux.get(ListeDattente.get(nomFormationCourante).get(i)).get(nomFormationCourante);
 						voeuEtu.etatVoeu = etatvoeux.refuser;
+						System.out.println("******************************ici annulation voeu "+nomFormationCourante);
 						if (DossierEtudiant.containsKey(ListeDattente.get(nomFormationCourante).get(i))){
 							try {
+								System.out.println("******************************on le sup "+nomFormationCourante);
 								recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(ListeDattente.get(nomFormationCourante).get(i)).etu, voeuEtu);
 								} catch (DonneesInvalides e) {
 								// TODO Auto-generated catch block
@@ -464,6 +470,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 						}
 						else{
 							try {
+								System.out.println("******************************on le sup2 "+nomFormationCourante);
 								recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(ListeDattente.get(nomFormationCourante).get(i)).etu, voeuEtu);								
 							} catch (DonneesInvalides e) {
 								// TODO Auto-generated catch block

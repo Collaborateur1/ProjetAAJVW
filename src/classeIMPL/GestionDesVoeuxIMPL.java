@@ -203,6 +203,8 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	@Override
 	public void repondreAuxPropositions(String ine, decision choixEtu,
 			short numeroVoeu) throws DonneesInvalides, UtilisationInterdite {
+		
+		System.out.println("*************************************************************************************************88"+ine);
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
 				ArrayList lv = ListeVoeuxEtudiant.get(ine);

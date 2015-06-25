@@ -38,7 +38,7 @@ public class remplissageBDD {
 		Formation fr2= new Formation("UT1","MER", "Info Gest", "Midi Pyrenees", (short)2);
 		Formation fr3= new Formation("UT2","Math", "Mathematique appliqué", "Languedoc", (short)2);
 		Formation fr4= new Formation("UT2","SIAD", "Decisionnel", "Languedoc", (short)2);
-		Formation fr5= new Formation("UT3","Meca", "Mecanique des fluide", "Midi Pyrenees", (short)2);
+		Formation fr5= new Formation("UT3","Meca", "Mecanique des fluide", "Midi Pyrenees", (short)1);
 		Formation fr6= new Formation("UT3","GSI", "Info Gest", "Midi Pyrenees", (short)2);
 		
 		Formation frok= new Formation("Lycée","BTS", "Info Gest", "Midi Pyrenees", (short)2);

@@ -15,49 +15,45 @@ import java.util.Hashtable;
 public class DBGestionDesVoeux {
 	Connection conn;
 	public DBGestionDesVoeux(short numGDV){
-	//Création de la base de données si non créée
-	
-		try {
-			 Class.forName("org.h2.Driver");
-		    conn = DriverManager.getConnection("jdbc:h2:"+"BddsnDBGestionDesVoeux"+numGDV+";IGNORECASE=TRUE", "sa", "");
-		    // on cree un objet Statement qui va permettre l'execution des requetes
-	        Statement s = conn.createStatement();
-	
-	        // On regarde si la table existe deja
-	        String query = "select * from VOEU limit 1";
-	       
-	       
-	        try {
-	        	s.executeQuery(query);
-	        	
-	        } catch(Exception e) {
-	        	// Dans le cas où elle n'existe pas, on l'a crée
-	        	System.out.println("creation table");
-	        	
-	        	s.execute("create table VOEU  ( " +
-	        			" IDVOEU SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT, " +
-	        			" INEETUDIANT VARCHAR( 30 ) NOT NULL , " +
-	        			" NOMUNIVERSITE VARCHAR( 30 ) NOT NULL , " +
-	        			" NOMFORMATION VARCHAR( 30 ) NOT NULL , " +
-	        			" TYPEFORMATION VARCHAR( 30 ) NOT NULL , " +
-	        			" NOMRECTORAT VARCHAR( 30 ) NOT NULL , " +
-	        			" QUOTA SMALLINT ,"+
-	        			"ETATVOEUX VARCHAR( 30 ) NOT NULL,"+
-	        			"DECISION VARCHAR( 30 ) NOT NULL,"+ 
-	        			"NUMEROVOEU SMALLINT, PRIMARY KEY(IDVOEU))");			 
-	        	
-	        }
-               
-	        
-	        
-	   			} catch(Exception e) {
-	   				// Il y a une erreur
-	   				e.printStackTrace();
-	   			}
-		
-		
+		//Création de la base de données si non créée
 
-}	
+		try {
+			Class.forName("org.h2.Driver");
+			conn = DriverManager.getConnection("jdbc:h2:"+"BddsnDBGestionDesVoeux"+numGDV+";IGNORECASE=TRUE", "sa", "");
+			// on cree un objet Statement qui va permettre l'execution des requetes
+			Statement s = conn.createStatement();
+
+			// On regarde si la table existe deja
+			String query = "select * from VOEU limit 1";
+
+
+			try {
+				s.executeQuery(query);
+
+			} catch(Exception e) {
+				// Dans le cas où elle n'existe pas, on l'a crée
+				System.out.println("creation table");
+
+				s.execute("create table VOEU  ( " +
+						" IDVOEU SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT, " +
+						" INEETUDIANT VARCHAR( 30 ) NOT NULL , " +
+						" NOMUNIVERSITE VARCHAR( 30 ) NOT NULL , " +
+						" NOMFORMATION VARCHAR( 30 ) NOT NULL , " +
+						" TYPEFORMATION VARCHAR( 30 ) NOT NULL , " +
+						" NOMRECTORAT VARCHAR( 30 ) NOT NULL , " +
+						" QUOTA SMALLINT ,"+
+						"ETATVOEUX VARCHAR( 30 ) NOT NULL,"+
+						"DECISION VARCHAR( 30 ) NOT NULL,"+ 
+						"NUMEROVOEU SMALLINT, PRIMARY KEY(IDVOEU))");			 
+
+			}
+
+		} catch(Exception e) {
+			// Il y a une erreur
+			e.printStackTrace();
+		}
+
+	}	
 	
 	public Hashtable<String, ArrayList<Voeu>> Chargervoeu() throws SQLException
 	{
@@ -127,7 +123,7 @@ public class DBGestionDesVoeux {
 			                vx.formationVoeu.NomFormation+"','"+vx.formationVoeu.TypeFormation+"','"+
 					        vx.formationVoeu.nomRectorat+"',"+vx.formationVoeu.quota+",'"+
 					        String.valueOf(vx.etatVoeu)+"','"+String.valueOf(vx.dcsEtudiant)+"',"+
-			                vx.numeroVoeu+","+vx.numerogdv+")");
+			                vx.numeroVoeu+")");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

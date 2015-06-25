@@ -631,6 +631,7 @@ public class Client extends javax.swing.JFrame {
 		// TODO add your handling code here:
 	}//GEN-LAST:event_jComboBox1ActionPerformed
 
+
 	// La deconnexion
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         //bouton déconnecter
@@ -647,7 +648,7 @@ public class Client extends javax.swing.JFrame {
         // TODO add your handling code here:
         String choixVoeu = (String) jComboBox1.getSelectedItem();
 		if(jList2.getSelectedValue()instanceof Voeu )	
-		{
+		{System.out.println("my ok");
 			Voeu v=(Voeu) jList2.getSelectedValue();
 
 			switch (choixVoeu)
