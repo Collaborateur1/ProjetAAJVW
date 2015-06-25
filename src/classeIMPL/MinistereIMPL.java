@@ -104,7 +104,6 @@ public class MinistereIMPL extends MinistèrePOA {
 	public void inscriptionRectorat(String nomRectorat, Rectorat iorRectorat)throws DonneesInvalides {
 		// TODO Auto-generated method stub
 		//On rajoute le rectorat dans le ministère
-
 		ListeRectorat.put(nomRectorat, iorRectorat);
 
 

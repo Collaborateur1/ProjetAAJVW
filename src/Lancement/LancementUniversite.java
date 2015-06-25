@@ -29,7 +29,7 @@ public class LancementUniversite {
 		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(new String[0],null);
 		CreationDossierEtudiant dossetu = null;
 
-		UniversiteIMPL univ1= new UniversiteIMPL(args[0],"rectorat",orb);
+		UniversiteIMPL univ1= new UniversiteIMPL(args[0],args[1],orb);
 		System.out.println("Université "+args[0]+" opérationnelle");
 
 		orb.run();

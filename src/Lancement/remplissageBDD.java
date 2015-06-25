@@ -31,10 +31,10 @@ public class remplissageBDD {
 		nomUniv = nomUnivp;
 		
 		Formation fr1= new Formation("UT1","Miage", "Info Gest", "Midi Pyrenees", (short)2);
-		Formation fr2= new Formation("UT3","MER", "Info Gest", "Midi Pyrenees", (short)2);
-		Formation fr3= new Formation("UT1","Math", "Mathematique appliqué", "Midi Pyrenees", (short)2);
-		Formation fr4= new Formation("UT3","SIAD", "Decisionnel", "Midi Pyrenees", (short)2);
-		Formation fr5= new Formation("UT1","Meca", "Mecanique des fluide", "Midi Pyrenees", (short)2);
+		Formation fr2= new Formation("UT1","MER", "Info Gest", "Midi Pyrenees", (short)2);
+		Formation fr3= new Formation("UT2","Math", "Mathematique appliqué", "Languedoc", (short)2);
+		Formation fr4= new Formation("UT2","SIAD", "Decisionnel", "Languedoc", (short)2);
+		Formation fr5= new Formation("UT3","Meca", "Mecanique des fluide", "Midi Pyrenees", (short)2);
 		Formation fr6= new Formation("UT3","GSI", "Info Gest", "Midi Pyrenees", (short)2);
 		
 		String []ListePrereq = new String[3];

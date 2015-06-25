@@ -41,7 +41,7 @@ public class LancementGeneral {
 			public void run() {
 				try {
 					String[]st=new String[1];
-					st[0]="rectorat";
+					st[0]="Midi Pyrenees";
 					LancementRectorat.main(st);
 				} catch (DonneesInvalides | ServantNotActive | WrongPolicy
 						| InvalidName | AdapterInactive e) {
@@ -61,7 +61,7 @@ public class LancementGeneral {
 			public void run() {
 				try {
 					String[]st=new String[1];
-					st[0]="rectorat2";
+					st[0]="Languedoc";
 					LancementRectorat.main(st);
 				} catch (DonneesInvalides | ServantNotActive | WrongPolicy
 						| InvalidName | AdapterInactive e) {
@@ -76,15 +76,35 @@ public class LancementGeneral {
 		rect2.start();
 
 		Thread.sleep(1000);
+		
+		Runnable recto3 = new Runnable() {
+			public void run() {
+				try {
+					String[]st=new String[1];
+					st[0]="Provence";
+					LancementRectorat.main(st);
+				} catch (DonneesInvalides | ServantNotActive | WrongPolicy
+						| InvalidName | AdapterInactive e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}                 
+			}
+		};
+
+
+		Thread rect3=new Thread(recto3);
+		rect3.start();
+
+		Thread.sleep(1000);
 
 		
 		Runnable unive1 = new Runnable() {
 			public void run() {
 				try {
 					
-					String[]st=new String[1];
+					String[]st=new String[2];
 					st[0]="UT3";
-					
+					st[1]="Midi Pyrenees";
 					LancementUniversite.main(st);
 				} catch (DonneesInvalides | ServantNotActive | WrongPolicy
 						| InvalidName | AdapterInactive e) {
@@ -104,8 +124,9 @@ public class LancementGeneral {
 			public void run() {
 				try {
 					
-					String[]st=new String[1];
+					String[]st=new String[2];
 					st[0]="UT1";
+					st[1]="Midi Pyrenees";
 					LancementUniversite.main(st);
 				} catch (DonneesInvalides | ServantNotActive | WrongPolicy
 						| InvalidName | AdapterInactive e) {
@@ -124,8 +145,9 @@ public class LancementGeneral {
 			public void run() {
 				try {
 					
-					String[]st=new String[1];
+					String[]st=new String[2];
 					st[0]="UT2";
+					st[1]="Languedoc";
 					LancementUniversite.main(st);
 				} catch (DonneesInvalides | ServantNotActive | WrongPolicy
 						| InvalidName | AdapterInactive e) {
