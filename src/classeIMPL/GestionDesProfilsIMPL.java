@@ -50,7 +50,7 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 	 * @throws ServantAlreadyActive 
 	 * @throws AdapterInactive ******************************/
 	//On initialise la gestion des profils
-	public GestionDesProfilsIMPL(short nGdp,org.omg.CORBA.ORB orb,String monRectorat) throws DonneesInvalides, InvalidName, ServantNotActive, WrongPolicy, ServantAlreadyActive, AdapterInactive {
+	public GestionDesProfilsIMPL(short nGdp,org.omg.CORBA.ORB orb) throws DonneesInvalides, InvalidName, ServantNotActive, WrongPolicy, ServantAlreadyActive, AdapterInactive {
 		//On lui affecte un numéro qui servira au LoadBalancer à renvoyer la bonne GDP selon l'ine de l'étudiant (commencant par 1 ou 2)
 		numGDP=nGdp;
 		
@@ -67,12 +67,12 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 		//On inscrit la gestion des profils au LoadBalancer pour qu'il connaisse sont IOR
 		loadBalancer.inscriptionGDP(GestionDesProfilsHelper.narrow(rootPOA.servant_to_reference(this)), nGdp);
 		//On récupère une instance qui permettra de récupérer les données de la BDD
-		bddGDP = new DBGestionDesProfils();
+		bddGDP = new DBGestionDesProfils(numGDP);
 		
 		ArrayList<BDDEtudiantHelper> le=null;//La classe BDDEtudiantHelper créer des objets au format de la BDD et de les convertirs en objet Etudiant par la suite
 		try {
 			//On charge la base de données dans cette liste "temporaire d'objet"
-			le =  bddGDP.ChargerEtudiant(numGDP);
+			le =  bddGDP.ChargerEtudiant();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

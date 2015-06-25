@@ -20,14 +20,18 @@ import Databases.DBUniversite;
 public class remplissageBDD {
 
 	DBUniversite bddUNIV;
-	DBGestionDesProfils bddGDP;
+	DBGestionDesProfils bddGDP1;
+	DBGestionDesProfils bddGDP2;
 	String nomUniv;
 	
 	public remplissageBDD(String nomUnivp)
 	{
 		System.out.println("Création de la BDD "+nomUnivp);
 		bddUNIV = new DBUniversite(nomUnivp);
-		bddGDP = new DBGestionDesProfils();
+		
+		bddGDP1 = new DBGestionDesProfils((short) 1);
+		bddGDP2 = new DBGestionDesProfils((short) 2);
+		
 		nomUniv = nomUnivp;
 		
 		Formation fr1= new Formation("UT1","Miage", "Info Gest", "Midi Pyrenees", (short)2);
@@ -54,9 +58,9 @@ public class remplissageBDD {
 				bddUNIV.ajouterEtudiant(detu1.etu.ineEtudiant, detu1);
 				bddUNIV.ajouterEtudiant(detu2.etu.ineEtudiant, detu2);
 				bddUNIV.ajouterEtudiant(detu3.etu.ineEtudiant, detu3);
-				bddGDP.ajouterEtudiant(detu1.etu.ineEtudiant, detu1.etu);
-				bddGDP.ajouterEtudiant(detu2.etu.ineEtudiant, detu2.etu);
-				bddGDP.ajouterEtudiant(detu3.etu.ineEtudiant, detu3.etu);
+				bddGDP1.ajouterEtudiant(detu1.etu.ineEtudiant, detu1.etu);
+				bddGDP1.ajouterEtudiant(detu2.etu.ineEtudiant, detu2.etu);
+				bddGDP1.ajouterEtudiant(detu3.etu.ineEtudiant, detu3.etu);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -78,9 +82,9 @@ public class remplissageBDD {
 				bddUNIV.ajouterEtudiant(detu4.etu.ineEtudiant, detu4);
 				bddUNIV.ajouterEtudiant(detu5.etu.ineEtudiant, detu5);
 				bddUNIV.ajouterEtudiant(detu6.etu.ineEtudiant, detu6);
-				bddGDP.ajouterEtudiant(detu4.etu.ineEtudiant, detu4.etu);
-				bddGDP.ajouterEtudiant(detu5.etu.ineEtudiant, detu5.etu);
-				bddGDP.ajouterEtudiant(detu6.etu.ineEtudiant, detu6.etu);
+				bddGDP1.ajouterEtudiant(detu4.etu.ineEtudiant, detu4.etu);
+				bddGDP1.ajouterEtudiant(detu5.etu.ineEtudiant, detu5.etu);
+				bddGDP2.ajouterEtudiant(detu6.etu.ineEtudiant, detu6.etu);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -104,10 +108,10 @@ public class remplissageBDD {
 				bddUNIV.ajouterEtudiant(detu8.etu.ineEtudiant, detu8);
 				bddUNIV.ajouterEtudiant(detu9.etu.ineEtudiant, detu9);
 				bddUNIV.ajouterEtudiant(detu10.etu.ineEtudiant, detu10);
-				bddGDP.ajouterEtudiant(detu7.etu.ineEtudiant, detu7.etu);
-				bddGDP.ajouterEtudiant(detu8.etu.ineEtudiant, detu8.etu);
-				bddGDP.ajouterEtudiant(detu9.etu.ineEtudiant, detu9.etu);
-				bddGDP.ajouterEtudiant(detu10.etu.ineEtudiant, detu10.etu);
+				bddGDP2.ajouterEtudiant(detu7.etu.ineEtudiant, detu7.etu);
+				bddGDP2.ajouterEtudiant(detu8.etu.ineEtudiant, detu8.etu);
+				bddGDP2.ajouterEtudiant(detu9.etu.ineEtudiant, detu9.etu);
+				bddGDP2.ajouterEtudiant(detu10.etu.ineEtudiant, detu10.etu);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

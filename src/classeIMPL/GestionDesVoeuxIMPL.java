@@ -84,7 +84,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		//c'est ici que l'on caste GestionDesVoeuxIMPL en GestionDesVoeux GestionDesVoeuxHelper.narrow(rootPOA.servant_to_reference(this))s
 		/*3*/gdpRattache.inscriptionGestionDesVoeux(thisdGdv);
 		// TODO Auto-generated constructor stub
-		bddGDV = new DBGestionDesVoeux();
+		bddGDV = new DBGestionDesVoeux(numGDV);
 		
 		try {
 			ListeVoeuxEtudiant = bddGDV.Chargervoeu();
