@@ -14,12 +14,12 @@ import java.util.Hashtable;
 
 public class DBGestionDesVoeux {
 	Connection conn;
-	public DBGestionDesVoeux(){
+	public DBGestionDesVoeux(short numGDV){
 	//Création de la base de données si non créée
 	
 		try {
 			 Class.forName("org.h2.Driver");
-		    conn = DriverManager.getConnection("jdbc:h2:"+"BddsnDBGestionDesVoeux"+";IGNORECASE=TRUE", "sa", "");
+		    conn = DriverManager.getConnection("jdbc:h2:"+"BddsnDBGestionDesVoeux"+numGDV+";IGNORECASE=TRUE", "sa", "");
 		    // on cree un objet Statement qui va permettre l'execution des requetes
 	        Statement s = conn.createStatement();
 	
@@ -44,8 +44,7 @@ public class DBGestionDesVoeux {
 	        			" QUOTA SMALLINT ,"+
 	        			"ETATVOEUX VARCHAR( 30 ) NOT NULL,"+
 	        			"DECISION VARCHAR( 30 ) NOT NULL,"+ 
-	        			"NUMEROVOEU SMALLINT,"+
-	        			"NUMEROGDV SMALLINT,PRIMARY KEY(IDVOEU))");			 
+	        			"NUMEROVOEU SMALLINT, PRIMARY KEY(IDVOEU))");			 
 	        	
 	        }
                

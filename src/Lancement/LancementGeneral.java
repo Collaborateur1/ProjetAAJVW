@@ -177,11 +177,14 @@ public class LancementGeneral {
 		t3.start();
 
 		Thread.sleep(1000);
-
-		Runnable r4 = new Runnable() {
+		
+		//Lancement de Gestion des Profils 1
+		Runnable r41 = new Runnable() {
 			public void run() {
 				try {
-					LancementGDP.main(null);
+					String[]st=new String[1];
+					st[0]="1";
+					LancementGDP.main(st);
 				} catch (DonneesInvalides | InvalidName | ServantNotActive
 						| WrongPolicy | ServantAlreadyActive | AdapterInactive e) {
 					// TODO Auto-generated catch block
@@ -190,20 +193,38 @@ public class LancementGeneral {
 			}
 		};
 
-		Thread t4=new Thread(r4);
-		t4.start();
+		Thread t41=new Thread(r41);
+		t41.start();
 
+		Thread.sleep(1000);
+		
+		//Lancement de Gestion des Profils 2
+		Runnable r42 = new Runnable() {
+			public void run() {
+				try {
+					String[]st=new String[1];
+					st[0]="2";
+					LancementGDP.main(st);
+				} catch (DonneesInvalides | InvalidName | ServantNotActive
+						| WrongPolicy | ServantAlreadyActive | AdapterInactive e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}        
+			}
+		};
 
+		Thread t42=new Thread(r42);
+		t42.start();
 
 		Thread.sleep(1000);
 
-
-
-
-		Runnable r5 = new Runnable() {
+		//Lancement Gestion des Voeux 1
+		Runnable r51 = new Runnable() {
 			public void run() {
 				try {
-					LancementGDV.main(null);
+					String[]st=new String[1];
+					st[0]="1";
+					LancementGDV.main(st);
 				} catch (InvalidName | ServantNotActive | WrongPolicy
 						| DonneesInvalides | AdapterInactive e) {
 					// TODO Auto-generated catch block
@@ -212,8 +233,30 @@ public class LancementGeneral {
 			}
 		};
 
-		Thread t5=new Thread(r5);
-		t5.start();
+		Thread t51=new Thread(r51);
+		t51.start();
+		
+		Thread.sleep(1000);
+
+		//Lancement Gestion des Voeux 2
+		Runnable r52 = new Runnable() {
+			public void run() {
+				try {
+					String[]st=new String[1];
+					st[0]="2";
+					LancementGDV.main(st);
+				} catch (InvalidName | ServantNotActive | WrongPolicy
+						| DonneesInvalides | AdapterInactive e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}           
+			}
+		};
+
+		Thread t52=new Thread(r52);
+		t52.start();
+		
+		Thread.sleep(1000);
 		
 		Runnable r6 = new Runnable() {
 			public void run() {

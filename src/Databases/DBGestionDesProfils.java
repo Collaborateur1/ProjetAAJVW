@@ -16,16 +16,16 @@ public class DBGestionDesProfils {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
-	public DBGestionDesProfils()
+	public DBGestionDesProfils(short numGDP)
 	{
 		//Création de la base de données si non créé
 
 		try {
 			Class.forName("org.h2.Driver");
-			conn = DriverManager.getConnection("jdbc:h2:"+"BddsnDBGestionDesProfils"+";IGNORECASE=TRUE", "sa", "");
+			conn = DriverManager.getConnection("jdbc:h2:"+"BddsnDBGestionDesProfils"+numGDP+";IGNORECASE=TRUE", "sa", "");
 			// on cree un objet Statement qui va permettre l'execution des requetes
 			Statement s = conn.createStatement();
 
@@ -53,18 +53,12 @@ public class DBGestionDesProfils {
 						" MOTDEPASSE VARCHAR( 30 ) NULL , " +
 						" QUOTA SMALLINT ,"+
 						" ADRESSE VARCHAR( 50 ) ,PRIMARY KEY(IDETUDIANT))");
-
-
-
 			}
-
 
 		} catch(Exception e) {
 			// Il y a une erreur
 			e.printStackTrace();
 		}
-
-
 
 	}	
 
@@ -83,8 +77,6 @@ public class DBGestionDesProfils {
 					detu.formation.NomFormation+"','"+detu.formation.TypeFormation+"','"+
 					detu.formation.nomRectorat+"','',"+detu.formation.quota+",'"+
 					detu.adresse+"')");
-
-
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -108,11 +100,11 @@ public class DBGestionDesProfils {
 		}
 	}
 
-	public ArrayList<BDDEtudiantHelper> ChargerEtudiant(short num) throws SQLException
+	public ArrayList<BDDEtudiantHelper> ChargerEtudiant() throws SQLException
 	{
 
 
-		String query ="select * from ETUDIANT WHERE INEETUDIANT LIKE'"+String.valueOf(num)+"%'";
+		String query ="select * from ETUDIANT";
 
 		Statement s = null;
 		ResultSet re = null;

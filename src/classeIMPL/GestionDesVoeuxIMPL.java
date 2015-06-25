@@ -84,7 +84,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		//c'est ici que l'on caste GestionDesVoeuxIMPL en GestionDesVoeux GestionDesVoeuxHelper.narrow(rootPOA.servant_to_reference(this))s
 		/*3*/gdpRattache.inscriptionGestionDesVoeux(thisdGdv);
 		// TODO Auto-generated constructor stub
-		bddGDV = new DBGestionDesVoeux();
+		bddGDV = new DBGestionDesVoeux(numGDV);
 		
 		try {
 			ListeVoeuxEtudiant = bddGDV.Chargervoeu();
@@ -154,7 +154,8 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		boolean voeuxValider = false;
 
 		Voeu[] lvc = new Voeu[lv.size()];
-		for (int i = 0; i < lv.size(); i++) {
+		for (int i = 0; i < lv.size(); i++) 
+		{
 			v = (Voeu) lv.get(i);
 			lvc[i] = v;
 			if (!voeuxValider && v.etatVoeu == etatvoeux.accepter) 
@@ -164,7 +165,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			}
 		}
 
-		if (voeuxValider) 
+		if(voeuxValider) 
 		{
 			Voeu[] lvc2 = new Voeu[nbVoeuxAafficher];
 			for (int j = 0; j < nbVoeuxAafficher; j++) 
@@ -459,13 +460,19 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			v = (Voeu) lv.get(i);
 			if(v.numeroVoeu==Reponse.numeroVoeu)
 			{
-				lv.set(i, Reponse);
+				try {
+					lv.set(i, Reponse);
+					bddGDV.modifierEtatVoeux(Reponse, ine);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		if(ListeVoeuxEtudiant.containsKey(ine))
 		{
 			if (ListeEtudiant.containsKey(ine))
-			{ListeEtudiant.get(ine).majEtatVoeux(chargerVoeux(ine));}
+				ListeEtudiant.get(ine).majEtatVoeux(chargerVoeux(ine));
 			
 		}
 		else{
