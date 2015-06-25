@@ -37,6 +37,9 @@ public class remplissageBDD {
 		Formation fr5= new Formation("UT3","Meca", "Mecanique des fluide", "Midi Pyrenees", (short)2);
 		Formation fr6= new Formation("UT3","GSI", "Info Gest", "Midi Pyrenees", (short)2);
 		
+		Formation frok= new Formation("Lycée","BTS", "Info Gest", "Midi Pyrenees", (short)2);
+		Formation frpok= new Formation("Lycée","BAC", "Info Gest", "Midi Pyrenees", (short)2);
+		
 		String []ListePrereq = new String[3];
 		ListePrereq[0]= "DUT";
 		ListePrereq[1]= "BTS";
@@ -44,9 +47,9 @@ public class remplissageBDD {
 		
 		if(nomUniv=="UT1")
 		{
-			dossierEtudiant detu1 = CreationDossierEtudiant.creerDossierEtudiant("Patrick", "François", "1PF001", nomUniv, fr2);
-			dossierEtudiant detu2 = CreationDossierEtudiant.creerDossierEtudiant("DOSSANTOS", "Marc", "1DM001", nomUniv, fr3);
-			dossierEtudiant detu3 = CreationDossierEtudiant.creerDossierEtudiant("CARTIER", "Axel", "1CA001", nomUniv, fr2);
+			dossierEtudiant detu1 = CreationDossierEtudiant.creerDossierEtudiant("Patrick", "François", "1PF001", nomUniv, frok);
+			dossierEtudiant detu2 = CreationDossierEtudiant.creerDossierEtudiant("DOSSANTOS", "Marc", "1DM001", nomUniv, frpok);
+			dossierEtudiant detu3 = CreationDossierEtudiant.creerDossierEtudiant("CARTIER", "Axel", "1CA001", nomUniv, frok);
 			try {
 				bddUNIV.ajouterEtudiant(detu1.etu.ineEtudiant, detu1);
 				bddUNIV.ajouterEtudiant(detu2.etu.ineEtudiant, detu2);
@@ -68,9 +71,9 @@ public class remplissageBDD {
 		}
 		else if(nomUniv=="UT2")
 		{
-			dossierEtudiant detu4 = CreationDossierEtudiant.creerDossierEtudiant("GAINIER", "Clemence", "1GC001", nomUniv, fr3);
-			dossierEtudiant detu5 = CreationDossierEtudiant.creerDossierEtudiant("VACHER", "Simon", "1VS001", nomUniv, fr2);
-			dossierEtudiant detu6 = CreationDossierEtudiant.creerDossierEtudiant("LECOEUR", "Elise", "2LE001", nomUniv, fr3);
+			dossierEtudiant detu4 = CreationDossierEtudiant.creerDossierEtudiant("GAINIER", "Clemence", "1GC001", nomUniv, frok);
+			dossierEtudiant detu5 = CreationDossierEtudiant.creerDossierEtudiant("VACHER", "Simon", "1VS001", nomUniv, frok);
+			dossierEtudiant detu6 = CreationDossierEtudiant.creerDossierEtudiant("LECOEUR", "Elise", "2LE001", nomUniv, frpok);
 			try {
 				bddUNIV.ajouterEtudiant(detu4.etu.ineEtudiant, detu4);
 				bddUNIV.ajouterEtudiant(detu5.etu.ineEtudiant, detu5);
@@ -92,10 +95,10 @@ public class remplissageBDD {
 		}
 		else
 		{
-			dossierEtudiant detu7 = CreationDossierEtudiant.creerDossierEtudiant("BOUBAKOUR", "Malik", "2BM001", nomUniv, fr2);
-			dossierEtudiant detu8 = CreationDossierEtudiant.creerDossierEtudiant("DEVANNE", "Lucie", "2DL001", nomUniv, fr3);
-			dossierEtudiant detu9 = CreationDossierEtudiant.creerDossierEtudiant("CLAUDIN", "Anthony", "2CA002", nomUniv, fr2);
-			dossierEtudiant detu10 = CreationDossierEtudiant.creerDossierEtudiant("PONGE", "Anais", "2PA001", nomUniv, fr3);
+			dossierEtudiant detu7 = CreationDossierEtudiant.creerDossierEtudiant("BOUBAKOUR", "Malik", "2BM001", nomUniv, frpok);
+			dossierEtudiant detu8 = CreationDossierEtudiant.creerDossierEtudiant("DEVANNE", "Lucie", "2DL001", nomUniv, frok);
+			dossierEtudiant detu9 = CreationDossierEtudiant.creerDossierEtudiant("CLAUDIN", "Anthony", "2CA002", nomUniv, frok);
+			dossierEtudiant detu10 = CreationDossierEtudiant.creerDossierEtudiant("PONGE", "Anais", "2PA001", nomUniv, frok);
 			try {
 				bddUNIV.ajouterEtudiant(detu7.etu.ineEtudiant, detu7);
 				bddUNIV.ajouterEtudiant(detu8.etu.ineEtudiant, detu8);
