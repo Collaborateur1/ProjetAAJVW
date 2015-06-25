@@ -43,7 +43,7 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 	int nombreGDV;
 	LoadBalancerEtudiant loadBalancer;
 	org.omg.PortableServer.POA rootPOA;
-	DBGestionDesProfils bddGVP;
+	DBGestionDesProfils bddGDP;
 
 	Ministère ministere;
 
@@ -70,11 +70,11 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 
 
 		loadBalancer.inscriptionGDP(GestionDesProfilsHelper.narrow(rootPOA.servant_to_reference(this)), nGdp);
-		bddGVP = new DBGestionDesProfils();
+		bddGDP = new DBGestionDesProfils();
 		
 		ArrayList<BDDEtudiantHelper> le=null;
 		try {
-			le =  bddGVP.ChargerEtudiant(numGDP);
+			le =  bddGDP.ChargerEtudiant(numGDP);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -183,7 +183,7 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 			if(etudiantinscrit.containsKey(ine))
 			{
 				CodeEtudiantInscrit.put(ine,mdp);
-				bddGVP.ajouterMotDePass(ine,mdp);
+				bddGDP.ajouterMotDePass(ine,mdp);
 				return true;
 			}
 			else
