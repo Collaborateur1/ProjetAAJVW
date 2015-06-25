@@ -255,7 +255,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 	    HashMap<String,Double> map = new HashMap<String,Double>();
 	    ValueComparator comparateur =  new ValueComparator(map);	    
 	    
-		TreeMap<String,Double> TreeMapList = new TreeMap<String,Double>(comparateur);
+		TreeMap<String,Double> TreeMapList;
 		ArrayList<String> ineAttente = new ArrayList<String>();
 		//Va prendre les ligne de la treemap
 		Hashtable <String, Double>ListeCandidatAdmis = new Hashtable <String, Double>();
@@ -267,6 +267,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 		//Récupere la liste des formations
 		Enumeration ListeFormation  = ListeCandidatureParFormation.keys();
 		while(ListeFormation.hasMoreElements()){
+			TreeMapList = new TreeMap<String,Double>(comparateur);
 			nomFormationCourante = (String) ListeFormation.nextElement();
 			System.out.println("nom formation"+nomFormationCourante);
 			//récupère la liste des ine des étudiants candidats à cette formation
@@ -294,22 +295,22 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 				
 			}
 			TreeMapList.putAll(map);
-			System.out.println("taille treemap" +TreeMapList.size());
+			System.out.println("taille treemap :" +TreeMapList.size());
 		
 			Formation formation = ListeDesFormations.get(nomFormationCourante);		
 			
 			//Vérifier le nombre des candidatures par rapport au quota de la formation
 			if (formation.quota >= TreeMapList.size()){
-				System.out.println("quota" +formation.quota);
-				System.out.println("taille treemap" +TreeMapList.size());
+				System.out.println("quota 1: " +formation.quota);
+				System.out.println("taille treemap 1: " +TreeMapList.size());
 				ListeCandidatAdmis.putAll(TreeMapList);
 				ListeAdmiParFormation.put(formation.NomFormation, ListeCandidatAdmis);
 				
 
 			}
 			else{
-				System.out.println("quota" +formation.quota);
-				System.out.println("taille treemap" +TreeMapList.size());
+				System.out.println("quota 2: " +formation.quota);
+				System.out.println("taille treemap 2: " +TreeMapList.size());
 				Iterator<Entry<String, Double>> it = TreeMapList.entrySet().iterator();
 				int nbadmis =0;
 				while(it.hasNext()){
@@ -360,26 +361,29 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 					
 			}
 			//Maj etatVoeu etudiant listeAttente
-			for(int i=0; i<ineAttente.size();i++){
-				voeuEtu = ListeVoeux.get(ineAttente.get(i)).get(nomFormationCourante);
-				voeuEtu.etatVoeu = etatvoeux.listeDattente;
-				if (DossierEtudiant.containsKey(ineAttente.get(i))){
-					try {
-						recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(ineAttente.get(i)).etu, voeuEtu);
-					} catch (DonneesInvalides e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+			if (ListeDattente.containsKey(nomFormationCourante)){
+				for(int i=0; i<ListeDattente.get(nomFormationCourante).size();i++){
+					System.out.println("ine liste d'attente: "+ListeDattente.get(nomFormationCourante).get(i));
+					voeuEtu = ListeVoeux.get(ListeDattente.get(nomFormationCourante).get(i)).get(nomFormationCourante);
+					voeuEtu.etatVoeu = etatvoeux.listeDattente;
+					if (DossierEtudiant.containsKey(ineAttente.get(i))){
+						try {
+							recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(ineAttente.get(i)).etu, voeuEtu);
+						} catch (DonneesInvalides e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
-				}
-				else{
-					try {
-						recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(ineAttente.get(i)).etu, voeuEtu);
-					} catch (DonneesInvalides e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+					else{
+						try {
+							recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(ineAttente.get(i)).etu, voeuEtu);
+						} catch (DonneesInvalides e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
+					
 				}
-				
 			}
 			
 		}
@@ -416,43 +420,44 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 				for(int i =0; i<nbdispo; i++){ 
 					
 					System.out.println("test"+ListeDattente.size()+ NomUniv);
-					
-					if(ListeDattente.size()> 0){
-						
-						System.out.println("test"+ListeDattente.size());
-						voeuEtu = ListeVoeux.get(ListeDattente.get(nomFormationCourante).get(i)).get(nomFormationCourante);
-						System.out.println("le voeu"+ voeuEtu);
-						//envoyer et mettre à jour le voeu seulement
-						voeuEtu.etatVoeu = etatvoeux.accepter;
-						if (DossierEtudiant.containsKey(ListeDattente.get(nomFormationCourante).get(i))){
-							try {
-								recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(ListeDattente.get(nomFormationCourante).get(i)).etu, voeuEtu);
-								ListeAdmiParFormation.get(nomFormationCourante).put(ListeDattente.get(nomFormationCourante).get(i),10.0);
-								ListeDattente.get(nomFormationCourante).remove(i);
-							} catch (DonneesInvalides e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
+					if (ListeDattente.containsKey(nomFormationCourante)){
+						if(ListeDattente.get(nomFormationCourante).size()> 0){
+							
+							System.out.println("test"+ListeDattente.size());
+							voeuEtu = ListeVoeux.get(ListeDattente.get(nomFormationCourante).get(i)).get(nomFormationCourante);
+							System.out.println("le voeu"+ voeuEtu);
+							//envoyer et mettre à jour le voeu seulement
+							voeuEtu.etatVoeu = etatvoeux.accepter;
+							if (DossierEtudiant.containsKey(ListeDattente.get(nomFormationCourante).get(i))){
+								try {
+									recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(ListeDattente.get(nomFormationCourante).get(i)).etu, voeuEtu);
+									ListeAdmiParFormation.get(nomFormationCourante).put(ListeDattente.get(nomFormationCourante).get(i),10.0);
+									ListeDattente.get(nomFormationCourante).remove(i);
+								} catch (DonneesInvalides e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 							}
-						}
-						else{
-							try {
-								recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(ListeDattente.get(nomFormationCourante).get(i)).etu, voeuEtu);
-								ListeAdmiParFormation.get(nomFormationCourante).put(ListeDattente.get(nomFormationCourante).get(i),10.0);
-								ListeDattente.get(nomFormationCourante).remove(i);
-							} catch (DonneesInvalides e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
+							else{
+								try {
+									recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(ListeDattente.get(nomFormationCourante).get(i)).etu, voeuEtu);
+									ListeAdmiParFormation.get(nomFormationCourante).put(ListeDattente.get(nomFormationCourante).get(i),10.0);
+									ListeDattente.get(nomFormationCourante).remove(i);
+								} catch (DonneesInvalides e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 							}
+							
 						}
-						
 					}
 
 				}
 			}
 			else if (nbAdmis ==quota && ListeDattente.containsKey(nomFormationCourante) ){ 
-				if(ListeDattente.size()>0){
+				if(ListeDattente.get(nomFormationCourante).size()>0){
 					System.out.println("******************************ici annulation voeu "+nomFormationCourante);
-					for(int i =0; i<ListeDattente.size();i++){
+					for(int i =0; i<ListeDattente.get(nomFormationCourante).size();i++){
 						
 					
 						
