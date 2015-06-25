@@ -50,6 +50,7 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		this.cl=cl;
 		cl=new Client(this);
 		interfaceConnexion=new SocialNetworkIHM(this,cl);
+		//On récupère le LoadBalancer
 		loadbalancer= LoadBalancerEtudiantHelper.narrow(NamingServiceTool.getReferenceIntoNS("LBE"));
 		ListeVoeuxEtu=new ArrayList<Voeu>();
 	}
@@ -76,24 +77,22 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	public boolean ConnexionGDP(String INE, String mdp) throws DonneesInvalides, ServantNotActive, WrongPolicy
 	{
 		IEtudiant etu;
-		if(setGestionDesProfils(INE))//ici on récupere le GDP de letudiant selon son ine
+		//ici on récupere la GDP de letudiant selon son ine
+		if(setGestionDesProfils(INE))
 		{
+			//On teste si l'étudiant à le droit de ce connecter
 			if(gdp.autorisationConnexion(INE, mdp))
 			{
-
+				//On teste si l'étudiant est déjà connecté ou non
 				if(gdp.etudiantInscrit(INE))
 				{
 					etu=IEtudiantHelper.narrow(rootPOA.servant_to_reference(this));
 					gdv=gdp.connexion(etu, INE, mdp);
-					
+					//Si il possède des voeux on les charges dans l'interface
 					if(gdv.possedeVoeux(INE))
-					{
 						cl.configuration_de_connexion(gdp.consulterProfil(INE),gdv.chargerVoeux(INE));
-					}
 					else
-					{
 						cl.configuration_de_connexion(gdp.consulterProfil(INE),null);
-					}
 
 					this.INE=INE;
 					cl.setVisible(true);
@@ -116,6 +115,7 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		return this.cl;
 	}
 
+	//On charge l'instance du loadBalancer
 	public boolean setGestionDesProfils(String ine) throws DonneesInvalides
 	{	
 		gdp=loadbalancer.getProfil(ine);
@@ -166,27 +166,25 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	 * @throws UtilisationInterdite 
 	 * @throws DonneesInvalides ******************/
 
+	//On envoie un nouveaux voeux à la gestion des voeux et on met à jour l'affichage du client
 	public void fairVoeux(Voeu vx, String INE,short ordre) throws DonneesInvalides, UtilisationInterdite
 	{
 		int i=0;
 		cl.miseAjourJlist2(gdv.faireUnVoeu(INE, vx, ordre));
-
-
 	}
-
+	//On modifie l'ordre d'un voeux en l'envoyant à la gestion des voeux et on met à jour l'affichage du client
 	public void modifierVoeu( String INE,short numeroVoeux,short ordre) throws DonneesInvalides, UtilisationInterdite
 	{
 		int i=0;
 		cl.miseAjourJlist2(gdv.modifierVoeu(INE, numeroVoeux, ordre));
-
-
 	}
-
+	//On envoit à la gestion des voeux la demande de suppression de ce voeu et on met à jour l'affichage du client
 	public void supprimerVoeu( String INE,short numeroVoeux) throws DonneesInvalides, UtilisationInterdite
 	{
 		int i=0;
 		cl.miseAjourJlist2(gdv.supprimerVoeux(INE, numeroVoeux));
 	}
+	//On répond OUI, NON, OUI MAIS, NON MAIS à un voeu en le transmettant à la gestion des voeux
 	public void repondreAunVoeu(String ine, short numVoeu, decision choixEtu) throws DonneesInvalides, UtilisationInterdite
 	{
 		gdv.repondreAuxPropositions(ine, choixEtu, numVoeu);
@@ -195,7 +193,8 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	{
 		return INE;
 	}
-
+	
+	//On inscrit un etudiant gràce à son INE. On lui ajout seulement un mot de passe.
 	public boolean inscription(String ine, String mdp) throws DonneesInvalides
 	{
 		
@@ -210,6 +209,7 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		}
 	}
 
+	//Cette fonction permet de modifier l'interface d'un etudiant lorsqu'une vague est lancée
 	@Override
 	public void lancementVague(short numero) {
 		// TODO Auto-generated method stub
@@ -223,9 +223,8 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		}
 	}
 
+	//On lance une interface et on l'inscrit à la liste des interfaces connectées
 	public static void main(String[] args) throws RemoteException, InvalidName, AdapterInactive {
-
-
 		EtudiantIMPl etu=new EtudiantIMPl();
 		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(new String[0],null);
 		etu.setPOA(orb);
@@ -234,6 +233,7 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		orb.run();
 	}
 
+	//On retire l'interface de la liste des interfaces connectées
 	public void deconnexion (String ine){
 		gdv.deconnexion(ine);
 	}
