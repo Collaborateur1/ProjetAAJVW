@@ -128,8 +128,8 @@ public class Client extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
-        jButton10 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         jLabel10 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -140,9 +140,8 @@ public class Client extends javax.swing.JFrame {
 
         jTabbedPane1.setBackground(new java.awt.Color(245, 245, 225));
 
-        jButton4.setBackground(new java.awt.Color(153, 0, 153));
+        jButton4.setBackground(new java.awt.Color(204, 204, 255));
         jButton4.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Modifier mon profil");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,9 +157,9 @@ public class Client extends javax.swing.JFrame {
 
         jLabel7.setText("jLabel7");
 
-        jButton6.setBackground(new java.awt.Color(255, 0, 0));
+        jButton6.setBackground(new java.awt.Color(255, 102, 102));
         jButton6.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        jButton6.setText("Se déconnecter");
+        jButton6.setText("Se deconnecter");
         jButton6.setAutoscrolls(true);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,7 +173,7 @@ public class Client extends javax.swing.JFrame {
 
         jLabel21.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(59, 89, 152));
-        jLabel21.setText("Prénom");
+        jLabel21.setText("Prenom");
 
         jLabel22.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(59, 89, 152));
@@ -259,12 +258,15 @@ public class Client extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jList1);
 
         jButton1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        jButton1.setText("↑");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graphique/fleche_haut.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
 					jButton1ActionPerformed(evt);
-				} catch (DonneesInvalides | UtilisationInterdite e) {
+				} catch (DonneesInvalides e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (UtilisationInterdite e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -304,7 +306,8 @@ public class Client extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jList2);
 
         jButton5.setFont(new java.awt.Font("Arial Black", 1, 16)); // NOI18N
-        jButton5.setText("↓");
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graphique/fleche_bas.png"))); // NOI18N
+        jButton5.setActionCommand("Monter");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -328,15 +331,23 @@ public class Client extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setBackground(new java.awt.Color(204, 102, 255));
+        jComboBox1.setBackground(new java.awt.Color(204, 204, 255));
         jComboBox1.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selectionner", "OUI", "OUI MAIS", "NON MAIS", "NON" }));
 
-        jButton10.setBackground(new java.awt.Color(0, 153, 0));
-        jButton10.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        jButton10.setText("Valider");
-
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graphique/marianne.png"))); // NOI18N
+
+        jButton8.setText("Valider");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+					jButton8ActionPerformed(evt);
+				} catch (DonneesInvalides | UtilisationInterdite e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -373,18 +384,16 @@ public class Client extends javax.swing.JFrame {
                         .addGap(371, 371, 371))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel16)
-                                .addGap(478, 478, 478))
-                            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel16)
+                            .addGap(478, 478, 478))
+                        .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -407,7 +416,7 @@ public class Client extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jLabel2))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -420,16 +429,16 @@ public class Client extends javax.swing.JFrame {
                                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5)))
+                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(75, 75, 75))))
         );
 
@@ -458,7 +467,7 @@ public class Client extends javax.swing.JFrame {
                         .addComponent(jLabel14)))
                 .addGap(2, 2, 2))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 10, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 798, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -622,9 +631,21 @@ public class Client extends javax.swing.JFrame {
 		// TODO add your handling code here:
 	}//GEN-LAST:event_jComboBox1ActionPerformed
 
-	private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) throws DonneesInvalides, UtilisationInterdite {//GEN-FIRST:event_jButton10ActionPerformed
-		// TODO add your handling code here:
-		String choixVoeu = (String) jComboBox1.getSelectedItem();
+	// La deconnexion
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        //bouton déconnecter
+        etudiant.deconnexion(etudiant.getINE());
+        this.dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+	//Listener du bouton connexion, valide ou pas la connexion
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        //bouton modifierProfil
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) throws DonneesInvalides, UtilisationInterdite {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        String choixVoeu = (String) jComboBox1.getSelectedItem();
 		if(jList2.getSelectedValue()instanceof Voeu )	
 		{
 			Voeu v=(Voeu) jList2.getSelectedValue();
@@ -650,21 +671,7 @@ public class Client extends javax.swing.JFrame {
 		}
 		else
 			jLabel10.setText("Veuillez selectionner un voeu");
-
-
-	}//GEN-LAST:event_jButton10ActionPerformed
-
-	// La deconnexion
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        //bouton déconnecter
-        etudiant.deconnexion(etudiant.getINE());
-        this.dispose();
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-	//Listener du bouton connexion, valide ou pas la connexion
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        //bouton modifierProfil
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButton8ActionPerformed
 
 
 	public void configuration_de_connexion(Etudiant etudiant,Voeu[] vx)
@@ -755,7 +762,7 @@ public class Client extends javax.swing.JFrame {
 	
 	public void bouttonchoix(boolean b)
 	{
-		jButton10.setEnabled(b);
+		jButton8.setEnabled(b);
 		jComboBox1.setVisible(b);
 	}
 
@@ -796,13 +803,13 @@ public class Client extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
