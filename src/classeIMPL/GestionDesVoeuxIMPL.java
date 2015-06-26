@@ -287,13 +287,9 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 						v.dcsEtudiant = choixEtu;
 						if(v.etatVoeu==etatvoeux.listeDattente||v.etatVoeu==etatvoeux.accepter)
 							{
-							System.out.println("sa passe ici"+ ine);
-							
 							ministere.GetRectoratEtudiant(ine);
-							System.out.println("8ok");
-							//ministere.GetRectoratEtudiant(ine).
+							
 							ministere.recupererRectorat(v.formationVoeu.nomRectorat).repondrePropositionVoeux(ine,v);
-							System.out.println("DQDQD");
 							}
 					}	
 				}
