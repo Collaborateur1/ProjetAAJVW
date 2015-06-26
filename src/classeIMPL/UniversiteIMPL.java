@@ -119,7 +119,7 @@ public UniversiteIMPL(String nomUniv, String nomAcad,org.omg.CORBA.ORB orb) thro
 	for(int i = 0;i<bdhf.size();i++)
 	{
 		b = bdhf.get(i);
-		//System.out.println("Dans Univ "+nomUniv+" : Ajout formation "+b.getFr().NomFormation);
+		
 		this.ajouterFormation(b.getFr(), bddUNIV.chargerPrerequis(b.getFr().NomFormation));
 	}
 }
@@ -229,27 +229,29 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 	public void repondrePropositionvoeux(String ine, Voeu voeu)
 			throws DonneesInvalides {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Liste dadmi : "+ListeAdmiParFormation);
 	
 		if (voeu.dcsEtudiant==decision.NONdefinitif||voeu.dcsEtudiant==decision.NONmais){
 			
 			if (ListeAdmiParFormation.get(voeu.formationVoeu.NomFormation).containsKey(ine)){
-				
+		System.out.println("Supprésion du Voeu"+voeu.formationVoeu.NomFormation+" ave la décidion"+voeu.dcsEtudiant);
 				ListeAdmiParFormation.get(voeu.formationVoeu.NomFormation).remove(ine);
 			}
 			else if(ListeDattente.containsKey(voeu.formationVoeu.NomFormation)){
 				
 				if(ListeDattente.get(voeu.formationVoeu.NomFormation).contains(ine)){
-										
+			System.out.println("Supprésion du Voeu dans liste attente"+voeu.formationVoeu.NomFormation+" ave la décidion"+voeu.dcsEtudiant);
 				ListeDattente.get(voeu.formationVoeu.NomFormation).remove(ine);
 			   }
 			}
 		}
-		
+		System.out.println("Liste admi mise a jour: "+ListeAdmiParFormation);
 	}
 	
 	@Override
 	public void deliberationJury()  {
+		System.out.println("Nous somme dans l'univ "+this.NomUniv+"\n\n");
+		System.out.println("Liste des candidature "+ListeCandidatureParFormation.toString()+"\n\n");
 		// TODO Auto-generated method stub
 		//le comparateur permet de trier par valeur et non par clé
 	    HashMap<String,Double> map = new HashMap<String,Double>();
@@ -268,13 +270,16 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 		Enumeration ListeFormation  = ListeCandidatureParFormation.keys();
 		while(ListeFormation.hasMoreElements()){
 			TreeMapList = new TreeMap<String,Double>(comparateur);
+			map.clear();
 			nomFormationCourante = (String) ListeFormation.nextElement();
-			System.out.println("nom formation"+nomFormationCourante);
+		if(ListeCandidatureParFormation.get(nomFormationCourante).size()!=0)
+		 {	
+			System.out.println("nom formation courante***************"+nomFormationCourante);
 			//récupère la liste des ine des étudiants candidats à cette formation
 			ArrayList<String> ListeCandidature = ListeCandidatureParFormation.get(nomFormationCourante);
-			System.out.println("nb candidat"+ListeCandidature.size());
+			System.out.println("nombre candidat pour formationcourante="+ListeCandidature.size());
 			for(int i=0 ; i < ListeCandidature.size() ; i++){
-				System.out.println("candidat"+ListeCandidature.get(i));
+				System.out.println("candidat "+ListeCandidature.get(i));
 				//Récupère le dossier de l'étudiant
 				//On vérifie si l'etudiant postule dans son universite
 				if (DossierCandidatureEtudiant.containsKey(ListeCandidature.get(i)))
@@ -282,7 +287,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 				else 
 					DossEtu = DossierEtudiant.get(ListeCandidature.get(i));
 				
-				System.out.println("doss etu"+DossEtu.listnotes);			
+						
 				//parcours les résultats
 				for (nb = 0; nb <DossEtu.listnotes.length;nb++){
 					System.out.println("doss etu"+DossEtu.listnotes.length);
@@ -295,22 +300,27 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 				
 			}
 			TreeMapList.putAll(map);
-			System.out.println("taille treemap :" +TreeMapList.size());
+			
 		
 			Formation formation = ListeDesFormations.get(nomFormationCourante);		
 			
 			//Vérifier le nombre des candidatures par rapport au quota de la formation
+			System.out.println("quota pour la formation "+nomFormationCourante+" = "+formation.quota+" taille trimap"+TreeMapList.size());
+			System.out.println("affichage de la trimap "+TreeMapList.toString());
+			
 			if (formation.quota >= TreeMapList.size()){
-				System.out.println("quota 1: " +formation.quota);
-				System.out.println("taille treemap 1: " +TreeMapList.size());
-				ListeCandidatAdmis.putAll(TreeMapList);
-				ListeAdmiParFormation.put(formation.NomFormation, ListeCandidatAdmis);
 				
+				
+				ListeCandidatAdmis.putAll(TreeMapList);
+				
+				ListeAdmiParFormation.put(formation.NomFormation, ListeCandidatAdmis);
+				TreeMapList=new TreeMap<String, Double>();
+				ListeCandidatAdmis=new Hashtable<String, Double>();
 
 			}
 			else{
-				System.out.println("quota 2: " +formation.quota);
-				System.out.println("taille treemap 2: " +TreeMapList.size());
+			
+				
 				Iterator<Entry<String, Double>> it = TreeMapList.entrySet().iterator();
 				int nbadmis =0;
 				while(it.hasNext()){
@@ -327,23 +337,35 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 						 
 					 }
 				}
-				
+				TreeMapList=new TreeMap<String, Double>();
+				 ListeCandidatAdmis= new Hashtable<String, Double>();
+				 
 				 ListeDattente.put(formation.NomFormation, ineAttente);
 				 System.out.println("nb attente"+ListeDattente.size());
 								
 			}
 		
-			
+			System.out.println("juskici ca va");
 			//Maj etatVoeu etudiant admis
-			// récupère le voeu de l'étudiant pour cette formation;			
+			// récupère le voeu de l'étudiant pour cette formation;		
+			
 			Hashtable<String,Double> ListeAdmis = ListeAdmiParFormation.get(nomFormationCourante);
+			System.out.println("chargement hastable ok");
 			Enumeration ineAdmis = ListeAdmis.keys();
 			while(ineAdmis.hasMoreElements()){
 				String unAdmis =(String) ineAdmis.nextElement(); 
+				System.out.println("String admi ok "+unAdmis);
+				System.out.println("Affichage Liste des Voeux "+ListeVoeux.toString());
+				
 				voeuEtu = ListeVoeux.get(unAdmis).get(nomFormationCourante);
+				System.out.println("Beug ir "+nomFormationCourante);
 				voeuEtu.etatVoeu = etatvoeux.accepter;
+				System.out.println("Sinon ici");
+				DossierEtudiant.containsKey(unAdmis);
+				System.out.println("je sais pas..");
 				if (DossierEtudiant.containsKey(unAdmis)){
 					try {
+						System.out.println("Le dossier etudiant contien un admi la c'est pas normal");
 						recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(unAdmis).etu, voeuEtu);
 					} catch (DonneesInvalides e) {
 						// TODO Auto-generated catch block
@@ -352,7 +374,9 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 				}
 				else{
 					try{
+						System.out.println("la c'est normal");
 						recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(unAdmis).etu, voeuEtu);
+						System.out.println("mais sa beug");
 					} catch (DonneesInvalides e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -360,6 +384,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 				}
 					
 			}
+			System.out.println("la on passe dans la liste dattente");
 			//Maj etatVoeu etudiant listeAttente
 			if (ListeDattente.containsKey(nomFormationCourante)){
 				for(int i=0; i<ListeDattente.get(nomFormationCourante).size();i++){
@@ -386,9 +411,11 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 				}
 			}
 			
+		  }
 		}
 		
-		
+		System.out.println("\n\nListe dattente periode 1"+ListeDattente.toString());
+		System.out.println("\n\nList admi periode1 "+ ListeAdmiParFormation);
 	}
 
 	
@@ -408,13 +435,15 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 		short nbdispo;
 		Voeu voeuEtu = null;
 		Enumeration <String> ListeFormation  = ListeAdmiParFormation.keys();
-		System.out.println("si ya que ca jai raisonn "+NomUniv);
+	
 		while(ListeFormation.hasMoreElements()){
 			
 			String nomFormationCourante = ListeFormation.nextElement();
 			nbAdmis =(short) ListeAdmiParFormation.get(nomFormationCourante).size(); 
 		    quota = ListeDesFormations.get(nomFormationCourante).quota;
 		    System.out.println(nomFormationCourante+" le nom de formation courante");
+			System.out.println("si ya que ca jai raisonn "+ListeAdmiParFormation.toString());
+			System.out.println("nombre admi "+nbAdmis+" quota "+quota+" ");
 			if (nbAdmis<quota){
 				nbdispo = (short) (quota - nbAdmis);
 				for(int i =0; i<nbdispo; i++){ 

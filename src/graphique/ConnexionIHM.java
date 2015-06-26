@@ -44,7 +44,7 @@ champ pour afficher mots de passe incorrete: jLabel4
  *
  * @author puls2
  */
-public class SocialNetworkIHM extends javax.swing.JFrame {
+public class ConnexionIHM extends javax.swing.JFrame {
 EtudiantIMPl ietudiant;
 Client cl;
 
@@ -52,7 +52,7 @@ Client cl;
     /**
      * Creates new form SocialNetworkIHM
      */
-    public SocialNetworkIHM() throws RemoteException {
+    public ConnexionIHM() throws RemoteException {
         
         initComponents();
         //this.getContentPane().setBackground(new Color(247,247,247));
@@ -64,7 +64,7 @@ jLabel4.setVisible(false);
         
     }
      
-    public SocialNetworkIHM(EtudiantIMPl ietudiant, Client cl ) throws RemoteException {
+    public ConnexionIHM(EtudiantIMPl ietudiant, Client cl ) throws RemoteException {
         
         initComponents();
         this.cl=cl;
@@ -310,13 +310,13 @@ new InscriptionIHM(ietudiant).setVisible(true);
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SocialNetworkIHM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConnexionIHM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SocialNetworkIHM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConnexionIHM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SocialNetworkIHM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConnexionIHM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SocialNetworkIHM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConnexionIHM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -326,9 +326,9 @@ new InscriptionIHM(ietudiant).setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new SocialNetworkIHM().setVisible(true);
+                    new ConnexionIHM().setVisible(true);
                 } catch (RemoteException ex) {
-                    Logger.getLogger(SocialNetworkIHM.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ConnexionIHM.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });

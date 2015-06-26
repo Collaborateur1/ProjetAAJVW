@@ -11,20 +11,13 @@ import generated.LoadBalancerEtudiantHelper;
 import generated.UtilisationInterdite;
 import generated.Voeu;
 import generated.decision;
+import graphique.Client;
+
+
+import graphique.ConnexionIHM;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-
-import javax.swing.JButton;
-
-import generated.Etudiant;
-import graphique.Client;
-import graphique.SocialNetworkIHM;
 
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
@@ -34,9 +27,11 @@ import org.omg.PortableServer.POAPackage.WrongPolicy;
 import outils.NamingServiceTool;
 
 public class EtudiantIMPl extends IEtudiantPOA{
-	Client cl; //il sagit de l'interface principale postbac
+	
+   //il sagit de l'interface principale postbac
+	Client cl; 
 	GestionDesProfils gdp;
-	SocialNetworkIHM interfaceConnexion;
+	ConnexionIHM interfaceConnexion;
 	org.omg.PortableServer.POA rootPOA;
 	GestionDesVoeux gdv;
 	LoadBalancerEtudiant loadbalancer;
@@ -49,13 +44,23 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	{
 		this.cl=cl;
 		cl=new Client(this);
-		interfaceConnexion=new SocialNetworkIHM(this,cl);
+		interfaceConnexion=new ConnexionIHM(this,cl);
 		//On récupère le LoadBalancer
 		loadbalancer= LoadBalancerEtudiantHelper.narrow(NamingServiceTool.getReferenceIntoNS("LBE"));
 		ListeVoeuxEtu=new ArrayList<Voeu>();
 	}
 
 	/********fonction généré******/
+	
+	/**
+	 * name -notifier  Notifier l'étudiant
+	 * 
+	 * @param String : Message à notifier
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
+	
 	@Override
 	public void notifier(String message) {
 		// TODO Auto-generated method stub
@@ -63,6 +68,14 @@ public class EtudiantIMPl extends IEtudiantPOA{
 
 	}
 
+	/**
+	 * name -majEtatVoeux  Mettre à jour l'état des Voeux
+	 * 
+	 * @param Voeu[] : Liste des voeux à mèttres à jours
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
 	@Override
 	public void majEtatVoeux(Voeu[] Voeux) {
 		// TODO Auto-generated method stub
@@ -72,8 +85,18 @@ public class EtudiantIMPl extends IEtudiantPOA{
 
 
 
-	/*************Fonction rajouter****************/
+	
 
+	/**
+	 * name -ConnexionGDP  se connecter à la GDP
+	 * 
+	 * @param String : INE etudiant
+	 * @param String : Mots de passe
+	 * @return boolean : connexion effectuer ou non
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
 	public boolean ConnexionGDP(String INE, String mdp) throws DonneesInvalides, ServantNotActive, WrongPolicy
 	{
 		IEtudiant etu;
@@ -111,12 +134,28 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		return false;
 	}
 
-
+	/**
+	 * name -getPostLicenceInterface  Obtenir la page principale lié à l'étudiant
+	 * 
+	 * @return Client : l'interface graphique du client
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
 	public Client getPostLicenceInterface()
 	{
 		return this.cl;
 	}
 
+	/**
+	 * name -setGestionDesProfils  Récupéré le GDP avec le loadBalancer
+	 * 
+	 * @param String : ine de l'étudiant
+	 * @return boolean : ine de l'étudiant
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
 	//On charge l'instance du loadBalancer
 	public boolean setGestionDesProfils(String ine) throws DonneesInvalides
 	{	
@@ -126,44 +165,26 @@ public class EtudiantIMPl extends IEtudiantPOA{
 
 		return false;
 	}
+	
 	public void setPOA(org.omg.CORBA.ORB orb) throws InvalidName, AdapterInactive
 	{
 		rootPOA=org.omg.PortableServer.POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
 		rootPOA.the_POAManager().activate();
 	}
-	public Client getClient()
-	{
-		return cl;
-	}
-	public SocialNetworkIHM getInetfaceConnex()
+
+	public ConnexionIHM getInetfaceConnex()
 	{
 		return interfaceConnexion;
 	}
-	public GestionDesProfils getGDP()
-	{
-		return gdp;
-	}
+	
 
 	public GestionDesVoeux getGDV()
 	{
 		return gdv;
 	}
 
-	public LoadBalancerEtudiant getLoadBalancer()
-	{
-		return loadbalancer;
-	}
-	/*
-	public ArrayList ConsulterProfilGDP(String INE)
-	{
-		return null;
-	}
-
-	public Seq ConsulterProfilGDP(String INE)
-	{
-		return null;
-	}
-	 **/
+	
+	
 	/***************** Fonction ajouter
 	 * @throws UtilisationInterdite 
 	 * @throws DonneesInvalides ******************/
@@ -174,18 +195,21 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		int i=0;
 		cl.miseAjourJlist2(gdv.faireUnVoeu(INE, vx, ordre));
 	}
+	
 	//On modifie l'ordre d'un voeux en l'envoyant à la gestion des voeux et on met à jour l'affichage du client
 	public void modifierVoeu( String INE,short numeroVoeux,short ordre) throws DonneesInvalides, UtilisationInterdite
 	{
 		int i=0;
 		cl.miseAjourJlist2(gdv.modifierVoeu(INE, numeroVoeux, ordre));
 	}
+	
 	//On envoit à la gestion des voeux la demande de suppression de ce voeu et on met à jour l'affichage du client
 	public void supprimerVoeu( String INE,short numeroVoeux) throws DonneesInvalides, UtilisationInterdite
 	{
 		int i=0;
 		cl.miseAjourJlist2(gdv.supprimerVoeux(INE, numeroVoeux));
 	}
+	
 	//On répond OUI, NON, OUI MAIS, NON MAIS à un voeu en le transmettant à la gestion des voeux
 	public void repondreAunVoeu(String ine, short numVoeu, decision choixEtu) throws DonneesInvalides, UtilisationInterdite
 	{

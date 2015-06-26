@@ -46,20 +46,6 @@ public class RectoratIMPL extends RectoratPOA {
 	 * @throws AdapterInactive 
 	 * @throws WrongPolicy 
 	 * @throws ServantNotActive ***********************************/
-	public RectoratIMPL(Hashtable<String, Universite> listeListUniversite,String nomrectorat,org.omg.CORBA.ORB orb ) throws DonneesInvalides, InvalidName, AdapterInactive, ServantNotActive, WrongPolicy {
-		super();
-		ListeListUniversite = listeListUniversite;
-		MonMinistere= MinistèreHelper.narrow(
-				NamingServiceTool.getReferenceIntoNS("Ministere"));
-		System.out.println("Reférérence ministere recuperee" );
-        this.nomRectorat=nomrectorat;
-        
-        rootPOA = org.omg.PortableServer.POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
-		rootPOA.the_POAManager().activate();
-        MonMinistere.inscriptionRectorat(this.nomRectorat, RectoratHelper.narrow(rootPOA.servant_to_reference(this)));
-    	
-
-	}
 
 	public RectoratIMPL(org.omg.CORBA.ORB orb,String nomrectorat) throws DonneesInvalides, ServantNotActive, WrongPolicy, InvalidName, AdapterInactive {
 		super();
@@ -78,18 +64,34 @@ public class RectoratIMPL extends RectoratPOA {
 
 
 
-	/**********************Fonction Généré*********************/
 
+
+	/**
+	 * name -nomRectorat retourne le nom du rectorat
+	 * 
+	 * @return String : Le nom de rectorat
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
+	
 	@Override
 	public String nomRectorat() {
 		// TODO Auto-generated method stub
 		return nomRectorat;
 	}
 
+	/**
+	 * name -deliberationJuryFinal  délibération final du jury
+	 * 
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
+	
 	@Override
 	public void deliberationJuryFinal() {
 		// TODO Auto-generated method stub
-		System.out.println("****************************4");
 		Enumeration<Universite> ListeUniv=this.ListeListUniversite.elements();
 
 		while(ListeUniv.hasMoreElements())
@@ -97,12 +99,20 @@ public class RectoratIMPL extends RectoratPOA {
 			Universite Un=null;
 
 			Un= ListeUniv.nextElement();
-			System.out.println(Un.nomUniversite()+"*******************");
 			Un.deliberationFinal();
 			
 		}
 	}
 	
+	/**
+	 * name -transfertDossier retourne le nom du rectorat
+	 * 
+	 * @param dossierEtudiant : le dossier de l'étudiant
+	 * @param Voeu : le Voeu de l'étudiant
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
 	@Override
 	public void transfertDossier(dossierEtudiant dossierEtu, Voeu voeu) {
 
@@ -142,6 +152,17 @@ public class RectoratIMPL extends RectoratPOA {
 		}
 
 	}
+	
+	/**
+	 * name -envoyerListeVoeuxGDV envoyé la liste de voeux au universités 
+	 * 
+	 * @param Voeu[] : la liste de voeu des étudiants à envoyé
+	 * @param Etudiant : LE dosser de l'étudiant
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
+	
 	@Override
 	public void envoyerListeVoeuxGDV(Voeu[] lv, Etudiant etu)
 			throws DonneesInvalides {
@@ -180,34 +201,35 @@ public class RectoratIMPL extends RectoratPOA {
 					{
 						
 						dossierEtu=univEtudiant.madDossier(etu.ineEtudiant);
-						System.out.println("ici?" );
+						
 						Universite univPostuler =GetUniversiteDansRecorat(lv[i].formationVoeu.nomUniv);
-						System.out.println("ou encor la" );
+						
 						univPostuler.envoyerCandidatureD(dossierEtu, etu.ineEtudiant, lv[i]);
-						System.out.println("comprend rien --.-" );
+						
 					}
 					lv[i].etatVoeu = etatvoeux.valide;
 					LesGDV.get(String.valueOf(lv[i].numerogdv)).transmettreDecisionCandidatureRectorat(etu.ineEtudiant, lv[i]);
 				}
 				else
 				{
-					System.out.println("222" );
+					
 					lv[i].etatVoeu = etatvoeux.nonValide;
 					LesGDV.get(String.valueOf(lv[i].numerogdv)).transmettreDecisionCandidatureRectorat(etu.ineEtudiant, lv[i]);
-					//il faut la renvoyer a létudiant! A toi de jouer ;)
+					
 				}
 			}
-			//sinnon on fait le transfert vers le bon rectorat
+			
+			
 			else
 			{
 
 				
 				Rectorat recorat_a_Joindre=MonMinistere.recupererRectorat(lv[i].formationVoeu.nomRectorat);
-				System.out.println("nom rect form : "+lv[i].formationVoeu.nomRectorat );
+				
 				dossierEtu=univEtudiant.madDossier(etu.ineEtudiant);
-				System.out.println("recto : "+recorat_a_Joindre.nomRectorat());
+		
 				recorat_a_Joindre.transfertDossier(dossierEtu, lv[i]);
-				System.out.println("amel theori4" );
+		
 
 
 
@@ -218,7 +240,16 @@ public class RectoratIMPL extends RectoratPOA {
 	}
 
 
-
+	/**
+	 * name -envoyerDecisionCandidatureRectorat : Un rectorat relai la réponse d'une université a un autre rectorat qui lui avait transmis cette demande
+	 * 
+	 * @param String : ine de l'étudiant
+	 * @param Voeu : Voeu de l'étudiant
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
+	
 	@Override
 	public void envoyerDecisionCandidatureRectorat(String ine, Voeu voeu)
 			throws DonneesInvalides {
@@ -227,6 +258,15 @@ public class RectoratIMPL extends RectoratPOA {
 		LesGDV.get(String.valueOf(voeu.numerogdv)).transmettreDecisionCandidatureRectorat(ine, voeu);
 	}
 
+	/**
+	 * name -envoyerDecisionCandidatureUniv : Une université renvoie la réponse de sa candidature a son rectorat
+	 * 
+	 * @param Etudiant : Dossier de l'étudiant
+	 * @param Voeu : Voeu de l'étudiant
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
 	@Override
 	public void envoyerDecisionCandidatureUniv(Etudiant etu, Voeu voeu)
 			throws DonneesInvalides {
@@ -253,6 +293,16 @@ public class RectoratIMPL extends RectoratPOA {
 	}
 	
 
+	/**
+	 * name -inscriptionUniv : inscrition des universités dans le rectorats
+	 * 
+	 * @param inscriptionUniv : université à inscrire
+	 * @param String  : Nom université
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
+	
 	@Override
 	public void inscriptionUniv(Universite iorLUniversite, String nomUniv) {
 		// TODO Auto-generated method stub
@@ -261,6 +311,16 @@ public class RectoratIMPL extends RectoratPOA {
 		
 	}
 
+	/**
+	 * name -repondrePropositionVoeux : La GDV transmet la décision de l'étudiant, la décision se trouve dans le voeu
+	 * 
+	 * @param String: ine de l'étudiant
+	 * @param Voeu : Voeu de l'étudiant
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
+	
 	@Override
 	public void repondrePropositionVoeux(String ine, Voeu voeu)
 			throws DonneesInvalides {
@@ -277,17 +337,33 @@ public class RectoratIMPL extends RectoratPOA {
 			{
 				
 				univ.repondrePropositionvoeux(ine, voeu);
-				System.out.println("**************************j'ai répondu "+voeu.dcsEtudiant+" au voeu "+voeu.formationVoeu.NomFormation+"je suis ine etudiant recto" +ine );
+				
 			}
 		}
 	}
 
+	/**
+	 * name -inscriptionGDV : Inscription de la GDV
+	 * 
+	 * @param Short: numéro de la GDV
+	 * @param GestionDesVoeux : GestionDesVoeux à inscrire
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
 	@Override
 	public void inscriptionGDV(short numeroGDV, GestionDesVoeux Gdv) {
 		// TODO Auto-generated method stub
 		LesGDV.put(String.valueOf(numeroGDV), Gdv);
 	}
 
+	/**
+	 * name -deliberationJury() : délibération jury phase 2
+	 * 
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */
 	@Override
 	public void deliberationJury() {
 		// TODO Auto-generated method stub
@@ -299,12 +375,20 @@ public class RectoratIMPL extends RectoratPOA {
 			Universite Un=null;
 			
 			Un= ListeUniv.nextElement();
-			System.out.println("déliberation jury univ "+Un.nomUniversite());
 			Un.deliberationJury();
 		}
 		deliberationJury=true;
 		}
 	}
+	
+	/**
+	 * name -getFicheEtudiant : Obtenir la fiche de l'étudiant au pret de l'université
+	 * 
+	 * @param String: ine de l'étudiant
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
 	
 	@Override
 	public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
@@ -326,7 +410,7 @@ public class RectoratIMPL extends RectoratPOA {
 		
 	}
 
-	/*********************Fonction créé par nous**************/
+	/*********************Fonction local**************/
 
 	//Vérifier q'une candidature est conforme
 
@@ -339,10 +423,10 @@ public class RectoratIMPL extends RectoratPOA {
 		//On cherche si on trouve la formation de létudiant dans les formations valide
 		for (int i=0;i< ListeFormationValidePrCandidature.size();i++)
 		{
-			System.out.println(" NomFormationEtudiant: "+ListeFormationValidePrCandidature.get(i));
+			
 			if(ListeFormationValidePrCandidature.get(i).equals(NomFormationEtudiant))
 			{
-				System.out.println(" NomFormationEtudiant: "+ListeFormationValidePrCandidature.get(i));
+				
 				return true;
 			}	
 		}

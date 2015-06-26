@@ -77,7 +77,7 @@ public class remplissageBDD {
 		{
 			dossierEtudiant detu4 = CreationDossierEtudiant.creerDossierEtudiant("GAINIER", "Clemence", "1GC001", nomUniv, frok);
 			dossierEtudiant detu5 = CreationDossierEtudiant.creerDossierEtudiant("VACHER", "Simon", "1VS001", nomUniv, frok);
-			dossierEtudiant detu6 = CreationDossierEtudiant.creerDossierEtudiant("LECOEUR", "Elise", "2LE001", nomUniv, frpok);
+			dossierEtudiant detu6 = CreationDossierEtudiant.creerDossierEtudiant("LECOEUR", "Elise", "2LE001", nomUniv, frok);
 			try {
 				bddUNIV.ajouterEtudiant(detu4.etu.ineEtudiant, detu4);
 				bddUNIV.ajouterEtudiant(detu5.etu.ineEtudiant, detu5);
