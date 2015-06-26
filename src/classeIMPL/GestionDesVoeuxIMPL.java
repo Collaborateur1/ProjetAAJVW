@@ -102,23 +102,20 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	/**
 	 * @name - numeroGDV()
 	 * 
-	 * description: le numéro de la gdv
+	 * description: le numéro de la gdv (On retourne le numéro de notre GDV)
 	 * 
 	 * @return short
 	 * @author M2GroupeCorba
 	 * @date 20/05/2015
 	 * @note
 	 */
-	
-	//On retourne le numéro de notre GDV
 	@Override
 	public short numeroGDV() {
-		// TODO Auto-generated method stub
 		return numGDV;
 	}
 
 	/**
-	 * name - inscriptionIE Inscription des interfaces étudiants
+	 * name - inscriptionIE Inscription des interfaces étudiants (Pour notifier des étudiants on récupère les interfaces et on les stock)
 	 *                            
 	 * 
 	 * @param String ine : Ine de létudiant
@@ -127,7 +124,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	 * @date 20/05/2015
 	 * @note
 	 */
-	//Pour notifier des étudiants on récupère les interfaces et on les stock
 	@Override
 	public void inscriptionIE(String ine, IEtudiant iorEtudiant) throws DonneesInvalides {
 		//Si un étudiant se connect cette méthode est appelé et ajoute l'interface et une liste de voeux vide si c'est sa première connexion
@@ -142,7 +138,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	}
 
 	/**
-	 * name - rechercherFormation  Recherche de formation
+	 * name - rechercherFormation  Recherche de formation (Retourne la liste des formations recherchés)
 	 * 
 	 * 
 	 * @param String : mots clé de recherche
@@ -151,7 +147,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	 * @date 20/05/2015
 	 * @note
 	 */	
-	//Retourne la liste des formations recherchés
 	@Override
 	public Formation[] rechercherFormation(String motscles) {
 		//On parcours toutes nos formations
@@ -176,6 +171,10 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	/**
 	 * name - existFormation  l'étudiant a t'il des voeux
 	 * 
+	 * description : 
+	 * On teste si une formation existe par rapport au mot clé d'une recherche (cette fonction permet d'éviter les problemes lié à corba sur le fait que l'on ne peut
+	 * pas renvoyer de valeur null). La méthode est appelé avant de retourner les formations correspondant à une recherche
+	 * 
 	 * 
 	 * @param String : ine de l'étudiant
 	 * @return boolean: existance de létudiant dans le SI
@@ -183,9 +182,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	 * @date 20/05/2015
 	 * @note
 	 */	
-	
-	//On teste si une formation existe par rapport au mot clé d'une recherche (cette fonction permet d'éviter les problemes lié à corba sur le fait que l'on ne peut
-	//pas renvoyer de valeur null). La méthode est appelé avant de retourner les formations correspondant à une recherche
 	@Override
 	public boolean existFormation(String motcle) {
 		// TODO Auto-generated method stub
@@ -198,7 +194,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	}
 	
 	/**
-	 * name - chargerVoeux  Charger la liste des voeux de létudiant
+	 * name - chargerVoeux  Charger la liste des voeux de létudiant (Cette méthode renvoie les voeux (ainsi que leur état) à une interface étudiant)
 	 * 
 	 * @param String : ine de l'étudiant
 	 * @return Voeu[]: liste des voeux de létudiant
@@ -206,8 +202,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	 * @date 20/05/2015
 	 * @note
 	 */
-	
-	//Cette méthode renvoie les voeux (ainsi que leur état) à une interface étudiant
 	@Override
 	public Voeu[] chargerVoeux(String ine) throws DonneesInvalides {
 		// TODO Auto-generated method stub
@@ -246,7 +240,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	}
 
 	/**
-	 * name - faireUnVoeu  Charger la liste des voeux de létudiant
+	 * name - faireUnVoeu  Charger la liste des voeux de létudiant (On ajoute un voeux formulé par un étudiant à sa liste)
 	 * 
 	 * @param String : ine de l'étudiant
 	 * @param Voeu : Voeu de létudiant
@@ -256,7 +250,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	 * @date 20/05/2015
 	 * @note
 	 */	
-	//On ajoute un voeux formulé par un étudiant à sa liste
 	@Override
 	public Voeu[] faireUnVoeu(String ine, Voeu monVoeux, short ordre)
 			throws DonneesInvalides, UtilisationInterdite {
@@ -278,7 +271,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	}
 
 	/**
-	 * name - repondreAuxPropositions  Répondre aux propositions faites à l'étudiant
+	 * name - repondreAuxPropositions  Répondre aux propositions faites à l'étudiant (On permet a un étudiant de répondre à un voeu)
 	 * 
 	 * @param String : ine de l'étudiant
 	 * @param decision : décidion de l'étudiant
@@ -286,7 +279,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	 * @date 20/05/2015
 	 * @note
 	 */	
-	//On permet a un étudiant de répondre à un voeu
 	@Override
 	public void repondreAuxPropositions(String ine, decision choixEtu, short numeroVoeu) throws DonneesInvalides, UtilisationInterdite {
 		ArrayList lv = ListeVoeuxEtudiant.get(ine);
@@ -299,16 +291,14 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 				v.dcsEtudiant = choixEtu;
 				if(v.etatVoeu==etatvoeux.listeDattente||v.etatVoeu==etatvoeux.accepter)
 				{
-
 					ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,v);
-
 				}
 			}	
 		}
 
-
-		if (choixEtu.equals(decision.NONdefinitif)){
-
+		//On supprime tout les voeux
+		if(choixEtu.equals(decision.NONdefinitif))
+		{
 			for(int i =0; i<ListeVoeuxEtudiant.get(ine).size(); i++){
 				ListeVoeuxEtudiant.get(ine).get(i).dcsEtudiant=decision.NONdefinitif;
 
@@ -319,7 +309,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 			try {
 				bddGDV.supprimerAllVoeux(ine);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -431,7 +420,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	 * @date 20/05/2015
 	 * @note
 	 */	
-	
 	@Override
 	public Voeu[] modifierVoeu(String ine, short numeroVoeu, short ordre)
 			throws DonneesInvalides, UtilisationInterdite {
@@ -516,6 +504,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 		
 		for(int i = 0;i<lv.size();i++)
 		{
+			//On le supprime d'abords en BD
 			v = (Voeu) lv.get(i);
 			if(v.numeroVoeu==numeroVoeu)
 			{
@@ -527,6 +516,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 				}
 				v.numeroVoeu = 0;
 			}
+			//On remonte les autres voeu d'une position pour ceux en dessous du voeu supprimé
 			else if(v.numeroVoeu>numeroVoeu)
 			{
 				try {
@@ -538,6 +528,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 				v.numeroVoeu--;
 			}
 		}
+		//On suprrime ensuite celui de la liste de la classe
 		for(int i=0;i<lv.size();i++)
 		{
 			v = (Voeu) lv.get(i);
@@ -547,7 +538,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 				
 			}
 		}
-		
+		//On met a jour l'affichage l'interface
 		return chargerVoeux(ine);
 	}
 
@@ -564,10 +555,9 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	@Override
 	public void transmettreDecisionCandidatureRectorat(String ine, Voeu Reponse)
 			throws DonneesInvalides {
-		// TODO Auto-generated method stub
 		ArrayList lv = ListeVoeuxEtudiant.get(ine);
-		
 		Voeu v;
+		//On modifie l'état des voeux en fonction de ce qui est reçu de la première vague
 		for(int i=0;i<lv.size();i++)
 		{
 			v = (Voeu) lv.get(i);
@@ -577,16 +567,14 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 					lv.set(i, Reponse);
 					bddGDV.modifierEtatVoeux(Reponse, ine);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		}
 		if(ListeVoeuxEtudiant.containsKey(ine))
 		{
-			if (ListeEtudiant.containsKey(ine))
+			if (ListeEtudiant.containsKey(ine))//On vérifie que l'interface est connecté pour mettre a jour l'interface sinon on ne fais rien
 				ListeEtudiant.get(ine).majEtatVoeux(chargerVoeux(ine));
-			
 		}
 		else{
 			ListeEtudiant.get(ine).notifier("vous navez plus de voeux");
@@ -604,7 +592,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	 */	
 	@Override
 	public boolean possedeVoeux(String ine) {
-		// TODO Auto-generated method stub
 		if (ListeVoeuxEtudiant.containsKey(ine)){
 			
 			ArrayList<Voeu> lv=ListeVoeuxEtudiant.get(ine);
@@ -627,11 +614,9 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	 */	
 	@Override
 	public void lancementVague(short numero) {
-		// TODO Auto-generated method stub
-		System.out.println("first");
-		if(numero == 1)//période 1
-		{
-			
+		//On lance les vague selon le paramètre numéro
+		if(numero == 1)//période 1 (Vague 1)
+		{	
 			Enumeration e = ListeVoeuxEtudiant.keys();
 			 
 			ArrayList<Voeu> lv;
@@ -647,7 +632,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 					et = gdpRattache.consulterProfil(ine);
 					
 				} catch (DonneesInvalides e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				Voeu[] tabVoeu = new Voeu[lv.size()];
@@ -666,20 +650,17 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 						ListeEtudiant.get(ine).lancementVague((short) 1);
 					
 				} catch (DonneesInvalides e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 			
 		}
-		else if(numero == 2)//période 2
+		else if(numero == 2)//période 2 (Vague 2)
 		{
 			ministere.deliberationJury();
 		}
-		else if(numero==3)
+		else if(numero==3)//période 3 (Vague 3)
 		{
-			
-			
 			ministere.deliberationJuryFinal();
 		}
 	}
@@ -694,7 +675,6 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	 */	
 	@Override
 	public void deconnexion(String ine) {
-		// TODO Auto-generated method stub
 		ListeEtudiant.remove(ine);
 	}
 
