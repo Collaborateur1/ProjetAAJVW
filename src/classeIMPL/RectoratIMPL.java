@@ -62,10 +62,6 @@ public class RectoratIMPL extends RectoratPOA {
 	
 	}
 
-
-
-
-
 	/**
 	 * name -nomRectorat retourne le nom du rectorat
 	 * 
@@ -77,7 +73,6 @@ public class RectoratIMPL extends RectoratPOA {
 	
 	@Override
 	public String nomRectorat() {
-		// TODO Auto-generated method stub
 		return nomRectorat;
 	}
 
@@ -91,16 +86,14 @@ public class RectoratIMPL extends RectoratPOA {
 	
 	@Override
 	public void deliberationJuryFinal() {
-		// TODO Auto-generated method stub
 		Enumeration<Universite> ListeUniv=this.ListeListUniversite.elements();
-
+		//On parcours toutes les université pour lancer les délibération sur chacune d'elle
 		while(ListeUniv.hasMoreElements())
 		{
 			Universite Un=null;
 
 			Un= ListeUniv.nextElement();
 			Un.deliberationFinal();
-			
 		}
 	}
 	
@@ -115,15 +108,12 @@ public class RectoratIMPL extends RectoratPOA {
 	 */	
 	@Override
 	public void transfertDossier(dossierEtudiant dossierEtu, Voeu voeu) {
-
-		// TODO Auto-generated method stub
-
 		boolean candiddatureConforme=false;
 
-		//->boolean CandidatureConforme(String NomFormationEtudiant,String Nomformationvoeu)
+		//Si la candidature est conforme
 		if (CandidatureConforme(dossierEtu.etu.formation.NomFormation,voeu.formationVoeu.NomFormation))
 		{	
-
+			//On relai la candidature a l'université concerné
 			try {
 				
 				Universite universiteAcontacter;	
@@ -133,12 +123,12 @@ public class RectoratIMPL extends RectoratPOA {
 				this.envoyerDecisionCandidatureRectorat(dossierEtu.etu.ineEtudiant, voeu);
 
 			} catch (DonneesInvalides e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		else
 		{
+			//si la candidature n'est pas conforme il faut la renvoyer à l'étudiant
 			try {
 				voeu.etatVoeu=etatvoeux.nonValide;
 				Rectorat recorat_a_Joindre=MonMinistere.recupererRectorat(dossierEtu.etu.formation.nomRectorat);
@@ -148,7 +138,7 @@ public class RectoratIMPL extends RectoratPOA {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			//si la candidature n'est pas conforme il faut la renvoyer a létudiant...good luck..
+			
 		}
 
 	}
@@ -177,7 +167,7 @@ public class RectoratIMPL extends RectoratPOA {
 
 		for(int i=0;i<lv.length;i++)
 		{
-			/*histoire de vous faciliter la compréhention*/
+			//Pour faciliter la compréhention
 			NomFormationEtudiant=etu.formation.NomFormation;
 			NomFormationVoeux=lv[i].formationVoeu.NomFormation;
 			
@@ -195,7 +185,7 @@ public class RectoratIMPL extends RectoratPOA {
 						
 						univEtudiant.envoyerCandidature(etu.ineEtudiant, lv[i]);
 					}
-					//sinon bin on récupere le dossier dans luniv de letudiant
+					//sinon on récupere le dossier dans luniv de letudiant
 					//et on lenvoi a lautre univ qui est, elle aussi dans le rectorat
 					else
 					{
@@ -222,17 +212,11 @@ public class RectoratIMPL extends RectoratPOA {
 			
 			else
 			{
-
-				
 				Rectorat recorat_a_Joindre=MonMinistere.recupererRectorat(lv[i].formationVoeu.nomRectorat);
 				
 				dossierEtu=univEtudiant.madDossier(etu.ineEtudiant);
 		
 				recorat_a_Joindre.transfertDossier(dossierEtu, lv[i]);
-		
-
-
-
 			}
 
 		}
@@ -251,10 +235,7 @@ public class RectoratIMPL extends RectoratPOA {
 	 */	
 	
 	@Override
-	public void envoyerDecisionCandidatureRectorat(String ine, Voeu voeu)
-			throws DonneesInvalides {
-		// TODO Auto-generated method stub
-		
+	public void envoyerDecisionCandidatureRectorat(String ine, Voeu voeu) throws DonneesInvalides {
 		LesGDV.get(String.valueOf(voeu.numerogdv)).transmettreDecisionCandidatureRectorat(ine, voeu);
 	}
 
@@ -268,26 +249,22 @@ public class RectoratIMPL extends RectoratPOA {
 	 * @note
 	 */	
 	@Override
-	public void envoyerDecisionCandidatureUniv(Etudiant etu, Voeu voeu)
-			throws DonneesInvalides {
-		// TODO Auto-generated method stub
-		
+	public void envoyerDecisionCandidatureUniv(Etudiant etu, Voeu voeu) throws DonneesInvalides {
 		//si il s'agit de ce recorat qui doit récupéré la réponse
 		if(etu.formation.nomRectorat.equals(nomRectorat))
 		{
 			
-			//Pour faire simple..le numero de voeu correspond a son GDV comme sa
+			//Pour faire simple, le numero de voeu correspond a son GDV comme ca
 			//facile de le retrouver
 			GestionDesVoeux Gdv;
 			Gdv=LesGDV.get(String.valueOf(voeu.numerogdv));
 			Gdv.transmettreDecisionCandidatureRectorat(etu.ineEtudiant, voeu);
 		}
-		//sinnon faut le passer au bon recorat
+		//sinon le trasnmettre au bon recorat
 		else
 		{
 			Rectorat recorat_a_Joindre=MonMinistere.recupererRectorat(etu.formation.nomRectorat);
-			
-			//on ne s'embete pas.. on appel direct le service sur le bon serveur
+			//on appel directement le service sur le bon serveur
 			recorat_a_Joindre.envoyerDecisionCandidatureUniv(etu,voeu);
 		}
 	}
@@ -305,10 +282,7 @@ public class RectoratIMPL extends RectoratPOA {
 	
 	@Override
 	public void inscriptionUniv(Universite iorLUniversite, String nomUniv) {
-		// TODO Auto-generated method stub
-	
 		ListeListUniversite.put(nomUniv, iorLUniversite);
-		
 	}
 
 	/**
@@ -322,23 +296,15 @@ public class RectoratIMPL extends RectoratPOA {
 	 */	
 	
 	@Override
-	public void repondrePropositionVoeux(String ine, Voeu voeu)
-			throws DonneesInvalides {
-		// TODO Auto-generated method stub
+	public void repondrePropositionVoeux(String ine, Voeu voeu) throws DonneesInvalides {
 		Universite univ;
 		Enumeration<Universite> e= ListeListUniversite.elements();
-	
 		
 		while (e.hasMoreElements())
 		{
-			
 			univ=e.nextElement();
 			if(univ.nomUniversite().equals(voeu.formationVoeu.nomUniv))
-			{
-				
 				univ.repondrePropositionvoeux(ine, voeu);
-				
-			}
 		}
 	}
 
@@ -353,7 +319,6 @@ public class RectoratIMPL extends RectoratPOA {
 	 */	
 	@Override
 	public void inscriptionGDV(short numeroGDV, GestionDesVoeux Gdv) {
-		// TODO Auto-generated method stub
 		LesGDV.put(String.valueOf(numeroGDV), Gdv);
 	}
 
@@ -366,7 +331,7 @@ public class RectoratIMPL extends RectoratPOA {
 	 */
 	@Override
 	public void deliberationJury() {
-		// TODO Auto-generated method stub
+		//Parcours de chaque université pour faire délibérer le jury
 		if(!deliberationJury){
 		Enumeration<Universite> ListeUniv=this.ListeListUniversite.elements();
 
@@ -382,17 +347,15 @@ public class RectoratIMPL extends RectoratPOA {
 	}
 	
 	/**
-	 * name -getFicheEtudiant : Obtenir la fiche de l'étudiant au pret de l'université
+	 * name -getFicheEtudiant : Obtenir la fiche de l'étudiant auprès de l'université
 	 * 
 	 * @param String: ine de l'étudiant
 	 * @author jean-vincent
 	 * @date 20/05/2015
 	 * @note
 	 */	
-	
 	@Override
 	public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
-		// TODO Auto-generated method stub
 		Universite univ;
 		Enumeration<Universite> e= ListeListUniversite.elements();
 		while (e.hasMoreElements())
@@ -413,22 +376,16 @@ public class RectoratIMPL extends RectoratPOA {
 	/*********************Fonction local**************/
 
 	//Vérifier q'une candidature est conforme
-
 	public boolean CandidatureConforme(String NomFormationEtudiant,String Nomformationvoeu)
 	{
-		//System.out.println(" NomFormationEtudiant: "+ NomFormationEtudiant+" Nomformationvoeu: "+Nomformationvoeu);
 		//On récupere la liste des formations valide pour la formation auquel il a postuler
 		ArrayList<String> ListeFormationValidePrCandidature=ValidationFormation.get(Nomformationvoeu);
 		System.out.println(ValidationFormation.toString());
 		//On cherche si on trouve la formation de létudiant dans les formations valide
 		for (int i=0;i< ListeFormationValidePrCandidature.size();i++)
 		{
-			
 			if(ListeFormationValidePrCandidature.get(i).equals(NomFormationEtudiant))
-			{
-				
 				return true;
-			}	
 		}
 		return false;
 	}
@@ -437,36 +394,31 @@ public class RectoratIMPL extends RectoratPOA {
 	public boolean UniversiteDansRecorat(String univ)
 	{
 		if (ListeListUniversite.get(univ)!=null)
-		{
 			return true;
-		}
 		else
-		{
 			return false;
-		}
 	}
 
-	// récupérer luuniv si elle fait parti du recorat
+	// récupérer l'univ si elle fait parti du recorat
 	public Universite GetUniversiteDansRecorat(String univ)
 	{
 		return ListeListUniversite.get(univ);
-
 	}
-	
-
 
 	public static void main(String[] args) throws DonneesInvalides, ServantNotActive, WrongPolicy, InvalidName {
-
-  
-    
 	}
 
-
-
+	/**
+	 * name -ajoutPrerequis : Ajout des prérequis d'une formation
+	 * 
+	 * @param Fromation: formation concerné
+	 * @param String[]: tableaux des prérequis
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
 	@Override
 	public void ajoutPrerequis(Formation formation, String[] prerequis) {
-		// TODO Auto-generated method stub
-		
 		ArrayList<String> Prereq = new ArrayList<String>();
 		for(int i =0 ; i<prerequis.length; i++){
 			Prereq.add(prerequis[i]);

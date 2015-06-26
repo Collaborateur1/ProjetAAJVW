@@ -26,59 +26,78 @@ public class LBEtudiantIMPL extends LoadBalancerEtudiantPOA {
 	}
 	
 	/*********************Fonction généré******************************/
+	/**
+	 * name -getProfil retourne une GDV en fonction du premier chiffre de l'ine passé en paramètre
+	 * 
+	 * @param String : ine
+	 * @return GestionDesProfils: une GDP
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
 	@Override
 	public GestionDesProfils getProfil(String ine) throws DonneesInvalides {
-		// TODO Auto-generated method stub
 		
-		if(ine.startsWith("1")) //si ine contient "G1"  on renvoi GDP1 sinon GDP2 (on fait deux GDP pour linstant)
+		if(ine.startsWith("1")) //si ine commence par "1"
 	    {
 			return listGDP.get("1");
 	    }
-		else
+		else//si ine commence par "2" ou n'importe quoi d'autre
 		{
 			return listGDP.get("2");	
 		}
 
 	}
-
+	/**
+	 * name -getServProfil Retourne la GDV correspondant au numéro passé en paramètre
+	 * 
+	 * @param short: numéro gdv
+	 * @return GestionDesProfils : Une GDP
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
 	@Override
 	public GestionDesProfils getServProfil(short num) throws DonneesInvalides {
-		// TODO Auto-generated method stub
 		return listGDP.get(String.valueOf(num));
 	}
 
+	/**
+	 * name -inscriptionGDP Enregistrement de la GDP dans le LoadBalancer
+	 * 
+	 * @param GestionDesProfils : une GDP
+	 * @param : et son numéro associé
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
 	@Override
-	public void inscriptionGDP(GestionDesProfils iorGestionDesProfils,
-			short numero) throws DonneesInvalides {
+	public void inscriptionGDP(GestionDesProfils iorGestionDesProfils, short numero) throws DonneesInvalides {
 		listGDP.put(String.valueOf(numero), iorGestionDesProfils);
-		// TODO Auto-generated method stub
-		
 	}
 	
-	
-
 	public static void main(String[] args) {
-	
-	
-		
 	}
 
+	/**
+	 * name -getAllGDP Permet de connaitre toutes les GDP
+	 * 
+	 * @return GestionDesProfils[]: tableaux de toutes les GDP
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
 	@Override
 	public GestionDesProfils[] getAllGDP() {
-		// TODO Auto-generated method stub
 		GestionDesProfils[] tabGDP = new GestionDesProfils[listGDP.size()];
 		Enumeration<GestionDesProfils> lesGDP = listGDP.elements();
 		int i=0;
 		
-		while(lesGDP.hasMoreElements()){
-			
-			
-				tabGDP[i] = lesGDP.nextElement();
+		while(lesGDP.hasMoreElements())
+		{
+			tabGDP[i] = lesGDP.nextElement();
 			i++;
-			
 		}
-		
-		
 		return tabGDP;
 	}
 
