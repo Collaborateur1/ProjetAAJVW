@@ -229,7 +229,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 	public void repondrePropositionvoeux(String ine, Voeu voeu)
 			throws DonneesInvalides {
 		// TODO Auto-generated method stub
-		System.out.println("Liste dadmi : "+ListeAdmiParFormation);
+		
 	
 		if (voeu.dcsEtudiant==decision.NONdefinitif||voeu.dcsEtudiant==decision.NONmais){
 			
@@ -245,13 +245,14 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 			   }
 			}
 		}
-		System.out.println("Liste admi mise a jour: "+ListeAdmiParFormation);
+		System.out.println("nouvelle liste dadmis "+ListeAdmiParFormation.toString()+"\n\n");
+		System.out.println("nouvelle liste dattente "+ListeDattente.toString()+"\n\n");
+		
 	}
 	
 	@Override
 	public void deliberationJury()  {
-		System.out.println("Nous somme dans l'univ "+this.NomUniv+"\n\n");
-		System.out.println("Liste des candidature "+ListeCandidatureParFormation.toString()+"\n\n");
+	
 		// TODO Auto-generated method stub
 		//le comparateur permet de trier par valeur et non par clé
 	    HashMap<String,Double> map = new HashMap<String,Double>();
@@ -441,9 +442,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 			String nomFormationCourante = ListeFormation.nextElement();
 			nbAdmis =(short) ListeAdmiParFormation.get(nomFormationCourante).size(); 
 		    quota = ListeDesFormations.get(nomFormationCourante).quota;
-		    System.out.println(nomFormationCourante+" le nom de formation courante");
-			System.out.println("si ya que ca jai raisonn "+ListeAdmiParFormation.toString());
-			System.out.println("nombre admi "+nbAdmis+" quota "+quota+" ");
+		    
 			if (nbAdmis<quota){
 				nbdispo = (short) (quota - nbAdmis);
 				for(int i =0; i<nbdispo; i++){ 
@@ -485,17 +484,17 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 			}
 			else if (nbAdmis ==quota && ListeDattente.containsKey(nomFormationCourante) ){ 
 				if(ListeDattente.get(nomFormationCourante).size()>0){
-					System.out.println("******************************ici annulation voeu "+nomFormationCourante);
+					
 					for(int i =0; i<ListeDattente.get(nomFormationCourante).size();i++){
 						
 					
 						
 						voeuEtu = ListeVoeux.get(ListeDattente.get(nomFormationCourante).get(i)).get(nomFormationCourante);
 						voeuEtu.etatVoeu = etatvoeux.refuser;
-						System.out.println("******************************ici annulation voeu "+nomFormationCourante);
+					
 						if (DossierEtudiant.containsKey(ListeDattente.get(nomFormationCourante).get(i))){
 							try {
-								System.out.println("******************************on le sup "+nomFormationCourante);
+								
 								recto.envoyerDecisionCandidatureUniv(DossierEtudiant.get(ListeDattente.get(nomFormationCourante).get(i)).etu, voeuEtu);
 								} catch (DonneesInvalides e) {
 								// TODO Auto-generated catch block
@@ -504,7 +503,7 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 						}
 						else{
 							try {
-								System.out.println("******************************on le sup2 "+nomFormationCourante);
+								
 								recto.envoyerDecisionCandidatureUniv(DossierCandidatureEtudiant.get(ListeDattente.get(nomFormationCourante).get(i)).etu, voeuEtu);								
 							} catch (DonneesInvalides e) {
 								// TODO Auto-generated catch block

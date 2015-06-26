@@ -44,7 +44,8 @@ public class DBGestionDesVoeux {
 						" QUOTA SMALLINT ,"+
 						"ETATVOEUX VARCHAR( 30 ) NOT NULL,"+
 						"DECISION VARCHAR( 30 ) NOT NULL,"+ 
-						"NUMEROVOEU SMALLINT, PRIMARY KEY(IDVOEU))");			 
+						"NUMEROVOEU SMALLINT,"+
+						"NUMEROGDV SMALLINT,PRIMARY KEY(IDVOEU))");			 
 
 			}
 
@@ -123,7 +124,7 @@ public class DBGestionDesVoeux {
 			                vx.formationVoeu.NomFormation+"','"+vx.formationVoeu.TypeFormation+"','"+
 					        vx.formationVoeu.nomRectorat+"',"+vx.formationVoeu.quota+",'"+
 					        String.valueOf(vx.etatVoeu)+"','"+String.valueOf(vx.dcsEtudiant)+"',"+
-			                vx.numeroVoeu+")");
+			                vx.numeroVoeu+","+vx.numerogdv+")");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
