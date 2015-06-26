@@ -68,7 +68,7 @@ Hashtable <String,ArrayList<String>> ListeDattente;
 DBUniversite bddUNIV;;
 
 
-/**************************Constructeur********************************/
+/************************** Constructeur ********************************/
 
 public UniversiteIMPL(String nomUniv, String nomAcad,org.omg.CORBA.ORB orb) throws DonneesInvalides, InvalidName, AdapterInactive, ServantNotActive, WrongPolicy {
 	super();
@@ -124,7 +124,14 @@ public UniversiteIMPL(String nomUniv, String nomAcad,org.omg.CORBA.ORB orb) thro
 	}
 }
 
-
+/****
+ * @name getFicheEtudiant  
+ * @description Récupérer la fiche de l'étudiant à partir de son INE
+ * Quand un étudiant s'inscrit on récupère son profil pour le mettre dans gestion des profils
+ * 
+ * @param String : INE étudiant
+ * @return Etudiant
+ ****/	
 @Override
 public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 	// TODO Auto-generated method stub
@@ -136,20 +143,37 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 	
 	
 }
-/**************************Généré*************************************/
-
+/************************** Fonctions Générées *************************************/
+	/****
+	 * @name nomUniversite  
+	 * @description Récupérer le nom de l'université
+	 * 
+	 * @return String : Nom université
+	 ****/	
 	@Override
 	public String nomUniversite() {
 		// TODO Auto-generated method stub
 		return NomUniv;
 	}
 
+	/****
+	 * @name villeUniversite  
+	 * @description Récupérer la ville de l'université
+	 * 
+	 * @return String : Ville université
+	 ****/	
 	@Override
 	public String villeUniversite() {
 		// TODO Auto-generated method stub
 		return Ville;
 	}
 
+	/****
+	 * @name nomUniversite  
+	 * @description Récupérer le nom du rectorat d'une université
+	 * 
+	 * @return String : Nom rectorat
+	 ****/	
 	@Override
 	public String academieUniversite() {
 		// TODO Auto-generated method stub
@@ -158,6 +182,13 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 
 	
 
+	/****
+	 * @name envoyerCandidature  
+	 * @description Envoyer le voeu formulé par l'étudiant à l'université concernée
+	 * 
+	 * @param String INE
+	 * @param Voeu
+	 ****/	
 	@Override
 	public void envoyerCandidature(String ine, Voeu voeu)
 			throws DonneesInvalides {
@@ -187,6 +218,14 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 		
 	}
 
+	/****
+	 * @name envoyerCandidatureD  
+	 * @description Fournir le dossier avec candidature si l'université ne connait pas l'étudiant
+	 * 
+	 * @param dossierEtudiant
+	 * @param String INE
+	 * @param Voeu
+	 ****/	
 	@Override
 	public void envoyerCandidatureD(dossierEtudiant dossierEtu, String ine,
 			Voeu voeu) throws DonneesInvalides {
@@ -218,6 +257,14 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 		DossierCandidatureEtudiant.put(ine,dossierEtu);
 	}
 
+	/****
+	 * @name envoyerCandidatureD  
+	 * @description Si un rectorat a besoin de transmettre le dossier à une université qui n'a pas cet étudiant
+	 * Il fait appel a cette méthode en retrouvant l'université d'origine de l'étudiant
+	 * 
+	 * @param String INE
+	 * @return dossierEtudiant
+	 ****/	
 	@Override
 	public dossierEtudiant madDossier(String ine) {
 		// TODO Auto-generated method stub
@@ -225,6 +272,14 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 		return DossierEtudiant.get(ine);
 	}
 
+	/****
+	 * @name repondrePropositionvoeux  
+	 * @description Le rectorat transmet la décision de l'étudiant, la décision se trouve dans le voeu
+	 * 
+	 * @param String INE
+	 * @param Voeu
+	 * @return void
+	 ****/	
 	@Override
 	public void repondrePropositionvoeux(String ine, Voeu voeu)
 			throws DonneesInvalides {
@@ -250,6 +305,12 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 		
 	}
 	
+	/****
+	 * @name deliberationJury  
+	 * @description Calcule la moyenne de tous les étudiants qui ont postulé, établit la liste des admis et la liste d'attente
+	 * 
+	 * @param void
+	 ****/	
 	@Override
 	public void deliberationJury()  {
 	
@@ -421,6 +482,13 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 
 	
 
+	/****
+	 * @name estEtudiant
+	 * @description Vérification si l'étudiant existe
+	 * 
+	 * @param String INE
+	 * @return Boolean : Vrai si l'étudiant existe
+	 ****/	
 	@Override
 	public boolean estEtudiant(String ine) {
 		// TODO Auto-generated method stub
@@ -428,6 +496,12 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 	}
 
 
+	/****
+	 * @name deliberationFinal  
+	 * @description Vérifie si des places se sont libérées pour décider du sort des étudiants en liste d'attente
+	 * 
+	 * @return void
+	 ****/	
 	public void deliberationFinal() {
 		// TODO Auto-generated method stub
 		//Récupere la liste des formations
@@ -521,9 +595,16 @@ public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 	}
 
 
-/*****************fonction ajouter*******************************/
+/***************** Fonctions ajoutées *******************************/
 
-
+/****
+ * @name ajouterEtudiant  
+ * @description Ajoutee l'étudiant dans l'université et l'associer à un rectorat
+ * 
+ * @param String INE
+ * @param dossierEtudiant
+ * @return void
+ ****/	
 public void ajouterEtudiant(String ine, dossierEtudiant dossier)
 {
 		
@@ -531,6 +612,14 @@ public void ajouterEtudiant(String ine, dossierEtudiant dossier)
 	ministere.EnregistrerRectoratEtudiant(ine, recto);
 }
 
+/****
+ * @name ajouterFormation  
+ * @description Ajouter une formation à la liste de formations
+ * 
+ * @param Formation 
+ * @param String[] tableau de pré-requis
+ * @return void
+ ****/
 public void ajouterFormation(Formation fr,String[] frRequises)
 {
 	ArrayList<String>ListEtu = new ArrayList <String>();
@@ -539,6 +628,12 @@ public void ajouterFormation(Formation fr,String[] frRequises)
 	recto.ajoutPrerequis(fr, frRequises);
 }
 
+/****
+ * @name affichage  
+ * @description affiche la liste des étudiants admis et la liste des étudiants en liste d'attente
+ *  
+ * @return void
+ ****/
 public void affichage(){
 	System.out.println("Liste des etudiants admis : "+ListeAdmiParFormation);
 	System.out.println("Liste des etudiants en attente : "+ListeDattente);

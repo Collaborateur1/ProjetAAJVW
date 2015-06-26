@@ -15,8 +15,8 @@ import generated.LoadBalancerEtudiantPOA;
 public class LBEtudiantIMPL extends LoadBalancerEtudiantPOA {
 	
 	Hashtable<String,GestionDesProfils> listGDP;
-	/*********************Costructeur******************************/
 	
+	/*********************Costructeur******************************/
 
 	public LBEtudiantIMPL(org.omg.CORBA.ORB orb) {
 			// TODO Auto-generated constructor stub
@@ -25,16 +25,15 @@ public class LBEtudiantIMPL extends LoadBalancerEtudiantPOA {
 
 	}
 	
-	/*********************Fonction généré******************************/
-	/**
-	 * name -getProfil retourne une GDV en fonction du premier chiffre de l'ine passé en paramètre
+	/********************* Fonctions générées ******************************/
+	
+	/****
+	 * @name getProfil 
+	 * @description retourne une GDV en fonction du premier chiffre de l'ine passé en paramètre
 	 * 
-	 * @param String : ine
+	 * @param String : INE
 	 * @return GestionDesProfils: une GDP
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	@Override
 	public GestionDesProfils getProfil(String ine) throws DonneesInvalides {
 		
@@ -48,29 +47,25 @@ public class LBEtudiantIMPL extends LoadBalancerEtudiantPOA {
 		}
 
 	}
-	/**
-	 * name -getServProfil Retourne la GDV correspondant au numéro passé en paramètre
+	/****
+	 * @name getServProfil 
+	 * @description Retourne la GDV correspondante au numéro passé en paramètre
 	 * 
 	 * @param short: numéro gdv
 	 * @return GestionDesProfils : Une GDP
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	@Override
 	public GestionDesProfils getServProfil(short num) throws DonneesInvalides {
 		return listGDP.get(String.valueOf(num));
 	}
 
-	/**
-	 * name -inscriptionGDP Enregistrement de la GDP dans le LoadBalancer
+	/****
+	 * @name inscriptionGDP 
+	 * @description Enregistrement de la GDP dans le LoadBalancer
 	 * 
 	 * @param GestionDesProfils : une GDP
-	 * @param : et son numéro associé
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 * @param Le numéro associé à la GDP
+	 ****/	
 	@Override
 	public void inscriptionGDP(GestionDesProfils iorGestionDesProfils, short numero) throws DonneesInvalides {
 		listGDP.put(String.valueOf(numero), iorGestionDesProfils);
@@ -79,14 +74,12 @@ public class LBEtudiantIMPL extends LoadBalancerEtudiantPOA {
 	public static void main(String[] args) {
 	}
 
-	/**
-	 * name -getAllGDP Permet de connaitre toutes les GDP
+	/****
+	 * @name getAllGDP 
+	 * @description Permet de connaitre toutes les GDP
 	 * 
 	 * @return GestionDesProfils[]: tableaux de toutes les GDP
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	@Override
 	public GestionDesProfils[] getAllGDP() {
 		GestionDesProfils[] tabGDP = new GestionDesProfils[listGDP.size()];

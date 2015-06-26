@@ -42,13 +42,13 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 
 	Ministère ministere;
 
-	/*********************Costructeur
+	/**** Constructeur
 	 * @throws DonneesInvalides 
 	 * @throws InvalidName 
 	 * @throws WrongPolicy 
 	 * @throws ServantNotActive 
 	 * @throws ServantAlreadyActive 
-	 * @throws AdapterInactive ******************************/
+	 * @throws AdapterInactive ****/
 	//On initialise la gestion des profils
 	public GestionDesProfilsIMPL(short nGdp,org.omg.CORBA.ORB orb) throws DonneesInvalides, InvalidName, ServantNotActive, WrongPolicy, ServantAlreadyActive, AdapterInactive {
 		//On lui affecte un numéro qui servira au LoadBalancer à renvoyer la bonne GDP selon l'ine de l'étudiant (commencant par 1 ou 2)
@@ -90,35 +90,27 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 		}
 	}
 
-	/*********************Fonction généré******************************/
-
+	/********** Fonctions générées **********/	
 	
-	
-	/**
-	 * @name - numeroGDP  On retourne le numérode la GDP
+	/****
+	 * @name numeroGDP  
+	 * @description renvoie le numérode la GDP
 	 * 
-	 * description: le numéro de la gdp
-	 * 
-	 * @return short
-	 * @author M2GroupeCorba
-	 * @date 20/05/2015
-	 * @note
-	 */
+	 * @return short (Numéro GDP)
+	 ****/
 	@Override
 	public short numeroGDP() {
 		// TODO Auto-generated method stub
 		return numGDP;
 	}
 
-	/**
-	 * name -autorisationConnexion  l'étudiant peut il ce connecter ?
+	/****
+	 * @name autorisationConnexion  
+	 * @description Vérification si l'étudiant peut se connecter 
 	 * 
-	 * @param String : ine de l'étudiant
-	 * @return boolean: 
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 * @param String : INE de l'étudiant
+	 * @return boolean: Vrai si l'étudiant peut se connecter 
+	 ****/	
 	
 	@Override
 	public boolean autorisationConnexion(String ine, String mdp)
@@ -137,16 +129,14 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 		return false;
 	}
 
-	/**
-	 * name -connexion  Connexion de l'étudiant
+	/****
+	 * @name connexion  
+	 * @description Connexion de l'étudiant
 	 * 
-	 * @param String : ine de l'étudiant
-	 * @param String : mots de passe
+	 * @param String : INE de l'étudiant
+	 * @param String : Mot de passe
 	 * @return GestionDesVoeux : Gestion des Veeux r'attaché à l'étudiant
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	@Override
 	public GestionDesVoeux connexion(IEtudiant iorEtudiant, String ine,
 			String mdp) throws DonneesInvalides {
@@ -174,30 +164,27 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 		return null;
 	}
 
-	/**
-	 * name -consulterProfil Consultation d'un profil
+	/****
+	 * @name consulterProfil 
+	 * @description Consultation d'un profil
 	 * 
-	 * @param String : ine de l'étudiant
+	 * @param String : INE de l'étudiant
 	 * @return Etudiant : Fiche de l'étudiant
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+
+	 ****/	
 	@Override
 	public Etudiant consulterProfil(String ine) throws DonneesInvalides {
 		// TODO Auto-generated method stub	 
 		return  etudiantinscrit.get(ine);
 	}
 
-	/**
-	 * name -modifierProfil Modification du profil de l'étudiant
+	/****
+	 * @name modifierProfil 
+	 * @description Modification du profil de l'étudiant
 	 * 
 	 * @param String : ine de l'étudiant
 	 * @param String : adresse de l'étudiant
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	@Override
 	public void modifierProfil(String ine, String adr) throws DonneesInvalides {
 		// TODO Auto-generated method stub
@@ -206,14 +193,12 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 		}
 	}
 
-	/**
-	 * name -inscriptionGestionDesVoeux Inscription de la gestin des voeux
+	/****
+	 * @name inscriptionGestionDesVoeux 
+	 * @description Inscription de la gestion des voeux
 	 * 
-	 * @param GestionDesVoeux : gestipn des voeux
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 * @param GestionDesVoeux : gestion des voeux
+	 ****/	
 	//On inscrit la gestion des voeux à la gestion des profils rattaché
 	@Override
 	public void inscriptionGestionDesVoeux(GestionDesVoeux GDesVx) {
@@ -221,14 +206,13 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 		GestionDesVoeuxInscrit=GDesVx;
 	}
 
-	/**
-	 * name -etudiantInscrit L'étudiant est t'il insctrit
+	/****
+	 * @name etudiantInscrit 
+	 * @description Vérificiation si l'étudiant est bien insctrit
 	 * 
-	 * @param String  : Ine de l'étudiant 
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 * @param String : Ine de l'étudiant 
+	 * @return Boolean : Vrai si l'étudiant est bien inscrit
+	 ****/	
 	//On test si un étudiant existe 
 	@Override
 	public boolean etudiantInscrit(String ine) throws DonneesInvalides {
@@ -237,14 +221,13 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 		return etudiantinscrit.containsKey(ine);
 	}
 
-	/**
-	 * name -getFicheEtudiant Obtenir la fiche de l'étudiant
+	/****
+	 * @name getFicheEtudiant 
+	 * @description Obtenir la fiche de l'étudiant
 	 * 
 	 * @param String  : Ine de l'étudiant 
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+
+	 ****/	
 	
 	//On retourne un etudiant selon sont INE
 	@Override
@@ -253,15 +236,13 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 		return ministere.GetRectoratEtudiant(ine).getFicheEtudiant(ine);
 	}
 
-	/**
-	 * name -inscriptionEtudiant Inscription dans le SI
+	/****
+	 * @name inscriptionEtudiant 
+	 * @description Inscription dans le Base de données
 	 * 
 	 * @param String  : Ine de l'étudiant 
 	 * @param String  : Mots de passe
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	//On inscrit un etudiant qui n'a pas encore de mot de passe
 	@Override
 	public boolean inscriptionEtudiant(String ine, String mdp)
@@ -285,20 +266,18 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 		}
 		else
 		{
-			System.out.println("Mot de passe déja rentrée");
+			System.out.println("Mot de passe déja rentré");
 			return false;
 		}
 
 	}
 	
-	/**
-	 * name -getGDV Retourner la GDV rataché
+	/****
+	 * @name getGDV 
+	 * @description Récupérer la GDV ratachée
 	 * 
-	 @return GestionDesVoeux:gestion des voeu rataché
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 * @return GestionDesVoeux:gestion des voeu rataché
+	 ****/	
 	//On retourne la GDV rattaché
 	@Override
 	public GestionDesVoeux getGDV() {
@@ -306,8 +285,14 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 		return GestionDesVoeuxInscrit;
 	}
 	
-	/*********************Fonction rajouté (local)******************************/
+	/********** Fonctions rajoutées (local) **********/
 	
+	/****
+	 * @name getLoadBalancer 
+	 * @description Retrourner le LoadBalancer
+	 * 
+	 * @return LoadBalancerEtudiant loadBalancer
+	 ****/	
 	//On retourne le loadBalancer
 	public LoadBalancerEtudiant getLoadBalancer()
 	{

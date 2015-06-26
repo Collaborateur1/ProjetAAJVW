@@ -40,7 +40,7 @@ public class RectoratIMPL extends RectoratPOA {
 	org.omg.PortableServer.POA rootPOA;
 	boolean deliberationJury=false;
 
-	/*************************Constructeur
+	/*********************** Constructeur
 	 * @throws DonneesInvalides 
 	 * @throws InvalidName 
 	 * @throws AdapterInactive 
@@ -62,27 +62,24 @@ public class RectoratIMPL extends RectoratPOA {
 	
 	}
 
-	/**
-	 * name -nomRectorat retourne le nom du rectorat
+	/****
+	 * @name nomRectorat 
+	 * @description retourne le nom du rectorat
 	 * 
 	 * @return String : Le nom de rectorat
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	
 	@Override
 	public String nomRectorat() {
 		return nomRectorat;
 	}
 
-	/**
-	 * name -deliberationJuryFinal  délibération final du jury
+	/****
+	 * @name deliberationJuryFinal  
+	 * @description Délibération finale du jury
 	 * 
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 * @return void
+	 ****/	
 	
 	@Override
 	public void deliberationJuryFinal() {
@@ -97,15 +94,13 @@ public class RectoratIMPL extends RectoratPOA {
 		}
 	}
 	
-	/**
-	 * name -transfertDossier retourne le nom du rectorat
+	/****
+	 * @name transfertDossier 
+	 * @description retourne le nom du rectorat
 	 * 
 	 * @param dossierEtudiant : le dossier de l'étudiant
 	 * @param Voeu : le Voeu de l'étudiant
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	@Override
 	public void transfertDossier(dossierEtudiant dossierEtu, Voeu voeu) {
 		boolean candiddatureConforme=false;
@@ -113,7 +108,7 @@ public class RectoratIMPL extends RectoratPOA {
 		//Si la candidature est conforme
 		if (CandidatureConforme(dossierEtu.etu.formation.NomFormation,voeu.formationVoeu.NomFormation))
 		{	
-			//On relai la candidature a l'université concerné
+			//On relaie la candidature a l'université concernée
 			try {
 				
 				Universite universiteAcontacter;	
@@ -143,15 +138,13 @@ public class RectoratIMPL extends RectoratPOA {
 
 	}
 	
-	/**
-	 * name -envoyerListeVoeuxGDV envoyé la liste de voeux au universités 
+	/****
+	 * @name envoyerListeVoeuxGDV 
+	 * @description envoyer la liste de voeux aux universités 
 	 * 
-	 * @param Voeu[] : la liste de voeu des étudiants à envoyé
-	 * @param Etudiant : LE dosser de l'étudiant
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 * @param Voeu[] : la liste de voeux des étudiants à envoyer
+	 * @param Etudiant : Le dossier de l'étudiant
+	 ****/	
 	
 	@Override
 	public void envoyerListeVoeuxGDV(Voeu[] lv, Etudiant etu)
@@ -224,30 +217,26 @@ public class RectoratIMPL extends RectoratPOA {
 	}
 
 
-	/**
-	 * name -envoyerDecisionCandidatureRectorat : Un rectorat relai la réponse d'une université a un autre rectorat qui lui avait transmis cette demande
+	/****
+	 * @name envoyerDecisionCandidatureRectorat 
+	 * @description Un rectorat relai la réponse d'une université a un autre rectorat qui lui avait transmis cette demande
 	 * 
 	 * @param String : ine de l'étudiant
 	 * @param Voeu : Voeu de l'étudiant
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	
 	@Override
 	public void envoyerDecisionCandidatureRectorat(String ine, Voeu voeu) throws DonneesInvalides {
 		LesGDV.get(String.valueOf(voeu.numerogdv)).transmettreDecisionCandidatureRectorat(ine, voeu);
 	}
 
-	/**
-	 * name -envoyerDecisionCandidatureUniv : Une université renvoie la réponse de sa candidature a son rectorat
+	/****
+	 * @name envoyerDecisionCandidatureUniv 
+	 * @description Une université renvoie la réponse de sa candidature a son rectorat
 	 * 
 	 * @param Etudiant : Dossier de l'étudiant
 	 * @param Voeu : Voeu de l'étudiant
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	@Override
 	public void envoyerDecisionCandidatureUniv(Etudiant etu, Voeu voeu) throws DonneesInvalides {
 		//si il s'agit de ce recorat qui doit récupéré la réponse
@@ -264,36 +253,32 @@ public class RectoratIMPL extends RectoratPOA {
 		else
 		{
 			Rectorat recorat_a_Joindre=MonMinistere.recupererRectorat(etu.formation.nomRectorat);
-			//on appel directement le service sur le bon serveur
+			//on appelle directement le service sur le bon serveur
 			recorat_a_Joindre.envoyerDecisionCandidatureUniv(etu,voeu);
 		}
 	}
 	
 
-	/**
-	 * name -inscriptionUniv : inscrition des universités dans le rectorats
+	/****
+	 * @name inscriptionUniv 
+	 * @description inscrition des universités dans le rectorats
 	 * 
-	 * @param inscriptionUniv : université à inscrire
+	 * @param Universite : université à inscrire
 	 * @param String  : Nom université
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	
 	@Override
 	public void inscriptionUniv(Universite iorLUniversite, String nomUniv) {
 		ListeListUniversite.put(nomUniv, iorLUniversite);
 	}
 
-	/**
-	 * name -repondrePropositionVoeux : La GDV transmet la décision de l'étudiant, la décision se trouve dans le voeu
+	/****
+	 * @name repondrePropositionVoeux 
+	 * @description La GDV transmet la décision de l'étudiant, la décision se trouve dans le voeu
 	 * 
-	 * @param String: ine de l'étudiant
+	 * @param String: INE de l'étudiant
 	 * @param Voeu : Voeu de l'étudiant
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	
 	@Override
 	public void repondrePropositionVoeux(String ine, Voeu voeu) throws DonneesInvalides {
@@ -308,27 +293,24 @@ public class RectoratIMPL extends RectoratPOA {
 		}
 	}
 
-	/**
-	 * name -inscriptionGDV : Inscription de la GDV
+	/****
+	 * @name inscriptionGDV 
+	 * @description Inscription de la GDV
 	 * 
 	 * @param Short: numéro de la GDV
 	 * @param GestionDesVoeux : GestionDesVoeux à inscrire
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	@Override
 	public void inscriptionGDV(short numeroGDV, GestionDesVoeux Gdv) {
 		LesGDV.put(String.valueOf(numeroGDV), Gdv);
 	}
 
-	/**
-	 * name -deliberationJury() : délibération jury phase 2
+	/****
+	 * @name deliberationJury 
+	 * @description délibération du jury phase 2
 	 * 
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */
+	 * @return void
+	 ****/
 	@Override
 	public void deliberationJury() {
 		//Parcours de chaque université pour faire délibérer le jury
@@ -346,14 +328,13 @@ public class RectoratIMPL extends RectoratPOA {
 		}
 	}
 	
-	/**
-	 * name -getFicheEtudiant : Obtenir la fiche de l'étudiant auprès de l'université
+	/****
+	 * @name getFicheEtudiant 
+	 * @description Obtenir la fiche de l'étudiant auprès de l'université
 	 * 
 	 * @param String: ine de l'étudiant
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 * @return Etudiant (La fiche de l'étudiant)
+	 ****/	
 	@Override
 	public Etudiant getFicheEtudiant(String ine) throws DonneesInvalides {
 		Universite univ;
@@ -373,15 +354,23 @@ public class RectoratIMPL extends RectoratPOA {
 		
 	}
 
-	/*********************Fonction local**************/
+	/********************* Fonctions local **************/
 
-	//Vérifier q'une candidature est conforme
+	/****
+	 * @name CandidatureConforme 
+	 * @description Vérification si la candidature est conforme (Vérification prérequis)
+	 *  
+	 * @param String : Nom de la formation de l'étudiant
+	 * @param String : Nom de la formation  souhaitée
+	 * @return Boolean : Vrai si la candidature est conforme
+	 ****/
+	//Vérifier qu'une candidature est conforme
 	public boolean CandidatureConforme(String NomFormationEtudiant,String Nomformationvoeu)
 	{
-		//On récupere la liste des formations valide pour la formation auquel il a postuler
+		//On récupere la liste des formations valides pour la formation auquel il a postulé
 		ArrayList<String> ListeFormationValidePrCandidature=ValidationFormation.get(Nomformationvoeu);
 		System.out.println(ValidationFormation.toString());
-		//On cherche si on trouve la formation de létudiant dans les formations valide
+		//On cherche si on trouve la formation de l'étudiant dans les formations valides
 		for (int i=0;i< ListeFormationValidePrCandidature.size();i++)
 		{
 			if(ListeFormationValidePrCandidature.get(i).equals(NomFormationEtudiant))
@@ -390,7 +379,14 @@ public class RectoratIMPL extends RectoratPOA {
 		return false;
 	}
 
-	// vérifier si luniv fait parti du recorat
+	/****
+	 * @name UniversiteDansRecorat 
+	 * @description Vérification si l'université fait partie du rectorat
+	 *  
+	 * @param String : Nom de l'université
+	 * @return Boolean : Vrai si l'université fait partie du rectorat
+	 ****/
+	// vérifier si l'université fait bien partie du recorat
 	public boolean UniversiteDansRecorat(String univ)
 	{
 		if (ListeListUniversite.get(univ)!=null)
@@ -399,7 +395,14 @@ public class RectoratIMPL extends RectoratPOA {
 			return false;
 	}
 
-	// récupérer l'univ si elle fait parti du recorat
+	/****
+	 * @name GetUniversiteDansRecorat 
+	 * @description Récupérer l'université si elle fait partie du recorat
+	 * 
+	 * @param String : Nom de l'université
+	 * @return Universite
+	 ****/
+	
 	public Universite GetUniversiteDansRecorat(String univ)
 	{
 		return ListeListUniversite.get(univ);
@@ -408,15 +411,13 @@ public class RectoratIMPL extends RectoratPOA {
 	public static void main(String[] args) throws DonneesInvalides, ServantNotActive, WrongPolicy, InvalidName {
 	}
 
-	/**
-	 * name -ajoutPrerequis : Ajout des prérequis d'une formation
+	/****
+	 * @name ajoutPrerequis 
+	 * @description Ajout des prérequis d'une formation
 	 * 
 	 * @param Fromation: formation concerné
 	 * @param String[]: tableaux des prérequis
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	@Override
 	public void ajoutPrerequis(Formation formation, String[] prerequis) {
 		ArrayList<String> Prereq = new ArrayList<String>();

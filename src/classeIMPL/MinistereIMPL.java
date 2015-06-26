@@ -48,15 +48,13 @@ public class MinistereIMPL extends MinistèrePOA {
 
 
 
-	/**********************Fonction Généré*********************/
-	/**
-	 * name -madDesFormationsFrance Donne au GDV toutes les formations existante
+	/**********************Fonctions Générées*********************/
+	/****
+	 * @name madDesFormationsFrance 
+	 * @description Mise à la disposition de la GDV de toutes les formations existantes
 	 * 
 	 * @return Formation[] : tableaux contenant toutes les formations
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	@Override
 	public Formation[] madDesFormationsFrance() {
 		// TODO Auto-generated method stub
@@ -69,68 +67,60 @@ public class MinistereIMPL extends MinistèrePOA {
 		return Forma;
 	}
 
-	/**
-	 * name -GetRectoratEtudiant Donne le rectorat pour un étudiant donné
+	/****
+	 * @name GetRectoratEtudiant 
+	 * @description Récupérer le rectorat pour un étudiant donné
 	 * 
 	 * @param String: ine d'un étudiant
 	 * @return Rectorat : un rectorat d'un étudiant
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	@Override
 	public Rectorat GetRectoratEtudiant(String ine) throws DonneesInvalides {
 		// TODO Auto-generated method stub
 
 		return IneRectorat.get(ine);
 	}
-	/**
-	 * name -containsEtudiant Dit si un étudiant possède un rectorat rattache (appelé avant de retourner un vrai rectorat pour éviter une valeur null en corba)
+	/****
+	 * @name containsEtudiant 
+	 * @description Vérification si un étudiant possède un rectorat rattache 
+	 * (appelé avant de retourner un vrai rectorat pour éviter une valeur null en corba)
 	 * 
 	 * @param String: ine d'un étudiant
 	 * @return Boolean : si rectorat de l'étudiant existe ou pas 
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */
+	 ****/
 	@Override
 	public boolean containsEtudiant(String ine) throws DonneesInvalides {
 		return IneRectorat.containsKey(ine);
 	}
-	/**
-	 * name -EnregistrerRectoratEtudiant Ajoute le Rectorat d'un étudiant dans la liste de cette classe
+	/****
+	 * @name EnregistrerRectoratEtudiant 
+	 * @description Ajoute le Rectorat d'un étudiant dans la liste de cette classe
 	 * 
 	 * @param String: ine d'un étudiant
 	 * @param Rectorat: Rectorat de l'étudiant
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */
+	 ****/
 	@Override
 	public void EnregistrerRectoratEtudiant(String ine, Rectorat recto) {
 		IneRectorat.put(ine, recto);
 	}
 
-	/**
-	 * name -depotDesFormationsRectorat Ajout les formations transmises par les rectorats
+	/****
+	 * @name depotDesFormationsRectorat 
+	 * @description Ajouter les formations transmises par les rectorats à la liste des formations
 	 * 
 	 * @param Formation: nouvelle formation
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */
+	 ****/
 	@Override
 	public void depotDesFormationsRectorat(Formation Formation) {
 		this.ListeFormation.add(Formation);
 	}
 
-	/**
-	 * name -deliberationJuryFinal Permet de délibéré la 2ème vague (cascade jusqu'au université)
+	/****
+	 * @name deliberationJuryFinal 
+	 * @description Permet de délibérer la 2ème vague (cascade jusqu'aux universités)
 	 * 
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */
+	 * @return void
+	 ****/
 	@Override
 	public void deliberationJuryFinal() {
 		Enumeration ListeRectorat=this.ListeRectorat.elements();
@@ -145,14 +135,12 @@ public class MinistereIMPL extends MinistèrePOA {
 		}
 	}
 
-	/**
-	 * name -inscriptionRectorat On ajout un rectorat dans le ministère
+	/****
+	 * @name inscriptionRectorat 
+	 * @description On ajoute un rectorat dans le ministère
 	 * 
 	 * @param String: nom du rectorat
 	 * @param Rectorat: ior du rectorat
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
 	 */
 	@Override
 	public void inscriptionRectorat(String nomRectorat, Rectorat iorRectorat)throws DonneesInvalides {
@@ -160,15 +148,13 @@ public class MinistereIMPL extends MinistèrePOA {
 		ListeRectorat.put(nomRectorat, iorRectorat);
 	}
 
-	/**
-	 * name -recupererRectorat On récupère un rectorat selon un nom donné
+	/****
+	 * @name recupererRectorat 
+	 * @description On récupère un rectorat selon un nom donné
 	 * 
 	 * @param String: nom du rectorat recherché
 	 * @return Rectorat : ior du rectorat recherché
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */
+	 ****/
 	@Override
 	public Rectorat recupererRectorat(String nomRectorat)
 			throws DonneesInvalides {
@@ -177,15 +163,13 @@ public class MinistereIMPL extends MinistèrePOA {
 
 	}
 
-	/**
-	 * name -rectoratRattacherUniv Permet de retrouver le rectorat rattaché a une université
+	/****
+	 * @name rectoratRattacherUniv 
+	 * @description Permet de retrouver le rectorat rattaché a une université
 	 * 
 	 * @param String: nom du rectorat recherché (grace au nom de l'academie car nom academie = nom rectorat)
 	 * @return Rectorat : ior du rectorat recherché
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */
+	 ****/
 	@Override
 	public Rectorat rectoratRattacherUniv(String nomAcademie)
 			throws DonneesInvalides {
@@ -193,13 +177,12 @@ public class MinistereIMPL extends MinistèrePOA {
 		return ListeRectorat.get(nomAcademie);
 	}
 
-	/**
-	 * name -deliberationJury Permet de délibéré la première vague (appel des université en cascade
+	/****
+	 * @name deliberationJury 
+	 * @description Permet de délibéré la première vague (appel des universités en cascade)
 	 * 
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */
+	 * @return void
+	 ****/
 	@Override
 	public void deliberationJury() {
 		//On appel en cascade tous les rectorat qui appelleront à leur tour les université pour les faire délibérer
@@ -214,30 +197,29 @@ public class MinistereIMPL extends MinistèrePOA {
 		}
 
 	}
-	/**********************Fonction rajouter*********************/
+	
+	/********************** Fonctions rajoutées *********************/
 	public void test()
 	{
-		//un test pour voir si les rectorats vienne bien ce rajouter
+		//un test pour voir si les rectorats viennent bien de se rajouter
 		if(!ListeRectorat.isEmpty())
 			System.out.println("sa ka maché3: ");
 
 	}
 
-	/**********************Le Main pour enregistrer dans le NS*************************/
+	/********************** Le Main pour enregistrer dans le Naming Service *************************/
 
 	public static void main(String[] args) {
 
 	}
 	
-	/**
-	 * name -InscriptionGDVDansRectorats Pour chaque rectorat on lui assigne une GDV qui lui transmettra les candidatures
+	/****
+	 * @name InscriptionGDVDansRectorats 
+	 * @description Pour chaque rectorat on lui assigne une GDV qui lui transmettra les candidatures
 	 * 
-	 * @param String: numéro de la GDV assigné
-	 * @param GestionDesVoeux : ior de la GDV assigné
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */
+	 * @param String: numéro de la GDV assignée
+	 * @param GestionDesVoeux : IOR de la GDV assignée
+	 ****/
 	@Override
 	public void InscriptionGDVDansRectorats(short num, GestionDesVoeux gdv) {
 		// TODO Auto-generated method stub
@@ -249,20 +231,5 @@ public class MinistereIMPL extends MinistèrePOA {
 		}
 
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

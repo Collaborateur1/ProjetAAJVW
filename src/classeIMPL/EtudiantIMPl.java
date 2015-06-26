@@ -28,7 +28,9 @@ import outils.NamingServiceTool;
 
 public class EtudiantIMPl extends IEtudiantPOA{
 	
-   //il sagit de l'interface principale postbac
+   /****
+    * L'interface principale PostLicence
+    *****/
 	Client cl; 
 	GestionDesProfils gdp;
 	ConnexionIHM interfaceConnexion;
@@ -38,8 +40,10 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	ArrayList<Voeu> ListeVoeuxEtu;
 	String INE;
 
-	/**********Constructeur
-	 * @throws RemoteException ************/	
+	
+	/********** Fonctions générées **********/
+	/**** Constructeur
+	 * @throws RemoteException ****/	
 	public EtudiantIMPl() throws RemoteException
 	{
 		this.cl=cl;
@@ -49,17 +53,13 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		loadbalancer= LoadBalancerEtudiantHelper.narrow(NamingServiceTool.getReferenceIntoNS("LBE"));
 		ListeVoeuxEtu=new ArrayList<Voeu>();
 	}
-
-	/********fonction généré******/
 	
-	/**
-	 * name -notifier  Notifier l'étudiant
+	/****
+	 * @name notifier  
+	 * @description Notifier l'étudiant
 	 * 
 	 * @param String : Message à notifier
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	
 	@Override
 	public void notifier(String message) {
@@ -68,14 +68,11 @@ public class EtudiantIMPl extends IEtudiantPOA{
 
 	}
 
-	/**
-	 * name -majEtatVoeux  Mettre à jour l'état des Voeux
-	 * 
-	 * @param Voeu[] : Liste des voeux à mèttres à jours
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	/****
+	 * @name majEtatVoeux  
+	 * @description Mettre à jour l'état des Voeux
+	 * @param Voeu[] : Liste des voeux à mettre à jour
+	 ****/	
 	@Override
 	public void majEtatVoeux(Voeu[] Voeux) {
 		// TODO Auto-generated method stub
@@ -83,20 +80,16 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		cl.miseAjourJlist2(Voeux);
 	}
 
-
-
 	
 
-	/**
-	 * name -ConnexionGDP  se connecter à la GDP
+	/****
+	 * @name ConnexionGDP 
+	 * @description connexion au serveur GestionDeProfils
 	 * 
 	 * @param String : INE etudiant
 	 * @param String : Mots de passe
-	 * @return boolean : connexion effectuer ou non
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 * @return boolean : connexion effectuée ou non
+	 ****/	
 	public boolean ConnexionGDP(String INE, String mdp) throws DonneesInvalides, ServantNotActive, WrongPolicy
 	{
 		IEtudiant etu;
@@ -134,31 +127,27 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		return false;
 	}
 
-	/**
-	 * name -getPostLicenceInterface  Obtenir la page principale lié à l'étudiant
+	/****
+	 * @name getPostLicenceInterface  
+	 * @description Obtenir la page principale liée à l'étudiant
 	 * 
 	 * @return Client : l'interface graphique du client
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	public Client getPostLicenceInterface()
 	{
 		return this.cl;
 	}
 
 	/**
-	 * name -setGestionDesProfils  Récupéré le GDP avec le loadBalancer
+	 * @name setGestionDesProfils  
+	 * @description Récupérer le GDP avec le loadBalancer
 	 * 
-	 * @param String : ine de l'étudiant
-	 * @return boolean : ine de l'étudiant
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
+	 * @param String : INE de l'étudiant
+	 * @return boolean : Vrai s'il retrouve un profil avec l'INE dans le serveur GestionDeProfils
 	 */	
-	//On charge l'instance du loadBalancer
 	public boolean setGestionDesProfils(String ine) throws DonneesInvalides
 	{	
+		//On charge l'instance du loadBalancer
 		gdp=loadbalancer.getProfil(ine);
 		if(gdp!=null)
 			return true;
@@ -172,12 +161,25 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		rootPOA.the_POAManager().activate();
 	}
 
+	/****
+	 * @name getInetfaceConnex 
+	 * @description Récupérer l'interface de connexion
+	 * 
+	 * @return ConnexionIHM interfaceConnexion
+	 ****/
 	public ConnexionIHM getInetfaceConnex()
 	{
 		return interfaceConnexion;
 	}
 	
 
+	/****
+	 * @name getGDV 
+	 * @description Récupérer le serveur GestionDeProfils
+	 * 
+	 * @return GestionDesVoeux gdv
+	 ****/
+	
 	public GestionDesVoeux getGDV()
 	{
 		return gdv;
@@ -185,93 +187,81 @@ public class EtudiantIMPl extends IEtudiantPOA{
 
 	
 	
-	/***************** Fonction ajouter
+	/***************** Fonction ajoutées
 	 * @throws UtilisationInterdite 
 	 * @throws DonneesInvalides ******************/
-	/**
-	 * name -fairVoeux  On envoie un nouveau voeu à la gestion des voeux et on met à jour l'affichage du client
+	/****
+	 * @name fairVoeux  
+	 * @description envoie un nouveau voeu à la gestion des voeux et  met à jour l'affichage du client
 	 * 
 	 * @param Voeu : voeu a ajouter
 	 * @param String : ine étudiant
-	 * @param short : numero du voeux correspond a l'ordre
+	 * @param short : numero du voeu correspond a l'ordre
 	 * @return void
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	public void fairVoeux(Voeu vx, String INE,short ordre) throws DonneesInvalides, UtilisationInterdite
 	{
 		int i=0;
 		cl.miseAjourJlist2(gdv.faireUnVoeu(INE, vx, ordre));
 	}
-	/**
-	 * name -modifierVoeu  On modifie l'ordre d'un voeux en l'envoyant à la gestion des voeux et on met à jour l'affichage du client
+	/****
+	 * @name modifierVoeu  
+	 * @description modifie l'ordre d'un voeu en l'envoyant à la gestion des voeux et met à jour l'affichage du client
 	 * 
 	 * @param String : ine étudiant
 	 * @param short : position du voeu concerné
 	 * @param short : nouvelle position du voeu
 	 * @return void
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	public void modifierVoeu(String INE,short numeroVoeux,short ordre) throws DonneesInvalides, UtilisationInterdite
 	{
 		int i=0;
 		cl.miseAjourJlist2(gdv.modifierVoeu(INE, numeroVoeux, ordre));
 	}
-	/**
-	 * name -modifierVoeu  On envoit à la gestion des voeux la demande de suppression de ce voeu et on met à jour l'affichage du client
+	/****
+	 * @name modifierVoeu  
+	 * @description envoie à la gestion des voeux la demande de suppression de ce voeu et met à jour l'affichage du client
 	 * 
-	 * @param String : ine étudiant
+	 * @param String : INE étudiant
 	 * @param short : position du voeu concerné
 	 * @return void
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	public void supprimerVoeu(String INE,short numeroVoeux) throws DonneesInvalides, UtilisationInterdite
 	{
 		int i=0;
 		cl.miseAjourJlist2(gdv.supprimerVoeux(INE, numeroVoeux));
 	}
-	/**
-	 * name -modifierVoeu  On répond OUI, NON, OUI MAIS, NON MAIS à un voeu en le transmettant à la gestion des voeux
+	/****
+	 * @name modifierVoeu  
+	 * @description On répond OUI, NON, OUI MAIS, NON MAIS à un voeu en le transmettant à la gestion des voeux
 	 * 
 	 * @param String : ine étudiant
 	 * @param short : position du voeu concerné
 	 * @param decision : réponse d'un étudiant a un voeu
 	 * @return void
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */	
+	 ****/	
 	public void repondreAunVoeu(String ine, short numVoeu, decision choixEtu) throws DonneesInvalides, UtilisationInterdite
 	{
 		gdv.repondreAuxPropositions(ine, choixEtu, numVoeu);
 	}
 	/**
-	 * name -getINE  retourne l'ine de l'étudiant
+	 * @name getINE  
+	 * @description Récupérer l'ine de l'étudiant
 	 * 
 	 * @return String : ine
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
 	 */
 	public String getINE()
 	{
 		return INE;
 	}
-	/**
-	 * name -inscription  On inscrit un etudiant gràce à son INE. On lui ajout seulement un mot de passe.
+	/****
+	 * @name inscription  
+	 * @description On inscrit un etudiant gràce à son INE. On lui ajoute seulement un mot de passe.
 	 * 
 	 * @param String : ine
 	 * @param String : mot de passe
-	 * @return Boolean : validation de l'inscription ou non
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */
+	 * @return Boolean : Vrai si inscription validée
+	 ****/
 	public boolean inscription(String ine, String mdp) throws DonneesInvalides
 	{
 		
@@ -285,15 +275,13 @@ public class EtudiantIMPl extends IEtudiantPOA{
 			return false;
 		}
 	}
-	/**
-	 * name -lancementVague  Cette fonction permet de modifier l'interface d'un etudiant lorsqu'une vague est lancée
+	/****
+	 * @name lancementVague  
+	 * @description modifier l'interface d'un etudiant lorsqu'une vague est lancée
 	 * 
 	 * @param String : numero de vague a lancer
 	 * @return void
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */
+	 ****/
 	@Override
 	public void lancementVague(short numero) {
 		// TODO Auto-generated method stub
@@ -307,7 +295,7 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		}
 	}
 
-	//On lance une interface et on l'inscrit à la liste des interfaces connectées
+	/* Main : On lance une interface et on l'inscrit à la liste des interfaces connectées */
 	public static void main(String[] args) throws RemoteException, InvalidName, AdapterInactive {
 		EtudiantIMPl etu=new EtudiantIMPl();
 		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(new String[0],null);
@@ -316,15 +304,13 @@ public class EtudiantIMPl extends IEtudiantPOA{
 
 		orb.run();
 	}
-	/**
-	 * name -deconnexion  On retire l'interface de la liste des interfaces connectées
+	/****
+	 * @name deconnexion  
+	 * @description Retirer l'interface de la liste des interfaces connectées
 	 * 
 	 * @param String : ine d'un etudiant
 	 * @return void
-	 * @author jean-vincent
-	 * @date 20/05/2015
-	 * @note
-	 */
+	 ****/
 	public void deconnexion (String ine){
 		gdv.deconnexion(ine);
 	}
