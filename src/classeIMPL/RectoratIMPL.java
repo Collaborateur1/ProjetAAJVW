@@ -335,7 +335,7 @@ public class RectoratIMPL extends RectoratPOA {
 			univ=e.nextElement();
 			if(univ.nomUniversite().equals(voeu.formationVoeu.nomUniv))
 			{
-				
+				System.out.println("reponse au voeux "+ voeu.formationVoeu.nomUniv);
 				univ.repondrePropositionvoeux(ine, voeu);
 				
 			}
