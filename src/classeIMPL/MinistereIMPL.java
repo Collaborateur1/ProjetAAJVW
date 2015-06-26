@@ -49,6 +49,14 @@ public class MinistereIMPL extends MinistèrePOA {
 
 
 	/**********************Fonction Généré*********************/
+	/**
+	 * name -madDesFormationsFrance Donne au GDV toutes les formations existante
+	 * 
+	 * @return Formation[] : tableaux contenant toutes les formations
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
 	@Override
 	public Formation[] madDesFormationsFrance() {
 		// TODO Auto-generated method stub
@@ -57,45 +65,77 @@ public class MinistereIMPL extends MinistèrePOA {
 		for(int i=0;i<this.ListeFormation.size();i++)
 		{
 			Forma[i]=this.ListeFormation.get(i);
-			//System.out.println("Formation "+i+" ajoutée : "+ Forma[i].NomFormation);
 		}
-
-
 		return Forma;
 	}
 
-
+	/**
+	 * name -GetRectoratEtudiant Donne le rectorat pour un étudiant donné
+	 * 
+	 * @param String: ine d'un étudiant
+	 * @return Rectorat : un rectorat d'un étudiant
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */	
 	@Override
 	public Rectorat GetRectoratEtudiant(String ine) throws DonneesInvalides {
 		// TODO Auto-generated method stub
 
 		return IneRectorat.get(ine);
 	}
-	
+	/**
+	 * name -containsEtudiant Dit si un étudiant possède un rectorat rattache (appelé avant de retourner un vrai rectorat pour éviter une valeur null en corba)
+	 * 
+	 * @param String: ine d'un étudiant
+	 * @return Boolean : si rectorat de l'étudiant existe ou pas 
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */
 	@Override
 	public boolean containsEtudiant(String ine) throws DonneesInvalides {
-		// TODO Auto-generated method stub
 		return IneRectorat.containsKey(ine);
 	}
+	/**
+	 * name -EnregistrerRectoratEtudiant Ajoute le Rectorat d'un étudiant dans la liste de cette classe
+	 * 
+	 * @param String: ine d'un étudiant
+	 * @param Rectorat: Rectorat de l'étudiant
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */
 	@Override
 	public void EnregistrerRectoratEtudiant(String ine, Rectorat recto) {
-		// TODO Auto-generated method stub
 		IneRectorat.put(ine, recto);
-
 	}
 
+	/**
+	 * name -depotDesFormationsRectorat Ajout les formations transmises par les rectorats
+	 * 
+	 * @param Formation: nouvelle formation
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */
 	@Override
 	public void depotDesFormationsRectorat(Formation Formation) {
-		// TODO Auto-generated method stub
 		this.ListeFormation.add(Formation);
 	}
 
+	/**
+	 * name -deliberationJuryFinal Permet de délibéré la 2ème vague (cascade jusqu'au université)
+	 * 
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */
 	@Override
 	public void deliberationJuryFinal() {
-		// TODO Auto-generated method stub
-		System.out.println("*************************2");
 		Enumeration ListeRectorat=this.ListeRectorat.elements();
-
+		
+		//Appel des délibération en cascade de tous les rectorats pour qu'à leurs tours ils appellent les université
 		while(ListeRectorat.hasMoreElements())
 		{
 			Rectorat rt=null;
@@ -105,40 +145,64 @@ public class MinistereIMPL extends MinistèrePOA {
 		}
 	}
 
+	/**
+	 * name -inscriptionRectorat On ajout un rectorat dans le ministère
+	 * 
+	 * @param String: nom du rectorat
+	 * @param Rectorat: ior du rectorat
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */
 	@Override
 	public void inscriptionRectorat(String nomRectorat, Rectorat iorRectorat)throws DonneesInvalides {
-		// TODO Auto-generated method stub
 		//On rajoute le rectorat dans le ministère
 		ListeRectorat.put(nomRectorat, iorRectorat);
-
-
 	}
 
+	/**
+	 * name -recupererRectorat On récupère un rectorat selon un nom donné
+	 * 
+	 * @param String: nom du rectorat recherché
+	 * @return Rectorat : ior du rectorat recherché
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */
 	@Override
 	public Rectorat recupererRectorat(String nomRectorat)
 			throws DonneesInvalides {
-		// TODO Auto-generated method stub
 		//on retourne tout simplement le rectorat correspondant..
 		return ListeRectorat.get(nomRectorat);
 
 	}
 
+	/**
+	 * name -rectoratRattacherUniv Permet de retrouver le rectorat rattaché a une université
+	 * 
+	 * @param String: nom du rectorat recherché (grace au nom de l'academie car nom academie = nom rectorat)
+	 * @return Rectorat : ior du rectorat recherché
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */
 	@Override
 	public Rectorat rectoratRattacherUniv(String nomAcademie)
 			throws DonneesInvalides {
-		//fonction redondante avec recupererRectorat...
+		//fonction redondante avec recupererRectorat mais concervé pour ne pas planter le programme (manque de temps)
 		return ListeRectorat.get(nomAcademie);
-
-		// TODO Auto-generated method stub
-
 	}
 
+	/**
+	 * name -deliberationJury Permet de délibéré la première vague (appel des université en cascade
+	 * 
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */
 	@Override
 	public void deliberationJury() {
-		// TODO Auto-generated method stub
-
-		//On fait juste passé le message..enfin une appel de fonction quoi
-		System.out.println("test2");
+		//On appel en cascade tous les rectorat qui appelleront à leur tour les université pour les faire délibérer
 		Enumeration ListeRectorat=this.ListeRectorat.elements();
 
 		while(ListeRectorat.hasMoreElements())
@@ -153,8 +217,6 @@ public class MinistereIMPL extends MinistèrePOA {
 	/**********************Fonction rajouter*********************/
 	public void test()
 	{
-
-
 		//un test pour voir si les rectorats vienne bien ce rajouter
 		if(!ListeRectorat.isEmpty())
 			System.out.println("sa ka maché3: ");
@@ -166,7 +228,16 @@ public class MinistereIMPL extends MinistèrePOA {
 	public static void main(String[] args) {
 
 	}
-
+	
+	/**
+	 * name -InscriptionGDVDansRectorats Pour chaque rectorat on lui assigne une GDV qui lui transmettra les candidatures
+	 * 
+	 * @param String: numéro de la GDV assigné
+	 * @param GestionDesVoeux : ior de la GDV assigné
+	 * @author jean-vincent
+	 * @date 20/05/2015
+	 * @note
+	 */
 	@Override
 	public void InscriptionGDVDansRectorats(short num, GestionDesVoeux gdv) {
 		// TODO Auto-generated method stub

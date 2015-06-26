@@ -95,7 +95,7 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 	
 	
 	/**
-	 * @name - numeroGDP()
+	 * @name - numeroGDP  On retourne le numérode la GDP
 	 * 
 	 * description: le numéro de la gdp
 	 * 
@@ -104,7 +104,6 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 	 * @date 20/05/2015
 	 * @note
 	 */
-	//On retourne le numérode la GDP
 	@Override
 	public short numeroGDP() {
 		// TODO Auto-generated method stub
@@ -293,7 +292,7 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 	}
 	
 	/**
-	 * name -getGDV() Retourner la GDV rataché
+	 * name -getGDV Retourner la GDV rataché
 	 * 
 	 @return GestionDesVoeux:gestion des voeu rataché
 	 * @author jean-vincent
@@ -308,8 +307,6 @@ public class GestionDesProfilsIMPL extends GestionDesProfilsPOA {
 	}
 	
 	/*********************Fonction rajouté (local)******************************/
-
-	
 	
 	//On retourne le loadBalancer
 	public LoadBalancerEtudiant getLoadBalancer()
