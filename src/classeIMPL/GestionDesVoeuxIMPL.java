@@ -266,9 +266,9 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 						v.dcsEtudiant = choixEtu;
 						if(v.etatVoeu==etatvoeux.listeDattente||v.etatVoeu==etatvoeux.accepter)
 							{
-							ministere.GetRectoratEtudiant(ine);
 							
-							ministere.recupererRectorat(v.formationVoeu.nomRectorat).repondrePropositionVoeux(ine,v);
+							
+							ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,v);
 							}
 					}	
 				}
@@ -278,9 +278,9 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 					
 					for(int i =0; i<ListeVoeuxEtudiant.get(ine).size(); i++){
 						ListeVoeuxEtudiant.get(ine).get(i).dcsEtudiant=decision.NONdefinitif;
-						System.out.println("sa passe ici dans la boucle"+ListeVoeuxEtudiant.get(ine).get(i));
+					
 						
-						ministere.recupererRectorat(ListeVoeuxEtudiant.get(ine).get(i).formationVoeu.nomRectorat).repondrePropositionVoeux(ine,ListeVoeuxEtudiant.get(ine).get(i));
+						ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,ListeVoeuxEtudiant.get(ine).get(i));
 						
 					}
 					ListeVoeuxEtudiant.remove(ine);
@@ -314,7 +314,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 						
 						ListeVoeuxEtudiant.get(ine).get(i).dcsEtudiant=decision.NONdefinitif;
 						
-						ministere.recupererRectorat(ListeVoeuxEtudiant.get(ine).get(i).formationVoeu.nomRectorat).repondrePropositionVoeux(ine,ListeVoeuxEtudiant.get(ine).get(i));
+						ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,ListeVoeuxEtudiant.get(ine).get(i));
 						try {
 							bddGDV.supprimerVoeux(ListeVoeuxEtudiant.get(ine).get(i), ine);
 						} catch (SQLException e) {
@@ -331,7 +331,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 							{
 								
 							ListeVoeuxEtudiant.get(ine).get(i).dcsEtudiant=decision.NONdefinitif;
-							ministere.recupererRectorat(ListeVoeuxEtudiant.get(ine).get(i).formationVoeu.nomRectorat).repondrePropositionVoeux(ine,ListeVoeuxEtudiant.get(ine).get(i));
+							ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,ListeVoeuxEtudiant.get(ine).get(i));
 							
 							try {
 								bddGDV.supprimerVoeux(ListeVoeuxEtudiant.get(ine).get(i), ine);
@@ -363,7 +363,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
                       for(int i =v.numeroVoeu; i<ListeVoeuxEtudiant.get(ine).size(); i++){
 						
 						ListeVoeuxEtudiant.get(ine).get(i).dcsEtudiant=decision.NONdefinitif;
-						ministere.recupererRectorat(ListeVoeuxEtudiant.get(ine).get(i).formationVoeu.nomRectorat).repondrePropositionVoeux(ine,ListeVoeuxEtudiant.get(ine).get(i));
+						ministere.GetRectoratEtudiant(ine).repondrePropositionVoeux(ine,ListeVoeuxEtudiant.get(ine).get(i));
 						try {
 							bddGDV.supprimerVoeux(ListeVoeuxEtudiant.get(ine).get(i), ine);
 						} catch (SQLException e) {
@@ -586,7 +586,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 	@Override
 	public void lancementVague(short numero) {
 		// TODO Auto-generated method stub
-		System.out.println("first");
+		
 		if(numero == 1)//période 1
 		{
 			
@@ -617,7 +617,7 @@ public class GestionDesVoeuxIMPL extends GestionDesVoeuxPOA{
 				}
 				try {
 					
-					//System.out.println("rectorat"+ministere.GetRectoratEtudiant(ine).nomRectorat());
+					
 					ministere.GetRectoratEtudiant(ine).envoyerListeVoeuxGDV(tabVoeu, et);
 					
 					if(ListeEtudiant.containsKey(ine))

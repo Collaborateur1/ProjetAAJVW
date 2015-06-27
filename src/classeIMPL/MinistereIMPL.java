@@ -199,13 +199,7 @@ public class MinistereIMPL extends MinistèrePOA {
 	}
 	
 	/********************** Fonctions rajoutées *********************/
-	public void test()
-	{
-		//un test pour voir si les rectorats viennent bien de se rajouter
-		if(!ListeRectorat.isEmpty())
-			System.out.println("sa ka maché3: ");
 
-	}
 
 	/********************** Le Main pour enregistrer dans le Naming Service *************************/
 

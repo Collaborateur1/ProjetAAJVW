@@ -283,14 +283,15 @@ public class RectoratIMPL extends RectoratPOA {
 	@Override
 	public void repondrePropositionVoeux(String ine, Voeu voeu) throws DonneesInvalides {
 		Universite univ;
-		Enumeration<Universite> e= ListeListUniversite.elements();
+		if(ListeListUniversite.containsKey(voeu.formationVoeu.nomUniv))
+			{
+			GetUniversiteDansRecorat(voeu.formationVoeu.nomUniv).repondrePropositionvoeux(ine, voeu);
+			}
+		else//transfert vers le bon rectorat
+			{
+			MonMinistere.recupererRectorat(voeu.formationVoeu.nomRectorat).repondrePropositionVoeux(ine, voeu);
+			}
 		
-		while (e.hasMoreElements())
-		{
-			univ=e.nextElement();
-			if(univ.nomUniversite().equals(voeu.formationVoeu.nomUniv))
-				univ.repondrePropositionvoeux(ine, voeu);
-		}
 	}
 
 	/****
@@ -369,7 +370,7 @@ public class RectoratIMPL extends RectoratPOA {
 	{
 		//On récupere la liste des formations valides pour la formation auquel il a postulé
 		ArrayList<String> ListeFormationValidePrCandidature=ValidationFormation.get(Nomformationvoeu);
-		System.out.println(ValidationFormation.toString());
+		
 		//On cherche si on trouve la formation de l'étudiant dans les formations valides
 		for (int i=0;i< ListeFormationValidePrCandidature.size();i++)
 		{
