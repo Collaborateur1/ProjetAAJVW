@@ -93,9 +93,9 @@ public class EtudiantIMPl extends IEtudiantPOA{
 	public boolean ConnexionGDP(String INE, String mdp) throws DonneesInvalides, ServantNotActive, WrongPolicy
 	{
 		IEtudiant etu;
-		//ici on récupere la GDP de letudiant selon son ine
+		//ici on récupere la GDP de letudiant selon son ine.
 		if(setGestionDesProfils(INE))
-		{
+		{//testtttttt
 			//On teste si l'étudiant à le droit de ce connecter
 			if(gdp.autorisationConnexion(INE, mdp))
 			{
