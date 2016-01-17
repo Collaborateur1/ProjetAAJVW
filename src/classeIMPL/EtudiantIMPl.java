@@ -95,7 +95,7 @@ public class EtudiantIMPl extends IEtudiantPOA{
 		IEtudiant etu;
 		//ici on récupere la GDP de letudiant selon son ine.
 		if(setGestionDesProfils(INE))
-		{//testtttttt
+		{//testttttttddddd
 			//On teste si l'étudiant à le droit de ce connecter
 			if(gdp.autorisationConnexion(INE, mdp))
 			{
